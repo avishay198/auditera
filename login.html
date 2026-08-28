@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://auditera.co.il/login.html">
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: blob:;
+  font-src 'self';
+  object-src 'none';
+  frame-src 'self';
+  base-uri 'self';
+  form-action 'self';
+  connect-src 'self' https://auditera-license.auditera.workers.dev;
+  upgrade-insecure-requests;
+">
+<title>הרשמה / כניסה — Auditera</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fffdf5;color:#3a2000;direction:rtl;display:flex;flex-direction:column;min-height:100vh}
+:root{--brown:#3a2000;--brown2:#5a3010;--gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;--cream:#fffdf5;--white:#fff;--muted:#9a7a4a;--border:#e0c888;--danger:#dc2626}
+
+/* NAV */
+nav{background:var(--brown);padding:0 6%;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;direction:ltr}
+.nav-logo-icon{width:32px;height:32px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.nav-logo-text{font-size:17px;font-weight:700;color:#ffffff}
+.nav-logo-text span{color:#c99a2e}
+.nav-back{font-size:13px;color:rgba(245,230,192,.6);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .2s}
+.nav-back:hover{color:#f5e6c0}
+
+/* LAYOUT */
+.page{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:36px;width:100%;max-width:420px;box-shadow:0 4px 24px rgba(58,32,0,.1)}
+.card-logo{text-align:center;margin-bottom:28px}
+.card-logo-icon{width:52px;height:52px;background:var(--brown);border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px}
+.card-logo h1{font-size:22px;font-weight:800;color:var(--brown)}
+.card-logo p{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* TABS */
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:#f5e6c0;border-radius:10px;padding:3px;margin-bottom:28px}
+.tab-btn{padding:9px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;background:transparent;color:var(--muted);transition:all .2s}
+.tab-btn.active{background:var(--brown);color:#f5e6c0}
+
+/* FORM */
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--brown2);margin-bottom:6px}
+.form-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-family:inherit;color:var(--brown);background:var(--cream);outline:none;transition:border-color .2s;direction:rtl}
+.form-input:focus{border-color:var(--gold);background:var(--white)}
+.form-input.error{border-color:var(--danger)}
+.field-err{font-size:11px;color:var(--danger);margin-top:4px;display:none}
+.field-err.show{display:block}
+
+/* PASSWORD TOGGLE */
+.input-wrap{position:relative}
+.input-wrap .form-input{padding-left:40px}
+.toggle-pass{position:absolute;left:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:15px;color:var(--muted);padding:2px}
+
+/* SUBMIT */
+.submit-btn{width:100%;padding:13px;background:var(--brown);color:#f5e6c0;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;transition:opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.submit-btn:hover:not(:disabled){opacity:.88}
+.submit-btn:disabled{opacity:.45;cursor:not-allowed}
+.submit-btn .spinner{width:16px;height:16px;border:2px solid rgba(245,230,192,.4);border-top-color:#f5e6c0;border-radius:50%;animation:spin .7s linear infinite;display:none}
+.submit-btn.loading .spinner{display:block}
+.submit-btn.loading .btn-text{opacity:.6}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ALERT */
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+.alert.show{display:block}
+.alert.error{background:#fef2f2;border:1px solid #fecaca;color:var(--danger)}
+.alert.success{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:10px;margin:20px 0;color:var(--muted);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* NOTE */
+.form-note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6}
+.form-note a{color:var(--gold);text-decoration:none;font-weight:600}
+
+/* FIRST-RUN SETUP OVERLAY */
+.setup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.setup-overlay.show{display:flex}
+.setup-card{background:var(--white);border-radius:18px;padding:36px;width:100%;max-width:440px;box-shadow:0 24px 64px rgba(0,0,0,.45);border:1px solid var(--border)}
+.setup-header{margin-bottom:20px}
+.setup-title{font-size:19px;font-weight:800;color:var(--brown);margin-bottom:5px}
+.setup-subtitle{font-size:12.5px;color:var(--muted);line-height:1.6}
+.setup-info{background:#fef9ee;border:1px solid var(--gold2);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--brown2);line-height:1.65;margin-bottom:20px}
+
+@media(max-width:480px){
+  nav{padding:0 4%;height:52px}
+  .tabs{font-size:13px}
+  .form-input{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="A" style="height:36px;width:36px;display:block;object-fit:contain;">
+    <div class="nav-logo-text"><span>Au</span>ditera</div>
+  </a>
+  <a class="nav-back" href="index.html">← חזרה לדף הבית</a>
+</nav>
+
+<div class="page">
+  <div class="card">
+    <div class="card-logo">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="A" style="height:36px;width:36px;display:block;object-fit:contain;">
+      <p id="card-subtitle">צור חשבון חינם</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn" id="tab-register" onclick="showTab('register')">הרשמה</button>
+      <button class="tab-btn active" id="tab-login" onclick="showTab('login')">כניסה</button>
+    </div>
+
+    <!-- ALERT -->
+    <div class="alert" id="alertBox"></div>
+
+    <!-- REGISTER FORM -->
+    <form id="registerForm" style="display:none" onsubmit="doRegister(event)">
+      <div class="form-group">
+        <label for="regName">שם מלא</label>
+        <input class="form-input" id="regName" type="text" placeholder="ישראל ישראלי" autocomplete="name">
+        <div class="field-err" id="regNameErr">נא הזן שם מלא</div>
+      </div>
+      <div class="form-group">
+        <label for="regEmail">כתובת אימייל</label>
+        <input class="form-input" id="regEmail" type="email" placeholder="name@example.com" autocomplete="email">
+        <div class="field-err" id="regEmailErr">נא הזן כתובת אימייל תקינה</div>
+      </div>
+      <div class="form-group">
+        <label for="regPass">סיסמה</label>
+        <div class="input-wrap">
+          <input class="form-input" id="regPass" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password">
+          <button type="button" class="toggle-pass" onclick="togglePass('regPass',this)">👁</button>
+        </div>
+        <div class="field-err" id="regPassErr">סיסמה חייבת להכיל לפחות 6 תווים</div>
+      </div>
+      <div class="form-group" style="margin-bottom:10px">
+        <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;font-size:12px;font-weight:400;color:var(--brown2);line-height:1.5">
+          <input type="checkbox" id="regConsent" style="margin-top:3px;accent-color:var(--brown);flex-shrink:0">
+          <span>קראתי ואני מסכים/ה ל<a href="legal.html" target="_blank" style="color:var(--gold);font-weight:600">תנאי השימוש</a> ול<a href="legal.html#privacy" target="_blank" style="color:var(--gold);font-weight:600">מדיניות הפרטיות</a> של Auditera, לרבות עיבוד פרטי ההרשמה שלי בהתאם לתיקון 13 לחוק הגנת הפרטיות.</span>
+        </label>
+        <div class="field-err" id="regConsentErr">יש לאשר את תנאי השימוש ומדיניות הפרטיות כדי להמשיך</div>
+      </div>
+      <button class="submit-btn" type="submit" id="regBtn">
+        <div class="spinner"></div>
+        <span class="btn-text">צור חשבון ←</span>
+      </button>
+      <div class="form-note">כבר יש לך חשבון? <a href="#" onclick="showTab('login');return false">התחבר כאן</a></div>
+    </form>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" onsubmit="doLogin(event)" novalidate>
+      <div class="form-group">
+        <label for="loginEmail">כתובת אימייל</label>
+        <input class="form-input" id="loginEmail" type="text" inputmode="email" placeholder="name@example.com" autocomplete="email" style="direction:ltr;text-align:left">
+        <div class="field-err" id="loginEmailErr">נא הזן כתובת אימייל</div>
+      </div>
+      <div class="form-group">
+        <label for="loginPass">סיסמה</label>
+        <div class="input-wrap">
+          <input class="form-input" id="loginPass" type="password" placeholder="הסיסמה שלך" autocomplete="current-password">
+          <button type="button" class="toggle-pass" onclick="togglePass('loginPass',this)">👁</button>
+        </div>
+        <div class="field-err" id="loginPassErr">נא הזן סיסמה</div>
+      </div>
+      <button class="submit-btn" type="submit" id="loginBtn">
+        <div class="spinner"></div>
+        <span class="btn-text">כניסה למערכת ←</span>
+      </button>
+      <div class="form-note">אין לך חשבון? <a href="#" onclick="showTab('register');return false">הירשם חינם</a></div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+const USERS_KEY   = 'auditera_users_v1';
+const SESSION_KEY = 'auditera_session';
+// ── פרטי מנהל — שנה לפני הפצה ────────────────────────────
+const ADMIN_EMAIL    = 'admin@auditera';
+// SHA-256(adminPass + SALT) — pre-computed; change via admin panel before distribution
+const ADMIN_PASS_HASH = '60ac289aa569531be2c5a30ae41274a868619f199f44da8cd13f4d3909479f47';
+// ── Google Sheets — הדבק כאן את ה-URL מ-Apps Script ───────
+const SHEETS_URL = ''; // לדוגמה: 'https://script.google.com/macros/s/AKfyc.../exec'
+// ── Make Webhook — הדבק כאן את ה-URL מ-Make ────────────────
+const MAKE_WEBHOOK_URL = 'https://auditera-license.auditera.workers.dev/notify';
+// ──────────────────────────────────────────────────────────
+
+// שולח נתוני הרשמה ל-Make → Airtable (fire-and-forget)
+// אין סיסמה / hash / salt — מידע רגיסטרציה בלבד
+function notifyMake(name, email, plan) {
+  if (!MAKE_WEBHOOK_URL) return;
+  try {
+    fetch(MAKE_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event: 'register',
+        name,
+        email,
+        plan,
+        registered_at: new Date().toISOString(),
+        consent_at: new Date().toISOString(),
+        consent_version: '2026-08',
+        source: document.referrer || 'direct'
+      })
+    }).catch(() => {});
+  } catch(e) {}
+}
+
+// ── עדכון פרטי לקוח ב-Make ────────────────────────────────
+// מנגנון: שמירת snapshot בכניסה אחרונה → השוואה בכניסה הנוכחית →
+// אם יש שינוי: event='profile_update' + שדות שהשתנו → Make מעדכן Airtable.
+// תמיד נשלח גם event='login' עם timestamp — שני ה-webhooks פועלים במקביל.
+
+const _SYNC_KEY_PFX = 'af_last_sync_';
+
+function _getSyncKey(email) { return _SYNC_KEY_PFX + email; }
+
+function _readCPAFromStorage(email) {
+  // קרא פרטי ר״ח שנשמרו ב-audit_agent (localStorage, מפתח גלובלי)
+  try {
+    const v = localStorage.getItem('af_cpa_info');
+    return v ? JSON.parse(v) : {};
+  } catch(e) { return {}; }
+}
+
+function _getAnalysisCount(email) {
+  try {
+    const key = 'af_analysis_count_' + email;
+    return parseInt(localStorage.getItem(key) || '0', 10);
+  } catch(e) { return 0; }
+}
+
+function _buildUserSnapshot(user) {
+  const cpa = _readCPAFromStorage(user.email);
+  return {
+    plan:          user.plan || 'trial',
+    name:          user.name || '',
+    licenseQuota:  user.licenseQuota || null,
+    cpaName:       cpa.name || '',
+    cpaLicense:    cpa.license || '',
+    cpaFirm:       cpa.firm || '',
+    cpaAddress:    cpa.address || '',
+    analysisCount: _getAnalysisCount(user.email)
+  };
+}
+
+function _detectChanges(prev, current) {
+  // השווה כל שדה — החזר מערך שמות שדות שהשתנו
+  const changed = [];
+  const keys = Object.keys(current);
+  keys.forEach(k => {
+    if (String(prev[k] ?? '') !== String(current[k] ?? '')) changed.push(k);
+  });
+  return changed;
+}
+
+// שולח עדכון כניסה ל-Make — כולל מסלול עדכני (fire-and-forget)
+function notifyMakeLogin(user) {
+  if (!MAKE_WEBHOOK_URL) return;
+  const now = new Date().toISOString();
+  const daysSinceReg = user.created
+    ? Math.floor((Date.now() - new Date(user.created)) / 86400000)
+    : null;
+
+  // ── 1. event=login — תמיד נשלח ─────────────────────────
+  try {
+    fetch(MAKE_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event:    'login',
+        email:    user.email,
+        name:     user.name || '',
+        plan:     user.plan || 'trial',
+        login_at: now
+      })
+    }).catch(() => {});
+  } catch(e) {}
+
+  // ── 2. event=profile_update — רק אם יש שינוי ──────────
+  try {
+    const syncKey  = _getSyncKey(user.email);
+    const current  = _buildUserSnapshot(user);
+    const prevRaw  = localStorage.getItem(syncKey);
+    const prev     = prevRaw ? JSON.parse(prevRaw) : {};
+    const changed  = _detectChanges(prev, current);
+
+    if (changed.length > 0) {
+      // בנה payload עם רק השדות שהשתנו + מטה-דאטה
+      const updatedFields = {};
+      changed.forEach(k => { updatedFields[k] = current[k]; });
+
+      fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event:      'profile_update',
+          email:      user.email,
+          name:       current.name,
+          plan:       current.plan,
+          updated_at: now
+        })
+      }).catch(() => {});
+    }
+
+    // שמור snapshot עדכני לכניסה הבאה
+    localStorage.setItem(syncKey, JSON.stringify(current));
+  } catch(e) {}
+}
+
+// שולח נתוני הרשמה ל-Google Sheets (fire-and-forget)
+function notifySheets(name, email, plan) {
+  if (!SHEETS_URL) return; // אם URL לא הוגדר — דלג
+  try {
+    fetch(SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' }, // Apps Script דורש text/plain למניעת CORS preflight
+      body: JSON.stringify({
+        name,
+        email,
+        plan,
+        source: document.referrer ? 'קישור חיצוני' : 'כתובת ישירה',
+        version: '1.0',
+        ip: '—'
+      })
+    }).catch(() => {}); // לא חוסם את ההרשמה גם אם נכשל
+  } catch(e) {}
+}
+// ──────────────────────────────────────────────────────────
+
+// ── הפנייה אוטומטית אם כבר מחובר ──────────────────────────
+(function(){
+  try{
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+    if(s && s.loggedIn) window.location.replace('audit_agent.html');
+  }catch(e){}
+  // קביעת טאב מ-URL param
+  const p = new URLSearchParams(window.location.search);
+  if(p.get('tab')==='register') showTab('register');
+})();
+
+// ── TABS ───────────────────────────────────────────────────
+function showTab(tab){
+  const isReg = tab==='register';
+  document.getElementById('registerForm').style.display = isReg ? 'block' : 'none';
+  document.getElementById('loginForm').style.display    = isReg ? 'none'  : 'block';
+  document.getElementById('tab-register').classList.toggle('active', isReg);
+  document.getElementById('tab-login').classList.toggle('active', !isReg);
+  document.getElementById('card-subtitle').textContent = isReg ? 'צור חשבון חינם' : 'ברוך השב';
+  clearAlert();
+}
+
+// ── HELPERS ────────────────────────────────────────────────
+
+// יצירת salt אקראי (16 bytes → hex)
+function generateSalt(){
+  return Array.from(crypto.getRandomValues(new Uint8Array(16)))
+    .map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// PBKDF2 — איטי בכוונה (100,000 iterations), salt אקראי פר-משתמש
+// אין salt קבוע בקוד — אין rainbow tables אפשריות
+async function hashPassPBKDF2(pass, salt){
+  const enc = new TextEncoder();
+  const keyMat = await crypto.subtle.importKey(
+    'raw', enc.encode(pass), {name:'PBKDF2'}, false, ['deriveBits']
+  );
+  const bits = await crypto.subtle.deriveBits(
+    {name:'PBKDF2', salt:enc.encode(salt), iterations:100000, hash:'SHA-256'},
+    keyMat, 256
+  );
+  return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+// legacy — SHA-256 עם salt קבוע (לצורך migration בלבד)
+async function _hashPassLegacy(pass){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass+'bskc$szWk0fH=1Bx%E49Ck7M^w=gEpJY'));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function showAlert(msg, type='error'){
+  const el = document.getElementById('alertBox');
+  el.textContent = msg;
+  el.className = `alert show ${type}`;
+}
+function clearAlert(){
+  document.getElementById('alertBox').className = 'alert';
+}
+function setLoading(btnId, on){
+  const btn = document.getElementById(btnId);
+  btn.classList.toggle('loading', on);
+  btn.disabled = on;
+}
+function fieldErr(id, msg, show){
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.toggle('show', show);
+  el.previousElementSibling?.classList?.toggle('error', show);
+  // input is the sibling before the error div (or inside input-wrap)
+  const inp = document.getElementById(id.replace('Err',''));
+  if(inp) inp.classList.toggle('error', show);
+}
+function togglePass(inputId, btn){
+  const inp = document.getElementById(inputId);
+  const isPass = inp.type==='password';
+  inp.type = isPass ? 'text' : 'password';
+  btn.textContent = isPass ? '🙈' : '👁';
+}
+
+// ── REGISTER ───────────────────────────────────────────────
+async function doRegister(e){
+  e.preventDefault();
+  clearAlert();
+  const name  = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('regPass').value;
+  let ok = true;
+  const consent = document.getElementById('regConsent').checked;
+  if(!name){ fieldErr('regNameErr','נא הזן שם מלא',true); ok=false; } else fieldErr('regNameErr','',false);
+  if(!email||!email.includes('@')){ fieldErr('regEmailErr','נא הזן כתובת אימייל תקינה',true); ok=false; } else fieldErr('regEmailErr','',false);
+  if(pass.length<6){ fieldErr('regPassErr','סיסמה חייבת להכיל לפחות 6 תווים',true); ok=false; } else fieldErr('regPassErr','',false);
+  if(!consent){ fieldErr('regConsentErr','יש לאשר את תנאי השימוש ומדיניות הפרטיות כדי להמשיך',true); ok=false; } else fieldErr('regConsentErr','',false);
+  if(!ok) return;
+
+  setLoading('regBtn', true);
+  try{
+    const users = JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
+    if(users.find(u=>u.email===email)){
+      showAlert('כתובת האימייל הזו כבר רשומה. נסה להתחבר.');
+      setLoading('regBtn', false);
+      return;
+    }
+    const salt = generateSalt();
+    const hash = await hashPassPBKDF2(pass, salt);
+    users.push({ name, email, hash, salt, created: new Date().toISOString(), plan: 'trial' });
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    notifySheets(name, email, 'trial'); // ← שולח ל-Google Sheets
+    notifyMake(name, email, 'trial');   // ← שולח ל-Make → Airtable
+    const session = { email, name, loggedIn:true };
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    showAlert('החשבון נוצר בהצלחה! מעביר אותך למערכת...', 'success');
+    setTimeout(()=>{ window.location.href='audit_agent.html'; }, 900);
+  }catch(err){
+    showAlert('אירעה שגיאה. נסה שוב.');
+    setLoading('regBtn', false);
+  }
+}
+
+// ── LOGIN ──────────────────────────────────────────────────
+async function doLogin(e){
+  e.preventDefault();
+  clearAlert();
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('loginPass').value;
+  let ok = true;
+  if(!email||!email.includes('@')){ fieldErr('loginEmailErr','נא הזן כתובת אימייל תקינה',true); ok=false; } else fieldErr('loginEmailErr','',false);
+  if(!pass){  fieldErr('loginPassErr','נא הזן סיסמה',true); ok=false; } else fieldErr('loginPassErr','',false);
+  if(!ok) return;
+
+  setLoading('loginBtn', true);
+  try{
+    // ── כניסת מנהל ────────────────────────────────────────
+    if(email === ADMIN_EMAIL && (await _hashPassLegacy(pass)) === ADMIN_PASS_HASH){
+      const session = { email:'admin', name:'מנהל מערכת', loggedIn:true, isAdmin:true };
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+      showAlert('כניסת מנהל מוצלחת! מעביר אותך...', 'success');
+      setTimeout(()=>{ window.location.href='admin.html'; }, 700);
+      return;
+    }
+    // ── כניסה רגילה ───────────────────────────────────────
+    const users = JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
+    const user  = users.find(u=>u.email===email);
+    if(!user){ showAlert('לא נמצא חשבון עם כתובת אימייל זו.'); setLoading('loginBtn',false); return; }
+
+    // ── אימות סיסמה + migration אוטומטי ──────────────────
+    let passOk = false;
+    if(user.salt){
+      // PBKDF2 — פורמט חדש
+      const hash = await hashPassPBKDF2(pass, user.salt);
+      passOk = (hash === user.hash);
+    } else {
+      // SHA-256 legacy — בדוק ואז שדרג ל-PBKDF2
+      const legacyHash = await _hashPassLegacy(pass);
+      if(legacyHash === user.hash){
+        passOk = true;
+        // שדרוג שקט ל-PBKDF2
+        const newSalt = generateSalt();
+        user.salt = newSalt;
+        user.hash = await hashPassPBKDF2(pass, newSalt);
+      }
+    }
+    if(!passOk){ showAlert('סיסמה שגויה. נסה שנית.'); setLoading('loginBtn',false); return; }
+
+    // ── עדכון כניסה אחרונה ────────────────────────────────
+    user.lastLogin = new Date().toISOString();
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    notifyMakeLogin(user); // ← שולח עדכון מסלול + פרטי כניסה ל-Make
+    const session = { email, name:user.name||email, loggedIn:true };
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    showAlert('כניסה מוצלחת! מעביר אותך...', 'success');
+    setTimeout(()=>{ window.location.href='audit_agent.html'; }, 700);
+  }catch(err){
+    showAlert('אירעה שגיאה. נסה שוב.');
+    setLoading('loginBtn', false);
+  }
+}
+
+
+
+</script>
+</body>
+</html>

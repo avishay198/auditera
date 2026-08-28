@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /login.html
+Disallow: /checkout.html
+Disallow: /audit_agent.html
+
+Sitemap: https://auditera.co.il/sitemap.xml

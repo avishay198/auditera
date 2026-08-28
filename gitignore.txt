@@ -1,0 +1,59 @@
+# Videos & GIFs
+*.mp4
+*.mov
+*.gif
+
+# QA & build scripts
+qa*.js
+sim_merge.js
+build_*.py
+make_video*.py
+make_kenburns.py
+make_newvid.py
+make_smooth.py
+fix_*.py
+create_*.py
+gen_demo.py
+edit_video.py
+build_pptx.js
+build_prd.js
+auditflow_video_script.js
+
+# Temp concat files
+concat*.txt
+
+# Draft & demo HTML
+_draft_*.html
+demo_v3.html
+demo_v4.html
+demo_video.html
+demo_video_new.html
+demo_auditflow.html
+audit_autoplay.html
+video_scenes.html
+sim_report_*.html
+report_anomaly.html
+report_exec.html
+report_full.html
+
+# Documents
+*.docx
+*.pptx
+
+# Excel / data files
+*.xlsx
+
+# Worker debug
+worker_debug.js
+
+# Markdown (internal)
+auditera_posts.md
+audora_philosophy.md
+make_setup_guide.md
+
+# Node
+node_modules/
+package-lock.json
+
+# OS
+.DS_Store
