@@ -21,7 +21,7 @@ html,body{min-height:100%;font-family:'Segoe UI',system-ui,-apple-system,sans-se
 
 /* ── NAV ─────────────────────────────────────────────────────────── */
 nav{background:var(--brown);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,.28)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-direction:row-reverse}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-text{font-size:19px;font-weight:800;color:#fff;letter-spacing:-.2px}
 .nav-logo-text span{color:var(--gold)}
 .nav-back{color:#e8d4a0;font-size:13px;text-decoration:none;opacity:.8;display:flex;align-items:center;gap:5px}
@@ -36,9 +36,9 @@ nav{background:var(--brown);height:62px;display:flex;align-items:center;justify-
 .trust-item span{font-size:16px}
 
 /* ── PLAN CARD ────────────────────────────────────────────────────── */
-.plan-card{background:linear-gradient(135deg,var(--brown) 0%,#5a3010 100%);border-radius:20px;padding:28px 24px;margin-bottom:20px;color:#f5e6c0;position:relative;overflow:hidden;box-shadow:var(--shadow-lg)}
-.plan-card::after{content:'';position:absolute;top:-40px;left:-40px;width:180px;height:180px;background:rgba(201,154,46,.12);border-radius:50%;pointer-events:none}
-.plan-card::before{content:'';position:absolute;bottom:-30px;right:-20px;width:120px;height:120px;background:rgba(255,255,255,.04);border-radius:50%;pointer-events:none}
+.plan-card{background:#2a1500;border-radius:16px;padding:28px 24px;margin-bottom:20px;color:#f5e6c0;position:relative;overflow:hidden;box-shadow:var(--shadow-lg);border-right:4px solid #c99a2e}
+.plan-card::after{content:none}
+.plan-card::before{content:none}
 .plan-badge{display:inline-block;background:var(--gold);color:var(--brown);font-size:11px;font-weight:800;padding:4px 14px;border-radius:20px;letter-spacing:.06em;margin-bottom:12px;text-transform:uppercase}
 .plan-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
 .plan-name{font-size:28px;font-weight:900;color:#fff;line-height:1.1}
@@ -164,7 +164,7 @@ footer a{color:var(--muted);text-decoration:underline}
 
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqs/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="Auditera" style="height:32px;width:32px;object-fit:contain;flex-shrink:0">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqs/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="Auditera" style="height:36px;width:36px;object-fit:contain;flex-shrink:0">
     <div class="nav-logo-text"><span>Au</span>ditera</div>
   </a>
   <a href="pricing.html" class="nav-back">← חזרה למחירים</a>
