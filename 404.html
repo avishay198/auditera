@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';">
+<meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — הדף לא נמצא | Auditera</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fdf3dc;color:#3a2000;direction:rtl;display:flex;flex-direction:column;min-height:100vh}
+:root{--brown:#3a2000;--gold:#c99a2e;--gold2:#e8d4a0;--cream:#fdf3dc;--muted:#9a7a4a;--border:#e0c888}
+
+nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;direction:ltr}
+.nav-logo-text{font-size:20px;font-weight:700;color:#fff}
+.nav-logo-text span{color:#c99a2e}
+
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 6%;text-align:center}
+.card{max-width:520px;width:100%}
+
+.code{font-size:120px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-6px;margin-bottom:8px;opacity:.35}
+.title{font-size:28px;font-weight:800;color:var(--brown);margin-bottom:14px}
+.desc{font-size:16px;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:400px;margin-right:auto;margin-left:auto}
+
+.btn-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{padding:13px 28px;background:var(--brown);color:#f5e6c0;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;transition:opacity .2s}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{padding:13px 28px;background:transparent;color:var(--brown);border:1.5px solid var(--border);border-radius:9px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;transition:background .2s}
+.btn-secondary:hover{background:rgba(58,32,0,.06)}
+
+.quick-links{margin-top:48px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.quick-link{font-size:14px;color:var(--muted);text-decoration:none;font-weight:500;transition:color .15s}
+.quick-link:hover{color:var(--brown)}
+.quick-link::before{content:'← ';font-size:12px}
+
+footer{background:var(--brown);padding:22px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-brand{font-size:16px;font-weight:700;color:rgba(245,230,192,.7)}
+.footer-brand span{color:var(--gold)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.22)}
+
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+@media(max-width:480px){
+  .code{font-size:80px}
+  .title{font-size:22px}
+  .btn-group{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="A" style="height:36px;width:36px;object-fit:contain">
+    <div class="nav-logo-text"><span>Au</span>ditera</div>
+  </a>
+</nav>
+
+<div class="main">
+  <div class="card">
+    <div class="code">404</div>
+    <h1 class="title">הדף לא נמצא</h1>
+    <p class="desc">הכתובת שביקשת אינה קיימת או שהועברה למקום אחר. בדוק את הכתובת או חזור לדף הבית.</p>
+
+    <div class="btn-group">
+      <a href="index.html" class="btn-primary">חזרה לדף הבית</a>
+      <a href="contact.html" class="btn-secondary">צור קשר</a>
+    </div>
+
+    <div class="quick-links">
+      <a href="features.html" class="quick-link">תכונות</a>
+      <a href="pricing.html" class="quick-link">תמחור</a>
+      <a href="how.html" class="quick-link">איך זה עובד</a>
+      <a href="login.html" class="quick-link">כניסה</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand"><span>Au</span>ditera</div>
+  <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות. · <a href="accessibility.html" style="color:rgba(245,230,192,.4);text-decoration:underline">נגישות</a></div>
+</footer>
+
+<div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
+  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
+  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#3a2000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
+</div>
+<script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
+</body>
+</html>
