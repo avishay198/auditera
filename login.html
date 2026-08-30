@@ -22,7 +22,7 @@
 <title>הרשמה / כניסה — Auditera</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden}
+html,body{min-height:100%}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--white:#fff;--muted:#9a7a4a;--border:#e0c888;--danger:#dc2626;
@@ -36,7 +36,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
 
 .form-panel{max-width:480px;width:100%;
   flex:1;overflow-y:auto;background:var(--cream);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
   padding:40px 24px;
 }
 
@@ -66,9 +66,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
 .bp-back:hover{color:rgba(245,230,192,.65)}
 
 /* ── FORM CARD ── */
-.card{width:100%;max-width:400px}
-.card-head{text-align:center;margin-bottom:28px}
-.card-head img{width:48px;height:48px;object-fit:contain;margin-bottom:12px}
+.card{width:100%;max-width:400px;margin:auto}
+.card-head{text-align:center;margin-bottom:28px;overflow:visible}
+.card-head img{width:62px;height:62px;display:block;margin:0 auto 12px;overflow:visible}
 .card-title{font-size:22px;font-weight:800;color:var(--brown)}
 .card-sub{font-size:13px;color:var(--muted);margin-top:5px}
 
@@ -186,7 +186,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
         <label for="regPass">סיסמה</label>
         <div class="input-wrap">
           <input class="form-input" id="regPass" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password">
-          <button type="button" class="toggle-pass" onclick="togglePass('regPass',this)">👁</button>
+          <button type="button" class="toggle-pass" onclick="togglePass('regPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
         <div class="field-err" id="regPassErr">סיסמה חייבת להכיל לפחות 6 תווים</div>
       </div>
@@ -215,7 +215,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
         <label for="loginPass">סיסמה</label>
         <div class="input-wrap">
           <input class="form-input" id="loginPass" type="password" placeholder="הסיסמה שלך" autocomplete="current-password">
-          <button type="button" class="toggle-pass" onclick="togglePass('loginPass',this)">👁</button>
+          <button type="button" class="toggle-pass" onclick="togglePass('loginPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
         <div class="field-err" id="loginPassErr">נא הזן סיסמה</div>
       </div>
@@ -467,7 +467,7 @@ function togglePass(inputId, btn){
   const inp = document.getElementById(inputId);
   const isPass = inp.type==='password';
   inp.type = isPass ? 'text' : 'password';
-  btn.textContent = isPass ? '🙈' : '👁';
+  btn.innerHTML = isPass ? '<<SVG_PLACEHOLDER width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>' : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
 }
 
 // ── REGISTER ───────────────────────────────────────────────
