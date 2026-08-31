@@ -676,11 +676,11 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         <div class="cb" style="padding:12px 14px">
           <p style="font-size:11px;color:var(--muted);margin-bottom:9px">עסקאות מזומן מעל הסף יסומנו כחריגות חמורות אוטומטית</p>
           <label style="display:flex;align-items:center;gap:8px;margin-bottom:7px;cursor:pointer;font-size:13px;font-weight:600">
-            <input type="radio" name="cashLaw" value="business" checked onchange="_cashLawType=this.value" style="accent-color:var(--pl)">
+            <input type="radio" name="cashLaw" value="business" aria-label="עסק לעסק — סף ₪11,000" checked onchange="_cashLawType=this.value" style="accent-color:var(--pl)">
             עסק לעסק — סף ₪11,000
           </label>
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600">
-            <input type="radio" name="cashLaw" value="individual" onchange="_cashLawType=this.value" style="accent-color:var(--pl)">
+            <input type="radio" name="cashLaw" value="individual" aria-label="יחיד — סף ₪5,000" onchange="_cashLawType=this.value" style="accent-color:var(--pl)">
             יחיד — סף ₪5,000
           </label>
         </div>
@@ -897,15 +897,15 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       <div class="cb" style="padding:14px 16px">
         <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
           <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600">
-            <input type="radio" name="vatMode" value="regular" checked onchange="setVATMode('regular')" style="accent-color:var(--pl)">
+            <input type="radio" name="vatMode" value="regular" aria-label="מחויב במע&quot;מ רגיל" checked onchange="setVATMode('regular')" style="accent-color:var(--pl)">
             מחויב במע"מ (18%)
           </label>
           <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600">
-            <input type="radio" name="vatMode" value="exempt" onchange="setVATMode('exempt')" style="accent-color:var(--accent)">
+            <input type="radio" name="vatMode" value="exempt" aria-label="פטור ממע&quot;מ" onchange="setVATMode('exempt')" style="accent-color:var(--accent)">
             <span style="background:#dcfce7;color:#15803d;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700">פטור ממע"מ ✓</span>
           </label>
           <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600">
-            <input type="radio" name="vatMode" value="custom" onchange="setVATMode('custom')" style="accent-color:var(--warn)">
+            <input type="radio" name="vatMode" value="custom" aria-label="שיעור מע&quot;מ מותאם" onchange="setVATMode('custom')" style="accent-color:var(--warn)">
             שיעור מותאם:
             <input type="number" id="customVatInput" min="0" max="100" value="17" placeholder="%"
               style="width:58px;padding:3px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;direction:ltr;margin-right:2px"
@@ -3045,11 +3045,11 @@ function showColumnMapper(headers){
   fmtDiv.innerHTML=`
     <strong><i class="ti ti-calendar"></i> פורמט תאריך בקובץ:</strong>
     <label style="margin-right:14px;cursor:pointer">
-      <input type="radio" name="dateFormatPicker" value="DD/MM/YYYY" ${_dateFormat==='DD/MM/YYYY'?'checked':''} onchange="_dateFormat=this.value">
+      <input type="radio" name="dateFormatPicker" value="DD/MM/YYYY" aria-label="פורמט תאריך DD/MM/YYYY ישראלי" ${_dateFormat==='DD/MM/YYYY'?'checked':''} onchange="_dateFormat=this.value">
       <strong>DD/MM/YYYY</strong> — ישראלי (31/01/2025)
     </label>
     <label style="cursor:pointer">
-      <input type="radio" name="dateFormatPicker" value="MM/DD/YYYY" ${_dateFormat==='MM/DD/YYYY'?'checked':''} onchange="_dateFormat=this.value">
+      <input type="radio" name="dateFormatPicker" value="MM/DD/YYYY" aria-label="פורמט תאריך MM/DD/YYYY אמריקאי" ${_dateFormat==='MM/DD/YYYY'?'checked':''} onchange="_dateFormat=this.value">
       <strong>MM/DD/YYYY</strong> — אמריקאי (01/31/2025)
     </label>
     <div style="font-size:10px;color:var(--muted);margin-top:4px">תאריכים בפורמט YYYY/MM/DD מזוהים אוטומטית ואינם מושפעים</div>`;
@@ -4350,14 +4350,14 @@ function renderTransactions(){
       </div>
       <div class="cb" style="padding:10px">
         <div class="tc">
-          <input class="si" type="text" placeholder="חיפוש..." oninput="filterText=this.value;currentPage=1;renderTablePage()">
+          <input class="si" type="text" placeholder="חיפוש..." aria-label="חיפוש עסקאות" oninput="filterText=this.value;currentPage=1;renderTablePage()">
           <select class="fs" onchange="filterType=this.value;currentPage=1;renderTablePage()">
             <option value="all">הכל</option><option value="הכנסה">הכנסות</option><option value="הוצאה">הוצאות</option>
           </select>
         </div>
         <!-- absorb browser autocomplete before the table -->
-        <input style="display:none" type="text" name="fakeuser" autocomplete="username"/>
-        <input style="display:none" type="password" name="fakepass" autocomplete="new-password"/>
+        <input style="display:none" type="text" name="fakeuser" aria-hidden="true" tabindex="-1" autocomplete="username"/>
+        <input style="display:none" type="password" name="fakepass" aria-hidden="true" tabindex="-1" autocomplete="new-password"/>
         <div class="tw">
           <table class="dt" autocomplete="off">
             <thead><tr>
@@ -4419,7 +4419,7 @@ function renderTablePage(){
           <span class="flag-btn ${flag==='g'?'fg':'fn'}" onclick="setFlag(${r.idx},'g')" title="אומת"></span>
         </div>
       </td>
-      <td><input class="note-input" type="search" autocomplete="off" value="${escHtml(note)}" onchange="setNote(${r.idx},this.value)" placeholder="הערה..." style="width:120px"></td>
+      <td><input class="note-input" type="search" aria-label="הערה לעסקה" autocomplete="off" value="${escHtml(note)}" onchange="setNote(${r.idx},this.value)" placeholder="הערה..." style="width:120px"></td>
     </tr>`;
   }).join('');
   renderPag(rows.length);
@@ -5096,7 +5096,7 @@ function renderAnomalies(){
                   style="font-size:11px;padding:4px 7px;border:1px solid var(--border);border-radius:7px;background:#fff;font-family:inherit;cursor:pointer;min-width:160px;flex-shrink:0">
                   ${selOpts}
                 </select>
-                <input type="text" value="${escHtml(rev.note)}"
+                <input type="text" aria-label="הערת רו&quot;ח" value="${escHtml(rev.note)}" aria-label="הערת רו&quot;ח"
                   placeholder="הערת רו&quot;ח…"
                   oninput="setAnomReview('${key.replace(/'/g,"\\'")}','note',this.value)"
                   style="flex:1;font-size:11px;padding:4px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;background:#fff;direction:rtl"/>
@@ -6225,7 +6225,7 @@ function renderWHT(){
       </td>
       <td style="font-size:11px;padding:6px 8px;text-align:center;border-bottom:1px solid #e8e0d0">
         <div style="display:inline-flex;align-items:center;gap:3px;background:#f5f0e8;border-radius:6px;padding:3px 7px">
-          <input type="number" min="0" max="100" step="0.5"
+          <input type="number" aria-label="ציון ביקורת 0–100" min="0" max="100" step="0.5" aria-label="ציון ביקורת 0–100"
             value="${ovr?.customRate!=null?ovr.customRate:(v.rate*100).toFixed(0)}"
             onchange="setWHTOverride(this.closest('tr').dataset.vname,'customRate',this.value)"
             style="width:38px;padding:2px 4px;border:1px solid var(--border);border-radius:4px;font-size:11px;text-align:center;background:#fff;color:var(--text)">
@@ -6968,13 +6968,13 @@ function renderWorkingPapers(){
           </div>
           <div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0;min-width:240px">
             <div style="display:flex;gap:6px;align-items:center">
-              <input type="text" placeholder="הכין" value="${escHtml(so.prepared||'')}"
+              <input type="text" placeholder="הכין" aria-label="שם מכין ניירות עבודה" value="${escHtml(so.prepared||'')}"
                 style="flex:1;padding:4px 7px;border:1px solid var(--border);border-radius:5px;font-size:11px;background:var(--card);color:var(--text)"
                 onchange="_wpSignoffs['${s.id}']=_wpSignoffs['${s.id}']||{};_wpSignoffs['${s.id}'].prepared=this.value;renderWorkingPapers()">
-              <input type="text" placeholder="בדק" value="${escHtml(so.reviewed||cpaName)}"
+              <input type="text" placeholder="בדק" aria-label="שם בודק ניירות עבודה" value="${escHtml(so.reviewed||cpaName)}"
                 style="flex:1;padding:4px 7px;border:1px solid var(--border);border-radius:5px;font-size:11px;background:var(--card);color:var(--text)"
                 onchange="_wpSignoffs['${s.id}']=_wpSignoffs['${s.id}']||{};_wpSignoffs['${s.id}'].reviewed=this.value;renderWorkingPapers()">
-              <input type="date" value="${so.date||new Date().toISOString().slice(0,10)}"
+              <input type="date" aria-label="תאריך ניירות עבודה" value="${so.date||new Date().toISOString().slice(0,10)}"
                 style="width:110px;padding:4px 7px;border:1px solid var(--border);border-radius:5px;font-size:11px;background:var(--card);color:var(--text)"
                 oninput="_wpSignoffs['${s.id}']=_wpSignoffs['${s.id}']||{};_wpSignoffs['${s.id}'].date=this.value">
             </div>
@@ -9454,7 +9454,7 @@ function renderOpenItems(){
       <div class="oi-text">
         <div>${escHtml(item.text)}</div>
         ${item.note?`<div style="font-size:11px;color:var(--muted);margin-top:3px">💬 ${escHtml(item.note)}</div>`:''}
-        <input type="text" placeholder="הוסף הערה..." value="${escHtml(item.note||'')}"
+        <input type="text" placeholder="הוסף הערה..." aria-label="הוסף הערה" value="${escHtml(item.note||'')}"
           onchange="setOpenItemNote(${item.id},this.value)"
           style="margin-top:4px;width:100%;font-size:11px;padding:3px 7px;border:1px solid var(--border);border-radius:5px;direction:rtl;font-family:inherit;display:${item.note?'block':'none'}"
           onfocus="this.style.display='block'">
@@ -9505,7 +9505,7 @@ function renderChecklist(){
     const ts=s.ts?`<span class="cl-time">${s.ts}</span>`:'';
     const autoBadge=item.auto?`<span class="cl-auto"><i class="ti ti-zoom-in"></i> אוטו</span>`:'';
     return`<li class="checklist-item${checked?' done':''}">
-      <input type="checkbox" ${checked?'checked':''} onchange="toggleChecklistItem('${item.id}',this.checked)">
+      <input type="checkbox" aria-label="סמן כהושלם" ${checked?'checked':''} onchange="toggleChecklistItem('${item.id}',this.checked)">
       <span class="cl-label">${item.label}</span>
       ${autoBadge}${ts}
     </li>`;
@@ -9902,7 +9902,7 @@ function renderBudget(){
 
     rows+='<tr data-brow="'+catKey+'">'
       +'<td style="font-weight:600;color:var(--primary)">'+escHtml(cat)+'</td>'
-      +'<td><input class="budget-inp" data-cat="'+escHtml(cat)+'" type="number" placeholder="הכנס תקציב" value="'+(bud||'')+'" min="0" step="100" style="width:120px" oninput="_budgetAutoSave()"></td>'
+      +'<td><input class="budget-inp" aria-label="תקציב לקטגוריה" data-cat="'+escHtml(cat)+'" type="number" placeholder="הכנס תקציב" value="'+(bud||'')+'" min="0" step="100" style="width:120px" oninput="_budgetAutoSave()"></td>'
       +'<td style="font-weight:600">'+fmtCur(actual)+'</td>'
       +'<td data-bvar="'+catKey+'">'+varBadge+'</td>'
       +'<td data-bbar="'+catKey+'">'+barHtml+'</td>'
