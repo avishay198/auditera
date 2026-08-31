@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
   img-src 'self' data: blob:;
-  font-src 'self';
+  font-src 'self' https://cdn.jsdelivr.net;
   object-src 'none';
   frame-src 'self';
   base-uri 'self';
@@ -16,6 +16,7 @@
   upgrade-insecure-requests; frame-ancestors 'self';
 ">
 <link rel="canonical" href="https://auditera.co.il/">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <title>Auditera — ביקורת פיננסית חכמה לרואי חשבון</title>
 <meta name="description" content="Auditera — כלי ביקורת פיננסית חכם לרואי חשבון ישראליים. ניתוח CSV/Excel, זיהוי 11 סוגי חריגות, בנפורד, מע&quot;מ, ניכוי מס במקור ועוד.">
 <meta property="og:title" content="Auditera — ביקורת פיננסית חכמה לרואי חשבון">
@@ -257,6 +258,16 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
   .footer-links{gap:14px}
 }
 
+
+@media(max-width:400px){
+  .hero h1{font-size:22px}
+  .hero-sub{font-size:13px}
+  .btn-main,.btn-outline{font-size:14px;padding:11px 12px}
+  .steps{grid-template-columns:1fr}
+  .stat-item{min-width:100%;border-left:none!important}
+  .footer-links{flex-direction:column;gap:8px}
+  .cta-inner h2{font-size:19px}
+}
 /* ACCESSIBILITY */
 *:focus{outline:none}
 *:focus-visible{outline:2px solid #c99a2e;outline-offset:3px;border-radius:4px}
@@ -364,25 +375,25 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
   </div>
   <div class="feat-grid">
     <div class="feat-card">
-      <div class="feat-icon-wrap"><i class="ti ti-zoom-scan" aria-hidden="true"></i></div>
+      <div class="feat-icon-wrap"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div>
       <h3>זיהוי חריגות אוטומטי</h3>
       <p>11 סוגי בדיקות — כפילויות, סכומים עגולים, עסקאות בסוף שבוע, חוק מזומן, חשבוניות ישראל ועוד.</p>
       <a class="feat-link" href="features.html">קרא עוד ←</a>
     </div>
     <div class="feat-card hl">
-      <div class="feat-icon-wrap"><i class="ti ti-chart-histogram" aria-hidden="true"></i></div>
+      <div class="feat-icon-wrap"><i class="ti ti-chart-bar" aria-hidden="true"></i></div>
       <h3>חוק בנפורד</h3>
       <p>ניתוח התפלגות ספרות ראשונות לגילוי מניפולציות חשבונאיות פוטנציאליות בתיקי לקוחות.</p>
       <a class="feat-link" href="features.html">קרא עוד ←</a>
     </div>
     <div class="feat-card">
-      <div class="feat-icon-wrap"><i class="ti ti-robot" aria-hidden="true"></i></div>
+      <div class="feat-icon-wrap"><i class="ti ti-brain" aria-hidden="true"></i></div>
       <h3>AI עם BYOK</h3>
       <p>חבר מפתח OpenAI או Groq משלך — שאל שאלות על הנתונים בעברית טבעית.</p>
       <a class="feat-link" href="features.html">קרא עוד ←</a>
     </div>
     <div class="feat-card">
-      <div class="feat-icon-wrap"><i class="ti ti-files" aria-hidden="true"></i></div>
+      <div class="feat-icon-wrap"><i class="ti ti-table" aria-hidden="true"></i></div>
       <h3>השוואה שנה לשנה</h3>
       <p>העלה שני קבצים ותקבל ניתוח YoY אוטומטי עם גרפים ותובנות.</p>
     </div>
@@ -392,7 +403,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
       <p>דוחות PDF ו-CSV — מוכנים להגשה ללקוח או לרשויות.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon-wrap"><i class="ti ti-lock" aria-hidden="true"></i></div>
+      <div class="feat-icon-wrap"><i class="ti ti-shield" aria-hidden="true"></i></div>
       <h3>100% פרטי</h3>
       <p>הנתונים לעולם לא עוזבים את הדפדפן שלך. אין שרת, אין ענן, אין סיכון.</p>
     </div>
