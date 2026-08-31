@@ -615,22 +615,16 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   <!-- UPLOAD -->
   <div id="tab-upload" class="tab-panel active">
     <div class="upload-zone" id="uploadZone">
-      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" multiple onchange="handleFiles(this.files)">
+      <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" onchange="handleFiles(this.files)">
       <div class="upload-icon"><i class="ti ti-cloud-upload" style="font-size:2.5rem"></i></div>
-      <h2>גרור קבצים לכאן או לחץ לבחירה</h2>
+      <h2>גרור קובץ לכאן או לחץ לבחירה</h2>
       <p id="uploadZoneHint">CSV או Excel — הסוכן מזהה עמודות אוטומטית בעברית ואנגלית</p>
       <div class="formats">
         <span class="fbadge">CSV</span><span class="fbadge">Excel (.xlsx)</span>
       </div>
     </div>
     <div class="file-list" id="fileList"></div>
-    <!-- סיכום מיזוג קבצים — מוצג רק כשיש קבצים טעונים -->
-    <div id="filesMergeSummary" style="display:none;margin-top:10px;padding:10px 14px;background:#f0f7ef;border:1.5px solid #b7ddb0;border-radius:9px;font-size:12.5px;color:#2d5a27;align-items:center;gap:16px;flex-wrap:wrap">
-      <span id="fmsFiles" style="font-weight:700"><i class="ti ti-files"></i> <span id="fmsFilesCount">0</span> קבצים</span>
-      <span id="fmsRows"><i class="ti ti-table"></i> <span id="fmsRowsCount">0</span> שורות סה״כ</span>
-      <span id="fmsDups" style="display:none;font-weight:600"></span>
-      <button onclick="document.getElementById('fileInput').click()" style="margin-right:auto;padding:5px 14px;border:1.5px solid #3a7c2e;border-radius:6px;background:#fff;color:#3a7c2e;font-weight:700;cursor:pointer;font-size:12px;font-family:inherit">+ הוסף קובץ נוסף</button>
-    </div>
+
     <div id="quotaBadge" style="margin-top:6px;text-align:left"></div>
 
 

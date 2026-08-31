@@ -4794,6 +4794,176 @@ function openSendKeyModal(tplKey, planHe, prefillEmail='', prefillName=''){
 function closeSendKeyModal(){
   document.getElementById('sendKeyModal').classList.remove('show');
 }
+
+// ── HTML EMAIL BUILDER ────────────────────────────────────────────────
+function buildKeyEmailHTML(name, plan, token, link){
+  const PLAN_DATA={
+    starter:  {label:'סטארטר',  price:'590',  quota:'35',  features:['35 תיקי לקוח','ביקורת חודשית ושנתית','זיהוי 12 סוגי חריגות אוטומטי','התאמת בנק + תזרים מזומנים','ייצוא PDF ו-Excel','תמיכה במייל']},
+    professional:{label:'מקצועי', price:'990', quota:'80',  features:['80 תיקי לקוח','כל יכולות הסטארטר','דוח AI מקצועי','ייצוא לריווחית','תמיכה טלפונית עדיפות']},
+    premium:  {label:'פרמיום',  price:'2,490',quota:'200', features:['200 תיקי לקוח','כל יכולות המקצועי','API גישה','מנהל חשבון אישי','SLA מובטח']},
+    enterprise:{label:'ארגוני', price:'בהתאמה',quota:'∞', features:['תיקים ללא הגבלה','כל יכולות הפרמיום','הטמעה מותאמת','הדרכת צוות','תמיכה 24/7']},
+    trial:    {label:'ניסיון', price:'0',    quota:'1',  features:['תיק לקוח אחד','ביקורת חודשית','גישה מלאה לתכונות']}
+  };
+  const pd = PLAN_DATA[plan] || PLAN_DATA.starter;
+  const featureRows = pd.features.map(f=>
+    `<tr><td style="padding:5px 0;font-size:14px;color:#5a3010;direction:rtl;text-align:right">
+      <span style="color:#c99a2e;font-weight:700;margin-left:8px">✓</span>${f}
+    </td></tr>`
+  ).join('');
+
+  return `<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f0e8d8;font-family:'Segoe UI',Arial,sans-serif;direction:rtl">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0e8d8;padding:32px 16px">
+  <tr><td align="center">
+  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+
+    <!-- HEADER -->
+    <tr><td style="background:#3a2000;border-radius:14px 14px 0 0;padding:28px 40px;text-align:center">
+      <div style="font-size:28px;font-weight:900;color:#f5e6c0;letter-spacing:-0.5px">
+        <span style="color:#c99a2e">Au</span>ditera
+      </div>
+      <div style="font-size:13px;color:rgba(245,230,192,0.6);margin-top:4px">כלי ביקורת חשבונאית חכם</div>
+    </td></tr>
+
+    <!-- HERO -->
+    <tr><td style="background:#ffffff;padding:36px 40px 28px;text-align:center">
+      <div style="font-size:40px;margin-bottom:12px">🎉</div>
+      <h1 style="margin:0 0 8px;font-size:24px;font-weight:800;color:#3a2000">ברוך הבא ל-Auditera, ${name}!</h1>
+      <p style="margin:0;font-size:15px;color:#7a5a30;line-height:1.6">
+        המנוי שלך אושר ומוכן לשימוש.<br>מפתח ההפעלה שלך מצורף למטה.
+      </p>
+    </td></tr>
+
+    <!-- PLAN BADGE -->
+    <tr><td style="background:#ffffff;padding:0 40px 24px">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background:#fdf8ee;border:1.5px solid #e8d4a0;border-radius:10px;padding:20px">
+        <tr>
+          <td style="text-align:right;direction:rtl">
+            <div style="font-size:11px;font-weight:800;color:#c99a2e;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">מסלול פעיל</div>
+            <div style="font-size:22px;font-weight:900;color:#3a2000">${pd.label}</div>
+            <div style="font-size:13px;color:#9a7a4a;margin-top:2px">עד ${pd.quota} תיקי לקוח · ₪${pd.price}/חודש</div>
+          </td>
+          <td style="text-align:left;vertical-align:top">
+            <span style="background:#3a2000;color:#c99a2e;font-size:11px;font-weight:800;padding:5px 14px;border-radius:20px">פעיל ✓</span>
+          </td>
+        </tr>
+        <tr><td colspan="2" style="padding-top:16px">
+          <table width="100%" cellpadding="0" cellspacing="0">${featureRows}</table>
+        </td></tr>
+      </table>
+    </td></tr>
+
+    <!-- ACTIVATION KEY -->
+    <tr><td style="background:#ffffff;padding:0 40px 28px">
+      <div style="font-size:13px;font-weight:700;color:#3a2000;margin-bottom:10px;text-align:right">🔑 מפתח ההפעלה שלך</div>
+      <div style="background:#1a0a00;border-radius:10px;padding:20px 24px;text-align:center">
+        <div style="font-family:'Courier New',Courier,monospace;font-size:12px;color:#c99a2e;word-break:break-all;letter-spacing:.03em;line-height:1.7">${token}</div>
+      </div>
+      <div style="font-size:11px;color:#9a7a4a;text-align:center;margin-top:8px">
+        ⚠ שמור את המפתח במקום בטוח — תזדקק לו בכל התקנה חדשה
+      </div>
+    </td></tr>
+
+    <!-- CTA -->
+    <tr><td style="background:#ffffff;padding:0 40px 36px;text-align:center">
+      <a href="${link}" style="display:inline-block;background:#c99a2e;color:#3a2000;font-size:16px;font-weight:800;padding:15px 40px;border-radius:10px;text-decoration:none">
+        כניסה למערכת &larr;
+      </a>
+      <div style="font-size:12px;color:#9a7a4a;margin-top:12px">
+        ${link}
+      </div>
+    </td></tr>
+
+    <!-- STEPS -->
+    <tr><td style="background:#f9f4ea;padding:24px 40px;border-top:1px solid #e8d4a0">
+      <div style="font-size:13px;font-weight:700;color:#3a2000;margin-bottom:14px;text-align:right">🚀 איך מתחילים</div>
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#3a2000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">1</span></td>
+          <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl;padding-bottom:10px">היכנס עם הכתובת ומספר הטלפון שלך</td>
+        </tr>
+        <tr>
+          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#3a2000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">2</span></td>
+          <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl;padding-bottom:10px">הכנס את מפתח ההפעלה שקיבלת</td>
+        </tr>
+        <tr>
+          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#3a2000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">3</span></td>
+          <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl">העלה את קובץ הנהלת החשבונות והתחל לבקר</td>
+        </tr>
+      </table>
+    </td></tr>
+
+    <!-- FOOTER -->
+    <tr><td style="background:#3a2000;border-radius:0 0 14px 14px;padding:20px 40px;text-align:center">
+      <div style="font-size:12px;color:rgba(245,230,192,0.6);line-height:1.8">
+        לשאלות ותמיכה — ענה לאימייל זה<br>
+        <span style="color:#c99a2e">support@auditera.co.il</span>
+      </div>
+      <div style="font-size:10px;color:rgba(245,230,192,0.35);margin-top:10px">© ${new Date().getFullYear()} Auditera · כל הזכויות שמורות</div>
+    </td></tr>
+
+  </table>
+  </td></tr>
+</table>
+</body></html>`;
+}
+
+function showEmailPreview(html, toEmail, subject){
+  let m = document.getElementById('emailPreviewModal');
+  if(!m){
+    m = document.createElement('div');
+    m.id = 'emailPreviewModal';
+    m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+    m.innerHTML = `
+      <div style="background:#fff;border-radius:14px;width:100%;max-width:680px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)">
+        <div style="background:#3a2000;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+          <span style="color:#f5e6c0;font-weight:700;font-size:15px">📧 תצוגה מקדימה — אימייל מפתח הפעלה</span>
+          <button onclick="document.getElementById('emailPreviewModal').remove()" style="background:rgba(255,255,255,.15);border:none;color:#f5e6c0;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px">✕</button>
+        </div>
+        <div style="padding:12px 16px;background:#f9f4ea;border-bottom:1px solid #e8d4a0;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap">
+          <button id="epCopyBtn" onclick="epCopyHTML()" style="background:#3a2000;color:#c99a2e;border:none;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer">📋 העתק HTML</button>
+          <button onclick="epOpenGmail()" style="background:#fff;color:#3a2000;border:1.5px solid #c99a2e;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer">✉ פתח ב-Gmail</button>
+          <span style="font-size:12px;color:#9a7a4a;align-self:center">העתק את ה-HTML ← Gmail ← Compose ← Ctrl+Shift+V</span>
+        </div>
+        <iframe id="epFrame" style="flex:1;border:none;min-height:500px"></iframe>
+      </div>`;
+    document.body.appendChild(m);
+  }
+  m.style.display = 'flex';
+  m._html = html;
+  m._toEmail = toEmail;
+  m._subject = subject;
+  const fr = m.querySelector('#epFrame');
+  fr.srcdoc = html;
+}
+
+function epCopyHTML(){
+  const m = document.getElementById('emailPreviewModal');
+  navigator.clipboard.writeText(m._html).then(()=>{
+    const btn = document.getElementById('epCopyBtn');
+    btn.textContent = '✅ הועתק!';
+    setTimeout(()=>{ btn.textContent = '📋 העתק HTML'; }, 2000);
+  }).catch(()=>{
+    const ta = document.createElement('textarea');
+    ta.value = m._html;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('epCopyBtn');
+    btn.textContent = '✅ הועתק!';
+    setTimeout(()=>{ btn.textContent = '📋 העתק HTML'; }, 2000);
+  });
+}
+
+function epOpenGmail(){
+  const m = document.getElementById('emailPreviewModal');
+  const url = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(m._toEmail)}&su=${encodeURIComponent(m._subject)}`;
+  window.open(url, '_blank');
+}
+
 async function execSendKey(){
   const email=(document.getElementById('skEmail').value||'').trim().toLowerCase();
   const name=(document.getElementById('skName').value||'').trim();
@@ -4825,13 +4995,13 @@ async function execSendKey(){
     .replace(/\[מפתח\]/g,token)
     .replace(/\[LINK\]/g,link);
   const subject=document.getElementById('tplSubj_'+tplKey)?.value||t.subject;
-  // פתח mailto עם נושא + גוף מלא
-  const mailtoUrl=`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  const a=document.createElement('a');a.href=mailtoUrl;document.body.appendChild(a);a.click();document.body.removeChild(a);
-  // רישום ביומן
+  // בנה HTML email ופתח preview
+  const htmlEmail = buildKeyEmailHTML(name, plan, token, link);
+  const cleanSubject = subject.replace(/<[^>]+>/g,'');
   adminLog('key_sent',`${email} [${plan}] תוקף:${expiry}`);
   closeSendKeyModal();
-  toast('✅ נפתח לקוח המייל עם המפתח — לחץ שלח');
+  showEmailPreview(htmlEmail, email, cleanSubject);
+  toast('✅ מפתח נוצר — העתק את ה-HTML ושלח ב-Gmail');
 }
 
 // WAITING LIST
