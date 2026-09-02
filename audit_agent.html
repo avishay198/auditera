@@ -1477,12 +1477,8 @@ function getUserPlan(){
   if(window._auditSession && window._auditSession.isDemo) return 'professional';
   const email=(window._auditSession&&window._auditSession.email)||'';
   const lic = _getLicenseData(email);
+  // רק רישיון תקף (token + תוקף) מעניק גישה — u.plan בלבד לא מספיק
   if(lic) return lic.plan;
-  try{
-    const users=JSON.parse(localStorage.getItem(USERS_KEY_APP)||'[]');
-    const u=users.find(x=>x.email===email);
-    return (u&&u.plan)?u.plan:'trial';
-  }catch(e){}
   return 'trial';
 }
 function getUserQuota(){
