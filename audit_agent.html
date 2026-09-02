@@ -547,7 +547,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   <div class="hbrand">
   </div>
   <div class="hactions">
-    <button class="hbtn demo" onclick="runDemo()"><i class="ti ti-player-play"></i> הדגמה</button>
+    <button class="hbtn demo" id="demoBtn" onclick="runDemo()" style="display:none"><i class="ti ti-player-play"></i> הדגמה</button>
     <button class="hbtn" onclick="resetAll()"><i class="ti ti-refresh"></i> איפוס</button>
     <button class="hbtn" onclick="exportReport('html')"><i class="ti ti-file-export"></i> ייצוא דוח</button>
     <div style="position:relative;display:inline-block" id="exportMenuWrap">
@@ -1562,6 +1562,7 @@ function getTrialStatus(){
     window._auditSession = { email: 'admin', name: 'מנהל מערכת', loggedIn: true, isAdmin: true };
     // נקה את הפרמטר מה-URL כדי שלא ייראה
     history.replaceState(null, '', window.location.pathname);
+    const _db=document.getElementById('demoBtn');if(_db)_db.style.display='';
     return;
   }
 
