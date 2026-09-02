@@ -2557,13 +2557,9 @@ const DEF_PRICES={trial:0,starter:590,professional:990,premium:2490,enterprise:0
 const DEF_QUOTAS={trial:1,starter:35,professional:80,premium:200,enterprise:9999};
 
 // ══════════════════════════════════════════════════════
-// ── LICENSE TOKEN — HMAC-SHA256 ───────────────────────
-// חייב להיות זהה ב-audit_agent.html — שנה לפני הפצה!
-// ══════════════════════════════════════════════════════
-const LIC_SECRET = 'aud-lic-2024-k9mXpR7vWqZn';
+// ── LICENSE TOKEN — נוצר ע"י Cloudflare Worker בלבד (LIC_SECRET לא בסורס) ──
 // ── DEFAULT ADMIN PASS HASH ───────────────────────────
-// passHash is SHA-256(password + SALT) — pre-computed, raw password never stored in source
-const DEF_PASS_HASH='671c397fd47973e2ca05de28a8fe2a0c93a1b5b1c98ad1bf97083ac798a7e104';
+// passHash is SHA-256(password + SALT) — stored in Cloudflare, not in source
 const LIC_PLAN_QUOTAS = DEF_QUOTAS; // ← זהה ל-DEF_QUOTAS, לא לשנות בנפרד
 
 function licPlanChanged(){
@@ -2571,29 +2567,27 @@ function licPlanChanged(){
   document.getElementById('licQuota').value = LIC_PLAN_QUOTAS[p] || 60;
 }
 
-async function _licHmac6(msg){
-  const enc = new TextEncoder();
-  const key = await crypto.subtle.importKey('raw', enc.encode(LIC_SECRET),
-    {name:'HMAC',hash:'SHA-256'}, false, ['sign']);
-  const sig = await crypto.subtle.sign('HMAC', key, enc.encode(msg));
-  return Array.from(new Uint8Array(sig)).map(b=>b.toString(16).padStart(2,'0')).join('').substring(0,6).toUpperCase();
-}
-
 async function doGenerateLicToken(){
   const email  = (document.getElementById('licEmail').value||'').trim().toLowerCase();
   const plan   = document.getElementById('licPlan').value;
   const quota  = parseInt(document.getElementById('licQuota').value)||60;
-  const expiry = document.getElementById('licExpiry').value; // YYYY-MM
+  const expiry = document.getElementById('licExpiry').value;
   if(!email||!email.includes('@')){ alert('נא הזן כתובת אימייל תקינה'); return; }
   if(!expiry){ alert('נא בחר תאריך פקיעה'); return; }
-  const payload = btoa(JSON.stringify({e:email,p:plan,q:quota,x:expiry}));
-  const h = await _licHmac6(payload);
-  const token = `AUD-${payload}-${h}`;
-  document.getElementById('licTokenOut').value = token;
-  const planHe = {starter:'סטארטר',professional:'מקצועי',premium:'פרמיום',enterprise:'ארגוני'}[plan]||plan;
-  document.getElementById('licTokenMeta').textContent =
-    `✓ תוכנית: ${planHe} | מכסה: ${quota===9999?'ללא הגבלה':quota+' תיקים'} | תוקף: עד סוף ${expiry} | אימייל: ${email}`;
-  document.getElementById('licResult').style.display = 'block';
+  const adminToken = sessionStorage.getItem('af_admin_token')||'';
+  try{
+    const resp = await fetch('https://auditera-license.auditera.workers.dev/generate-token',{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email,plan,quota,expiry,admin_token:adminToken})
+    });
+    const data = await resp.json();
+    if(!data.ok){ alert('שגיאה ביצירת טוקן — ' + (data.error||'נסה שוב')); return; }
+    document.getElementById('licTokenOut').value = data.token;
+    const planHe = {starter:'סטארטר',professional:'מקצועי',premium:'פרמיום',enterprise:'ארגוני'}[plan]||plan;
+    document.getElementById('licTokenMeta').textContent =
+      `✓ תוכנית: ${planHe} | מכסה: ${quota===9999?'ללא הגבלה':quota+' תיקים'} | תוקף: עד סוף ${expiry} | אימייל: ${email}`;
+    document.getElementById('licResult').style.display = 'block';
+  }catch(e){ alert('שגיאת רשת — ודא חיבור לאינטרנט'); }
 }
 
 function copyLicToken(){

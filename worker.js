@@ -45,6 +45,11 @@ export default {
       return handleAdminAuth(request, env);
     }
 
+    // ── POST /generate-token — יצירת טוקן רישיון (מנהל בלבד) ────
+    if (request.method === 'POST' && url.pathname === '/generate-token') {
+      return handleGenerateToken(request, env);
+    }
+
     return new Response('Not found', { status: 404, headers: CORS });
   }
 };
@@ -240,6 +245,53 @@ async function handleAdminAuth(request, env) {
 
     return json({ ok: true, token, expires });
   } catch (e) {
+    return json({ ok: false, error: 'server_error' }, 500);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// /generate-token — יצירת טוקן רישיון HMAC-SHA256
+// דורש אימות מנהל (admin_token מ-/admin-auth)
+// ══════════════════════════════════════════════════════════════
+async function handleGenerateToken(request, env) {
+  try {
+    const { email, plan, quota, expiry, admin_token } = await request.json();
+
+    // אמת שהמבקש הוא מנהל
+    if (!admin_token) return json({ ok: false, error: 'unauthorized' }, 401);
+    try {
+      const decoded = atob(admin_token);
+      const lastPipe = decoded.lastIndexOf('|');
+      const payload  = decoded.slice(0, lastPipe);
+      const sig      = decoded.slice(lastPipe + 1);
+      if (!payload.startsWith('admin|')) return json({ ok: false, error: 'unauthorized' }, 401);
+      const expires = parseInt(payload.split('|')[1]);
+      if (Date.now() > expires) return json({ ok: false, error: 'session_expired' }, 401);
+      // אמת חתימה
+      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.LIC_SECRET || ''),
+        { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+      const expected = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+      const expHex = Array.from(new Uint8Array(expected)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      if (expHex !== sig) return json({ ok: false, error: 'unauthorized' }, 401);
+    } catch(e) {
+      return json({ ok: false, error: 'unauthorized' }, 401);
+    }
+
+    // ולידציה
+    if (!email || !email.includes('@')) return json({ ok: false, error: 'invalid_email' }, 400);
+    if (!plan || !expiry) return json({ ok: false, error: 'missing_params' }, 400);
+
+    const q = parseInt(quota) || 60;
+    const payload = `${plan}|${q}|${expiry}|${email.toLowerCase().trim()}`;
+
+    const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.LIC_SECRET),
+      { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+    const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+    const hmac = Array.from(new Uint8Array(sig)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    const token = btoa(`${payload}|${hmac}`);
+
+    return json({ ok: true, token });
+  } catch(e) {
     return json({ ok: false, error: 'server_error' }, 500);
   }
 }
