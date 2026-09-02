@@ -1723,18 +1723,35 @@ nav {
       <label style="font-size:11px;font-weight:700;color:var(--brown);display:block;margin-bottom:8px">פורמט ייצוא</label>
       <div class="export-format-row" id="exportFormatCards"></div>
     </div>
-    <div class="form-row">
-      <div class="fg">
-        <label>מספר חשבון הכנסות (כ-800)</label>
-        <input id="priorIncomeAcc" placeholder="800" value="800">
+    <div style="margin-bottom:6px;font-size:11px;font-weight:700;color:var(--muted)">מספרי חשבונות לייצוא (ניתן לעריכה)</div>
+    <div style="border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:12px">
+      <!-- פריוריטי -->
+      <div style="background:var(--bg2);padding:8px 12px;font-size:11px;font-weight:700;color:var(--brown);border-bottom:1px solid var(--border)">פריוריטי</div>
+      <div class="form-row" style="padding:10px 12px 4px;gap:8px">
+        <div class="fg"><label style="font-size:10px">הכנסות</label><input id="priorIncomeAcc" placeholder="800" value="800" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">לקוחות</label><input id="priorDebtorAcc" placeholder="100" value="100" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">מע"מ</label><input id="priorVatAcc" placeholder="320" value="320" style="font-size:12px"></div>
       </div>
-      <div class="fg">
-        <label>מספר חשבון לקוחות (כ-100)</label>
-        <input id="priorDebtorAcc" placeholder="100" value="100">
+      <!-- חשבIT -->
+      <div style="background:var(--bg2);padding:8px 12px;font-size:11px;font-weight:700;color:var(--brown);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">חשבIT</div>
+      <div class="form-row" style="padding:10px 12px 4px;gap:8px">
+        <div class="fg"><label style="font-size:10px">הכנסות</label><input id="hitIncomeAcc" placeholder="הכנסות" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">לקוחות</label><input id="hitDebtorAcc" placeholder="לקוחות" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">מע"מ</label><input id="hitVatAcc" placeholder="מע"מ עסקאות" style="font-size:12px"></div>
       </div>
-      <div class="fg">
-        <label>מספר חשבון מע"מ (כ-320)</label>
-        <input id="priorVatAcc" placeholder="320" value="320">
+      <!-- חשבשבת -->
+      <div style="background:var(--bg2);padding:8px 12px;font-size:11px;font-weight:700;color:var(--brown);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">חשבשבת</div>
+      <div class="form-row" style="padding:10px 12px 4px;gap:8px">
+        <div class="fg"><label style="font-size:10px">הכנסות</label><input id="hsvIncomeAcc" placeholder="הכנסות" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">לקוחות</label><input id="hsvDebtorAcc" placeholder="לקוחות" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">מע"מ</label><input id="hsvVatAcc" placeholder="מע"מ עסקאות" style="font-size:12px"></div>
+      </div>
+      <!-- ריווחית -->
+      <div style="background:var(--bg2);padding:8px 12px;font-size:11px;font-weight:700;color:var(--brown);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">ריווחית</div>
+      <div class="form-row" style="padding:10px 12px 4px;gap:8px">
+        <div class="fg"><label style="font-size:10px">הכנסות</label><input id="rivIncomeAcc" placeholder="הכנסות" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">לקוחות</label><input id="rivDebtorAcc" placeholder="לקוחות" style="font-size:12px"></div>
+        <div class="fg"><label style="font-size:10px">מע"מ</label><input id="rivVatAcc" placeholder="מע"מ עסקאות" style="font-size:12px"></div>
       </div>
     </div>
     <div class="form-row">
@@ -3956,6 +3973,9 @@ function exportToPriority(){
 }
 
 function exportToHashavit(){
+  const hitInc=document.getElementById('hitIncomeAcc').value||'הכנסות';
+  const hitDeb=document.getElementById('hitDebtorAcc').value||'לקוחות';
+  const hitVat=document.getElementById('hitVatAcc').value||'מע"מ עסקאות';
   const {invs,recs}=_getExportData();
   if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
   // פורמט חשבIT — ייבוא תנועות חשבונאיות
@@ -3964,9 +3984,9 @@ function exportToHashavit(){
   const addRows=(items,isInv)=>items.forEach(x=>{
     const d=x.paidAt||(isInv?x.issuedAt:x.at)||'';
     const desc=isInv?`מנוי ${PLAN_NAMES[x.plan]||x.plan}`:(x.desc||'מנוי');
-    rows.push([d,docSeq,'',`לקוח — ${x.name}`,_amt(x.total),'',desc,'','ILS','']);
-    rows.push([d,docSeq,'','הכנסות','',_amt(x.amount),desc,'','ILS','S17']);
-    if(+x.vatAmt)rows.push([d,docSeq,'','מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,'','ILS','T17']);
+    rows.push([d,docSeq,hitDeb,`לקוח — ${x.name}`,_amt(x.total),'',desc,'','ILS','']);
+    rows.push([d,docSeq,hitInc,'הכנסות','',_amt(x.amount),desc,'','ILS','S17']);
+    if(+x.vatAmt)rows.push([d,docSeq,hitVat,'מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,'','ILS','T17']);
     docSeq++;
   });
   addRows(invs,true);addRows(recs,false);
@@ -3975,6 +3995,9 @@ function exportToHashavit(){
 }
 
 function exportToHashavshevet(){
+  const hsvInc=document.getElementById('hsvIncomeAcc').value||'הכנסות';
+  const hsvDeb=document.getElementById('hsvDebtorAcc').value||'לקוחות';
+  const hsvVat=document.getElementById('hsvVatAcc').value||'מע"מ עסקאות';
   const {invs,recs}=_getExportData();
   if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
   // פורמט חשבשבת — ייבוא תנועות
@@ -3982,9 +4005,9 @@ function exportToHashavshevet(){
   const addRows=(items,isInv)=>items.forEach(x=>{
     const d=_fmtIL(x.paidAt||(isInv?x.issuedAt:x.at)||'');
     const desc=isInv?`מנוי ${PLAN_NAMES[x.plan]||x.plan}`:(x.desc||'מנוי');
-    rows.push([d,x.id,'',`לקוח — ${x.name}`,_amt(x.total),'',desc,'','ILS']);
-    rows.push([d,x.id,'','הכנסות','',_amt(x.amount),desc,'','ILS']);
-    if(+x.vatAmt)rows.push([d,x.id,'','מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,'','ILS']);
+    rows.push([d,x.id,hsvDeb,`לקוח — ${x.name}`,_amt(x.total),'',desc,'','ILS']);
+    rows.push([d,x.id,hsvInc,'הכנסות','',_amt(x.amount),desc,'','ILS']);
+    if(+x.vatAmt)rows.push([d,x.id,hsvVat,'מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,'','ILS']);
   });
   addRows(invs,true);addRows(recs,false);
   dl('hashavshevet_'+ts()+'.csv',_csvRows(rows,'# חשבשבת — ייבוא דרך: ניהול חשבונות > ייבוא תנועות\n# שדה חשבון — יש להכניס מספר חשבון מתוך תוכנת חשבשבת\n#'),'text/csv;charset=utf-8');
@@ -3992,6 +4015,9 @@ function exportToHashavshevet(){
 }
 
 function exportToRivhit(){
+  const rivInc=document.getElementById('rivIncomeAcc').value||'הכנסות';
+  const rivDeb=document.getElementById('rivDebtorAcc').value||'לקוחות';
+  const rivVat=document.getElementById('rivVatAcc').value||'מע"מ עסקאות';
   const {invs,recs}=_getExportData();
   if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
   // פורמט ריווחית — ייבוא פקודות יומן
@@ -4001,9 +4027,9 @@ function exportToRivhit(){
     const d=_fmtIL(x.paidAt||(isInv?x.issuedAt:x.at)||'');
     const desc=isInv?`מנוי ${PLAN_NAMES[x.plan]||x.plan}`:(x.desc||'מנוי');
     const ref='R'+String(seq).padStart(4,'0');
-    rows.push([d,seq,'',`לקוח — ${x.name}`,_amt(x.total),'',desc,ref,'ILS','T']);
-    rows.push([d,seq,'','הכנסות','',_amt(x.amount),desc,ref,'ILS','T']);
-    if(+x.vatAmt)rows.push([d,seq,'','מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,ref,'ILS','']);
+    rows.push([d,seq,rivDeb,`לקוח — ${x.name}`,_amt(x.total),'',desc,ref,'ILS','T']);
+    rows.push([d,seq,rivInc,'הכנסות','',_amt(x.amount),desc,ref,'ILS','T']);
+    if(+x.vatAmt)rows.push([d,seq,rivVat,'מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,ref,'ILS','']);
     seq++;
   });
   addRows(invs,true);addRows(recs,false);
