@@ -40,6 +40,11 @@ export default {
       return handleNotify(request, env);
     }
 
+    // ── POST /admin-auth — אימות סיסמת מנהל ─────────────────────
+    if (request.method === 'POST' && url.pathname === '/admin-auth') {
+      return handleAdminAuth(request, env);
+    }
+
     return new Response('Not found', { status: 404, headers: CORS });
   }
 };
@@ -200,4 +205,41 @@ function json(data, status = 200) {
     status,
     headers: { ...CORS, 'Content-Type': 'application/json' }
   });
+}
+
+// ══════════════════════════════════════════════════════════════
+// /admin-auth — אימות סיסמת מנהל (hash מאוחסן כ-Cloudflare secret)
+// הגדר ב-Dashboard: ADMIN_PASS_HASH, ADMIN_SALT
+// ══════════════════════════════════════════════════════════════
+async function handleAdminAuth(request, env) {
+  try {
+    const { password } = await request.json();
+    if (!password) return json({ ok: false, error: 'missing_password' }, 400);
+
+    const salt   = env.ADMIN_SALT   || '';
+    const stored = env.ADMIN_PASS_HASH || '';
+    if (!stored) return json({ ok: false, error: 'not_configured' }, 500);
+
+    // SHA-256(password + salt) — אותו אלגוריתם כמו _hashPassLegacy
+    const buf  = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(password + salt));
+    const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+
+    if (hash !== stored) return json({ ok: false, error: 'invalid' });
+
+    // הפק session token תקף ל-8 שעות
+    const expires = Date.now() + 8 * 3600 * 1000;
+    const payload = `admin|${expires}`;
+    const secret  = env.LIC_SECRET || '';
+    const key = await crypto.subtle.importKey(
+      'raw', new TextEncoder().encode(secret),
+      { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+    );
+    const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+    const sigHex = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2,'0')).join('');
+    const token = btoa(payload + '|' + sigHex);
+
+    return json({ ok: true, token, expires });
+  } catch (e) {
+    return json({ ok: false, error: 'server_error' }, 500);
+  }
 }
