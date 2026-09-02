@@ -4779,6 +4779,11 @@ function openSendKeyModal(tplKey, planHe, prefillEmail='', prefillName=''){
   setTimeout(()=>(prefillEmail?document.getElementById('skName'):document.getElementById('skEmail')).focus(),120);
 }
 function closeSendKeyModal(){
+  if(window._pendingPlanSave){
+    toast('⚠️ שינוי המסלול בוטל — לא נוצר מפתח');
+    window._pendingPlanSave=null;
+    renderUsers();
+  }
   document.getElementById('sendKeyModal').classList.remove('show');
 }
 
@@ -5002,10 +5007,28 @@ async function execSendKey(){
   // בנה HTML email ופתח preview
   const htmlEmail=buildKeyEmailHTML(name,plan,token,link);
   const cleanSubject=subject.replace(/<[^>]+>/g,'');
+  // שמור מפתח ומסלול ב-user record
+  const usersNow=getUsers();const uNow=usersNow.find(x=>x.email===email);
+  if(uNow){uNow.licenseToken=token;uNow.licenseExpiry=expiry;}
+  // אם יש שינוי מסלול ממתין — כעת נשמור אותו
+  if(window._pendingPlanSave&&window._pendingPlanSave.email===email){
+    const {np,old,name:uName}=window._pendingPlanSave;
+    if(uNow)uNow.plan=np;
+    ss(UK,usersNow);
+    adminLog('plan_change',`${email}: ${old} → ${np}`);
+    fireWebhookEvent('plan_change',{email,name:uName,oldPlan:old,newPlan:np}).catch(()=>{});
+    fireAlertEvent('plan_change',`שינוי מסלול: ${uName}`,`${PLAN_NAMES[old]||old} → ${PLAN_NAMES[np]||np}`).catch(()=>{});
+    window._pendingPlanSave=null;
+  } else {
+    if(uNow)ss(UK,usersNow);
+  }
   adminLog('key_sent',`${email} [${plan}] תוקף:${expiry}`);
+  // סגור modal לפני closeSendKeyModal כדי לא לבטל pending
+  window._pendingPlanSave=null;
   closeSendKeyModal();
+  renderUsers();renderOverview();
   showEmailPreview(htmlEmail,email,cleanSubject);
-  toast('✅ מפתח נוצר — העתק את ה-HTML ושלח ב-Gmail');
+  toast('✅ מפתח נוצר ונשמר — העתק את ה-HTML ושלח ב-Gmail');
 }
 
 // WAITING LIST
@@ -5514,15 +5537,24 @@ function saveUserPlan(i,email){
   const sel=document.getElementById('usel-'+i);if(!sel)return;
   const np=sel.value;
   const users=getUsers();const u=users.find(x=>x.email===email);if(!u)return;
-  const old=u.plan;u.plan=np;ss(UK,users);
-  adminLog('plan_change',`${email}: ${old} → ${np}`);
-  toast(`✓ ${esc(u.name)} → ${PLAN_NAMES[np]}`);
-  if(old!==np){
-    fireWebhookEvent('plan_change',{email,name:u.name,oldPlan:old,newPlan:np}).catch(()=>{});
-    fireAlertEvent('plan_change',`שינוי מסלול: ${u.name}`,`${PLAN_NAMES[old]||old} → ${PLAN_NAMES[np]||np}`).catch(()=>{});
-  }
+  const old=u.plan;
+  const paidPlans=['starter','professional','premium','enterprise'];
   document.getElementById('usave-'+i).style.display='none';
-  renderUsers();renderOverview();
+  if(paidPlans.includes(np)){
+    // שמור בהמתנה — המסלול יישמר רק אחרי יצירת מפתח
+    window._pendingPlanSave={email,np,old,name:u.name};
+    openSendKeyModal('key_'+np, PLAN_NAMES[np]||np, email, u.name||'');
+    toast(`⏳ ממתין לייצור מפתח עבור ${esc(u.name)}…`);
+  } else {
+    u.plan=np;ss(UK,users);
+    adminLog('plan_change',`${email}: ${old} → ${np}`);
+    if(old!==np){
+      fireWebhookEvent('plan_change',{email,name:u.name,oldPlan:old,newPlan:np}).catch(()=>{});
+      fireAlertEvent('plan_change',`שינוי מסלול: ${u.name}`,`${PLAN_NAMES[old]||old} → ${PLAN_NAMES[np]||np}`).catch(()=>{});
+    }
+    toast(`✓ ${esc(u.name)} → ${PLAN_NAMES[np]}`);
+    renderUsers();renderOverview();
+  }
 }
 function toggleSuspend(i,email){
   const users=getUsers();const u=users.find(x=>x.email===email);if(!u)return;
@@ -5555,17 +5587,22 @@ async function addUserManual(){
     const exp=new Date();exp.setDate(exp.getDate()+days);
     nu.trialExpiry=exp.toISOString().split('T')[0];
   }
-  // Auto-generate license token for paid plans
+  // Auto-generate license token for paid plans via Worker
   let autoToken=null;
   if(['starter','professional','premium','enterprise'].includes(plan)){
     const quota=LIC_PLAN_QUOTAS[plan]||60;
     const expDate=new Date();expDate.setFullYear(expDate.getFullYear()+1);
-    const expiry=expDate.toISOString().substring(0,7); // YYYY-MM
-    const payload=btoa(JSON.stringify({e:email,p:plan,q:quota,x:expiry}));
-    const h=await _licHmac6(payload);
-    autoToken=`AUD-${payload}-${h}`;
-    nu.licenseToken=autoToken;
-    nu.licenseExpiry=expiry;
+    const expiry=expDate.toISOString().substring(0,7);
+    try{
+      const adminToken=sessionStorage.getItem('af_admin_token')||'';
+      const resp=await fetch('https://auditera-license.auditera.workers.dev/generate-token',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email,plan,quota,expiry,admin_token:adminToken})});
+      const data=await resp.json();
+      if(data.ok){autoToken=data.token;nu.licenseToken=autoToken;nu.licenseExpiry=expiry;}
+      else{toast('⚠️ משתמש נוסף אך המפתח נכשל — '+( data.error||''));}
+    }catch(e){
+      toast('⚠️ משתמש נוסף אך שגיאת רשת ביצירת מפתח');
+    }
   }
   users.push(nu);ss(UK,users);
   adminLog('add_user',`${email} (${plan})`);
