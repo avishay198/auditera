@@ -1973,7 +1973,7 @@ function renderTB(){
     classification:_tbColMap.classification
       ?(r[_tbColMap.classification]||'').toString().trim()
       :inferTBClass((r[_tbColMap.account]||'').toString().trim())
-  })).filter(r=>r.account||r.name);
+  })).filter(r=>(r.account||r.name)&&(r.debit||r.credit||r.balance));
 
   tbData=rows;
   const totalDebit=rows.reduce((s,r)=>s+r.debit,0);
@@ -1998,8 +1998,8 @@ function renderTB(){
           <div style="font-size:11px;color:var(--muted)">סה"כ זכות</div>
         </div>
         <div style="text-align:center;padding:12px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
-          <div style="font-size:18px;font-weight:900;color:${Math.abs(totalBalance)<0.01?'var(--muted)':totalBalance>=0?'#22c55e':'#dc2626'}">${fmt2(totalBalance)}</div>
-          <div style="font-size:11px;color:var(--muted)">יתרה נטו</div>
+          <div style="font-size:18px;font-weight:900;color:${balanced?'#22c55e':'#dc2626'}">${balanced?'₪0.00':fmt2(Math.abs(totalDebit-totalCredit))}</div>
+          <div style="font-size:11px;color:var(--muted)">${balanced?'הפרש ✓ (מאוזן)':'הפרש (לא מאוזן)'}</div>
         </div>
       </div>
       ${!balanced?`<div style="padding:10px 14px;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;font-size:12px;color:#dc2626;margin-bottom:12px">⚠️ הפרש חובה/זכות: ${fmt2(Math.abs(totalDebit-totalCredit))} — בדוק נתוני הקובץ</div>`:''}
@@ -2035,7 +2035,7 @@ function renderTB(){
             <td colspan="3" style="padding:8px 10px">סה"כ</td>
             <td style="padding:8px 10px;text-align:left;direction:ltr">${fmt2(totalDebit)}</td>
             <td style="padding:8px 10px;text-align:left;direction:ltr">${fmt2(totalCredit)}</td>
-            <td style="padding:8px 10px;text-align:left;direction:ltr">${fmt2(totalBalance)}</td>
+            <td style="padding:8px 10px;text-align:left;direction:ltr">${balanced?'₪0.00':fmt2(Math.abs(totalDebit-totalCredit))}</td>
             <td></td>
           </tr></tfoot>
         </table>
