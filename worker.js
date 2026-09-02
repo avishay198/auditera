@@ -60,6 +60,16 @@ export default {
       return handleRevoke(request, env);
     }
 
+    // ── POST /forgot-password — שליחת קישור איפוס ──────────────
+    if (request.method === 'POST' && url.pathname === '/forgot-password') {
+      return handleForgotPassword(request, env);
+    }
+
+    // ── POST /verify-reset — אימות טוקן איפוס ──────────────────
+    if (request.method === 'POST' && url.pathname === '/verify-reset') {
+      return handleVerifyReset(request, env);
+    }
+
     return new Response('Not found', { status: 404, headers: CORS });
   }
 };
@@ -211,6 +221,77 @@ async function handleNotify(request, env) {
 
   } catch (e) {
     return json({ ok: false, error: 'server_error' });
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// /forgot-password — יצירת טוקן איפוס + שליחה ל-Make
+// ══════════════════════════════════════════════════════════════
+async function handleForgotPassword(request, env) {
+  try {
+    const { email, base_url } = await request.json();
+    if (!email || !email.includes('@')) return json({ ok: false, error: 'invalid_email' }, 400);
+    if (!env.LICENSES) return json({ ok: false, error: 'kv_not_configured' });
+
+    // יצירת טוקן אקראי
+    const tokenBytes = new Uint8Array(32);
+    crypto.getRandomValues(tokenBytes);
+    const token = Array.from(tokenBytes).map(b=>b.toString(16).padStart(2,'0')).join('');
+
+    // שמירה ב-KV לשעה אחת
+    await env.LICENSES.put(
+      'reset:' + token,
+      JSON.stringify({ email: email.toLowerCase().trim(), expires: Date.now() + 3600000 }),
+      { expirationTtl: 3600 }
+    );
+
+    // קישור איפוס
+    const resetLink = (base_url || 'https://auditera.co.il/login.html') + '?reset=' + token;
+
+    // שליחה ל-Make
+    if (env.MAKE_WEBHOOK_URL) {
+      await fetch(env.MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'password_reset',
+          email: email.toLowerCase().trim(),
+          reset_link: resetLink,
+          expires_in: '60 דקות',
+          sent_at: new Date().toISOString()
+        })
+      });
+    }
+
+    return json({ ok: true });
+  } catch(e) {
+    return json({ ok: false, error: 'server_error' }, 500);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// /verify-reset — אימות טוקן + מחיקתו (חד-פעמי)
+// ══════════════════════════════════════════════════════════════
+async function handleVerifyReset(request, env) {
+  try {
+    const { token } = await request.json();
+    if (!token) return json({ ok: false, error: 'missing_token' }, 400);
+    if (!env.LICENSES) return json({ ok: false, error: 'kv_not_configured' });
+
+    const raw = await env.LICENSES.get('reset:' + token);
+    if (!raw) return json({ ok: false, error: 'invalid_or_expired' });
+
+    const { email, expires } = JSON.parse(raw);
+    if (Date.now() > expires) {
+      await env.LICENSES.delete('reset:' + token);
+      return json({ ok: false, error: 'expired' });
+    }
+
+    // מחק את הטוקן — חד-פעמי
+    await env.LICENSES.delete('reset:' + token);
+    return json({ ok: true, email });
+  } catch(e) {
+    return json({ ok: false, error: 'server_error' }, 500);
   }
 }
 

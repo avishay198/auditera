@@ -269,7 +269,20 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
         <span class="btn-text">כניסה למערכת ←</span>
       </button>
       <div class="form-note">אין לך חשבון? <a href="#" onclick="showTab('register');return false">הירשם חינם</a></div>
+      <div class="form-note" style="margin-top:6px"><a href="#" onclick="showForgotPass();return false" style="color:var(--muted);font-size:12px">שכחתי סיסמה</a></div>
     </form>
+
+    <!-- FORGOT PASSWORD PANEL -->
+    <div id="forgotPanel" style="display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #e0c888;border-radius:12px;text-align:right">
+      <p style="font-size:13px;font-weight:700;color:#3a2000;margin:0 0 8px">איפוס סיסמה</p>
+      <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונצור איתך קשר תוך 24 שעות עם סיסמה חדשה.</p>
+      <input id="forgotEmail" type="email" placeholder="האימייל שלך" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
+      <div style="display:flex;gap:8px">
+        <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#c99a2e;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
+        <button onclick="document.getElementById('forgotPanel').style.display='none'" style="padding:8px 14px;background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:8px;font-size:13px;cursor:pointer">ביטול</button>
+      </div>
+      <div id="forgotMsg" style="font-size:12px;margin-top:8px;color:#166534;display:none"></div>
+    </div>
 
     <!-- TRUST BADGES -->
     <div class="trust-row">
@@ -655,6 +668,83 @@ document.addEventListener('click',function(e){
   var m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
   if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target)){m.classList.remove('open');h.classList.remove('open');}
 });
+function showForgotPass(){
+  const panel=document.getElementById('forgotPanel');
+  panel.style.display=panel.style.display==='none'?'block':'none';
+  const em=document.getElementById('loginEmail').value;
+  if(em) document.getElementById('forgotEmail').value=em;
+  document.getElementById('forgotMsg').style.display='none';
+}
+
+async function sendForgotRequest(){
+  const email=(document.getElementById('forgotEmail').value||'').trim().toLowerCase();
+  const msg=document.getElementById('forgotMsg');
+  if(!email||!email.includes('@')){
+    msg.style.color='#dc2626';msg.textContent='נא הזן כתובת אימייל תקינה';msg.style.display='block';return;
+  }
+  msg.style.color='#7a5c2e';msg.textContent='שולח...';msg.style.display='block';
+  try{
+    const resp=await fetch('https://auditera-license.auditera.workers.dev/forgot-password',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,base_url:window.location.origin+window.location.pathname.replace(/[^/]*$/,'login.html')})
+    });
+    const data=await resp.json();
+    if(!data.ok){msg.style.color='#dc2626';msg.textContent='שגיאה — נסה שוב';return;}
+  }catch(e){}
+  msg.style.color='#166534';
+  msg.textContent='✓ קישור איפוס נשלח לאימייל שלך — תקף לשעה אחת.';
+}
+
+// ── איפוס סיסמה דרך קישור ?reset=TOKEN ──────────────────────
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  const resetToken=params.get('reset');
+  if(!resetToken) return;
+  history.replaceState(null,'',window.location.pathname);
+  // הצג מסך איפוס
+  document.addEventListener('DOMContentLoaded',()=>{
+    const box=document.querySelector('.auth-box')||document.querySelector('.card')||document.body;
+    const panel=document.createElement('div');
+    panel.id='resetPassPanel';
+    panel.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:9999';
+    panel.innerHTML=`<div style="background:#fff;border-radius:16px;padding:28px 24px;max-width:360px;width:90%;text-align:right;direction:rtl">
+      <h3 style="margin:0 0 6px;color:#3a2000;font-size:18px">הגדרת סיסמה חדשה</h3>
+      <p style="font-size:12px;color:#7a5c2e;margin:0 0 16px">בחר סיסמה חדשה לחשבון שלך</p>
+      <input id="newPass1" type="password" placeholder="סיסמה חדשה (לפחות 6 תווים)" style="width:100%;padding:9px 11px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;box-sizing:border-box">
+      <input id="newPass2" type="password" placeholder="אימות סיסמה" style="width:100%;padding:9px 11px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:12px;box-sizing:border-box">
+      <div id="resetMsg" style="font-size:12px;min-height:18px;margin-bottom:10px;color:#dc2626"></div>
+      <button onclick="doResetPass('${resetToken}')" style="width:100%;padding:10px;background:#c99a2e;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">שמור סיסמה חדשה</button>
+    </div>`;
+    document.body.appendChild(panel);
+  });
+})();
+
+async function doResetPass(token){
+  const p1=(document.getElementById('newPass1').value||'').trim();
+  const p2=(document.getElementById('newPass2').value||'').trim();
+  const msg=document.getElementById('resetMsg');
+  if(p1.length<6){msg.textContent='סיסמה חייבת להיות לפחות 6 תווים';return;}
+  if(p1!==p2){msg.textContent='הסיסמאות אינן תואמות';return;}
+  msg.style.color='#7a5c2e';msg.textContent='מאמת...';
+  let email;
+  try{
+    const resp=await fetch('https://auditera-license.auditera.workers.dev/verify-reset',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({token})
+    });
+    const data=await resp.json();
+    if(!data.ok){msg.style.color='#dc2626';msg.textContent='הקישור פג תוקף או כבר שומש — בקש קישור חדש';return;}
+    email=data.email;
+  }catch(e){msg.style.color='#dc2626';msg.textContent='שגיאת רשת — נסה שוב';return;}
+  // שמור סיסמה חדשה ב-localStorage
+  const users=JSON.parse(localStorage.getItem('auditera_users_v1')||'[]');
+  const u=users.find(x=>x.email===email);
+  if(!u){msg.style.color='#dc2626';msg.textContent='משתמש לא נמצא במכשיר זה — התחבר מהמכשיר המקורי';return;}
+  u.hash=await sha256(p1);
+  localStorage.setItem('auditera_users_v1',JSON.stringify(users));
+  msg.style.color='#166534';msg.textContent='✓ סיסמה עודכנה בהצלחה!';
+  setTimeout(()=>{document.getElementById('resetPassPanel').remove();},1500);
+}
 </script>
 </body>
 </html>
