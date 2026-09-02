@@ -285,7 +285,7 @@ const SESSION_KEY = 'auditera_session';
 // ── פרטי מנהל — שנה לפני הפצה ────────────────────────────
 const ADMIN_EMAIL    = 'admin@auditera';
 // SHA-256(adminPass + SALT) — pre-computed; change via admin panel before distribution
-// ADMIN_PASS_HASH הועבר ל-Cloudflare Worker (env.ADMIN_PASS_HASH) — לא נמצא בסורס
+
 // ── Google Sheets — הדבק כאן את ה-URL מ-Apps Script ───────
 const SHEETS_URL = ''; // לדוגמה: 'https://script.google.com/macros/s/AKfyc.../exec'
 // ── Make Webhook — הדבק כאן את ה-URL מ-Make ────────────────
@@ -569,9 +569,8 @@ async function doLogin(e){
   try{
     // ── כניסת מנהל ────────────────────────────────────────
     if(email === ADMIN_EMAIL){
-      // אימות מול Cloudflare Worker — fallback לhash מקומי אם Worker לא זמין
+      // אימות מול Cloudflare Worker — hash לא נמצא בסורס
       let adminOk = false;
-      const _ADMIN_HASH = '0a1dd6eb1c575fb351b190f6d3f9023af20b4ee10dcd91dfeff6f553685e747b';
       try {
         const ar = await fetch(MAKE_WEBHOOK_URL.replace('/notify','/admin-auth'), {
           method:'POST', headers:{'Content-Type':'application/json'},
@@ -583,8 +582,7 @@ async function doLogin(e){
           adminOk = true;
         }
       } catch(e) {
-        // fallback — בדיקה מקומית עד שה-Worker יפורסם
-        adminOk = (await _hashPassLegacy(pass)) === _ADMIN_HASH;
+        adminOk = false;
       }
       if(adminOk){
         const session = { email:'admin', name:'מנהל מערכת', loggedIn:true, isAdmin:true };
