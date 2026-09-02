@@ -3493,7 +3493,9 @@ function populateRecSelects(){
   if(rd&&!rd.value) rd.value=new Date().toISOString().split('T')[0];
 
   // Default VAT label
-  document.getElementById('recVATLabel').textContent=Math.round(vatRate*100);
+  const recTaxNow=ls(K.taxCfg,DEF_TAX);
+  document.getElementById('recVATLabel').textContent=recTaxNow.vatExempt?'0':Math.round((recTaxNow.vatRate||18));
+  if(recTaxNow.vatExempt){const va=document.getElementById('recVatAmt');if(va){va.value=0;va.placeholder='0';}}
 }
 
 function prefillReceiptFromInvoice(idx){
@@ -3508,11 +3510,18 @@ function prefillReceiptFromInvoice(idx){
 }
 
 function calcReceiptVAT(){
-  const vatRate=(ls(K.taxCfg,DEF_TAX).vatRate||18)/100;
+  const tax=ls(K.taxCfg,DEF_TAX);
+  const vatRate=(tax.vatRate||18)/100;
+  const vatExempt=tax.vatExempt||false;
   const net=+document.getElementById('recAmount').value||0;
-  const vat=Math.round(net*vatRate*100)/100;
-  document.getElementById('recVatAmt').value=vat||'';
-  document.getElementById('recTotal').value=(net+vat)||'';
+  if(vatExempt){
+    document.getElementById('recVatAmt').value=0;
+    document.getElementById('recTotal').value=net||'';
+  } else {
+    const vat=Math.round(net*vatRate*100)/100;
+    document.getElementById('recVatAmt').value=vat||'';
+    document.getElementById('recTotal').value=(net+vat)||'';
+  }
 }
 
 function showGenReceipt(){
