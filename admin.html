@@ -1748,8 +1748,11 @@ nav {
       </div>
     </div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="nbtn nbtn-gold" onclick="exportToPriority()"><i class="ti ti-download"></i> ייצוא עכשיו</button>
-      <button class="nbtn nbtn-outline" onclick="exportToHashavit()"><i class="ti ti-download"></i> ייצוא חשבIT</button>
+      <button class="nbtn nbtn-gold" onclick="exportToPriority()"><i class="ti ti-download"></i> פריוריטי</button>
+      <button class="nbtn nbtn-outline" onclick="exportToHashavit()"><i class="ti ti-download"></i> חשבIT</button>
+      <button class="nbtn nbtn-outline" onclick="exportToHashavshevet()"><i class="ti ti-download"></i> חשבשבת</button>
+      <button class="nbtn nbtn-outline" onclick="exportToRivhit()"><i class="ti ti-download"></i> ריווחית</button>
+      <button class="nbtn nbtn-outline" onclick="exportPriorityWHT()"><i class="ti ti-download"></i> ניכוי מס (פריוריטי)</button>
     </div>
     <div id="priorLastExport" style="font-size:10px;color:var(--muted);margin-top:8px"></div>
   </div>
@@ -3915,53 +3918,123 @@ async function fireWebhookEvent(eventId, data={}){
 }
 
 // ── PRIORITY / חשבIT EXPORT ──
-function exportToPriority(){
+function _fmtIL(d){if(!d)return'';const p=d.split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d;}
+function _amt(v){return(Math.round((+v||0)*100)/100).toFixed(2);}
+function _csvRow(r,quote=true){return r.map(v=>quote?`"${String(v===null||v===undefined?'':v).replace(/"/g,'""')}"`:String(v===null||v===undefined?'':v)).join(',');}
+function _csvRows(rows,comments=''){const bom='\ufeff';const hdr=_csvRow(rows[0],false);const data=rows.slice(1).map(r=>_csvRow(r,true)).join('\n');return bom+(comments?comments+'\n':'')+hdr+'\n'+data;}
+
+function _getExportData(){
   const from=document.getElementById('priorFrom').value;
   const to=document.getElementById('priorTo').value;
+  const invs=ls(K.invoices,[]).filter(i=>i.status==='paid'&&(!from||i.paidAt>=from)&&(!to||i.paidAt<=to));
+  const recs=ls(K.receipts,[]).filter(r=>(!from||(r.paidAt||r.at)>=from)&&(!to||(r.paidAt||r.at)<=to));
+  return{invs,recs};
+}
+
+function exportToPriority(){
   const incAcc=document.getElementById('priorIncomeAcc').value||'800';
   const debAcc=document.getElementById('priorDebtorAcc').value||'100';
   const vatAcc=document.getElementById('priorVatAcc').value||'320';
-  const vatRate=(ls(K.taxCfg,DEF_TAX).vatRate||18)/100;
-  const invoices=ls(K.invoices,[]).filter(i=>i.status==='paid'&&(!from||i.paidAt>=from)&&(!to||i.paidAt<=to));
-  const receipts=ls(K.receipts,[]).filter(r=>(!from||(r.paidAt||r.at)>=from)&&(!to||(r.paidAt||r.at)<=to));
-
-  if(!invoices.length&&!receipts.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
-
-  // Priority journal format: YYYY-MM-DD | account | debit | credit | description | reference
-  const rows=[['תאריך','חשבון','חובה','זכות','תיאור','מסמך']];
-  invoices.forEach(inv=>{
-    const d=inv.paidAt||inv.issuedAt||'';
-    rows.push([d,debAcc,inv.total,'',`${PLAN_NAMES[inv.plan]||inv.plan} — ${inv.name}`,inv.id]);
-    rows.push([d,incAcc,'',inv.amount,`הכנסה — ${inv.name}`,inv.id]);
-    rows.push([d,vatAcc,'',inv.vatAmt,`מע"מ — ${inv.name}`,inv.id]);
+  const {invs,recs}=_getExportData();
+  if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
+  // פורמט פריוריטי — יומן ראשי (FNJOURNALS)
+  const rows=[['JOURTYPE','BOOKDATE','ACCOUNT','DEBIT','CREDIT','DETAILS','REFERENCE','BRANCH','CURRENCY']];
+  const addRows=(items,isInv)=>items.forEach(x=>{
+    const d=_fmtIL(x.paidAt||(isInv?x.issuedAt:x.at)||'');
+    const desc=isInv?`${PLAN_NAMES[x.plan]||x.plan} — ${x.name}`:(x.desc||`מנוי — ${x.name}`);
+    rows.push(['1',d,debAcc,_amt(x.total),'',desc,x.id,'','ILS']);
+    rows.push(['1',d,incAcc,'',_amt(x.amount),`הכנסה — ${x.name}`,x.id,'','ILS']);
+    if(+x.vatAmt)rows.push(['1',d,vatAcc,'',_amt(x.vatAmt),`מע"מ — ${x.name}`,x.id,'','ILS']);
   });
-  receipts.forEach(rec=>{
-    const d=rec.paidAt||rec.at||'';
-    rows.push([d,debAcc,rec.total,'',`${PM_LABELS_HE[rec.method]||rec.method} — ${rec.name}`,rec.id]);
-    rows.push([d,incAcc,'',rec.amount,`${rec.desc||'הכנסה'} — ${rec.name}`,rec.id]);
-    rows.push([d,vatAcc,'',rec.vatAmt,`מע"מ — ${rec.name}`,rec.id]);
-  });
-  dl('priority_export_'+ts()+'.csv','﻿'+rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n'),'text/csv;charset=utf-8');
+  addRows(invs,true);addRows(recs,false);
+  dl('priority_journal_'+ts()+'.csv',_csvRows(rows,'# ייצוא פריוריטי — יומן ראשי\n# ייבוא דרך: ניהול חשבונות > קליטת נתונים > יומן ראשי (FNJOURNALS)\n# שדה ACCOUNT — יש להתאים למספרי חשבונות הספרים שלך\n# JOURTYPE=1 = יומן כללי | CURRENCY=ILS\n#'),'text/csv;charset=utf-8');
   ss('af_int_priority_last',new Date().toISOString());
   document.getElementById('priorLastExport').textContent=`ייצוא אחרון: ${new Date().toLocaleString('he-IL')} — ${rows.length-1} שורות`;
   document.getElementById('priorityIntStatus').className='int-status int-on';
   document.getElementById('priorityIntStatus').textContent='מחובר';
-  adminLog('export','priority CSV');toast('📥 ייצוא לפריוריטי הושלם');
+  adminLog('export','priority journal');toast('📥 ייצוא לפריוריטי הושלם');
 }
 
 function exportToHashavit(){
-  const from=document.getElementById('priorFrom').value;
-  const to=document.getElementById('priorTo').value;
-  const invoices=ls(K.invoices,[]).filter(i=>i.status==='paid'&&(!from||i.paidAt>=from)&&(!to||i.paidAt<=to));
-  const receipts=ls(K.receipts,[]).filter(r=>(!from||(r.paidAt||r.at)>=from)&&(!to||(r.paidAt||r.at)<=to));
-  if(!invoices.length&&!receipts.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
+  const {invs,recs}=_getExportData();
+  if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
+  // פורמט חשבIT — ייבוא תנועות חשבונאיות
+  const rows=[['Date','DocNum','Account','AccountName','Debit','Credit','Description','Reference','Currency','VATCode']];
+  let docSeq=1;
+  const addRows=(items,isInv)=>items.forEach(x=>{
+    const d=x.paidAt||(isInv?x.issuedAt:x.at)||'';
+    const desc=isInv?`מנוי ${PLAN_NAMES[x.plan]||x.plan}`:(x.desc||'מנוי');
+    rows.push([d,docSeq,'',`לקוח — ${x.name}`,_amt(x.total),'',desc,'','ILS','']);
+    rows.push([d,docSeq,'','הכנסות','',_amt(x.amount),desc,'','ILS','S17']);
+    if(+x.vatAmt)rows.push([d,docSeq,'','מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,'','ILS','T17']);
+    docSeq++;
+  });
+  addRows(invs,true);addRows(recs,false);
+  dl('hashavit_import_'+ts()+'.csv',_csvRows(rows,'# חשבIT — ייבוא דרך: הגדרות > ייבוא נתונים > תנועות חשבונאיות\n# שדה Account — מספר חשבון חשבIT | VATCode — קוד מע\'מ (S17=מכירות)\n#'),'text/csv;charset=utf-8');
+  adminLog('export','hashavit');toast('📥 ייצוא לחשבIT הושלם');
+}
 
-  // HashavIT format: Date | DocNum | CustCode | Desc | Amount | VATAmt | Total
-  const rows=[['תאריך','מסמך','קוד לקוח','שם לקוח','תיאור','נטו','מע"מ','סה"כ','אמצעי תשלום']];
-  invoices.forEach(inv=>rows.push([inv.paidAt||inv.issuedAt||'',inv.id,inv.email,inv.name,`מנוי ${PLAN_NAMES[inv.plan]||inv.plan}`,inv.amount,inv.vatAmt,inv.total,'חשבונית']));
-  receipts.forEach(rec=>rows.push([(rec.paidAt||rec.at||''),rec.id,rec.email,rec.name,(rec.desc||'מנוי'),rec.amount,rec.vatAmt,rec.total,(PM_LABELS_HE[rec.method]||rec.method)]));
-  dl('hashavit_export_'+ts()+'.csv','﻿'+rows.map(r=>r.map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(',')).join('\n'),'text/csv;charset=utf-8');
-  adminLog('export','hashavit CSV');toast('📥 ייצוא לחשבIT הושלם');
+function exportToHashavshevet(){
+  const {invs,recs}=_getExportData();
+  if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
+  // פורמט חשבשבת — ייבוא תנועות
+  const rows=[['תאריך','מסמך','חשבון','שם חשבון','חיוב','זכות','פרטים','אסמכתא','מטבע']];
+  const addRows=(items,isInv)=>items.forEach(x=>{
+    const d=_fmtIL(x.paidAt||(isInv?x.issuedAt:x.at)||'');
+    const desc=isInv?`מנוי ${PLAN_NAMES[x.plan]||x.plan}`:(x.desc||'מנוי');
+    rows.push([d,x.id,'',`לקוח — ${x.name}`,_amt(x.total),'',desc,'','ILS']);
+    rows.push([d,x.id,'','הכנסות','',_amt(x.amount),desc,'','ILS']);
+    if(+x.vatAmt)rows.push([d,x.id,'','מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,'','ILS']);
+  });
+  addRows(invs,true);addRows(recs,false);
+  dl('hashavshevet_'+ts()+'.csv',_csvRows(rows,'# חשבשבת — ייבוא דרך: ניהול חשבונות > ייבוא תנועות\n# שדה חשבון — יש להכניס מספר חשבון מתוך תוכנת חשבשבת\n#'),'text/csv;charset=utf-8');
+  adminLog('export','hashavshevet');toast('📥 ייצוא לחשבשבת הושלם');
+}
+
+function exportToRivhit(){
+  const {invs,recs}=_getExportData();
+  if(!invs.length&&!recs.length){toast('⚠️ אין רשומות בטווח התאריכים');return;}
+  // פורמט ריווחית — ייבוא פקודות יומן
+  const rows=[['תאריך','מספר פקודה','חשבון','שם חשבון','חיוב','זכות','פרטים','אסמכתא','מטבע','קוד מע"מ']];
+  let seq=1;
+  const addRows=(items,isInv)=>items.forEach(x=>{
+    const d=_fmtIL(x.paidAt||(isInv?x.issuedAt:x.at)||'');
+    const desc=isInv?`מנוי ${PLAN_NAMES[x.plan]||x.plan}`:(x.desc||'מנוי');
+    const ref='R'+String(seq).padStart(4,'0');
+    rows.push([d,seq,'',`לקוח — ${x.name}`,_amt(x.total),'',desc,ref,'ILS','T']);
+    rows.push([d,seq,'','הכנסות','',_amt(x.amount),desc,ref,'ILS','T']);
+    if(+x.vatAmt)rows.push([d,seq,'','מע"מ עסקאות','',_amt(x.vatAmt),`מע"מ — ${x.name}`,ref,'ILS','']);
+    seq++;
+  });
+  addRows(invs,true);addRows(recs,false);
+  dl('rivhit_journal_'+ts()+'.csv',_csvRows(rows,'# ריווחית — ייבוא פקודות יומן\n# ייבוא דרך: תחזוקה > יבוא נתונים מתוכנה זרה > בחר סוג קובץ: קבצי Excel/CSV\n# שדה חשבון — יש למלא מספר כרטיס חשבון מתוך ריווחית\n#'),'text/csv;charset=utf-8');
+  adminLog('export','rivhit');toast('📥 ייצוא לריווחית הושלם');
+}
+
+function exportPriorityWHT(){
+  // ניכוי מס במקור — SUPTAXFORMS
+  const tax=ls(K.taxCfg,DEF_TAX);
+  const whtRate=tax.whtRate||20;
+  const year=new Date().getFullYear();
+  const rows=[['SUPNAME','SUPID','TAXTYPE','TAXRATE','GROSSAMOUNT','TAXAMOUNT','NETAMOUNT','TAXYEAR','LEGALREF']];
+  // ניכוי מס על הכנסות ממנויים (אם רלוונטי)
+  const {invs,recs}=_getExportData();
+  const all=[...invs,...recs];
+  const byEmail={};
+  all.forEach(x=>{
+    if(!byEmail[x.email])byEmail[x.email]={name:x.name,email:x.email,gross:0};
+    byEmail[x.email].gross+=+x.amount||0;
+  });
+  Object.values(byEmail).forEach(s=>{
+    const gross=_amt(s.gross);
+    const tax_amt=_amt(s.gross*(whtRate/100));
+    const net=_amt(s.gross-s.gross*(whtRate/100));
+    const legalRef=`שיעור חברות ${whtRate}%`;
+    rows.push([s.name,s.email,'company',whtRate+'.0',gross,tax_amt,net,year,legalRef]);
+  });
+  if(rows.length===1){toast('⚠️ אין נתונים לייצוא ניכוי מס');return;}
+  dl('priority_wht_'+ts()+'.csv',_csvRows(rows,'# פריוריטי — ניכוי מס במקור לספקים (SUPTAXFORMS)\n# ייבוא דרך: ניהול רכש > ניכוי מס במקור > קליטה\n# SUPNAME — שם ספק כפי שמופיע בכרטיס הספק בפריוריטי\n#'),'text/csv;charset=utf-8');
+  adminLog('export','priority_wht');toast('📥 ייצוא ניכוי מס במקור הושלם');
 }
 
 // ── BANK DETAILS ──
