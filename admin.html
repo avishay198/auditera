@@ -5466,6 +5466,7 @@ function renderUsers(){
           ${resetTrialBtn}
           <button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#f5f0ff;color:#6d28d9;border-color:#c4b5fd" onclick="impersonateUser('${jsesc(u.email)}')"><i class="ti ti-masks-theater"></i></button>
           <button class="nbtn ${u.suspended?'nbtn-green':'nbtn-outline'}" style="padding:2px 7px;font-size:10px" onclick="toggleSuspend(${ri},'${jsesc(u.email)}')">${u.suspended?'▶ שחרר':'⏸ השהה'}</button>
+          ${u.licenseToken?`<button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#fff1f2;color:#be123c;border-color:#fda4af" title="בטל רישיון מ-KV" onclick="revokeUserLicense('${jsesc(u.email)}','${jsesc(u.name||u.email)}')"><i class="ti ti-ban"></i></button>`:''}
           <button class="nbtn nbtn-red" style="padding:2px 7px;font-size:10px" onclick="confirmAct('delUser:${jsesc(u.email)}','למחוק את ${jsesc(u.name)}?')">✕</button>
         </div>
       </td>
@@ -5556,6 +5557,25 @@ function saveUserPlan(i,email){
     renderUsers();renderOverview();
   }
 }
+async function revokeUserLicense(email, name){
+  if(!confirm(`לבטל את הרישיון של ${name}?\nהלקוח יחזור למסלול ניסיון בכניסה הבאה.`)) return;
+  const adminToken=sessionStorage.getItem('af_admin_token')||'';
+  try{
+    const resp=await fetch('https://auditera-license.auditera.workers.dev/revoke',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,admin_token:adminToken})
+    });
+    const data=await resp.json();
+    if(!data.ok){toast('❌ שגיאה בביטול רישיון — '+(data.error||''));return;}
+  }catch(e){toast('❌ שגיאת רשת');return;}
+  // מחק מ-localStorage גם
+  const users=getUsers();const u=users.find(x=>x.email===email);
+  if(u){delete u.licenseToken;delete u.licenseExpiry;delete u.licenseQuota;u.plan='trial';ss(UK,users);}
+  adminLog('revoke_license',email);
+  toast(`✓ רישיון של ${esc(name)} בוטל`);
+  renderUsers();renderOverview();
+}
+
 function toggleSuspend(i,email){
   const users=getUsers();const u=users.find(x=>x.email===email);if(!u)return;
   u.suspended=!u.suspended;ss(UK,users);
@@ -6650,8 +6670,10 @@ function execConfirm(){
   else if(act==='clearLog'){localStorage.removeItem(K.adminLog);toast('🗑 יומן נוקה');renderSystem();}
   else if(act.startsWith('delUser:')){
     const email=act.slice(8);
+    const adminToken=sessionStorage.getItem('af_admin_token')||'';
+    if(adminToken){fetch('https://auditera-license.auditera.workers.dev/revoke',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,admin_token:adminToken})}).catch(()=>{});}
     const users=getUsers().filter(u=>u.email!==email);
-    ss(UK,users);adminLog('delete_user',email);toast('🗑 משתמש נמחק');renderUsers();renderOverview();
+    ss(UK,users);adminLog('delete_user',email);toast('🗑 משתמש נמחק — רישיון בוטל');renderUsers();renderOverview();
   }
 }
 
