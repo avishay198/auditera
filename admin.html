@@ -2561,44 +2561,7 @@ const K={prices:'af_plan_prices',quotas:'af_plan_quotas',features:'af_feature_fl
 
 const DEF_PRICES={trial:0,starter:590,professional:990,premium:2490,enterprise:0};
 // חייב להיות זהה ל-_DEF_QUOTAS ב-audit_agent.html!
-const DEF_QUOTAS={trial:1,starter:35,professional:80,premium:200,enterprise:9999
-,
-  renewal:{name:'חידוש מנוי',subject:'תקופת המנוי שלך ב-Auditera הסתיימה — לחידוש',body:`שלום [שם],
-
-תקופת המנוי שלך ב-Auditera הסתיימה.
-
-━━━━━━━━━━━━━━━━━━━━━━━━
-📋 פרטי המנוי שהסתיים
-━━━━━━━━━━━━━━━━━━━━━━━━
-מסלול: [מסלול]
-תאריך סיום: [תאריך]
-
-━━━━━━━━━━━━━━━━━━━━━━━━
-🔄 חידוש המנוי
-━━━━━━━━━━━━━━━━━━━━━━━━
-כדי להמשיך להשתמש ב-Auditera, יש לבצע העברה בנקאית:
-
-בנק: [בנק]
-סניף: [סניף]
-חשבון: [חשבון]
-שם: [שם מוטב]
-סכום: [סכום] ₪ (לחודש / לשנה)
-
-לאחר ביצוע ההעברה — שלח אישור לאימייל זה ונפעיל את המנוי תוך 24 שעות.
-
-━━━━━━━━━━━━━━━━━━━━━━━━
-💡 מסלולים זמינים
-━━━━━━━━━━━━━━━━━━━━━━━━
-סטארטר   — ₪590/חודש  | עד 35 תיקים
-מקצועי   — ₪990/חודש  | עד 80 תיקים + AI
-פרמיום   — ₪2,490/חודש | עד 200 תיקים
-ארגוני   — ₪4,900/חודש | ללא הגבלה
-
-יש שאלות? ענה לאימייל זה — נשמח לעזור.
-
-בברכה,
-צוות Auditera`}
-};
+const DEF_QUOTAS={trial:1,starter:35,professional:80,premium:200,enterprise:9999};
 
 // ══════════════════════════════════════════════════════
 // ── LICENSE TOKEN — נוצר ע"י Cloudflare Worker בלבד (LIC_SECRET לא בסורס) ──
@@ -2954,12 +2917,47 @@ const DEF_TPLS={
 
 בהצלחה,
 צוות Auditera`},
+  renewal:{name:'חידוש מנוי',subject:'תקופת המנוי שלך ב-Auditera הסתיימה — לחידוש',body:`שלום [שם],
+
+תקופת המנוי שלך ב-Auditera הסתיימה.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+📋 פרטי המנוי שהסתיים
+━━━━━━━━━━━━━━━━━━━━━━━━
+מסלול: [מסלול]
+תאריך סיום: [תאריך]
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+🔄 חידוש המנוי
+━━━━━━━━━━━━━━━━━━━━━━━━
+כדי להמשיך להשתמש ב-Auditera, יש לבצע העברה בנקאית:
+
+בנק: [בנק]
+סניף: [סניף]
+חשבון: [חשבון]
+שם: [שם מוטב]
+סכום: [סכום] ₪ (לחודש / לשנה)
+
+לאחר ביצוע ההעברה — שלח אישור לאימייל זה ונפעיל את המנוי תוך 24 שעות.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+💡 מסלולים זמינים
+━━━━━━━━━━━━━━━━━━━━━━━━
+סטארטר   — ₪590/חודש  | עד 35 תיקים
+מקצועי   — ₪990/חודש  | עד 80 תיקים + AI
+פרמיום   — ₪2,490/חודש | עד 200 תיקים
+ארגוני   — ₪4,900/חודש | ללא הגבלה
+
+יש שאלות? ענה לאימייל זה — נשמח לעזור.
+
+בברכה,
+צוות Auditera`},
 };
 
 // ══════════════════════════════════════════════
 //  FINANCE TAB
 // ══════════════════════════════════════════════
-const INV_STATUS_HE={paid:'שולם',pending:'ממתין',failed:'נכשל',cancelled:'בוטל'};
+const INV_STATUS_HE={paid:'שולם',pending:'ממתין',failed:'נכשל',cancelled:'בוטל',draft:'טיוטה',sent:'נשלחה',overdue:'באיחור'};
 const FAIL_REASON_HE={card_declined:'כרטיס סורב',insufficient_funds:'אין כיסוי',card_expired:'כרטיס פג תוקף',other:'אחר'};
 const PERIOD_MUL={monthly:1,quarterly:3,annual:12};
 
@@ -3156,11 +3154,13 @@ function generateInvoice(){
   if(!email){toast('❌ בחר משתמש');return;}
   const users=getUsers();const u=users.find(x=>x.email===email);if(!u)return;
   const prices=getPrices();
-  const vatRate=(ls(K.taxCfg,DEF_TAX).vatRate||18)/100;
+  const _taxNow=ls(K.taxCfg,DEF_TAX);
+  const vatRate=(_taxNow.vatRate||18)/100;
+  const vatExempt=_taxNow.vatExempt||false;
   const monthlyNet=u.customPrice!==undefined?u.customPrice:(prices[u.plan||'trial']||0);
   const mul=PERIOD_MUL[period]||1;
   const amount=monthlyNet*mul;
-  const vatAmt=Math.round(amount*vatRate*100)/100;
+  const vatAmt=vatExempt?0:Math.round(amount*vatRate*100)/100;
   const total=amount+vatAmt;
   const inv={
     id:nextInvId(),email,name:u.name,plan:u.plan||'trial',
@@ -4839,7 +4839,7 @@ function openSendKeyModal(tplKey, planHe, prefillEmail='', prefillName=''){
      key_premium:'פרמיום • ₪2,490/חודש • 200 תיקים'}[tplKey]||'';
   document.getElementById('skEmail').value=prefillEmail;
   document.getElementById('skName').value=prefillName;
-  document.getElementById('skExpiry').value='1m';
+  document.getElementById('skExpiry').value='1y';
   document.getElementById('sendKeyModal').classList.add('show');
   setTimeout(()=>(prefillEmail?document.getElementById('skName'):document.getElementById('skEmail')).focus(),120);
 }
