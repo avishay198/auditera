@@ -6370,6 +6370,9 @@ function setWHTOverride(vendor, field, value){
 
 function exportWHT(){
   if(!analyzedData)return;
+  const q=v=>`"${String(v??''). replace(/"/g,'""')}"`;
+  const clientName=document.getElementById('clientName')?.value||'';
+  const dateStr=new Date().toLocaleDateString('he-IL');
   const rows=analyzedData.rows;
   const vMap={};
   rows.forEach(r=>{
@@ -6380,20 +6383,36 @@ function exportWHT(){
     if(r.cat)vMap[v].cats.add(r.cat);
   });
   const vendors=Object.values(vMap).filter(v=>v.total>=whtThreshold).sort((a,b)=>b.total-a.total);
-  const headers=['שם ספק','סוג','שיעור ניכוי %','ברוטו','ניכוי מס','נטו','בסיס חוקי'];
+  const totalBruto=vendors.reduce((s,v)=>s+v.total,0);
+  const emp=Array(7).fill('');
+  const meta=[
+    [q('דוח ניכוי מס במקור'),...emp.slice(1)],
+    [clientName?q('לקוח: '+clientName):'',...emp.slice(1)],
+    [q('הופק: '+dateStr),...emp.slice(1)],
+    [q('סף ניכוי: ₪'+whtThreshold.toLocaleString('he-IL')),...emp.slice(1)],
+    [...emp],
+  ];
+  const headers=[q('שם ספק'),q('סוג'),q('שיעור ניכוי %'),q('ברוטו'),q('ניכוי מס'),q('נטו'),q('בסיס חוקי')];
   const dataRows=vendors.map(v=>{
     const cats=[...v.cats];
     const type=detectWHTType(v.name,cats);
     const rate=getWHTRate(v.name,type);
     const wht=type==='exempt'?0:Math.round(v.total*rate);
     const T=WHT_TYPES[type];
-    return [v.name,T.label,(rate*100).toFixed(1)+'%',v.total,wht,v.total-wht,T.note];
+    return [q(v.name),q(T.label),q((rate*100).toFixed(1)+'%'),v.total.toFixed(2),wht.toFixed(2),(v.total-wht).toFixed(2),q(T.note)].join(',');
   });
-  let csv='﻿'+headers.join(',')+'\n';
-  dataRows.forEach(r=>{ csv+=r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')+'\n'; });
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='withholding_tax.csv';a.click();
+  const totalWHT=vendors.reduce((s,v)=>{
+    const type=detectWHTType(v.name,[...v.cats]);
+    const rate=getWHTRate(v.name,type);
+    return s+(type==='exempt'?0:Math.round(v.total*rate));
+  },0);
+  const footer=[
+    [...emp],
+    [q('סה"כ ברוטו'),'','',q(totalBruto.toFixed(2)),q(totalWHT.toFixed(2)),q((totalBruto-totalWHT).toFixed(2)),''].join(','),
+  ];
+  const allRows=[...meta.map(r=>r.join(',')),[headers.join(',')],...dataRows,...footer];
+  dlBlob(new Blob(['\ufeff'+allRows.join('\n')],{type:'text/csv;charset=utf-8'}),`ניכוי_מס_במקור_${new Date().toISOString().slice(0,10)}.csv`);
+  showToast('✓ CSV הורד','success');
 }
 
 // ── FORM 856 ───────────────────────────────────────────────
@@ -8547,42 +8566,45 @@ function exportCSV(){
   const totalInc=rows.filter(r=>r.amount>0).reduce((s,r)=>s+r.amount,0);
   const totalExp=rows.filter(r=>r.amount<0).reduce((s,r)=>s+r.amount,0);
   const net=totalInc+totalExp;
-  const fmt=v=>v.toLocaleString('he-IL',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const fmtAmt=v=>v.toFixed(2);
+  const hasRef=!!colMap.reference; const hasAlloc=!!colMap.allocationNum;
   // ── Header metadata ──
+  const cols=8+(hasRef?1:0)+(hasAlloc?1:0);
+  const emp=Array(cols).fill('');
   const meta=[
-    [q('דוח עסקאות — ביקורת חשבונאית'),'','','','','','',''],
-    [clientName?q('לקוח: '+clientName):'','','','','','','',''],
-    [q('הופק: '+dateStr),'','','','','','',''],
-    [q('סה"כ עסקאות: '+rows.length),'','','','','','',''],
-    ['','','','','','','',''],
+    [q('דוח עסקאות — ביקורת חשבונאית'),...emp.slice(1)],
+    [clientName?q('לקוח: '+clientName):'',...emp.slice(1)],
+    [q('הופק: '+dateStr),...emp.slice(1)],
+    [q('סה"כ עסקאות: '+rows.length),...emp.slice(1)],
+    [...emp],
   ];
   // ── Column headers ──
-  const h=[q('תאריך'),q('תיאור'),q('קטגוריה'),q('ספק'),q('סכום ₪'),q('סוג'),q('סימון'),q('הערה')];
+  const h=[q('תאריך'),q('תיאור'),q('קטגוריה'),q('ספק'),q('סכום ₪'),q('סוג')];
+  if(hasRef) h.push(q('אסמכתא'));
+  if(hasAlloc) h.push(q('מספר הקצאה'));
+  h.push(q('סימון'),q('הערה'));
   // ── Data rows ──
-  const body=rows.map(r=>[
-    q(r.date?fmtDate(r.date):''),
-    q(r.desc),
-    q(r.cat||'—'),
-    q(r.vendor||'—'),
-    r.amount,
-    q(r.type||'—'),
-    q(txFlags[r.idx]||'—'),
-    q(txNotes[r.idx]||'')
-  ].join(','));
-  // ── Totals footer ──
+  const body=rows.map(r=>{
+    const ref=hasRef?String(r.raw?.[colMap.reference]??r[colMap.reference]??''):null;
+    const alloc=hasAlloc?String(r.raw?.[colMap.allocationNum]??r[colMap.allocationNum]??''):null;
+    const cells=[q(r.date?fmtDate(r.date):''),q(r.desc),q(r.cat||''),q(r.vendor||''),r.amount,q(r.type||'')];
+    if(hasRef) cells.push(q(ref));
+    if(hasAlloc) cells.push(q(alloc));
+    cells.push(q(txFlags[r.idx]||''),q(txNotes[r.idx]||''));
+    return cells.join(',');
+  });
+  // ── Totals footer (amounts quoted to avoid CSV split) ──
   const footer=[
-    ['','','','','','','',''],
-    [q('סה"כ הכנסות'),'','','',fmt(totalInc),'','',''],
-    [q('סה"כ הוצאות'),'','','',fmt(totalExp),'','',''],
-    [q(net>=0?'רווח נטו':'הפסד נטו'),'','','',fmt(Math.abs(net)),'','',''],
+    [...emp],
+    [q('סה"כ הכנסות'),'','','',q(fmtAmt(totalInc)),...emp.slice(5)],
+    [q('סה"כ הוצאות'),'','','',q(fmtAmt(totalExp)),...emp.slice(5)],
+    [q(net>=0?'רווח נטו':'הפסד נטו'),'','','',q(fmtAmt(Math.abs(net))),...emp.slice(5)],
   ];
   const allRows=[...meta,[h.join(',')],...body,...footer.map(r=>r.join(','))];
   const csv=allRows.map(r=>Array.isArray(r)?r.join(','):r).join('\n');
   dlBlob(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),`עסקאות_ביקורת_${new Date().toISOString().slice(0,10)}.csv`);
   showToast('✓ CSV הורד','success');
 }
-
-// ── EXPORT TO ACCOUNTING SYSTEMS ───────────────────────────
 function toggleExportMenu(){
   const m=document.getElementById('exportMenu');
   m.style.display=m.style.display==='none'?'block':'none';
@@ -9418,13 +9440,30 @@ function renderCashFlow(){
 }
 function exportCashFlow(){
   if(!analyzedData?.byCategory){showToast('הפעל ניתוח תחילה','warning');return;}
-  const rows=[['קטגוריה','סיווג','סכום נטו','מספר עסקאות']];
-  Object.entries(analyzedData.byCategory).forEach(([cat,catData])=>{
+  const q=v=>`"${String(v??''). replace(/"/g,'""')}"`;
+  const clientName=document.getElementById('clientName')?.value||'';
+  const dateStr=new Date().toLocaleDateString('he-IL');
+  const entries=Object.entries(analyzedData.byCategory);
+  const grandNet=entries.reduce((s,[,d])=>s+(d.income-d.expense),0);
+  const emp=Array(4).fill('');
+  const meta=[
+    [q('דוח תזרים מזומנים'),...emp.slice(1)],
+    [clientName?q('לקוח: '+clientName):'',...emp.slice(1)],
+    [q('הופק: '+dateStr),...emp.slice(1)],
+    [...emp],
+  ];
+  const header=[q('קטגוריה'),q('סיווג'),q('סכום נטו'),q('מספר עסקאות')];
+  const dataRows=entries.map(([cat,catData])=>{
     const net=catData.income-catData.expense;
     const type=getCFClass(cat);
-    rows.push([`"${cat.replace(/"/g,'""')}"`,CF_TYPES[type]?.label||type,net.toFixed(2),catData.count]);
+    return [q(cat),q(CF_TYPES[type]?.label||type),net.toFixed(2),catData.count].join(',');
   });
-  dlBlob(new Blob(['﻿'+rows.map(r=>r.join(',')).join('\n')],{type:'text/csv;charset=utf-8'}),'תזרים_מזומנים.csv');
+  const footer=[
+    [...emp],
+    [q('תזרים נטו כולל'),'',q(grandNet.toFixed(2)),''].join(','),
+  ];
+  const allRows=[...meta.map(r=>r.join(',')),[header.join(',')],...dataRows,...footer];
+  dlBlob(new Blob(['\ufeff'+allRows.join('\n')],{type:'text/csv;charset=utf-8'}),`תזרים_מזומנים_${new Date().toISOString().slice(0,10)}.csv`);
   showToast('✓ CSV הורד','success');
 }
 
