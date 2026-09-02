@@ -2050,7 +2050,15 @@ function renderTB(){
 
 function exportTBCSV(){
   if(!tbData||!tbData.length){showToast('אין נתוני מאזן','error');return;}
-  const rows=[['מספר חשבון','שם חשבון','חובה','זכות','יתרה'],...tbData.map(r=>[r.account,r.name,r.debit,r.credit,r.balance||r.debit-r.credit])];
+  const fmtNum=v=>v?v:'';
+  const rows=[
+    ['מספר חשבון','שם חשבון','סיווג','חובה','זכות','יתרה','כיוון'],
+    ...tbData.map(r=>{
+      const net=r.balance||r.debit-r.credit;
+      const dir=r.debit>r.credit?'חובה':'זכות';
+      return[r.account,r.name,r.classification||'',fmtNum(r.debit),fmtNum(r.credit),net,dir];
+    })
+  ];
   const csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n');
   dlBlob(new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}),'מאזן_בוחן.csv');
 }
@@ -8533,10 +8541,44 @@ function exportReportXLSX(){
 function exportCSV(){
   if(!analyzedData)return;
   const{rows}=analyzedData;
-  const h=['תאריך','תיאור','קטגוריה','ספק','סכום','סוג','סימון','הערה'];
-  const body=rows.map(r=>[r.date?fmtDate(r.date):'',`"${r.desc.replace(/"/g,'""')}"`,`"${(r.cat||'').replace(/"/g,'""')}"`,`"${(r.vendor||'').replace(/"/g,'""')}"`,r.amount,r.type,txFlags[r.idx]||'',`"${(txNotes[r.idx]||'').replace(/"/g,'""')}"`].join(','));
-  const blob=new Blob(['﻿'+[h.join(','),...body].join('\n')],{type:'text/csv;charset=utf-8'});
-  dlBlob(blob,`עסקאות_${new Date().toISOString().slice(0,10)}.csv`);
+  const q=v=>`"${String(v??''). replace(/"/g,'""')}"`;
+  const clientName=document.getElementById('clientName')?.value||'';
+  const dateStr=new Date().toLocaleDateString('he-IL');
+  const totalInc=rows.filter(r=>r.amount>0).reduce((s,r)=>s+r.amount,0);
+  const totalExp=rows.filter(r=>r.amount<0).reduce((s,r)=>s+r.amount,0);
+  const net=totalInc+totalExp;
+  const fmt=v=>v.toLocaleString('he-IL',{minimumFractionDigits:2,maximumFractionDigits:2});
+  // ── Header metadata ──
+  const meta=[
+    [q('דוח עסקאות — ביקורת חשבונאית'),'','','','','','',''],
+    [clientName?q('לקוח: '+clientName):'','','','','','','',''],
+    [q('הופק: '+dateStr),'','','','','','',''],
+    [q('סה"כ עסקאות: '+rows.length),'','','','','','',''],
+    ['','','','','','','',''],
+  ];
+  // ── Column headers ──
+  const h=[q('תאריך'),q('תיאור'),q('קטגוריה'),q('ספק'),q('סכום ₪'),q('סוג'),q('סימון'),q('הערה')];
+  // ── Data rows ──
+  const body=rows.map(r=>[
+    q(r.date?fmtDate(r.date):''),
+    q(r.desc),
+    q(r.cat||'—'),
+    q(r.vendor||'—'),
+    r.amount,
+    q(r.type||'—'),
+    q(txFlags[r.idx]||'—'),
+    q(txNotes[r.idx]||'')
+  ].join(','));
+  // ── Totals footer ──
+  const footer=[
+    ['','','','','','','',''],
+    [q('סה"כ הכנסות'),'','','',fmt(totalInc),'','',''],
+    [q('סה"כ הוצאות'),'','','',fmt(totalExp),'','',''],
+    [q(net>=0?'רווח נטו':'הפסד נטו'),'','','',fmt(Math.abs(net)),'','',''],
+  ];
+  const allRows=[...meta,[h.join(',')],...body,...footer.map(r=>r.join(','))];
+  const csv=allRows.map(r=>Array.isArray(r)?r.join(','):r).join('\n');
+  dlBlob(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),`עסקאות_ביקורת_${new Date().toISOString().slice(0,10)}.csv`);
   showToast('✓ CSV הורד','success');
 }
 
