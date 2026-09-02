@@ -2009,9 +2009,9 @@ function renderTB(){
             <th style="padding:8px 10px;text-align:right;font-weight:700">מספר חשבון</th>
             <th style="padding:8px 10px;text-align:right;font-weight:700">שם חשבון</th>
             <th style="padding:8px 10px;text-align:right;font-weight:700">סיווג</th>
-            <th style="padding:8px 10px;text-align:right;font-weight:700">חובה</th>
-            <th style="padding:8px 10px;text-align:right;font-weight:700">זכות</th>
-            <th style="padding:8px 10px;text-align:right;font-weight:700">יתרה</th>
+            <th style="padding:8px 10px;text-align:left;direction:ltr;font-weight:700">חובה</th>
+            <th style="padding:8px 10px;text-align:left;direction:ltr;font-weight:700">זכות</th>
+            <th style="padding:8px 10px;text-align:left;direction:ltr;font-weight:700">יתרה</th>
             <th style="padding:8px 10px;text-align:right;font-weight:700">כיוון</th>
           </tr></thead>
           <tbody>
@@ -2033,9 +2033,9 @@ function renderTB(){
           </tbody>
           <tfoot><tr style="background:var(--primary);color:#C99A2E;font-weight:700">
             <td colspan="3" style="padding:8px 10px">סה"כ</td>
-            <td style="padding:8px 10px;text-align:left;direction:ltr">${fmt2(totalDebit)}</td>
-            <td style="padding:8px 10px;text-align:left;direction:ltr">${fmt2(totalCredit)}</td>
-            <td style="padding:8px 10px;text-align:left;direction:ltr">${balanced?'₪0.00':fmt2(Math.abs(totalDebit-totalCredit))}</td>
+            <td style="padding:8px 10px;text-align:left;direction:ltr;color:#dc2626">${fmt2(totalDebit)}</td>
+            <td style="padding:8px 10px;text-align:left;direction:ltr;color:#22c55e">${fmt2(totalCredit)}</td>
+            <td style="padding:8px 10px;text-align:left;direction:ltr;color:${balanced?'#22c55e':'#dc2626'}">${balanced?'₪0.00':fmt2(Math.abs(totalDebit-totalCredit))}</td>
             <td></td>
           </tr></tfoot>
         </table>
