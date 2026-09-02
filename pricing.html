@@ -44,23 +44,23 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 :root{--brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;--gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;--cream:#FEFAF3;--white:#fff;--muted:#9a7a4a;--border:#e0c888}
 
 /* NAV */
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--border);box-shadow:0 2px 12px rgba(58,32,0,.06)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-text{font-size:20px;font-weight:700;color:#fff}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
 .nav-logo-text span{color:#c99a2e}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{color:rgba(245,230,192,.6);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
-.nav-link:hover,.nav-link.active{color:#f5e6c0;background:rgba(255,255,255,.08)}
+.nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--brown);background:rgba(58,32,0,.06)}
 .nav-cta{padding:8px 20px;background:var(--gold);color:var(--brown);border:none;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;margin-right:8px}
 /* HAMBURGER MENU */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
-.hamburger span{display:block;width:22px;height:2px;background:#f5e6c0;border-radius:2px;transition:all .3s}
+.hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
+.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:#fff;flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(58,32,0,.12);border-top:2px solid var(--border)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a{color:var(--brown3);font-size:15px;padding:11px 4px;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:var(--brown);font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
 
@@ -74,7 +74,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 
 /* TOGGLE */
 .toggle-wrap{display:flex;justify-content:center;margin-bottom:4px}
-.toggle{display:inline-flex;background:rgba(58,32,0,.08);border-radius:9px;padding:4px;gap:2px}
+.toggle{display:inline-flex;border:1.5px solid var(--border);border-radius:9px;padding:4px;gap:2px;background:var(--white)}
 .tog{padding:9px 24px;border-radius:6px;font-size:14px;color:var(--muted);cursor:pointer;font-weight:700;font-family:inherit;border:none;background:none;transition:.15s}
 .tog.on{background:var(--brown);color:#f5e6c0}
 .tog-badge{display:inline-block;background:var(--gold2);color:var(--brown2);font-size:10px;font-weight:800;padding:1px 7px;border-radius:6px;margin-right:6px}
@@ -83,30 +83,32 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 /* PRICING CARDS */
 .cards-section{padding:55px 6%;background:var(--cream)}
 .cards-inner{max-width:980px;margin:0 auto}
-.cards-grid{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:18px;align-items:start;margin-bottom:24px}
-.pc{background:var(--white);border:1.5px solid var(--border);border-radius:18px;padding:28px 24px;transition:box-shadow .2s}
-.pc.featured{background:var(--brown);border-color:var(--brown);position:relative;box-shadow:0 12px 36px rgba(58,32,0,.22)}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;align-items:stretch;margin-bottom:24px}
+.pc{background:#fdf3dc;border:1.5px solid #e0c888;border-radius:18px;padding:28px 24px;transition:box-shadow .2s}
+.pc.featured{background:#fdf3dc;border:2px solid #c99a2e;position:relative;box-shadow:0 8px 28px rgba(201,154,46,.25)}
 .pc-badge{position:absolute;top:-13px;right:50%;transform:translateX(50%);background:var(--gold);color:var(--brown);font-size:11px;font-weight:900;padding:3px 14px;border-radius:6px;white-space:nowrap}
 .pc-tier{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
-.pc.featured .pc-tier{color:rgba(245,230,192,.4)}
+.pc.featured .pc-tier{color:var(--muted)}
 .pc-price{font-size:34px;font-weight:900;color:var(--brown);line-height:1}
-.pc.featured .pc-price{color:#f5e6c0}
+.pc.featured .pc-price{color:var(--brown)}
 .pc-period{font-size:13px;color:var(--muted);margin-bottom:18px;margin-top:3px}
-.pc.featured .pc-period{color:rgba(245,230,192,.3)}
+.pc.featured .pc-period{color:var(--muted)}
 .annual-note{display:none;font-size:11px;color:var(--gold3);font-weight:700}
 body.annual .annual-note{display:inline}
+.annual-cancel-note{display:none;font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+body.annual .annual-cancel-note{display:block}
 .pc-div{height:1px;background:var(--border);margin-bottom:16px}
-.pc.featured .pc-div{background:rgba(255,255,255,.1)}
+.pc.featured .pc-div{background:#e0c888}
 .pc-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
-.pc.featured .pc-desc{color:rgba(245,230,192,.42)}
+.pc.featured .pc-desc{color:var(--muted)}
 .pc-items{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
 .pc-items li{font-size:13px;color:var(--muted);display:flex;gap:7px;align-items:flex-start;line-height:1.5}
-.pc.featured .pc-items li{color:rgba(245,230,192,.5)}
+.pc.featured .pc-items li{color:var(--muted)}
 .pc-items li::before{content:'✓';color:var(--gold);font-weight:900;flex-shrink:0;margin-top:1px}
 .pc-btn{display:block;width:100%;padding:11px;border-radius:8px;font-size:15px;font-weight:800;border:none;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;background:var(--cream);color:var(--brown);border:1.5px solid var(--border);transition:.15s}
-.pc-btn:hover{border-color:var(--gold);background:var(--gold3)}
-.pc.featured .pc-btn{background:var(--gold);color:var(--brown);border-color:var(--gold)}
-.pc.featured .pc-btn:hover{background:#d9a830}
+.pc-btn:hover{border-color:var(--gold);background:#f5e6c0}
+.pc.featured .pc-btn{background:var(--brown);color:#f5e6c0;border-color:var(--brown)}
+.pc.featured .pc-btn:hover{background:#5a3010}
 
 /* annual price toggle */
 .monthly-price{}
@@ -261,10 +263,11 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <button class="tog" id="tog-annual" onclick="setTog('annual')"><span class="tog-badge">חסוך 20%</span>שנתי</button>
     </div>
   </div>
+  <p class="annual-cancel-note">ביטול לפני תום תקופת ההתחייבות כרוך בדמי ביטול בגובה 50% מדמי המנוי החודשי.</p>
 </div>
 
 <!-- CARDS -->
-<section class="cards-section">
+<section class="cards-section" id="plans">
   <div class="cards-inner">
     <div class="cards-grid">
 
@@ -273,7 +276,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <div class="pc-tier">סטארטר</div>
         <div class="pc-price monthly-price">₪590</div>
         <div class="pc-price annual-price">₪472</div>
-        <div class="pc-period">לחודש <span class="annual-note">• חיוב שנתי</span></div>
+        <div class="pc-period">לחודש <span class="annual-note">• חיוב חודשי בהתחייבות שנתית</span></div>
         <div class="pc-div"></div>
         <div class="pc-desc">למשרד קטן המנהל עד 35 לקוחות ורוצה לייעל את הביקורת החודשית השוטפת.</div>
         <ul class="pc-items">
@@ -293,7 +296,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <div class="pc-tier">מקצועי</div>
         <div class="pc-price monthly-price">₪990</div>
         <div class="pc-price annual-price">₪792</div>
-        <div class="pc-period">לחודש <span class="annual-note">• חיוב שנתי</span></div>
+        <div class="pc-period">לחודש <span class="annual-note">• חיוב חודשי בהתחייבות שנתית</span></div>
         <div class="pc-div"></div>
         <div class="pc-desc">למשרד צומח שצריך ביקורת שנתית, דפי עבודה ISA, ואימות מיסוי מלא.</div>
         <ul class="pc-items">
@@ -304,7 +307,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <li>אימות מע"מ וניכוי מס במקור</li>
           <li>דפי עבודה ISA מלאים</li>
           <li>ייצוא פריוריטי / חשבIT / ריווחית</li>
-          <li>AI BYOK - OpenAI / Groq</li>
+          <li>AI עם מפתח אישי (OpenAI / Groq)</li>
           <li>תמיכה בעדיפות</li>
         </ul>
         <a href="checkout.html?plan=professional" class="pc-btn">רכוש עכשיו ←</a>
@@ -315,13 +318,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <div class="pc-tier">פרמיום</div>
         <div class="pc-price monthly-price">₪2,490</div>
         <div class="pc-price annual-price">₪1,992</div>
-        <div class="pc-period">לחודש <span class="annual-note">• חיוב שנתי</span></div>
+        <div class="pc-period">לחודש <span class="annual-note">• חיוב חודשי בהתחייבות שנתית</span></div>
         <div class="pc-div"></div>
-        <div class="pc-desc">למשרדים גדולים הזקוקים ללא הגבלת לקוחות, White Label, ומנהל חשבון ייעודי.</div>
+        <div class="pc-desc">למשרדים גדולים הזקוקים ללא הגבלת לקוחות, מיתוג המשרד, ומנהל חשבון ייעודי.</div>
         <ul class="pc-items">
           <li>עד 200 תיקי לקוחות</li>
           <li>כל תכונות המסלול המקצועי</li>
-          <li>White Label - לוגו המשרד שלך</li>
+          <li>מיתוג מלא — לוגו המשרד שלך</li>
           <li>דשבורד ניהולי לצוות</li>
           <li>מנהל חשבון ייעודי</li>
           <li>תמיכה 24/7</li>
@@ -427,13 +430,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <td><span class="ck"></span></td>
         </tr>
         <tr>
-          <td>AI BYOK (OpenAI / Groq)</td>
+          <td>AI עם מפתח אישי (OpenAI / Groq)</td>
           <td><span class="cx">-</span></td>
           <td class="hl"><span class="ck"></span></td>
           <td><span class="ck"></span></td>
         </tr>
         <tr>
-          <td>White Label</td>
+          <td>מיתוג המשרד</td>
           <td><span class="cx">-</span></td>
           <td class="hl"><span class="cx">-</span></td>
           <td><span class="ck"></span></td>
@@ -482,7 +485,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 </section>
 
 <!-- FAQ -->
-<section class="faq-section">
+<section class="faq-section" id="faq">
   <div class="faq-inner">
     <div class="section-tag">שאלות</div>
     <div class="section-title">שאלות שרואי חשבון שואלים</div>
@@ -543,6 +546,11 @@ function setTog(mode){
   document.querySelectorAll('.tog').forEach(t=>t.classList.remove('on'));
   document.getElementById('tog-'+mode).classList.add('on');
   document.body.classList.toggle('annual', mode==='annual');
+  document.querySelectorAll('.pc-btn').forEach(btn=>{
+    const href=btn.getAttribute('href')||'';
+    const base=href.split('&billing')[0];
+    btn.setAttribute('href', mode==='annual' ? base+'&billing=annual' : base);
+  });
 }
 function toggleMobileMenu(){
   document.getElementById('hamburger').classList.toggle('open');

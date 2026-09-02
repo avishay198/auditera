@@ -18,7 +18,7 @@
 <link rel="canonical" href="https://auditera.co.il/">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <title>Auditera — ביקורת פיננסית חכמה לרואי חשבון</title>
-<meta name="description" content="Auditera — כלי ביקורת פיננסית חכם לרואי חשבון ישראליים. ניתוח CSV/Excel, זיהוי 11 סוגי חריגות, בנפורד, מע&quot;מ, ניכוי מס במקור ועוד.">
+<meta name="description" content="Auditera — כלי ביקורת פיננסית חכם לרואי חשבון ישראליים. ניתוח CSV/Excel, זיהוי 12 סוגי חריגות, בנפורד, מע&quot;מ, ניכוי מס במקור ועוד.">
 <meta property="og:title" content="Auditera — ביקורת פיננסית חכמה לרואי חשבון">
 <meta property="og:description" content="כלי ביקורת פיננסית חכם לרואי חשבון ישראליים — ניתוח עסקאות, דוחות PDF מקצועיים וזיהוי חריגות אוטומטי.">
 <meta property="og:type" content="website">
@@ -37,14 +37,14 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff;c
 }
 
 /* ── NAV ── */
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--border);box-shadow:0 2px 12px rgba(58,32,0,.06)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px}
-.nav-logo-text{font-size:20px;font-weight:700;color:#f5e6c0}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
 .nav-logo-text span{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{color:rgba(245,230,192,.6);text-decoration:none;font-size:16px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
-.nav-link:hover{color:#f5e6c0;background:rgba(255,255,255,.08)}
+.nav-link{color:var(--brown3);text-decoration:none;font-size:16px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav-link:hover{color:var(--brown);background:rgba(58,32,0,.06)}
 .nav-cta{padding:8px 20px;background:var(--gold);color:var(--brown);border:none;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s;text-decoration:none;margin-right:8px}
 .nav-cta:hover{opacity:.88}
 
@@ -59,7 +59,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
 
 /* VIDEO PREVIEW THUMBNAIL */
-.hero-demo{max-width:760px;width:100%;margin:0 auto;cursor:pointer;position:relative;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(58,32,0,.18),0 0 0 1.5px rgba(201,154,46,.3);transition:transform .2s,box-shadow .2s}
+.hero-demo{max-width:640px;width:100%;margin:0 auto;cursor:pointer;position:relative;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(58,32,0,.18),0 0 0 1.5px rgba(201,154,46,.3);transition:transform .2s,box-shadow .2s}
 .hero-demo:hover{transform:translateY(-3px);box-shadow:0 28px 70px rgba(58,32,0,.22),0 0 0 1.5px rgba(201,154,46,.5)}
 .hero-demo-bar{background:#2d1e0a;padding:10px 14px;display:flex;align-items:center;gap:8px}
 .hero-demo-dots{display:flex;gap:5px}
@@ -217,7 +217,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
   .nav-links .nav-link{display:none}
   .hamburger{display:flex}
   nav{padding:0 4%;height:56px}
-  .nav-links .nav-link{display:none}
+  .mobile-menu{top:56px}
   .nav-cta{font-size:13px;padding:7px 14px}
 
   .hero{padding:36px 5% 36px}
@@ -276,13 +276,13 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 .skip-link:focus-visible{top:0}
 /* HAMBURGER MENU */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
-.hamburger span{display:block;width:22px;height:2px;background:#f5e6c0;border-radius:2px;transition:all .3s}
+.hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
+.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:#fff;flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(58,32,0,.12);border-top:2px solid var(--border)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a{color:var(--brown3);font-size:15px;padding:11px 4px;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:var(--brown);font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
 </style>
@@ -377,7 +377,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
     <div class="feat-card">
       <div class="feat-icon-wrap"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div>
       <h3>זיהוי חריגות אוטומטי</h3>
-      <p>11 סוגי בדיקות — כפילויות, סכומים עגולים, עסקאות בסוף שבוע, חוק מזומן, חשבוניות ישראל ועוד.</p>
+      <p>12 סוגי חריגות — כפילויות, סכומים עגולים, עסקאות בסוף שבוע, חוק מזומן, חשבוניות ישראל ועוד.</p>
       <a class="feat-link" href="features.html">קרא עוד ←</a>
     </div>
     <div class="feat-card hl">
@@ -388,7 +388,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
     </div>
     <div class="feat-card">
       <div class="feat-icon-wrap"><i class="ti ti-brain" aria-hidden="true"></i></div>
-      <h3>AI עם BYOK</h3>
+      <h3>AI עם מפתח משלך</h3>
       <p>חבר מפתח OpenAI או Groq משלך — שאל שאלות על הנתונים בעברית טבעית.</p>
       <a class="feat-link" href="features.html">קרא עוד ←</a>
     </div>
@@ -455,7 +455,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
         <ul class="pc-features">
 <li><div class="fchk">✓</div>עד 35 לקוחות</li>
 <li><div class="fchk">✓</div>ביקורת חודשית ושנתית</li>
-<li><div class="fchk">✓</div>11 סוגי חריגות</li>
+<li><div class="fchk">✓</div>12 סוגי חריגות</li>
 <li><div class="fchk">✓</div>מיסוי ישראלי + חשבוניות ישראל</li>
 <li><div class="fchk">✓</div>ייצוא CSV</li>
         </ul>
@@ -466,9 +466,9 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
       <div class="pc-name">מקצועי</div>
       <div class="pc-price">₪990 <small>/ חודש</small></div>
       <ul class="pc-features">
-        <li><div class="fchk">✓</div>עד 100 לקוחות</li>
+        <li><div class="fchk">✓</div>עד 80 לקוחות</li>
         <li><div class="fchk">✓</div>ביקורת חודשית ושנתית</li>
-        <li><div class="fchk">✓</div>11 סוגי חריגות</li>
+        <li><div class="fchk">✓</div>12 סוגי חריגות</li>
         <li><div class="fchk">✓</div>ייצוא PDF + ריווחית</li>
         <li><div class="fchk">✓</div>תמיכה בדוא״ל</li>
       </ul>
@@ -478,7 +478,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
       <div class="pc-name">פרמיום</div>
       <div class="pc-price">₪2,490 <small>/ חודש</small></div>
       <ul class="pc-features">
-        <li><div class="fchk">✓</div>לקוחות ללא הגבלה</li>
+        <li><div class="fchk">✓</div>עד 200 לקוחות</li>
         <li><div class="fchk">✓</div>כל תכונות מקצועי</li>
         <li><div class="fchk">✓</div>ריבוי משתמשים</li>
         <li><div class="fchk">✓</div>White-label + API</li>
@@ -488,19 +488,6 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
     </div>
   </div>
 </section>
-
-<!-- CTA -->
-<div class="cta-wrap">
-  <div class="cta-inner">
-    <h2>מוכן לשדרג את הביקורת שלך?</h2>
-    <p>גישה מיידית לכל הכלים — ללא כרטיס אשראי.</p>
-    <div class="cta-btns">
-      <a href="login.html?tab=register" class="btn-cream">התחל חינם ←</a>
-      <a href="how.html" class="btn-ghost">צפה בהדגמה</a>
-    </div>
-    <div class="cta-note">ביטול מיידי בכל עת · תמיכה בעברית · מחירים כוללים מע״מ</div>
-  </div>
-</div>
 
 <footer>
   <div class="footer-brand">Audit<span style="color:var(--gold)">era</span></div>

@@ -35,6 +35,11 @@ export default {
       return handleRegister(request, env);
     }
 
+    // ── POST /notify — אירועי login ו-profile_update ──────────
+    if (request.method === 'POST' && url.pathname === '/notify') {
+      return handleNotify(request, env);
+    }
+
     return new Response('Not found', { status: 404, headers: CORS });
   }
 };
@@ -128,7 +133,10 @@ async function handleRegister(request, env) {
     // שלח ל-Make
     const makeResp = await fetch(makeUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        ...(env.MAKE_APIKEY ? { 'x-make-apikey': env.MAKE_APIKEY } : {})
+      },
       body: JSON.stringify({
         event: 'register',
         name: name || '',
@@ -139,11 +147,50 @@ async function handleRegister(request, env) {
       })
     });
 
-    return json({ ok: makeResp.ok });
+    const respText = await makeResp.text(); return json({ ok: makeResp.ok, status: makeResp.status, body: respText });
 
   } catch (e) {
     // לא חוסמים הרשמה בגלל שגיאת Make
     return json({ ok: false, error: 'make_error' });
+  }
+}
+
+
+// ══════════════════════════════════════════════════════════════
+// /notify — אירועי login ו-profile_update מ-login.html
+// ══════════════════════════════════════════════════════════════
+async function handleNotify(request, env) {
+  try {
+    const body = await request.json();
+    const { event, email } = body;
+
+    if (!event || !email) {
+      return json({ ok: false, error: 'missing_params' }, 400);
+    }
+
+    const makeUrl = env.MAKE_WEBHOOK_URL;
+    if (!makeUrl) {
+      return json({ ok: true, warning: 'make_not_configured' });
+    }
+
+    // שלח ל-Make רק אירועים ידועים
+    if (!['register', 'login', 'profile_update', 'contact', 'payment_request'].includes(event)) {
+      return json({ ok: false, error: 'unknown_event' }, 400);
+    }
+
+    const makeResp = await fetch(makeUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(env.MAKE_APIKEY ? { 'x-make-apikey': env.MAKE_APIKEY } : {})
+      },
+      body: JSON.stringify(body)
+    });
+
+    const respText = await makeResp.text(); return json({ ok: makeResp.ok, status: makeResp.status, body: respText });
+
+  } catch (e) {
+    return json({ ok: false, error: 'server_error' });
   }
 }
 

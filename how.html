@@ -45,23 +45,23 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 :root{--brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;--gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;--cream:#FEFAF3;--white:#fff;--muted:#9a7a4a;--border:#e0c888}
 
 /* NAV */
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--border);box-shadow:0 2px 12px rgba(58,32,0,.06)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-text{font-size:20px;font-weight:700;color:#fff}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
 .nav-logo-text span{color:#c99a2e}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{color:rgba(245,230,192,.6);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
-.nav-link:hover,.nav-link.active{color:#f5e6c0;background:rgba(255,255,255,.08)}
+.nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--brown);background:rgba(58,32,0,.06)}
 .nav-cta{padding:8px 20px;background:var(--gold);color:var(--brown);border:none;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;margin-right:8px}
 /* HAMBURGER MENU */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
-.hamburger span{display:block;width:22px;height:2px;background:#f5e6c0;border-radius:2px;transition:all .3s}
+.hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
+.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:#fff;flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(58,32,0,.12);border-top:2px solid var(--border)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a{color:var(--brown3);font-size:15px;padding:11px 4px;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:var(--brown);font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
 
@@ -237,7 +237,6 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   <div class="hero-tag"><span class="fdot"></span>תהליך עבודה</div>
   <h1>מקובץ Excel<br>לדוח ביקורת <em>מקצועי</em></h1>
   <p class="hero-sub">4 שלבים פשוטים. ממשק ידידותי שעובד מהיום הראשון.<br>לא צריך הכשרה, לא צריך IT.</p>
-  <a href="login.html?tab=register" class="btn-hero">התחל ניסיון חינם ←</a>
   <div class="hero-stats">
     <div class="hero-stat">
       <div class="hero-stat-num">4</div>
@@ -344,7 +343,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <div class="sec-card">
       <div class="sec-icon-box"><i class="ti ti-device-laptop" aria-hidden="true"></i></div>
       <h3>עיבוד מקומי בלבד</h3>
-      <p>כל הניתוח רץ ב-JavaScript בדפדפן שלך. אפס תקשורת לשרתי Auditera עם נתוני הלקוח.</p>
+      <p>כל הניתוח רץ בדפדפן שלך בלבד. אפס תקשורת לשרתי Auditera עם נתוני הלקוח.</p>
       <div class="sec-list">
         <div class="sec-item"><span class="sec-chk"></span>לא נשמרים נתונים בשרת</div>
         <div class="sec-item"><span class="sec-chk"></span>לא נשלחים נתונים לאינטרנט</div>
@@ -357,18 +356,18 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <p>מדיניות אבטחת תוכן קפדנית - מונעת XSS, הזרקת קוד ועומסים חיצוניים לא מאושרים.</p>
       <div class="sec-list">
         <div class="sec-item"><span class="sec-chk"></span>default-src 'self' בלבד</div>
-        <div class="sec-item"><span class="sec-chk"></span>ללא inline scripts לא מאושרים</div>
+        <div class="sec-item"><span class="sec-chk"></span>ללא קוד חיצוני לא מאושר</div>
         <div class="sec-item"><span class="sec-chk"></span>ללא frame-src חיצוני</div>
       </div>
     </div>
     <div class="sec-card">
       <div class="sec-icon-box"><i class="ti ti-key" aria-hidden="true"></i></div>
       <h3>מפתח AI בטוח</h3>
-      <p>מפתח OpenAI/Groq נשמר ב-sessionStorage בלבד - נמחק עם סגירת הדפדפן, לא נשלח לשרתי Auditera.</p>
+      <p>מפתח OpenAI/Groq נשמר בזיכרון הדפדפן בלבד — נמחק עם סגירת הדפדפן, לא נשלח לשרתי Auditera.</p>
       <div class="sec-list">
-        <div class="sec-item"><span class="sec-chk"></span>sessionStorage בלבד - אף פעם localStorage</div>
+        <div class="sec-item"><span class="sec-chk"></span>זיכרון זמני בלבד — לא נשמר לצמיתות</div>
         <div class="sec-item"><span class="sec-chk"></span>לא מועבר לשרת Auditera</div>
-        <div class="sec-item"><span class="sec-chk"></span>BYOK - מפתח המשרד שלך</div>
+        <div class="sec-item"><span class="sec-chk"></span>מפתח AI של המשרד שלך בלבד</div>
       </div>
     </div>
   </div>

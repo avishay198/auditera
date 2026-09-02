@@ -45,23 +45,23 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 :root{--brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;--gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;--cream:#FEFAF3;--white:#fff;--muted:#9a7a4a;--border:#e0c888}
 
 /* NAV */
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--border);box-shadow:0 2px 12px rgba(58,32,0,.06)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-text{font-size:20px;font-weight:700;color:#fff}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
 .nav-logo-text span{color:#c99a2e}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{color:rgba(245,230,192,.6);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
-.nav-link:hover,.nav-link.active{color:#f5e6c0;background:rgba(255,255,255,.08)}
+.nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--brown);background:rgba(58,32,0,.06)}
 .nav-cta{padding:8px 20px;background:var(--gold);color:var(--brown);border:none;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;margin-right:8px}
 /* HAMBURGER MENU */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
-.hamburger span{display:block;width:22px;height:2px;background:#f5e6c0;border-radius:2px;transition:all .3s}
+.hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
+.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:#fff;flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(58,32,0,.12);border-top:2px solid var(--border)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a{color:var(--brown3);font-size:15px;padding:11px 4px;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:var(--brown);font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
 
@@ -284,6 +284,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:absolute;top:-100px;right:0;background:#3a2000;color:#f5e6c0;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:9999;transition:top .2s}
 .skip-link:focus-visible{top:0}
+
+/* Plan filter */
+.plan-filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;justify-content:center}
+.pf-btn{padding:7px 18px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .18s}
+.pf-btn.active{background:var(--brown);border-color:var(--brown);color:#f5e6c0}
+.pf-btn:hover:not(.active){border-color:var(--gold);color:var(--brown)}
+.fcard[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -321,7 +328,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <span class="hero-pill">ביקורת חודשית</span>
     <span class="hero-pill">ביקורת שנתית</span>
     <span class="hero-pill">מיסוי ישראלי</span>
-    <span class="hero-pill">AI BYOK</span>
+    <span class="hero-pill">AI עם מפתח משלך</span>
     <span class="hero-pill">עיבוד מקומי בלבד</span>
   </div>
   <div class="hero-stats">
@@ -386,12 +393,12 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <span class="cap-tag">חוק בנפורד + MAD + χ²</span>
           <span class="cap-tag">אימות מע"מ 18%</span>
           <span class="cap-tag">ניכוי מס במקור (WHT)</span>
-          <span class="cap-tag">חשבוניות ישראל JSON / CSV</span>
+          <span class="cap-tag">חשבוניות ישראל — ייבוא ישיר</span>
           <span class="cap-tag">חוק מזומן ₪11,000</span>
           <span class="cap-tag">טופס 856</span>
           <span class="cap-tag">דפי עבודה ISA בעברית</span>
           <span class="cap-tag">יחסים פיננסיים</span>
-          <span class="cap-tag">MUS Sampling סטטיסטי</span>
+          <span class="cap-tag">דגימה סטטיסטית לביקורת</span>
           <span class="cap-tag">רגולציה מעודכנת 2026</span>
         </div>
       </div>
@@ -405,7 +412,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         </div>
         <div class="cap-row-right">
           <span class="cap-tag">סיכום ממצאים בשפה טבעית</span>
-          <span class="cap-tag">BYOK — OpenAI / Groq שלך</span>
+          <span class="cap-tag">מפתח AI אישי — OpenAI / Groq</span>
           <span class="cap-tag">0 שרתים — כל הניתוח מקומי</span>
           <span class="cap-tag">AI על דרישה — לא אוטומטי</span>
           <span class="cap-tag">מחיקה אוטומטית בסגירת הטאב</span>
@@ -472,21 +479,6 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <div class="exp-desc">כל הנתונים, הממצאים, החריגות ותוצאות בנפורד - לעבודה נוספת או תיוק</div>
       </div>
       <div class="exp-card">
-        <div class="exp-icon"><i class="ti ti-database-export" aria-hidden="true"></i></div>
-        <div class="exp-name">פריוריטי</div>
-        <div class="exp-desc">ייצוא ישיר בפורמט המותאם לפריוריטי - ללא הקלדה ידנית חוזרת</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon"><i class="ti ti-building-store" aria-hidden="true"></i></div>
-        <div class="exp-name">חשבIT</div>
-        <div class="exp-desc">ייצוא בפורמט חשבIT - תואם לייצוא ישיר למערכת</div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-icon"><i class="ti ti-database" aria-hidden="true"></i></div>
-        <div class="exp-name">חשבשבת / SAP B1</div>
-        <div class="exp-desc">תמיכה בפורמטי חשבשבת ו-SAP Business One לשילוב ישיר</div>
-      </div>
-      <div class="exp-card">
         <div class="exp-icon"><i class="ti ti-report" aria-hidden="true"></i></div>
         <div class="exp-name">ריווחית</div>
         <div class="exp-desc">ייצוא ממצאים בפורמט מותאם לריווחית - ללא הקלדה ידנית חוזרת</div>
@@ -501,84 +493,78 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <div class="section-tag">כל התכונות</div>
     <div class="section-title">תכונות לפי מסלול</div>
     <div class="section-sub">תכונות המסומנות <span style="background:#fdf3dc;border:1px solid #c99a2e;color:#3a2000;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px">שנתי</span> זמינות בביקורת שנתית בלבד.</div>
+    <div class="plan-filter">
+      <button class="pf-btn active" onclick="filterPlan('all',this)">כל התכונות</button>
+      <button class="pf-btn" onclick="filterPlan('starter',this)">סטארטר</button>
+      <button class="pf-btn" onclick="filterPlan('professional',this)">מקצועי</button>
+      <button class="pf-btn" onclick="filterPlan('premium',this)">פרמיום</button>
+    </div>
     <div class="fcard-grid">
 
-      <div class="fcard">
+      <div class="fcard" data-plans="starter professional premium">
         <div class="fcard-name">12 סוגי חריגות</div>
         <div class="fcard-desc">זיהוי אוטומטי: כפילויות, סכומים עגולים, פיצול עסקאות, עסקאות סוף תקופה, ריכוז ספקים ועוד.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">אימות מע"מ 18%</div>
         <div class="fcard-desc">בדיקה שכל חשבונית משקפת את שיעור המע"מ הנוכחי — כולל זיהוי חשבוניות פטורות וחשבוניות כפולות.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">ניכוי מס במקור (WHT)</div>
         <div class="fcard-desc">אימות שיעורי ניכוי מול ספי הפטור של רשות המסים, לפי סוג ספק וסכום שנתי מצטבר.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="starter professional premium">
         <div class="fcard-name">חשבוניות ישראל</div>
         <div class="fcard-desc">ייבוא קבצי JSON ו-CSV ישירות ממערכת חשבוניות ישראל — אימות שדות חובה וזיהוי חריגות.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="starter professional premium">
         <div class="fcard-name">חוק מזומן ₪11,000</div>
         <div class="fcard-desc">סריקה לעסקאות מזומן מעל הסף החוקי — עם סימון וציון ההשלכה הרגולטורית הרלוונטית.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">דפי עבודה ISA</div>
         <div class="fcard-desc">תיעוד ביקורת לפי תקנים בינלאומיים ISA — בעברית, בפורמט המקובל, מוכן לתיוק ולהצגה.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">דוח רווח והפסד</div>
         <div class="fcard-desc">ריכוז אוטומטי של הכנסות והוצאות לפי קטגוריות, עם פירוט חודשי ושנתי.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">תזרים מזומנים</div>
         <div class="fcard-desc">סיווג אוטומטי של תנועות לפעילות שוטפת, פעילות השקעה ופעילות מימון.</div>
       </div>
-      <div class="fcard">
-        <div class="fcard-name">MUS Sampling</div>
-        <div class="fcard-desc">דגימה סטטיסטית לפי שיטת Monetary Unit Sampling — לבחירת עסקאות לבדיקה מעמיקה.</div>
+      <div class="fcard" data-plans="professional premium">
+        <div class="fcard-name">דגימה סטטיסטית</div>
+        <div class="fcard-desc">בחירה סטטיסטית של עסקאות לבדיקה מעמיקה, לפי תקנים בינלאומיים.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">השוואה לתקציב</div>
         <div class="fcard-desc">הצגת חריגות בפועל מול תקציב שהועלה — לזיהוי סעיפים חורגים בלחיצת כפתור.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="professional premium">
         <div class="fcard-name">סיכום AI בעברית</div>
         <div class="fcard-desc">תיאור ממצאים בשפה טבעית לדוח הלקוח — מבוסס על הנתונים שנותחו, מותאם לסגנון.</div>
       </div>
-      <div class="fcard">
+      <div class="fcard" data-plans="starter professional premium">
         <div class="fcard-name">0 שרתים — עיבוד מקומי</div>
         <div class="fcard-desc">כל הניתוח מתבצע בדפדפן בלבד. נתוני הלקוח לא עוזבים את המחשב — מתאים לסוד מקצועי.</div>
       </div>
-      <div class="fcard">
-        <div class="fcard-name">ייצוא Excel / CSV</div>
-        <div class="fcard-desc">כל הממצאים, החריגות והניתוחים בקובץ עבודה מוכן לעריכה ולתיוק.</div>
-      </div>
-      <div class="fcard">
-        <div class="fcard-name">ייצוא פריוריטי</div>
-        <div class="fcard-desc">פורמט מותאם לייבוא ישיר למערכת פריוריטי — ללא הקלדה ידנית חוזרת.</div>
-      </div>
-      <div class="fcard">
-        <div class="fcard-name">ייצוא ריווחית / חשבIT / SAP</div>
-        <div class="fcard-desc">פורמטי ייצוא לריווחית, חשבIT וחשבשבת / SAP B1 — לשילוב ישיר במערכת הנהלת החשבונות.</div>
-      </div>
-      <div class="fcard annual">
+      <div class="fcard annual" data-plans="professional premium">
         <div class="fcard-name">חוק בנפורד + MAD</div>
         <div class="fcard-desc">ניתוח התפלגות ספרות ראשונות עם מדד סטייה ממוצעת — לזיהוי מניפולציות בנתונים.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
-      <div class="fcard annual">
+      <div class="fcard annual" data-plans="professional premium">
         <div class="fcard-name">מבחן χ² + ערך p</div>
         <div class="fcard-desc">בדיקה סטטיסטית לחריגות בנפורד — מאפשרת לנמק ממצאים בשפה אקדמית מוכרת.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
-      <div class="fcard annual">
+      <div class="fcard annual" data-plans="professional premium">
         <div class="fcard-name">ניתוח מגמות YoY</div>
         <div class="fcard-desc">השוואת שנה מול שנה קודמת — לזיהוי שינויים מהותיים בסעיפים ספציפיים.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
-      <div class="fcard annual">
+      <div class="fcard annual" data-plans="professional premium">
         <div class="fcard-name">חריגות בין-חודשיות</div>
         <div class="fcard-desc">זיהוי שינויים חדים בין חודשים עוקבים — תבניות שאינן מזוהות בניתוח חודשי בודד.</div>
         <span class="fcard-badge">שנתי</span>
@@ -627,6 +613,15 @@ document.addEventListener('click',function(e){
   <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
   <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#3a2000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
-<script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
+<script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';
+function filterPlan(plan, btn){
+  document.querySelectorAll('.pf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.fcard').forEach(card=>{
+    const plans = card.dataset.plans || 'starter professional premium';
+    card.hidden = (plan !== 'all' && !plans.includes(plan));
+  });
+}
+</script>
 </body>
 </html>

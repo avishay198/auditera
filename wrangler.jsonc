@@ -1,0 +1,5 @@
+{
+  "name": "auditera-license",
+  "compatibility_date": "2026-08-28",
+  "main": "worker.js"
+}

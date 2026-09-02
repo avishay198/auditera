@@ -60,7 +60,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 #maintBanner{display:none;background:#dc2626;color:#fff;text-align:center;padding:7px;font-size:12px;font-weight:700;position:sticky;top:56px;z-index:200}
 
 /* ── TABS ── */
-.tab-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 20px;display:flex;gap:0;position:sticky;top:56px;z-index:200;overflow-x:auto}
+.tab-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 20px;display:flex;gap:0;position:sticky;top:56px;z-index:200;overflow-x:visible}
 .tab-bar::-webkit-scrollbar{height:3px}.tab-bar::-webkit-scrollbar-thumb{background:var(--gold2)}
 .tab{padding:12px 16px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.15s;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px}
 .tab:hover{color:var(--brown)}.tab.active{color:var(--brown);border-bottom-color:var(--gold)}
@@ -135,6 +135,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 .ff-row:last-child{border-bottom:none}
 .ff-name{font-size:12px;font-weight:600;color:var(--brown)}
 .ff-center{display:flex;justify-content:center}
+.ff-section{grid-column:1/-1;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:10px 10px 3px;margin-top:4px;border-top:1px solid var(--border)}
 
 /* ── TAX TABLE ── */
 .tax-tbl{width:100%;border-collapse:collapse;font-size:12px}
@@ -352,22 +353,6 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 .faq-item.open .faq-a{display:block}
 .faq-a-actions{display:flex;gap:6px;margin-top:8px}
 
-/* ── UTM / SOURCE TRACKING ── */
-.utm-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:14px}
-.utm-source-card{background:#fff;border:1px solid var(--border);border-radius:9px;padding:12px 14px}
-.utm-source-name{font-size:11px;font-weight:800;color:var(--brown);margin-bottom:6px}
-.utm-bar-wrap{background:#f0e8d8;border-radius:20px;height:7px;overflow:hidden;margin-bottom:4px}
-.utm-bar{height:100%;border-radius:20px;background:var(--gold);transition:.4s}
-.utm-count{font-size:10px;color:var(--muted)}
-.utm-badge{display:inline-block;padding:1px 7px;border-radius:20px;font-size:9px;font-weight:700;background:#f0f9ff;color:#0369a1}
-.utm-badge.utm-google{background:#fef9c3;color:#854d0e}
-.utm-badge.utm-facebook{background:#dbeafe;color:#1e40af}
-.utm-badge.utm-linkedin{background:#e0f2fe;color:#0369a1}
-.utm-badge.utm-email{background:#fce7f3;color:#be185d}
-.utm-badge.utm-organic{background:#dcfce7;color:#15803d}
-.utm-badge.utm-direct{background:#f3f4f6;color:#374151}
-.utm-badge.utm-referral{background:#ede9fe;color:#6d28d9}
-.utm-tbl td:first-child{font-weight:600;font-size:11px}
 
 /* ── SECURITY / COMPLIANCE ── */
 .gdpr-row{background:#fff;border:1px solid var(--border);border-radius:9px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
@@ -866,6 +851,8 @@ nav {
   </div>
 </nav>
 
+
+
 <div id="maintBanner">⚠️ מצב תחזוקה פעיל — המשתמשים רואים הודעת תחזוקה</div>
 
 <!-- IMPERSONATION BANNER -->
@@ -904,6 +891,7 @@ nav {
   <div class="tab" onclick="showTab('integrations',this)"><i class="ti ti-plug"></i> אינטגרציות</div>
   <div class="tab" onclick="showTab('security',this)"><i class="ti ti-shield"></i> אבטחה</div>
   <div class="tab" onclick="showTab('support',this)"><i class="ti ti-headset"></i> תמיכה</div>
+  <div class="tab" onclick="showTab('inquiries',this)"><i class="ti ti-inbox"></i> פניות</div>
   <div class="tab" onclick="showTab('system',this)"><i class="ti ti-settings"></i> מערכת</div>
 </div>
 
@@ -1275,53 +1263,6 @@ nav {
     </div>
   </div>
 
-  <!-- UTM / SOURCE TRACKING -->
-  <div class="card" style="margin-top:16px">
-    <div class="card-head">
-      <div class="card-title"><i class="ti ti-antenna"></i> מקור הרשמה — UTM Tracking</div>
-      <div style="display:flex;gap:6px">
-        <button class="nbtn nbtn-outline" onclick="renderUTMBreakdown()"><i class="ti ti-refresh"></i> רענן</button>
-        <button class="nbtn nbtn-outline" onclick="exportUTMReport()"><i class="ti ti-download"></i> ייצוא</button>
-      </div>
-    </div>
-    <div id="utmBreakdown" style="margin-bottom:14px"></div>
-    <div class="card-title" style="font-size:12px;margin-bottom:8px">פירוט משתמשים לפי מקור</div>
-    <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
-      <select id="utmSourceF" onchange="renderUTMTable()" style="border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11px;font-family:inherit">
-        <option value="">כל המקורות</option><option value="google">Google</option><option value="facebook">Facebook</option>
-        <option value="linkedin">LinkedIn</option><option value="email">Email</option>
-        <option value="organic">Organic</option><option value="direct">Direct</option><option value="referral">Referral</option>
-      </select>
-      <select id="utmMediumF" onchange="renderUTMTable()" style="border:1px solid var(--border);border-radius:6px;padding:4px 8px;font-size:11px;font-family:inherit">
-        <option value="">כל המדיומים</option><option value="cpc">CPC / Paid</option><option value="organic">Organic</option>
-        <option value="email">Email</option><option value="social">Social</option><option value="referral">Referral</option>
-      </select>
-      <input id="utmCampaignF" placeholder="קמפיין..." oninput="renderUTMTable()" style="border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;font-family:inherit;width:150px">
-    </div>
-    <div id="utmUserTable"></div>
-    <div style="margin-top:14px;padding-top:12px;border-top:1px solid #f0e8d8">
-      <div class="card-title" style="font-size:12px;margin-bottom:8px"><i class="ti ti-plus"></i> הגדר UTM למשתמש ידנית</div>
-      <div class="form-row">
-        <div class="fg"><label>משתמש</label>
-          <select id="utmUserSel" style="border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;width:100%"><option value="">בחר משתמש...</option></select>
-        </div>
-        <div class="fg"><label>מקור (utm_source)</label>
-          <select id="utmSourceSel" style="border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;width:100%">
-            <option value="direct">Direct</option><option value="google">Google</option><option value="facebook">Facebook</option>
-            <option value="linkedin">LinkedIn</option><option value="email">Email</option><option value="organic">Organic</option>
-            <option value="referral">Referral</option><option value="other">אחר</option>
-          </select>
-        </div>
-        <div class="fg"><label>מדיום (utm_medium)</label><input id="utmMediumSel" placeholder="cpc / organic / email"></div>
-      </div>
-      <div class="form-row">
-        <div class="fg"><label>קמפיין (utm_campaign)</label><input id="utmCampaignSel" placeholder="summer_promo"></div>
-        <div class="fg"><label>תוכן (utm_content)</label><input id="utmContentSel" placeholder="banner_a"></div>
-        <div class="fg"><label>Referrer URL</label><input id="utmReferrerSel" placeholder="https://..."></div>
-      </div>
-      <button class="nbtn nbtn-gold" onclick="saveUserUTM()">✓ שמור UTM</button>
-    </div>
-  </div>
 
   <!-- ── FEATURE USAGE MAP ── -->
   <div class="card" style="margin-top:16px">
@@ -2546,7 +2487,40 @@ nav {
   </div>
 </div>
 
+
+<div id="pane-inquiries" class="pane">
+  <!-- ── Inquiries header ── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;margin-top:-10px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:20px;font-weight:800;color:var(--brown);display:flex;align-items:center;gap:8px">
+        <span style="width:34px;height:34px;background:linear-gradient(135deg,#f5e6c0,#e8c96e);border-radius:10px;display:inline-flex;align-items:center;justify-content:center">
+          <i class="ti ti-inbox" style="color:#92400e;font-size:17px"></i>
+        </span>
+        פניות ובקשות
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;margin-right:42px">פניות מטופס צור קשר ובקשות לקוד הפעלה</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <select id="inqFilter" onchange="renderInquiries()" style="border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer">
+          <option value="all">כל הסוגים</option>
+          <option value="payment_request">💳 בקשת קוד הפעלה</option>
+          <option value="contact">✉️ צור קשר</option>
+        </select>
+      <select id="inqStatus" onchange="renderInquiries()" style="border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer">
+          <option value="all">כל הסטטוסים</option>
+          <option value="new">🔵 חדש</option>
+          <option value="handled">✅ טופל</option>
+        </select>
+      <button class="nbtn nbtn-outline" onclick="renderInquiries()" style="padding:6px 14px;font-size:12px;border-radius:8px;display:flex;align-items:center;gap:5px"><i class="ti ti-refresh"></i> רענן</button>
+    </div>
+  </div>
+  <!-- ── Stats strip ── -->
+  <div id="inqStats" style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap"></div>
+  <!-- ── List ── -->
+  <div id="inqList"></div>
+</div>
 <div id="toast"></div>
+
 
 <script>
 // ══════════════════════════════════════════════
@@ -2634,23 +2608,42 @@ const DEF_TAX={vatRate:18,ilInvThreshold:5000,cashLawBusiness:11000,whtRate:20,p
 const DEF_SYS={maintenance:false,registration:true,demo:true,taxCalc:true,quota:true};
 
 const DEF_FEATURES=[
-  {key:'benford',      label:'חוק בנפורד',            s:true, p:true, pr:true},
-  {key:'ratios',       label:'יחסים פיננסיים',         s:true, p:true, pr:true},
-  {key:'anomalies',    label:'זיהוי חריגות (12 סוגים)',s:true, p:true, pr:true},
-  {key:'vat',          label:'חישוב מע"מ',             s:true, p:true, pr:true},
-  {key:'wht',          label:'ניכוי מס במקור + טופס 856',s:true,p:true,pr:true},
-  {key:'cashlaw',      label:'חוק מזומן',              s:true, p:true, pr:true},
-  {key:'ilinv',        label:'חשבוניות ישראל',         s:true, p:true, pr:true},
-  {key:'export_pdf',   label:'ייצוא PDF',              s:true, p:true, pr:true},
-  {key:'export_csv',   label:'ייצוא CSV',              s:true, p:true, pr:true},
-  {key:'vendor',       label:'רשת ספקים + לורנץ',      s:false,p:true, pr:true},
-  {key:'related',      label:'גילוי צדדים קשורים',     s:false,p:true, pr:true},
-  {key:'compare',      label:'השוואה שנה לשנה',        s:false,p:true, pr:true},
-  {key:'export_prio',  label:'ייצוא פריוריטי/חשבIT',  s:false,p:true, pr:true},
-  {key:'export_docx',  label:'ייצוא Word',             s:false,p:true, pr:true},
-  {key:'ai',           label:'AI — ניתוח שאלות (BYOK)',s:false,p:true, pr:true},
-  {key:'ai_contract',  label:'AI — חוזה מול פקודה',   s:false,p:false,pr:true},
-  {key:'audit_log',    label:'יומן ביקורת מלא',        s:false,p:false,pr:true},
+  // ── ביקורת חודשית + שנתית ─────────────────────────────────
+  {section:'ביקורת חודשית ושנתית'},
+  {key:'anomalies',    label:'זיהוי 12 חריגות',                   s:true, p:true, pr:true},
+  {key:'cashlaw',      label:'חוק מזומן (₪11,000)',               s:true, p:true, pr:true},
+  {key:'ilinv',        label:'חשבוניות ישראל',                    s:true, p:true, pr:true},
+  {key:'pl',           label:'דוח רווח והפסד',                    s:true, p:true, pr:true},
+  {key:'cashflow',     label:'תזרים מזומנים',                     s:true, p:true, pr:true},
+  {key:'open_items',   label:'פריטים פתוחים',                     s:true, p:true, pr:true},
+  {key:'bank',         label:'התאמת בנק',                        s:true, p:true, pr:true},
+  {key:'multi_file',   label:'מספר קבצים בניתוח',                s:true, p:true, pr:true},
+  {key:'risk_score',   label:'ניקוד סיכון כולל',                  s:true, p:true, pr:true},
+  {key:'vat',          label:'חישוב מע"מ (18%)',                   s:false,p:true, pr:true},
+  {key:'wht',          label:'ניכוי מס במקור',                    s:false,p:true, pr:true},
+  {key:'related',      label:'גילוי צדדים קשורים',                s:false,p:true, pr:true},
+  {key:'budget',       label:'השוואה לתקציב [חודשי]',             s:false,p:true, pr:true},
+  // ── ביקורת שנתית בלבד ─────────────────────────────────────
+  {section:'ביקורת שנתית'},
+  {key:'trial_balance',label:'מאזן בוחן',                        s:true, p:true, pr:true},
+  {key:'benford',      label:'חוק בנפורד + MAD + χ²',            s:false,p:true, pr:true},
+  {key:'ratios',       label:'יחסים פיננסיים',                    s:false,p:true, pr:true},
+  {key:'vendor',       label:'רשת ספקים + לורנץ',                 s:false,p:true, pr:true},
+  {key:'mus',          label:'MUS Sampling (דגימה)',               s:false,p:true, pr:true},
+  {key:'materiality',  label:'מהותיות (Materiality)',             s:false,p:true, pr:true},
+  {key:'isa',          label:'דפי עבודה ISA',                     s:false,p:true, pr:true},
+  {key:'compare',      label:'השוואה שנה לשנה (YoY)',             s:false,p:true, pr:true},
+  {key:'cross_month',  label:'חריגות בין-חודשיות',                s:false,p:true, pr:true},
+  {key:'form856',      label:'טופס 856',                          s:false,p:true, pr:true},
+  // ── ייצוא ──────────────────────────────────────────────────
+  {section:'ייצוא'},
+  {key:'export_pdf',   label:'ייצוא PDF',                        s:true, p:true, pr:true},
+  {key:'export_csv',   label:'ייצוא CSV / Excel',                s:true, p:true, pr:true},
+  {key:'export_rivhit',label:'ייצוא ריווחית (ישיר)',              s:false,p:true, pr:true},
+  {key:'export_prio',  label:'ייצוא פריוריטי / חשבIT / חשבשבת',  s:false,p:true, pr:true},
+  // ── AI ─────────────────────────────────────────────────────
+  {section:'AI'},
+  {key:'ai',           label:'דוח AI מקצועי (BYOK)',              s:false,p:true, pr:true},
 ];
 
 const PLAN_COLORS={trial:'#9ca3af',starter:'#3b82f6',professional:'#16a34a',premium:'#c99a2e',enterprise:'#3a2000'};
@@ -2719,9 +2712,10 @@ function showTab(name,el){
   document.getElementById('pane-'+name).classList.add('active');
   const found=el||tabEl(name);
   if(found) found.classList.add('active');
+  try{localStorage.setItem('af_admin_tab',name);}catch(e){}
   const map={overview:renderOverview,analytics:renderAnalytics,finance:renderFinance,users:renderUsers,
     product:renderProduct,promos:renderPromos,comms:renderComms,integrations:renderIntegrations,
-    security:renderSecurity,support:renderSupport,marketing:renderMarketing,system:renderSystem};
+    security:renderSecurity,support:renderSupport,marketing:renderMarketing,system:renderSystem,inquiries:renderInquiries};
   if(map[name]) map[name]();
 }
 function tabEl(name){
@@ -4295,7 +4289,6 @@ const RETENTION_DEFS=[
   {key:'webhookLog',  label:'לוג שידורי Webhook',      sub:'תיעוד שידורים אוטומטיים',        unit:'ימים', default:30},
   {key:'failedPayments',label:'תשלומים כושלים (Dunning)',sub:'רשימת כשלי תשלום שנסגרו',     unit:'ימים', default:180},
   {key:'gdprLog',     label:'לוג בקשות GDPR',          sub:'בקשות מחיקה/גישה שהושלמו',      unit:'ימים', default:365},
-  {key:'auditTrail',  label:'יומן ביקורת (Audit Trail)',sub:'פעולות משתמשים שנרשמו',        unit:'ימים', default:365},
   {key:'invoices',    label:'חשבוניות',                 sub:'לפי חוק — 7 שנים מינימום',      unit:'ימים', default:2555},
   {key:'receipts',    label:'קבלות',                    sub:'לפי חוק — 7 שנים מינימום',      unit:'ימים', default:2555},
 ];
@@ -4552,8 +4545,8 @@ function renderAnalytics(){
     </div>
   </div>`;
 
-  // Cohort + UTM + Feature Usage
-  setTimeout(()=>{renderCohortAnalysis();renderUTMBreakdown();renderUTMTable();renderFeatureUsageMap();},0);
+  // Cohort + Feature Usage
+  setTimeout(()=>{renderCohortAnalysis();renderFeatureUsageMap();},0);
 }
 
 function renderChurnList(){
@@ -4925,7 +4918,7 @@ function showEmailPreview(html, toEmail, subject){
         <div style="padding:12px 16px;background:#f9f4ea;border-bottom:1px solid #e8d4a0;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap">
           <button id="epCopyBtn" onclick="epCopyHTML()" style="background:#3a2000;color:#c99a2e;border:none;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer">📋 העתק HTML</button>
           <button onclick="epOpenGmail()" style="background:#fff;color:#3a2000;border:1.5px solid #c99a2e;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer">✉ פתח ב-Gmail</button>
-          <span style="font-size:12px;color:#9a7a4a;align-self:center">העתק את ה-HTML ← Gmail ← Compose ← Ctrl+Shift+V</span>
+          <span style="font-size:12px;color:#9a7a4a;align-self:center">לחץ "העתק" ← פתח Gmail ← Compose ← Ctrl+V</span>
         </div>
         <iframe id="epFrame" style="flex:1;border:none;min-height:500px"></iframe>
       </div>`;
@@ -4941,21 +4934,32 @@ function showEmailPreview(html, toEmail, subject){
 
 function epCopyHTML(){
   const m = document.getElementById('emailPreviewModal');
-  navigator.clipboard.writeText(m._html).then(()=>{
-    const btn = document.getElementById('epCopyBtn');
-    btn.textContent = '✅ הועתק!';
-    setTimeout(()=>{ btn.textContent = '📋 העתק HTML'; }, 2000);
-  }).catch(()=>{
-    const ta = document.createElement('textarea');
-    ta.value = m._html;
-    document.body.appendChild(ta);
-    ta.select();
+  const html = m._html;
+  const btn = document.getElementById('epCopyBtn');
+  // Copy as text/html so Gmail renders it as rich text (not raw code)
+  try{
+    const blob = new Blob([html],{type:'text/html'});
+    const item = new ClipboardItem({'text/html':blob});
+    navigator.clipboard.write([item]).then(()=>{
+      btn.textContent='✅ הועתק! עכשיו Ctrl+V ב-Gmail';
+      setTimeout(()=>{btn.textContent='📋 העתק להדבקה ב-Gmail';},3000);
+    });
+  }catch(e){
+    // fallback: execCommand with HTML
+    const div=document.createElement('div');
+    div.contentEditable='true';
+    div.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';
+    div.innerHTML=html;
+    document.body.appendChild(div);
+    const sel=window.getSelection();sel.removeAllRanges();
+    const range=document.createRange();range.selectNodeContents(div);
+    sel.addRange(range);
     document.execCommand('copy');
-    document.body.removeChild(ta);
-    const btn = document.getElementById('epCopyBtn');
-    btn.textContent = '✅ הועתק!';
-    setTimeout(()=>{ btn.textContent = '📋 העתק HTML'; }, 2000);
-  });
+    document.body.removeChild(div);
+    sel.removeAllRanges();
+    btn.textContent='✅ הועתק! עכשיו Ctrl+V ב-Gmail';
+    setTimeout(()=>{btn.textContent='📋 העתק להדבקה ב-Gmail';},3000);
+  }
 }
 
 function epOpenGmail(){
@@ -5928,84 +5932,6 @@ function showOrgModal(orgId){
 }
 
 // ══════════════════════════════════════════════
-//  UTM TRACKING
-// ══════════════════════════════════════════════
-const UTM_LABELS={'google':'Google','facebook':'Facebook','linkedin':'LinkedIn',
-  'email':'Email','organic':'Organic','direct':'Direct','referral':'Referral','other':'אחר'};
-const UTM_COLORS={'google':'#fef9c3','facebook':'#dbeafe','linkedin':'#e0f2fe',
-  'email':'#fce7f3','organic':'#dcfce7','direct':'#f3f4f6','referral':'#ede9fe','other':'#fdf8f0'};
-
-function renderUTMBreakdown(){
-  const users=getUsers();
-  const wrap=document.getElementById('utmBreakdown');if(!wrap)return;
-  const counts={};
-  users.forEach(u=>{const s=u.utmSource||'direct';counts[s]=(counts[s]||0)+1;});
-  const total=users.length||1;
-  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
-  if(!sorted.length){wrap.innerHTML='<div class="empty">אין נתוני UTM</div>';return;}
-  wrap.innerHTML=`<div class="utm-breakdown">${sorted.map(([src,cnt])=>`
-    <div class="utm-source-card">
-      <div class="utm-source-name">${UTM_LABELS[src]||esc(src)}</div>
-      <div class="utm-bar-wrap"><div class="utm-bar" style="width:${Math.round(cnt/total*100)}%"></div></div>
-      <div class="utm-count">${cnt} משתמשים · ${Math.round(cnt/total*100)}%</div>
-    </div>`).join('')}
-  </div>`;
-  // Populate user selects
-  const sel=document.getElementById('utmUserSel');
-  if(sel){sel.innerHTML='<option value="">בחר משתמש...</option>'+
-    users.map(u=>`<option value="${esc(u.email)}">${esc(u.name)} (${esc(u.email)})</option>`).join('');}
-}
-function renderUTMTable(){
-  const users=getUsers();
-  const srcF=(document.getElementById('utmSourceF')||{}).value||'';
-  const medF=(document.getElementById('utmMediumF')||{}).value||'';
-  const camF=((document.getElementById('utmCampaignF')||{}).value||'').toLowerCase();
-  const wrap=document.getElementById('utmUserTable');if(!wrap)return;
-  const filtered=users.filter(u=>{
-    const ms=!srcF||(u.utmSource||'direct')===srcF;
-    const mm=!medF||(u.utmMedium||'')===medF;
-    const mc=!camF||((u.utmCampaign||'').toLowerCase().includes(camF));
-    return ms&&mm&&mc;
-  });
-  if(!filtered.length){wrap.innerHTML='<div class="empty">אין תוצאות</div>';return;}
-  const rows=filtered.map(u=>`<tr>
-    <td style="font-weight:600;font-size:11px">${esc(u.name||'—')}<br><span style="font-size:9px;color:var(--muted)">${esc(u.email)}</span></td>
-    <td><span class="utm-badge utm-${(u.utmSource||'direct').replace(/[^a-z0-9-]/g,'')}">${UTM_LABELS[u.utmSource||'direct']||esc(u.utmSource)||'Direct'}</span></td>
-    <td style="font-size:10px;color:var(--muted)">${esc(u.utmMedium||'—')}</td>
-    <td style="font-size:10px;color:var(--muted)">${esc(u.utmCampaign||'—')}</td>
-    <td style="font-size:10px;color:var(--muted);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(u.utmReferrer||'—')}</td>
-    <td style="font-size:10px;color:var(--muted)">${dateStr(u.created)}</td>
-  </tr>`).join('');
-  wrap.innerHTML=`<table class="tbl utm-tbl">
-    <thead><tr><th>משתמש</th><th>מקור</th><th>מדיום</th><th>קמפיין</th><th>Referrer</th><th>תאריך</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table>`;
-}
-function saveUserUTM(){
-  const email=(document.getElementById('utmUserSel')||{}).value;
-  if(!email){toast('❌ בחר משתמש');return;}
-  const users=getUsers();const u=users.find(x=>x.email===email);if(!u)return;
-  u.utmSource=(document.getElementById('utmSourceSel')||{}).value||'direct';
-  u.utmMedium=(document.getElementById('utmMediumSel')||{}).value||'';
-  u.utmCampaign=(document.getElementById('utmCampaignSel')||{}).value||'';
-  u.utmContent=(document.getElementById('utmContentSel')||{}).value||'';
-  u.utmReferrer=(document.getElementById('utmReferrerSel')||{}).value||'';
-  ss(UK,users);adminLog('utm_set',`${email}: source=${u.utmSource}, campaign=${u.utmCampaign}`);
-  toast(`✓ UTM נשמר עבור ${esc(u.name)}`);
-  renderUTMBreakdown();renderUTMTable();
-}
-function exportUTMReport(){
-  const users=getUsers();
-  const header='שם,אימייל,מקור,מדיום,קמפיין,תוכן,Referrer,תאריך';
-  const rows=users.map(u=>[u.name,u.email,u.utmSource||'direct',u.utmMedium||'',
-    u.utmCampaign||'',u.utmContent||'',u.utmReferrer||'',
-    u.created?new Date(u.created).toLocaleDateString('he-IL'):'']
-    .map(v=>`"${String(v||'').replace(/"/g,'""')}"`).join(','));
-  dl('utm_report_'+ts()+'.csv','﻿'+[header,...rows].join('\n'),'text/csv;charset=utf-8');
-  adminLog('export','UTM report');toast('📥 דוח UTM יוצא');
-}
-
-// ══════════════════════════════════════════════
 //  SUPPORT TICKETS
 // ══════════════════════════════════════════════
 const TKT_STATUS_MAP={open:'פתוח',inprogress:'בטיפול',resolved:'נפתר',closed:'סגור'};
@@ -6329,16 +6255,18 @@ function saveTaxCfg(){
 
 function renderFF(){
   const saved=ls(K.features,null)||DEF_FEATURES;
-  document.getElementById('ffGrid').innerHTML=saved.map((f,i)=>`
-    <div class="ff-row">
+  document.getElementById('ffGrid').innerHTML=saved.map((f,i)=>{
+    if(f.section) return `<div class="ff-section">${f.section}</div>`;
+    return `<div class="ff-row">
       <div class="ff-name">${f.label}</div>
       ${['s','p','pr'].map(col=>`<div class="ff-center"><label class="tog"><input type="checkbox" data-fi="${i}" data-col="${col}"${f[col]?' checked':''}><span class="tog-sl"></span></label></div>`).join('')}
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function saveFeatureFlags(){
   const flags=JSON.parse(JSON.stringify(DEF_FEATURES));
   document.querySelectorAll('#ffGrid input[type=checkbox]').forEach(cb=>{
-    const i=+cb.dataset.fi;const col=cb.dataset.col;if(flags[i])flags[i][col]=cb.checked;
+    const i=+cb.dataset.fi;const col=cb.dataset.col;if(flags[i]&&flags[i].key)flags[i][col]=cb.checked;
   });
   ss(K.features,flags);adminLog('features','updated');toast('✓ תכונות עודכנו');
 }
@@ -7377,6 +7305,15 @@ function copyCampaign(){
 //  INIT
 // ══════════════════════════════════════════════
 renderOverview();
+// Restore last active tab
+(function(){
+  try{
+    const last=localStorage.getItem('af_admin_tab');
+    if(last&&last!=='overview'&&document.getElementById('pane-'+last)){
+      showTab(last);
+    }
+  }catch(e){}
+})();
 
 // הגדר תאריך ברירת מחדל לחודש הבא עבור מחולל ה-Token
 (function(){
@@ -7385,6 +7322,120 @@ renderOverview();
   const el = document.getElementById('licExpiry');
   if(el) el.value = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
 })();
+
+// ══ פניות ══════════════════════════════════════════════════
+function renderInquiries(){
+  const filterEl=document.getElementById('inqFilter');
+  const statusEl=document.getElementById('inqStatus');
+  const filter=filterEl?filterEl.value:'all';
+  const statusF=statusEl?statusEl.value:'all';
+
+  let allItems=[];
+  try{allItems=JSON.parse(localStorage.getItem('af_inquiries')||'[]');}catch(e){}
+
+  // Stats
+  const total=allItems.length;
+  const newCount=allItems.filter(i=>(i.status||'new')==='new').length;
+  const payCount=allItems.filter(i=>i.type==='payment_request').length;
+  const contactCount=allItems.filter(i=>i.type==='contact').length;
+  const statsEl=document.getElementById('inqStats');
+  if(statsEl){
+    statsEl.innerHTML=[
+      {icon:'ti-list',label:'סה"כ פניות',val:total,bg:'#f5f0e8',ic:'#92400e'},
+      {icon:'ti-circle-dot',label:'חדשות',val:newCount,bg:'#eff6ff',ic:'#2563eb'},
+      {icon:'ti-credit-card',label:'בקשות קוד',val:payCount,bg:'#fefce8',ic:'#ca8a04'},
+      {icon:'ti-mail',label:'צור קשר',val:contactCount,bg:'#f0fdf4',ic:'#15803d'}
+    ].map(s=>`<div style="background:${s.bg};border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:10px;min-width:120px">
+      <i class="ti ${s.icon}" style="color:${s.ic};font-size:18px"></i>
+      <div><div style="font-size:18px;font-weight:800;color:${s.ic}">${s.val}</div><div style="font-size:11px;color:#6b7280">${s.label}</div></div>
+    </div>`).join('');
+  }
+
+  // Filter
+  let items=[...allItems];
+  if(filter!=='all') items=items.filter(i=>i.type===filter);
+  if(statusF!=='all') items=items.filter(i=>(i.status||'new')===statusF);
+
+  const wrap=document.getElementById('inqList');
+  if(!wrap) return;
+
+  if(!allItems.length){
+    wrap.innerHTML='<div style="text-align:center;padding:70px 0;color:var(--muted)">'+
+      '<div style="width:64px;height:64px;background:#f5f0e8;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px">'+
+      '<i class="ti ti-inbox" style="font-size:28px;color:#c9961e"></i></div>'+
+      '<div style="font-size:15px;font-weight:700;color:var(--brown);margin-bottom:6px">אין פניות עדיין</div>'+
+      '<div style="font-size:13px">פניות יופיעו כאן כשלקוחות יצרו קשר או ביקשו קוד הפעלה</div></div>';
+    return;
+  }
+
+  if(!items.length){
+    wrap.innerHTML='<div style="text-align:center;padding:50px 0;color:var(--muted)">'+
+      '<i class="ti ti-search" style="font-size:28px;display:block;margin-bottom:10px;opacity:.4"></i>'+
+      '<div style="font-size:13px">לא נמצאו פניות עם הסינון הנוכחי</div></div>';
+    return;
+  }
+
+  const methodLabel={bank:'העברה בנקאית',bit:'Bit'};
+  const planBadge={starter:'#6b7280',professional:'#2563eb',premium:'#7c3aed',enterprise:'#92400e'};
+
+  wrap.innerHTML=items.map((it,idx)=>{
+    const date=it.at?new Date(it.at).toLocaleString('he-IL',{day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'}):'';
+    const handled=(it.status||'new')==='handled';
+    const isPay=it.type==='payment_request';
+    const borderColor=handled?'#d1fae5':isPay?'rgba(201,154,46,.35)':'var(--border)';
+    const topBar=isPay?'linear-gradient(90deg,rgba(245,230,192,.6),rgba(245,230,192,.15))':'linear-gradient(90deg,rgba(58,32,0,.04),transparent)';
+    const planColor=planBadge[it.plan]||'#6b7280';
+
+    return `<div style="background:#fff;border:1.5px solid ${borderColor};border-radius:14px;overflow:hidden;margin-bottom:12px;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,.07)'" onmouseout="this.style.boxShadow=''">
+      <!-- card top bar -->
+      <div style="background:${topBar};padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;border-bottom:1px solid ${borderColor}">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:11px;font-weight:800;background:${isPay?'rgba(201,154,46,.18)':'rgba(58,32,0,.08)'};color:var(--brown);padding:3px 12px;border-radius:20px">${isPay?'💳 בקשת קוד הפעלה':'✉️ צור קשר'}</span>
+          ${it.plan?`<span style="font-size:10px;font-weight:700;background:${planColor}18;color:${planColor};padding:2px 9px;border-radius:12px;border:1px solid ${planColor}40">${it.plan}${it.method?' · '+methodLabel[it.method]:''}</span>`:''}
+          ${handled?'<span style="font-size:10px;font-weight:700;background:#d1fae5;color:#15803d;padding:2px 9px;border-radius:12px">✅ טופל</span>':'<span style="font-size:10px;font-weight:700;background:#eff6ff;color:#2563eb;padding:2px 9px;border-radius:12px">🔵 חדש</span>'}
+        </div>
+        <div style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px"><i class="ti ti-clock"></i> ${date}</div>
+      </div>
+      <!-- card body -->
+      <div style="padding:14px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:15px;font-weight:700;color:var(--brown);margin-bottom:3px">${it.name||'—'} ${it.email?`<span style="font-size:12px;font-weight:400;color:var(--muted)">${it.email}</span>`:''}</div>
+          ${it.firm||it.phone?`<div style="font-size:12px;color:var(--muted);margin-bottom:6px">${[it.firm,it.phone].filter(Boolean).join(' · ')}</div>`:''}
+          ${it.subject?`<div style="font-size:12px;font-weight:600;color:var(--brown);margin-bottom:4px;display:flex;align-items:center;gap:4px"><i class="ti ti-tag" style="font-size:11px"></i> ${it.subject}</div>`:''}
+          ${it.message?`<div style="font-size:13px;color:var(--text);line-height:1.65;background:#fafaf8;border-right:3px solid var(--gold);padding:8px 12px;border-radius:0 6px 6px 0;margin-top:4px;max-width:520px">${it.message}</div>`:''}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;align-items:flex-end">
+          ${it.email?`<a href="mailto:${it.email}" class="nbtn nbtn-outline" style="padding:5px 12px;font-size:12px;border-radius:8px;display:flex;align-items:center;gap:5px"><i class="ti ti-mail"></i> שלח מייל</a>`:''}
+          <button onclick="markInquiryHandled(${allItems.indexOf(it)})" class="nbtn ${handled?'nbtn-outline':'nbtn-gold'}" style="padding:5px 12px;font-size:12px;border-radius:8px;display:flex;align-items:center;gap:5px">
+            <i class="ti ti-${handled?'rotate-clockwise':'circle-check'}"></i> ${handled?'בטל טיפול':'סמן כטופל'}
+          </button>
+          <button onclick="deleteInquiry(${allItems.indexOf(it)})" class="nbtn nbtn-outline" style="padding:5px 10px;font-size:12px;border-radius:8px;color:#dc2626;border-color:#fecaca;display:flex;align-items:center;gap:4px" title="מחק פנייה">
+            <i class="ti ti-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function markInquiryHandled(idx){
+  try{
+    const items=JSON.parse(localStorage.getItem('af_inquiries')||'[]');
+    if(items[idx]) items[idx].status=(items[idx].status||'new')==='handled'?'new':'handled';
+    localStorage.setItem('af_inquiries',JSON.stringify(items));
+  }catch(e){}
+  renderInquiries();
+}
+
+function deleteInquiry(idx){
+  if(!confirm('למחוק פנייה זו? הפעולה בלתי הפיכה.')) return;
+  try{
+    const items=JSON.parse(localStorage.getItem('af_inquiries')||'[]');
+    items.splice(idx,1);
+    localStorage.setItem('af_inquiries',JSON.stringify(items));
+  }catch(e){}
+  renderInquiries();
+}
 </script>
 </body>
 </html>

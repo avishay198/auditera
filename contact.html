@@ -123,13 +123,15 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 /* Quick links card */
 .quick-links-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 26px}
 .quick-links-card h4{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
-.quick-link-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);text-decoration:none;transition:color .15s}
-.quick-link-item:last-child{border-bottom:none;padding-bottom:0}
+.quick-link-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:12px;background:var(--cream);border:1px solid var(--border);text-decoration:none;margin-bottom:10px;transition:background .18s,border-color .18s,transform .15s}
+.quick-link-item:last-child{margin-bottom:0}
+.quick-link-item:hover{background:var(--gold3);border-color:var(--gold);transform:translateX(-3px)}
 .quick-link-item:hover .quick-link-label{color:var(--gold)}
-.quick-link-icon{width:32px;height:32px;background:var(--gold3);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.quick-link-label{font-size:14px;font-weight:600;color:var(--brown)}
-.quick-link-desc{font-size:12px;color:var(--muted)}
-.quick-link-arrow{margin-right:auto;font-size:14px;color:var(--muted)}
+.quick-link-icon{width:38px;height:38px;background:var(--white);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--brown)}
+.quick-link-text{flex:1;min-width:0}
+.quick-link-label{font-size:14px;font-weight:700;color:var(--brown);display:block}
+.quick-link-desc{font-size:12px;color:var(--muted);display:block;margin-top:1px}
+.quick-link-arrow{font-size:16px;color:var(--gold);font-weight:700;flex-shrink:0}
 
 /* ── FOOTER ── */
 footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
@@ -205,7 +207,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 <div class="mobile-menu" id="mobileMenu">
   <a href="features.html">תכונות</a>
   <a href="how.html">איך זה עובד</a>
-  <a href="pricing.html">תמחור</a>
+  <a href="pricing.html#plans">תמחור</a>
   <a href="contact.html">צור קשר</a>
   <a href="login.html" class="m-cta">כניסה למערכת ←</a>
 </div>
@@ -221,10 +223,10 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 
 <!-- TRUST STRIP -->
 <div class="trust-strip">
-  <div class="trust-item"><span class="trust-icon">⚡</span>תגובה תוך יום עסקים אחד</div>
-  <div class="trust-item"><span class="trust-icon">🔒</span>פרטייך לא ישותפו לאף גורם</div>
-  <div class="trust-item"><span class="trust-icon">🤝</span>שירות אישי — לא בוט</div>
-  <div class="trust-item"><span class="trust-icon">📞</span>תמיכה בעברית</div>
+  <div class="trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="13 3 13 10 19 10 11 21 11 14 5 14 13 3"/></svg>תגובה תוך יום עסקים אחד</div>
+  <div class="trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="5" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="16" r="1"/><path d="M8 11v-4a4 4 0 0 1 8 0v4"/></svg>פרטייך לא ישותפו לאף גורם</div>
+  <div class="trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/></svg>שירות אישי — לא בוט</div>
+  <div class="trust-item"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/></svg>תמיכה בעברית</div>
 </div>
 
 <!-- MAIN -->
@@ -257,13 +259,13 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
           <label class="form-label" for="subject">נושא הפנייה<span>*</span></label>
           <select class="form-select" id="subject" required>
             <option value="" disabled selected>בחר נושא...</option>
-            <option value="pricing">💰 תמחור ורכישה</option>
-            <option value="demo">🎯 בקשת הדגמה אישית</option>
-            <option value="support">🛠️ תמיכה טכנית</option>
-            <option value="feature">💡 שאלה על תכונה</option>
-            <option value="integration">🔗 אינטגרציה עם תוכנה</option>
-            <option value="enterprise">🏢 תמחור לפירמה גדולה</option>
-            <option value="other">📌 אחר</option>
+            <option value="pricing">תמחור ורכישה</option>
+            <option value="demo">בקשת הדגמה אישית</option>
+            <option value="support">תמיכה טכנית</option>
+            <option value="feature">שאלה על תכונה</option>
+            <option value="integration">אינטגרציה עם תוכנה</option>
+            <option value="enterprise">תמחור לפירמה גדולה</option>
+            <option value="other">אחר</option>
           </select>
         </div>
         <div class="form-group full">
@@ -282,7 +284,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 
     <!-- Success -->
     <div class="form-success" id="formSuccess">
-      <div class="form-success-icon">✉️</div>
+      <div class="form-success-icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></div>
       <h3>ההודעה נשלחה!</h3>
       <p>תודה שפנית אלינו.<br>נחזור אליך תוך יום עסקים אחד לכתובת הדוא"ל שהזנת.</p>
       <button onclick="resetForm()" style="margin-top:22px;padding:10px 24px;background:var(--brown);color:#f5e6c0;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">שלח פנייה נוספת</button>
@@ -294,7 +296,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 
     <!-- Response time -->
     <div class="response-badge">
-      <div class="response-badge-icon">⚡</div>
+      <div class="response-badge-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="13 3 13 10 19 10 11 21 11 14 5 14 13 3"/></svg></div>
       <div class="response-badge-text">
         <div class="response-badge-title">זמן מענה מובטח</div>
         <div class="response-badge-sub">יום עסקים אחד לכל פנייה<br>תמיכה בעברית בלבד</div>
@@ -304,42 +306,6 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
     <!-- Contact info -->
     <div class="info-card">
       <div class="info-card-title">פרטי יצירת קשר</div>
-
-      <div class="info-row">
-        <div class="info-icon-wrap">✉️</div>
-        <div class="info-text">
-          <div class="info-label">דוא"ל כללי</div>
-          <div class="info-value"><a href="mailto:support@auditera.co.il">support@auditera.co.il</a></div>
-          <div class="info-sub">לשאלות כלליות ותמיכה</div>
-        </div>
-      </div>
-
-      <div class="info-row">
-        <div class="info-icon-wrap">💼</div>
-        <div class="info-text">
-          <div class="info-label">מכירות ותמחור</div>
-          <div class="info-value"><a href="mailto:support@auditera.co.il">support@auditera.co.il</a></div>
-          <div class="info-sub">הצעות מחיר ופירמות גדולות</div>
-        </div>
-      </div>
-
-      <div class="info-row">
-        <div class="info-icon-wrap">🕘</div>
-        <div class="info-text">
-          <div class="info-label">שעות מענה</div>
-          <div class="info-value">א'–ה' · 09:00–18:00</div>
-          <div class="info-sub">פניות בסוף שבוע נענות ביום א'</div>
-        </div>
-      </div>
-
-      <div class="info-row">
-        <div class="info-icon-wrap">📍</div>
-        <div class="info-text">
-          <div class="info-label">מיקום</div>
-          <div class="info-value">תל אביב–יפו, ישראל</div>
-          <div class="info-sub">שירות מרחוק לכלל הארץ</div>
-        </div>
-      </div>
     </div>
 
     <!-- Quick links -->
@@ -347,37 +313,37 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
       <h4>קישורים מהירים</h4>
 
       <a class="quick-link-item" href="pricing.html">
-        <div class="quick-link-icon">💰</div>
+        <div class="quick-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h.01"/><path d="M11 15h2"/></svg></div>
         <div>
-          <div class="quick-link-label">תמחור ותוכניות</div>
-          <div class="quick-link-desc">השוואה מלאה בין התוכניות</div>
+          <div class="quick-link-text"><div class="quick-link-label">תמחור ותוכניות</div>
+          <div class="quick-link-desc">השוואה מלאה בין התוכניות</div></div>
         </div>
         <div class="quick-link-arrow">←</div>
       </a>
 
       <a class="quick-link-item" href="pricing.html#faq">
-        <div class="quick-link-icon">❓</div>
+        <div class="quick-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7"/><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3"/><line x1="9.7" y1="17" x2="14.3" y2="17"/></svg></div>
         <div>
-          <div class="quick-link-label">שאלות נפוצות</div>
-          <div class="quick-link-desc">תשובות מהירות לשאלות נפוצות</div>
+          <div class="quick-link-text"><div class="quick-link-label">שאלות נפוצות</div>
+          <div class="quick-link-desc">תשובות מהירות לשאלות נפוצות</div></div>
         </div>
         <div class="quick-link-arrow">←</div>
       </a>
 
       <a class="quick-link-item" href="features.html">
-        <div class="quick-link-icon">🔍</div>
+        <div class="quick-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg></div>
         <div>
-          <div class="quick-link-label">כל התכונות</div>
-          <div class="quick-link-desc">21 כלים לביקורת פיננסית</div>
+          <div class="quick-link-text"><div class="quick-link-label">כל התכונות</div>
+          <div class="quick-link-desc">21 כלים לביקורת פיננסית</div></div>
         </div>
         <div class="quick-link-arrow">←</div>
       </a>
 
       <a class="quick-link-item" href="login.html?tab=register">
-        <div class="quick-link-icon">🚀</div>
+        <div class="quick-link-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3"/><path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3"/><circle cx="15" cy="9" r="1"/></svg></div>
         <div>
-          <div class="quick-link-label">התחל חינם עכשיו</div>
-          <div class="quick-link-desc">תיק לקוח אחד — ללא כרטיס אשראי</div>
+          <div class="quick-link-text"><div class="quick-link-label">התחל חינם עכשיו</div>
+          <div class="quick-link-desc">תיק לקוח אחד — ללא כרטיס אשראי</div></div>
         </div>
         <div class="quick-link-arrow">←</div>
       </a>
@@ -442,6 +408,20 @@ ${message}`;
   const mailBody=encodeURIComponent(body);
   const mailLink=`mailto:support@auditera.co.il?subject=${mailSubject}&body=${mailBody}`;
 
+  // Save to localStorage inquiries
+  try{
+    const inq=JSON.parse(localStorage.getItem('af_inquiries')||'[]');
+    inq.unshift({type:'contact',name,email,firm,phone,subject:subjectHe,message,at:new Date().toISOString(),status:'new'});
+    localStorage.setItem('af_inquiries',JSON.stringify(inq.slice(0,50)));
+  }catch(e){}
+
+  // Send to Worker
+  fetch('https://auditera-license.auditera.workers.dev/notify',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({event:'contact',name,email,firm,phone,subject:subjectHe,message,at:new Date().toISOString()})
+  }).catch(()=>{});
+
   // Open email client
   window.location.href=mailLink;
 
@@ -475,7 +455,7 @@ function resetForm(){
 </script>
 <!-- COOKIE CONSENT -->
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
-  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
+  <span>אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
   <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#3a2000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
