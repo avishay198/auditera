@@ -1473,8 +1473,8 @@ async function _autoLookupLicense(){
       u.plan=data.plan;
       u.licenseExpiry=data.expiry;
       u.licenseQuota=data.quota;
-      // שמור placeholder token כדי ש-_getLicenseData יזהה רישיון תקף
-      if(!u.licenseToken) u.licenseToken='kv:'+data.plan+':'+data.expiry;
+      // שמור אסימון אימות (לא הטוקן המלא) — Worker אימת HMAC פנימית
+      u.licenseToken='kv_verified:'+data.plan+':'+data.expiry;
       localStorage.setItem(USERS_KEY_APP,JSON.stringify(users));
       _updateLicenseBanner();
       if(data.plan!=='trial'){

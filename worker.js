@@ -295,11 +295,11 @@ async function handleGenerateToken(request, env) {
     const hmac = Array.from(new Uint8Array(sig)).map(b=>b.toString(16).padStart(2,'0')).join('');
     const token = btoa(`${payload}|${hmac}`);
 
-    // שמור ב-KV לאחזור אוטומטי (ללא HMAC — רק מטא-דאטה)
+    // שמור ב-KV — כולל הטוקן המלא לאימות אוטומטי
     if (env.LICENSES) {
       await env.LICENSES.put(
         'license:' + email.toLowerCase().trim(),
-        JSON.stringify({ plan, quota: q, expiry }),
+        JSON.stringify({ plan, quota: q, expiry, token }),
         { expirationTtl: 60 * 60 * 24 * 400 } // ~13 חודשים
       );
     }
@@ -326,12 +326,28 @@ async function handleLookup(request, env) {
     }
     const raw = await env.LICENSES.get('license:' + email);
     if (!raw) return json({ ok: false, error: 'not_found' });
-    const { plan, quota, expiry } = JSON.parse(raw);
+    const { plan, quota, expiry, token } = JSON.parse(raw);
     // בדוק תאריך פקיעה
     const [yr, mo] = expiry.split('-').map(Number);
     if (new Date() >= new Date(yr, mo, 1)) {
       return json({ ok: false, error: 'expired' });
     }
+    // אמת את הטוקן (HMAC) לפני החזרה
+    if (token) {
+      let decoded;
+      try { decoded = atob(token.trim()); } catch { return json({ ok: false, error: 'invalid_token' }); }
+      const lastPipe = decoded.lastIndexOf('|');
+      const payload = decoded.slice(0, lastPipe);
+      const tokenHmac = decoded.slice(lastPipe + 1);
+      const key = await crypto.subtle.importKey(
+        'raw', new TextEncoder().encode(env.LIC_SECRET || ''),
+        { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+      );
+      const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
+      const expectedHmac = Array.from(new Uint8Array(sig)).map(b=>b.toString(16).padStart(2,'0')).join('');
+      if (expectedHmac !== tokenHmac) return json({ ok: false, error: 'invalid_signature' });
+    }
+    // מחזיר רק מטא-דאטה — הטוקן לא נחשף החוצה
     return json({ ok: true, plan, quota, expiry });
   } catch(e) {
     return json({ ok: false, error: 'server_error' }, 500);
