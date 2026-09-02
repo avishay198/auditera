@@ -12,7 +12,7 @@
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
@@ -48,6 +48,11 @@ export default {
     // ── POST /generate-token — יצירת טוקן רישיון (מנהל בלבד) ────
     if (request.method === 'POST' && url.pathname === '/generate-token') {
       return handleGenerateToken(request, env);
+    }
+
+    // ── GET /lookup — בדיקת רישיון אוטומטית לפי אימייל (ללא HMAC) ────
+    if (request.method === 'GET' && url.pathname === '/lookup') {
+      return handleLookup(request, env);
     }
 
     return new Response('Not found', { status: 404, headers: CORS });
@@ -290,7 +295,44 @@ async function handleGenerateToken(request, env) {
     const hmac = Array.from(new Uint8Array(sig)).map(b=>b.toString(16).padStart(2,'0')).join('');
     const token = btoa(`${payload}|${hmac}`);
 
+    // שמור ב-KV לאחזור אוטומטי (ללא HMAC — רק מטא-דאטה)
+    if (env.LICENSES) {
+      await env.LICENSES.put(
+        'license:' + email.toLowerCase().trim(),
+        JSON.stringify({ plan, quota: q, expiry }),
+        { expirationTtl: 60 * 60 * 24 * 400 } // ~13 חודשים
+      );
+    }
+
     return json({ ok: true, token });
+  } catch(e) {
+    return json({ ok: false, error: 'server_error' }, 500);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// /lookup — אחזור רישיון לפי אימייל (GET, ללא HMAC)
+// מחזיר plan/quota/expiry בלבד — לא את הטוקן המלא
+// ══════════════════════════════════════════════════════════════
+async function handleLookup(request, env) {
+  try {
+    const url = new URL(request.url);
+    const email = (url.searchParams.get('email') || '').toLowerCase().trim();
+    if (!email || !email.includes('@')) {
+      return json({ ok: false, error: 'missing_email' }, 400);
+    }
+    if (!env.LICENSES) {
+      return json({ ok: false, error: 'kv_not_configured' });
+    }
+    const raw = await env.LICENSES.get('license:' + email);
+    if (!raw) return json({ ok: false, error: 'not_found' });
+    const { plan, quota, expiry } = JSON.parse(raw);
+    // בדוק תאריך פקיעה
+    const [yr, mo] = expiry.split('-').map(Number);
+    if (new Date() >= new Date(yr, mo, 1)) {
+      return json({ ok: false, error: 'expired' });
+    }
+    return json({ ok: true, plan, quota, expiry });
   } catch(e) {
     return json({ ok: false, error: 'server_error' }, 500);
   }

@@ -1453,6 +1453,38 @@ async function doActivateLicense(){
   }, 1800);
 }
 
+async function _autoLookupLicense(){
+  // בדיקת רישיון אוטומטית מ-KV — ללא צורך בהכנסת מפתח ידנית
+  const email=(window._auditSession&&window._auditSession.email)||'';
+  if(!email||email==='admin'||email==='demo@guest') return;
+  // אם כבר יש רישיון תקף ב-localStorage — אין צורך לפנות לשרת
+  if(_getLicenseData(email)) return;
+  try{
+    const resp=await fetch(
+      'https://auditera-license.auditera.workers.dev/lookup?email='+encodeURIComponent(email),
+      {method:'GET'}
+    );
+    const data=await resp.json();
+    if(!data.ok) return;
+    // שמור אוטומטית ב-localStorage (בלי להציג modal)
+    const users=JSON.parse(localStorage.getItem(USERS_KEY_APP)||'[]');
+    const u=users.find(x=>x.email===email);
+    if(u){
+      u.plan=data.plan;
+      u.licenseExpiry=data.expiry;
+      u.licenseQuota=data.quota;
+      // שמור placeholder token כדי ש-_getLicenseData יזהה רישיון תקף
+      if(!u.licenseToken) u.licenseToken='kv:'+data.plan+':'+data.expiry;
+      localStorage.setItem(USERS_KEY_APP,JSON.stringify(users));
+      _updateLicenseBanner();
+      if(data.plan!=='trial'){
+        const planNames={starter:'סטארטר',professional:'מקצועי',premium:'פרמיום',enterprise:'ארגוני'};
+        showToast('✓ רישיון '+( planNames[data.plan]||data.plan)+' הופעל אוטומטית','success');
+      }
+    }
+  }catch(e){ /* שרת לא זמין — ממשיכים ב-trial */ }
+}
+
 function _updateLicenseBanner(){
   const email = (window._auditSession&&window._auditSession.email)||'';
   const banner = document.getElementById('licenseBanner');
@@ -1549,6 +1581,9 @@ function getTrialStatus(){
   }
   window._auditSession = session;
 })();
+
+// אחזור רישיון אוטומטי מ-KV בטעינה
+document.addEventListener('DOMContentLoaded', () => { _autoLookupLicense(); });
 
 function doLogout() {
   // מחיקת session בלבד — נתוני ההרשמה ב-localStorage נשמרים

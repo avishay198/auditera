@@ -1,5 +1,11 @@
 {
   "name": "auditera-license",
   "compatibility_date": "2026-08-28",
-  "main": "worker.js"
+  "main": "worker.js",
+  "kv_namespaces": [
+    {
+      "binding": "LICENSES",
+      "id": "5faf47187e1349e7b42f3c7234d5e0f2"
+    }
+  ]
 }
