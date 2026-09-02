@@ -1566,14 +1566,7 @@ function getTrialStatus(){
     return;
   }
 
-  // אפשרות 2: גישת הדגמה ← audit_agent.html?demo=true
-  if (urlParams.get('demo') === 'true') {
-    window._auditSession = { email: 'demo@guest', name: 'הדגמה', loggedIn: true, isDemo: true };
-    history.replaceState(null, '', window.location.pathname);
-    return;
-  }
-
-  // אפשרות 3: session רגיל אחרי כניסה
+  // אפשרות 2: session רגיל אחרי כניסה
   let session = null;
   try { session = JSON.parse(sessionStorage.getItem(SESSION_KEY)); } catch(e){}
   if (!session || !session.loggedIn) {
