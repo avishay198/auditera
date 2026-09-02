@@ -2554,7 +2554,43 @@ const K={prices:'af_plan_prices',quotas:'af_plan_quotas',features:'af_feature_fl
 
 const DEF_PRICES={trial:0,starter:590,professional:990,premium:2490,enterprise:0};
 // חייב להיות זהה ל-_DEF_QUOTAS ב-audit_agent.html!
-const DEF_QUOTAS={trial:1,starter:35,professional:80,premium:200,enterprise:9999};
+const DEF_QUOTAS={trial:1,starter:35,professional:80,premium:200,enterprise:9999,
+  renewal:{name:'חידוש מנוי',subject:'תקופת המנוי שלך ב-Auditera הסתיימה — לחידוש',body:`שלום [שם],
+
+תקופת המנוי שלך ב-Auditera הסתיימה.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+📋 פרטי המנוי שהסתיים
+━━━━━━━━━━━━━━━━━━━━━━━━
+מסלול: [מסלול]
+תאריך סיום: [תאריך]
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+🔄 חידוש המנוי
+━━━━━━━━━━━━━━━━━━━━━━━━
+כדי להמשיך להשתמש ב-Auditera, יש לבצע העברה בנקאית:
+
+בנק: [בנק]
+סניף: [סניף]
+חשבון: [חשבון]
+שם: [שם מוטב]
+סכום: [סכום] ₪ (לחודש / לשנה)
+
+לאחר ביצוע ההעברה — שלח אישור לאימייל זה ונפעיל את המנוי תוך 24 שעות.
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+💡 מסלולים זמינים
+━━━━━━━━━━━━━━━━━━━━━━━━
+סטארטר   — ₪590/חודש  | עד 35 תיקים
+מקצועי   — ₪990/חודש  | עד 80 תיקים + AI
+פרמיום   — ₪2,490/חודש | עד 200 תיקים
+ארגוני   — ₪4,900/חודש | ללא הגבלה
+
+יש שאלות? ענה לאימייל זה — נשמח לעזור.
+
+בברכה,
+צוות Auditera`}
+};
 
 // ══════════════════════════════════════════════════════
 // ── LICENSE TOKEN — נוצר ע"י Cloudflare Worker בלבד (LIC_SECRET לא בסורס) ──
@@ -2572,8 +2608,8 @@ async function doGenerateLicToken(){
   const plan   = document.getElementById('licPlan').value;
   const quota  = parseInt(document.getElementById('licQuota').value)||60;
   const expiry = document.getElementById('licExpiry').value;
-  if(!email||!email.includes('@')){ alert('נא הזן כתובת אימייל תקינה'); return; }
-  if(!expiry){ alert('נא בחר תאריך פקיעה'); return; }
+  if(!email||!email.includes('@')){ toast('❌ נא הזן כתובת אימייל תקינה'); return; }
+  if(!expiry){ toast('❌ נא בחר תאריך פקיעה'); return; }
   const adminToken = sessionStorage.getItem('af_admin_token')||'';
   try{
     const resp = await fetch('https://auditera-license.auditera.workers.dev/generate-token',{
@@ -2581,13 +2617,13 @@ async function doGenerateLicToken(){
       body: JSON.stringify({email,plan,quota,expiry,admin_token:adminToken})
     });
     const data = await resp.json();
-    if(!data.ok){ alert('שגיאה ביצירת טוקן — ' + (data.error||'נסה שוב')); return; }
+    if(!data.ok){ toast('❌ שגיאה ביצירת טוקן — ' + (data.error||'נסה שוב')); return; }
     document.getElementById('licTokenOut').value = data.token;
     const planHe = {starter:'סטארטר',professional:'מקצועי',premium:'פרמיום',enterprise:'ארגוני'}[plan]||plan;
     document.getElementById('licTokenMeta').textContent =
       `✓ תוכנית: ${planHe} | מכסה: ${quota===9999?'ללא הגבלה':quota+' תיקים'} | תוקף: עד סוף ${expiry} | אימייל: ${email}`;
     document.getElementById('licResult').style.display = 'block';
-  }catch(e){ alert('שגיאת רשת — ודא חיבור לאינטרנט'); }
+  }catch(e){ toast('❌ שגיאת רשת — ודא חיבור לאינטרנט'); }
 }
 
 function copyLicToken(){
