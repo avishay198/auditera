@@ -60,7 +60,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 #maintBanner{display:none;background:#dc2626;color:#fff;text-align:center;padding:7px;font-size:12px;font-weight:700;position:sticky;top:56px;z-index:200}
 
 /* ── TABS ── */
-.tab-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 20px;display:flex;gap:0;position:sticky;top:56px;z-index:200;overflow-x:visible}
+.tab-bar{background:#fff;border-bottom:2px solid var(--border);padding:0 20px;display:flex;gap:0;position:sticky;top:56px;z-index:200;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .tab-bar::-webkit-scrollbar{height:3px}.tab-bar::-webkit-scrollbar-thumb{background:var(--gold2)}
 .tab{padding:12px 16px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.15s;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:5px}
 .tab:hover{color:var(--brown)}.tab.active{color:var(--brown);border-bottom-color:var(--gold)}
@@ -3678,7 +3678,39 @@ function printReceipt(i){
     .stamp-legal{font-size:9px;color:#999;margin-top:4px}
     .footer{text-align:center;font-size:10px;color:#aaa;margin-top:16px;padding-top:12px;border-top:1px solid #eee}
     @media print{button{display:none!important}.print-btn-wrap{display:none!important}}
-  </style></head><body>
+  
+@media(max-width:600px){
+  /* Nav */
+  nav{padding:0 12px}
+  .nav-logo span{display:none}
+  /* Tab bar */
+  .tab-bar{padding:0 8px;top:52px}
+  .tab{padding:10px 10px;font-size:11px;white-space:nowrap}
+  /* Page */
+  .page{padding:12px 10px}
+  /* Cards */
+  .card{padding:14px 12px}
+  /* Form rows */
+  .form-row{flex-direction:column;gap:8px}
+  /* Grids */
+  .grid2,.grid3,.grid4{grid-template-columns:1fr!important}
+  /* Tables — scroll horizontally */
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;white-space:nowrap}
+  /* Modals */
+  .modal-box,.modal-content{width:calc(100vw - 24px)!important;max-width:100%!important;margin:12px auto}
+  /* Buttons */
+  .nbtn{padding:8px 12px;font-size:12px}
+  /* Export buttons wrap */
+  [style*="display:flex"][style*="gap:8px"]{flex-wrap:wrap}
+  /* KPI */
+  .kpi-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:400px){
+  .kpi-grid{grid-template-columns:1fr!important}
+  .tab{padding:8px 8px;font-size:10px}
+  .page{padding:8px 6px}
+}
+</style></head><body>
   <div class="rec-outer">
     <div class="rec-top">
       <div>
