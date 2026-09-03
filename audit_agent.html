@@ -702,15 +702,14 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       <div id="tbCardBody" style="display:block">
         <div class="cb">
           <p style="font-size:12px;color:var(--muted);margin-bottom:10px">העלה קובץ מאזן בוחן (CSV/XLSX) עם עמודות: מספר חשבון, שם חשבון, חובה, זכות, יתרה. הנתונים יוצגו בטאב <strong><i class="ti ti-scale"></i> מאזן</strong>.</p>
-          <div id="tbDropZone" style="border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;cursor:pointer"
+          <div id="tbDropZone" style="border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;cursor:pointer;position:relative"
             ondragover="event.preventDefault();this.style.borderColor='var(--primary)'"
             ondragleave="this.style.borderColor='var(--border)'"
             ondrop="event.preventDefault();this.style.borderColor='var(--border)';handleTBFile(event.dataTransfer.files[0])">
-            <div style="font-size:22px;margin-bottom:6px">📋</div>
-            <div style="font-size:13px;font-weight:600">גרור קובץ מאזן בוחן לכאן</div>
-            <div style="font-size:11px;color:var(--muted);margin-top:3px">CSV · Excel</div>
-            <input type="file" id="tbFileInput" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleTBFile(this.files[0])">
-            <button onclick="document.getElementById('tbFileInput').click()" class="cl-btn" style="margin-top:10px;font-size:12px">בחר קובץ</button>
+            <input type="file" id="tbFileInput" accept=".csv,.xlsx,.xls" style="position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2" onchange="handleTBFile(this.files[0])">
+            <div style="font-size:22px;margin-bottom:6px;pointer-events:none">📋</div>
+            <div style="font-size:13px;font-weight:600;pointer-events:none">גרור קובץ מאזן בוחן לכאן או לחץ לבחירה</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;pointer-events:none">CSV · Excel</div>
           </div>
           <div id="tbStatus" style="display:none;margin-top:10px;padding:8px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:12px;align-items:center;gap:10px">
             <span id="tbStatusText"></span>
