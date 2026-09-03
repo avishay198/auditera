@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://auditera.co/reset.html">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; object-src 'none'; connect-src 'self' https://auditera-license.auditera.workers.dev; upgrade-insecure-requests; frame-ancestors 'self';">
+<title>איפוס סיסמה — Auditera</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brown:#3a2000;--brown2:#5a3010;--gold:#c99a2e;--gold2:#e8d4a0;
+  --cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888;--danger:#dc2626;
+}
+html,body{min-height:100%;background:var(--cream);color:var(--brown);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;direction:rtl}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px 16px}
+
+/* ── CARD ── */
+.card{width:100%;max-width:400px;background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:36px 28px;box-shadow:0 8px 32px rgba(58,32,0,.08)}
+
+/* ── LOGO ── */
+.logo{text-align:center;margin-bottom:28px}
+.logo-mark{width:52px;height:52px;background:var(--brown);border-radius:14px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;box-shadow:0 4px 14px rgba(58,32,0,.2)}
+.logo h1{font-size:22px;font-weight:800;color:var(--brown);letter-spacing:-.01em}
+.logo p{font-size:13px;color:var(--muted);margin-top:3px}
+
+/* ── SECTION TITLE ── */
+.section-title{font-size:17px;font-weight:700;color:var(--brown);margin-bottom:4px}
+.section-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px;line-height:1.55}
+
+/* ── FORM ── */
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:11px;font-weight:700;color:var(--brown2);margin-bottom:6px;letter-spacing:.05em;text-transform:uppercase}
+.input-wrap{position:relative}
+.form-input{width:100%;padding:11px 14px;padding-left:42px;border:1.5px solid var(--border);border-radius:9px;font-size:15px;font-family:inherit;color:var(--brown);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
+.form-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,154,46,.12)}
+.form-input.err{border-color:var(--danger);box-shadow:0 0 0 3px rgba(220,38,38,.08)}
+.toggle-pass{position:absolute;left:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:2px;line-height:1;transition:color .15s}
+.toggle-pass:hover{color:var(--brown)}
+.field-err{font-size:11px;color:var(--danger);margin-top:4px;display:none}
+.field-err.show{display:block}
+
+/* ── STRENGTH ── */
+.strength-wrap{margin-top:6px}
+.strength-bar{height:4px;border-radius:2px;background:#e8d4a0;overflow:hidden}
+.strength-fill{height:100%;width:0;border-radius:2px;transition:width .3s,background .3s}
+.strength-label{font-size:10.5px;color:var(--muted);margin-top:3px;min-height:14px;transition:color .3s}
+
+/* ── SUBMIT ── */
+.submit-btn{width:100%;padding:13px;background:var(--brown);color:#f5e6c0;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .1s;text-decoration:none}
+.submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px)}
+.submit-btn:active:not(:disabled){transform:translateY(0)}
+.submit-btn:disabled{opacity:.4;cursor:not-allowed}
+.submit-btn .spinner{width:16px;height:16px;border:2px solid rgba(245,230,192,.35);border-top-color:#f5e6c0;border-radius:50%;animation:spin .7s linear infinite;display:none;flex-shrink:0}
+.submit-btn.loading .spinner{display:block}
+.submit-btn.loading .btn-text{opacity:.6}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── ALERT ── */
+.alert{padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:14px;display:none;line-height:1.5}
+.alert.show{display:block}
+.alert.error{background:#fef2f2;border:1px solid #fecaca;color:var(--danger)}
+
+/* ── STATES ── */
+.state{display:none;text-align:center}
+.state.show{display:block}
+#stateLoading{display:block}
+
+.state-icon{font-size:44px;margin-bottom:10px;line-height:1}
+.state-title{font-size:20px;font-weight:800;color:var(--brown);margin-bottom:8px}
+.state-sub{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px}
+
+/* ── LINKS ── */
+.back-link{display:inline-block;color:var(--gold);font-size:13px;font-weight:600;text-decoration:none;margin-top:18px}
+.back-link:hover{text-decoration:underline}
+.center{text-align:center}
+
+/* ── DIVIDER ── */
+.divider{border:none;border-top:1px solid #f0e4c8;margin:18px 0 0}
+
+/* ── FOOTER ── */
+.footer{margin-top:20px;text-align:center;font-size:11.5px;color:var(--muted)}
+.footer a{color:var(--gold);text-decoration:none;font-weight:600}
+.footer a:hover{text-decoration:underline}
+
+/* ── NO-JS warning ── */
+.noscript-box{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:12px 16px;border-radius:9px;font-size:13px;text-align:center;margin-bottom:16px}
+
+@media(max-width:440px){.card{padding:24px 16px}}
+</style>
+</head>
+<body>
+
+<noscript>
+<div style="max-width:400px;margin:40px auto;padding:24px;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;text-align:center;font-family:sans-serif;direction:rtl;color:#dc2626">
+  <strong>JavaScript נדרש</strong><br>
+  אנא אפשר JavaScript בדפדפן כדי לאפס את הסיסמה.<br>
+  <a href="login.html" style="color:#c99a2e;font-weight:600">חזור לכניסה</a>
+</div>
+</noscript>
+
+<div class="card">
+
+  <!-- Logo -->
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18V6l12-2v12" stroke="#f5e6c0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="6" cy="18" r="3" stroke="#f5e6c0" stroke-width="2"/>
+        <circle cx="18" cy="16" r="3" stroke="#f5e6c0" stroke-width="2"/>
+      </svg>
+    </div>
+    <h1>Auditera</h1>
+    <p>מערכת ביקורת חשבונאית</p>
+  </div>
+
+  <!-- State: Loading -->
+  <div id="stateLoading" class="state show">
+    <div class="state-icon">🔐</div>
+    <div class="state-title">מאמת קישור...</div>
+    <div class="state-sub">רק רגע</div>
+  </div>
+
+  <!-- State: Expired / Invalid -->
+  <div id="stateExpired" class="state">
+    <div class="state-icon">⚠️</div>
+    <div class="state-title">הקישור לא תקף</div>
+    <div class="state-sub">קישורי איפוס תקפים לשעה אחת בלבד.<br>ייתכן שהקישור כבר שומש או פג תוקפו.</div>
+    <a href="login.html" class="submit-btn">חזור לכניסה וקבל קישור חדש</a>
+    <a href="login.html" class="back-link">← דף הכניסה</a>
+  </div>
+
+  <!-- State: Form -->
+  <div id="stateForm" class="state">
+    <div class="section-title">הגדרת סיסמה חדשה</div>
+    <div class="section-sub">בחר סיסמה חזקה לחשבונך ב-Auditera</div>
+
+    <div class="alert" id="alertBox"></div>
+
+    <div class="form-group">
+      <label>סיסמה חדשה</label>
+      <div class="input-wrap">
+        <input class="form-input" id="pass1" type="password"
+               placeholder="לפחות 6 תווים"
+               autocomplete="new-password"
+               oninput="checkStrength(this.value)">
+        <button class="toggle-pass" type="button" onclick="toggleVis('pass1',this)" aria-label="הצג/הסתר סיסמה">👁</button>
+      </div>
+      <div class="strength-wrap">
+        <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+        <div class="strength-label" id="strengthLabel"></div>
+      </div>
+      <div class="field-err" id="pass1Err">סיסמה חייבת להכיל לפחות 6 תווים</div>
+    </div>
+
+    <div class="form-group">
+      <label>אימות סיסמה</label>
+      <div class="input-wrap">
+        <input class="form-input" id="pass2" type="password"
+               placeholder="הקלד את הסיסמה שוב"
+               autocomplete="new-password">
+        <button class="toggle-pass" type="button" onclick="toggleVis('pass2',this)" aria-label="הצג/הסתר סיסמה">👁</button>
+      </div>
+      <div class="field-err" id="pass2Err">הסיסמאות אינן תואמות</div>
+    </div>
+
+    <button class="submit-btn" id="saveBtn" onclick="doReset()">
+      <div class="spinner"></div>
+      <span class="btn-text">שמור סיסמה חדשה</span>
+    </button>
+
+    <hr class="divider">
+    <div class="center">
+      <a href="login.html" class="back-link">← חזור לדף הכניסה</a>
+    </div>
+  </div>
+
+  <!-- State: Success -->
+  <div id="stateSuccess" class="state">
+    <div class="state-icon">✅</div>
+    <div class="state-title">הסיסמה עודכנה בהצלחה!</div>
+    <div class="state-sub">הסיסמה החדשה שלך נשמרה.<br>מעביר לדף הכניסה...</div>
+    <a href="login.html" class="submit-btn" id="successBtn">כניסה עכשיו</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  שאלות? <a href="mailto:support@auditera.co">support@auditera.co</a>
+</div>
+
+<script>
+'use strict';
+const WORKER = 'https://auditera-license.auditera.workers.dev';
+let _resetToken = null;
+
+// ── Init ─────────────────────────────────────────────────────
+(function init(){
+  const params = new URLSearchParams(window.location.search);
+  _resetToken = params.get('token') || params.get('reset');
+
+  if (!_resetToken) {
+    switchState('stateExpired');
+    return;
+  }
+  // ניקוי ה-URL מיד (לא נשרוף token עדיין — רק בשמירה)
+  history.replaceState(null, '', window.location.pathname);
+  switchState('stateForm');
+  document.getElementById('pass1').focus();
+})();
+
+// ── State manager ─────────────────────────────────────────────
+function switchState(activeId){
+  ['stateLoading','stateExpired','stateForm','stateSuccess'].forEach(id => {
+    const el = document.getElementById(id);
+    if (id === activeId) el.classList.add('show');
+    else el.classList.remove('show');
+  });
+}
+
+// ── Password strength ─────────────────────────────────────────
+const STRENGTHS = [
+  {label:'',         color:'transparent', width:'0'},
+  {label:'חלשה',     color:'#dc2626',     width:'25%'},
+  {label:'בינונית',  color:'#f59e0b',     width:'55%'},
+  {label:'טובה',     color:'#22c55e',     width:'80%'},
+  {label:'חזקה מאוד',color:'#16a34a',     width:'100%'},
+];
+
+function checkStrength(v){
+  let score = 0;
+  if (v.length >= 6)  score++;
+  if (v.length >= 10) score++;
+  if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+  if (/[0-9]/.test(v)) score++;
+  if (/[^A-Za-z0-9]/.test(v)) score++;
+  score = Math.min(score, 4);
+
+  const s = v.length ? STRENGTHS[Math.max(score, 1)] : STRENGTHS[0];
+  const fill  = document.getElementById('strengthFill');
+  const label = document.getElementById('strengthLabel');
+  fill.style.width      = s.width;
+  fill.style.background = s.color;
+  label.textContent     = v.length ? ('חוזק: ' + s.label) : '';
+  label.style.color     = s.color;
+}
+
+function toggleVis(id, btn){
+  const el = document.getElementById(id);
+  const isPass = el.type === 'password';
+  el.type = isPass ? 'text' : 'password';
+  btn.textContent = isPass ? '🙈' : '👁';
+}
+
+// ── Reset submit ──────────────────────────────────────────────
+async function doReset(){
+  const p1 = document.getElementById('pass1').value;
+  const p2 = document.getElementById('pass2').value;
+  let ok   = true;
+
+  clearErr('pass1Err'); clearErr('pass2Err'); clearAlert();
+
+  if (p1.length < 6)  { setErr('pass1Err'); ok = false; }
+  if (p1 !== p2)      { setErr('pass2Err'); ok = false; }
+  if (!ok) return;
+
+  setBusy(true);
+
+  try {
+    const resp = await fetch(WORKER + '/verify-reset', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({token: _resetToken})
+    });
+
+    if (!resp.ok) throw new Error('network');
+    const data = await resp.json();
+
+    if (!data.ok) {
+      setBusy(false);
+      switchState('stateExpired');
+      return;
+    }
+
+    // עדכון סיסמה ב-localStorage
+    const email = data.email;
+    try {
+      const users = JSON.parse(localStorage.getItem('auditera_users_v1') || '[]');
+      const u = users.find(x => x.email === email);
+      if (u) {
+        u.hash = await sha256(p1);
+        localStorage.setItem('auditera_users_v1', JSON.stringify(users));
+      }
+    } catch(_){}
+
+    setBusy(false);
+    switchState('stateSuccess');
+
+    // Redirect אוטומטי אחרי 2.5 שניות
+    setTimeout(() => { window.location.href = 'login.html'; }, 2500);
+
+  } catch(e) {
+    setBusy(false);
+    showAlert('שגיאת רשת — בדוק חיבור לאינטרנט ונסה שוב');
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────
+function setErr(errId){
+  document.getElementById(errId).classList.add('show');
+  const inputId = errId === 'pass1Err' ? 'pass1' : 'pass2';
+  document.getElementById(inputId).classList.add('err');
+}
+function clearErr(errId){
+  document.getElementById(errId).classList.remove('show');
+  const inputId = errId === 'pass1Err' ? 'pass1' : 'pass2';
+  document.getElementById(inputId).classList.remove('err');
+}
+function showAlert(msg){
+  const el = document.getElementById('alertBox');
+  el.textContent = msg;
+  el.className = 'alert error show';
+}
+function clearAlert(){
+  const el = document.getElementById('alertBox');
+  el.className = 'alert';
+  el.textContent = '';
+}
+function setBusy(on){
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = on;
+  if (on) btn.classList.add('loading'); else btn.classList.remove('loading');
+}
+
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── Enter key ─────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('stateForm').classList.contains('show')) {
+    doReset();
+  }
+});
+</script>
+</body>
+</html>

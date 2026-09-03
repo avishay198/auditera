@@ -2205,7 +2205,7 @@ nav {
     <div class="card">
       <div class="card-head"><div class="card-title"><i class="ti ti-lock"></i> אבטחת מנהל</div></div>
       <p style="font-size:11px;color:var(--muted);margin-bottom:12px">שנה את פרטי כניסת המנהל. יכנסו לתוקף מיד.</p>
-      <div class="fg"><label>אימייל מנהל חדש</label><input id="secEmail" type="email" placeholder="admin@auditera.co.il"></div>
+      <div class="fg"><label>אימייל מנהל חדש</label><input id="secEmail" type="email" placeholder="admin@auditera.co"></div>
       <div class="fg"><label>סיסמה נוכחית</label><input id="secCurPass" type="password" placeholder="לאימות"></div>
       <div class="fg"><label>סיסמה חדשה</label><input id="secNewPass" type="password" placeholder="מינימום 8 תווים"></div>
       <div class="fg" style="margin-bottom:12px"><label>אשר סיסמה חדשה</label><input id="secConfPass" type="password" placeholder="חזור על הסיסמה"></div>
@@ -2220,7 +2220,7 @@ nav {
       <div class="card-head"><div class="card-title"><i class="ti ti-palette"></i> מיתוג ותצורה</div></div>
       <div class="form-row">
         <div class="fg"><label>שם המוצר</label><input id="brandName" placeholder="Auditera" oninput="previewBrand()"></div>
-        <div class="fg"><label>אימייל תמיכה</label><input id="brandEmail" placeholder="support@auditera.co.il"></div>
+        <div class="fg"><label>אימייל תמיכה</label><input id="brandEmail" placeholder="support@auditera.co"></div>
       </div>
       <div class="form-row">
         <div class="fg"><label>סלוגן</label><input id="brandTagline" placeholder="ביקורת פיננסית מבוססת AI" oninput="previewBrand()"></div>
@@ -3261,7 +3261,7 @@ function printInvoice(i){
   const brand=ls(K.branding,{});
   const co=brand.name||'Auditera';
   const coEn=brand.nameEn||'Auditera Ltd.';
-  const coEmail=brand.email||'support@auditera.co.il';
+  const coEmail=brand.email||'support@auditera.co';
   const coPhone=brand.phone||'';
   const coAddress=brand.address||'';
   const bank=getBankDetails();
@@ -3717,7 +3717,7 @@ function printReceipt(i){
   const brand=ls(K.branding,{});
   const co=brand.name||'Auditera';
   const coEn=brand.nameEn||'Auditera Ltd.';
-  const coEmail=brand.email||'support@auditera.co.il';
+  const coEmail=brand.email||'support@auditera.co';
   const coPhone=brand.phone||'';
   const coAddress=brand.address||'';
   const taxNow=ls(K.taxCfg,DEF_TAX);
@@ -5176,7 +5176,7 @@ function buildKeyEmailHTML(name, plan, token, link){
     <tr><td style="background:#3a2000;border-radius:0 0 14px 14px;padding:20px 40px;text-align:center">
       <div style="font-size:12px;color:rgba(245,230,192,0.6);line-height:1.8">
         לשאלות ותמיכה — ענה לאימייל זה<br>
-        <span style="color:#c99a2e">support@auditera.co.il</span>
+        <span style="color:#c99a2e">support@auditera.co</span>
       </div>
       <div style="font-size:10px;color:rgba(245,230,192,0.35);margin-top:10px">© ${new Date().getFullYear()} Auditera · כל הזכויות שמורות</div>
     </td></tr>
@@ -7019,7 +7019,7 @@ const MKT_SYS_PROMPT=`אתה סוכן שיווק מקצועי המתמחה בש�
 • פיצ'רים: ניתוח Excel/CSV, 11 סוגי חריגות, מע"מ 18% (היסטורי 17%), חוק מזומן (₪11,000/₪5,000), חשבוניות ישראל (סף ₪5,000 מיוני 2026), ניכוי מס במקור + טופס 856, AI BYOK (OpenAI/Groq), ייצוא לפריוריטי / חשבIT / חשבשבת
 • יתרון מרכזי: חוסך 2-3 שעות לכל ביקורת, ממצאים בעברית, דוחות מוכנים לייצוא
 • מחירים: ניסיון חינם | סטארטר ₪590/חודש | מקצועי ₪990/חודש | פרמיום ₪2,490/חודש
-• URL לניסיון: auditera.co.il/trial
+• URL לניסיון: auditera.co/trial
 
 כללים קבועים:
 - כתוב תמיד בעברית תקנית ורהוטה

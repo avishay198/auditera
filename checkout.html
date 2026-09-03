@@ -6,7 +6,7 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://auditera.co.il/checkout.html">
+<link rel="canonical" href="https://auditera.co/checkout.html">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; upgrade-insecure-requests; frame-ancestors 'self';">
 <meta name="referrer" content="no-referrer">
 <title>רכישת מנוי — Auditera</title>
@@ -251,7 +251,7 @@ footer a{color:var(--muted);text-decoration:underline}
       <div>
         <strong style="font-size:14px;color:#14532d;display:block;margin-bottom:4px">שליחת אישור תשלום</strong>
         לאחר ביצוע ההעברה, שלח אישור לכתובת:
-        <span class="contact-email" id="supportEmailBank">support@auditera.co.il</span>
+        <span class="contact-email" id="supportEmailBank">support@auditera.co</span>
       </div>
     </div>
 
@@ -296,7 +296,7 @@ footer a{color:var(--muted);text-decoration:underline}
       <div>
         <strong style="font-size:14px;color:#14532d;display:block;margin-bottom:4px">שליחת אישור Bit</strong>
         לאחר ביצוע התשלום, שלח אישור לכתובת:
-        <span class="contact-email" id="supportEmailBit">support@auditera.co.il</span>
+        <span class="contact-email" id="supportEmailBit">support@auditera.co</span>
       </div>
     </div>
 
@@ -313,7 +313,7 @@ footer a{color:var(--muted);text-decoration:underline}
     <div class="success-title">הפנייה התקבלה בהצלחה!</div>
     <div class="success-text">
       לאחר אימות התשלום תישלח הודעה עם קוד הפעלה תוך <strong>24 שעות</strong>.<br>
-      בשאלות כתוב ל-support@auditera.co.il
+      בשאלות כתוב ל-support@auditera.co
     </div>
     <a href="login.html" class="success-link">← כניסה למערכת</a>
   </div>
@@ -381,7 +381,7 @@ function renderBank(){
   try{bd=JSON.parse(localStorage.getItem('af_bank_details')||'{}');}catch(e){}
   const el=document.getElementById('bankDetails');
   if(!bd.name||!bd.account){
-    el.innerHTML='<div class="no-bank-box">פרטי הבנק טרם הוגדרו — שלח מייל ל-<strong>support@auditera.co.il</strong> לקבלת פרטי תשלום</div>';
+    el.innerHTML='<div class="no-bank-box">פרטי הבנק טרם הוגדרו — שלח מייל ל-<strong>support@auditera.co</strong> לקבלת פרטי תשלום</div>';
     return;
   }
   const rows=[
@@ -399,7 +399,7 @@ function renderBit(){
   const phone=bd.bit_phone||'';
   const el=document.getElementById('bitDetails');
   if(!phone){
-    el.innerHTML='<div class="no-bit-box">פרטי Bit טרם הוגדרו — שלח מייל ל-<strong>support@auditera.co.il</strong> לקבלת פרטי תשלום</div>';
+    el.innerHTML='<div class="no-bit-box">פרטי Bit טרם הוגדרו — שלח מייל ל-<strong>support@auditera.co</strong> לקבלת פרטי תשלום</div>';
     return;
   }
   const total=_planPrice?(_planPrice+Math.round(_planPrice*0.18)).toLocaleString('he-IL')+' ₪':'—';
@@ -426,7 +426,7 @@ function renderBit(){
 function renderContact(){
   let brand={};
   try{brand=JSON.parse(localStorage.getItem('af_branding')||'{}');}catch(e){}
-  const email=brand.email||'support@auditera.co.il';
+  const email=brand.email||'support@auditera.co';
   document.getElementById('supportEmailBank').textContent=email;
   document.getElementById('supportEmailBit').textContent=email;
 }

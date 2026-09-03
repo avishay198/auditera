@@ -6,7 +6,7 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="canonical" href="https://auditera.co.il/login.html">
+<link rel="canonical" href="https://auditera.co/login.html">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline';
@@ -275,7 +275,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
     <!-- FORGOT PASSWORD PANEL -->
     <div id="forgotPanel" style="display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #e0c888;border-radius:12px;text-align:right">
       <p style="font-size:13px;font-weight:700;color:#3a2000;margin:0 0 8px">איפוס סיסמה</p>
-      <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונצור איתך קשר תוך 24 שעות עם סיסמה חדשה.</p>
+      <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונשלח לך קישור לאיפוס סיסמה — תקף לשעה אחת.</p>
       <input id="forgotEmail" type="email" placeholder="האימייל שלך" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
       <div style="display:flex;gap:8px">
         <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#c99a2e;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
@@ -686,7 +686,7 @@ async function sendForgotRequest(){
   try{
     const resp=await fetch('https://auditera-license.auditera.workers.dev/forgot-password',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email,base_url:window.location.origin+window.location.pathname.replace(/[^/]*$/,'login.html')})
+      body:JSON.stringify({email,base_url:window.location.origin + '/reset.html'})
     });
     const data=await resp.json();
     if(!data.ok){msg.style.color='#dc2626';msg.textContent='שגיאה — נסה שוב';return;}
