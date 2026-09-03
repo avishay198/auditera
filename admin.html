@@ -3259,75 +3259,148 @@ function printInvoice(i){
   const inv=ls(K.invoices,[])[i];if(!inv)return;
   const brand=ls(K.branding,{});
   const co=brand.name||'Auditera';
-  const color=brand.color||'#3a2000';
-  const email=brand.email||'support@auditera.co.il';
+  const coEn=brand.nameEn||'Auditera Ltd.';
+  const coEmail=brand.email||'support@auditera.co.il';
+  const coPhone=brand.phone||'';
+  const coAddress=brand.address||'';
   const bank=getBankDetails();
   const taxCfgNow=ls(K.taxCfg,DEF_TAX);
   const vatExempt=taxCfgNow.vatExempt||false;
   const businessId=taxCfgNow.businessId||'';
+  const vatNum=brand.vatNumber||businessId||'';
+  const vatRate=Math.round((taxCfgNow.vatRate||18));
   const PERIOD_LBL={monthly:'חודשי',quarterly:'רבעוני',annual:'שנתי'};
-  const w=window.open('','_blank','width=800,height=1000');
+  const color=brand.color||'#1a1a2e';
+  const isPaid=inv.status==='paid';
+  const w=window.open('','_blank','width=820,height=1100');
   w.document.write(`<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8">
-  <title>חשבונית ${inv.id}</title>
+  <title>${vatExempt?'חשבונית עסקה':'חשבונית מס'} ${inv.id}</title>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',sans-serif;direction:rtl;color:#222;background:#fff;padding:40px}
-    .inv-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:20px;border-bottom:3px solid ${color}}
-    .co-name{font-size:24px;font-weight:900;color:${color}}.co-sub{font-size:12px;color:#666;margin-top:3px}
-    .inv-meta{text-align:left}.inv-num{font-size:18px;font-weight:800;color:${color}}.inv-dates{font-size:11px;color:#666;margin-top:4px}
-    .section{margin-bottom:20px}.section-title{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px}
-    .bill-to{font-size:13px}.bill-name{font-weight:700;font-size:15px}
-    table{width:100%;border-collapse:collapse;font-size:13px}
-    th{background:${color};color:#fff;padding:8px 12px;text-align:right;font-weight:700}
-    td{padding:8px 12px;border-bottom:1px solid #f0f0f0}
-    .total-row{font-weight:800;font-size:15px;background:#f9f9f9}
-    .vat-row{color:#666;font-size:12px}
-    .status-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;background:${inv.status==='paid'?'#dcfce7':'#fef9c3'};color:${inv.status==='paid'?'#15803d':'#854d0e'}}
-    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #eee;font-size:10px;color:#888;text-align:center}
-    @media print{button{display:none!important}}
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Heebo',sans-serif;direction:rtl;color:#1a1a1a;background:#f4f6f8;min-height:100vh;padding:32px 16px}
+    .page{background:#fff;max-width:720px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.10)}
+    /* HEADER */
+    .inv-header{background:${color};padding:32px 36px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;overflow:hidden}
+    .inv-header::before{content:'';position:absolute;top:-40px;left:-40px;width:200px;height:200px;background:rgba(255,255,255,.05);border-radius:50%}
+    .inv-header::after{content:'';position:absolute;bottom:-60px;right:60px;width:160px;height:160px;background:rgba(255,255,255,.04);border-radius:50%}
+    .co-name{font-size:26px;font-weight:900;color:#fff;letter-spacing:.01em}
+    .co-details{font-size:11px;color:rgba(255,255,255,.65);margin-top:5px;line-height:1.7}
+    .exempt-badge{display:inline-block;margin-top:6px;background:rgba(255,255,255,.15);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;border:1px solid rgba(255,255,255,.3)}
+    .inv-title-block{text-align:left;position:relative;z-index:1}
+    .inv-type{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+    .inv-num{font-size:22px;font-weight:900;color:#fff}
+    .inv-date-row{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px;line-height:1.8}
+    .status-pill{display:inline-block;padding:3px 12px;border-radius:20px;font-size:10px;font-weight:800;margin-top:8px;background:${isPaid?'#22c55e':'rgba(255,255,255,.2)'};color:#fff;letter-spacing:.05em}
+    /* BODY */
+    .inv-body{padding:28px 36px}
+    .section{margin-bottom:22px}
+    .section-label{font-size:10px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+    .bill-name{font-size:17px;font-weight:800;color:#1a1a1a}
+    .bill-sub{font-size:12px;color:#666;margin-top:2px}
+    /* TABLE */
+    .items-table{width:100%;border-collapse:collapse;margin-top:4px}
+    .items-table thead tr{background:#f8f9fb}
+    .items-table th{padding:10px 14px;text-align:right;font-size:10px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.06em;border-bottom:2px solid #eee}
+    .items-table td{padding:13px 14px;border-bottom:1px solid #f0f2f5;font-size:13px;color:#333}
+    .items-table tr:last-child td{border-bottom:none}
+    .item-name{font-weight:600;color:#1a1a1a}
+    .item-sub{font-size:11px;color:#999;margin-top:2px}
+    /* TOTALS */
+    .totals-wrap{background:#f8f9fb;border-radius:10px;padding:16px 18px;margin-top:16px}
+    .total-line{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:13px;color:#555}
+    .total-line.grand{border-top:2px solid #e5e7eb;margin-top:8px;padding-top:12px;font-size:16px;font-weight:900;color:#1a1a1a}
+    .total-line.grand .amount{color:${color};font-size:18px}
+    /* BANK */
+    .bank-box{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:10px;padding:16px 18px;margin-top:8px}
+    .bank-title{font-size:11px;font-weight:800;color:#15803d;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+    .bank-row{display:flex;gap:16px;font-size:12px;margin-bottom:4px}
+    .bank-label{color:#666;min-width:90px}
+    .bank-value{font-weight:700;color:#1a1a1a;font-family:monospace}
+    /* PAID STAMP */
+    .paid-stamp{position:absolute;top:50%;right:36px;transform:translateY(-50%) rotate(-12deg);border:4px solid rgba(34,197,94,.35);color:rgba(34,197,94,.4);font-size:42px;font-weight:900;padding:6px 18px;border-radius:8px;pointer-events:none;letter-spacing:.08em;display:${isPaid?'block':'none'}}
+    .note-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 14px;font-size:12px;color:#92400e}
+    /* FOOTER */
+    .inv-footer{padding:16px 36px;border-top:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:center}
+    .footer-text{font-size:10px;color:#bbb}
+    .print-btn{padding:10px 26px;background:${color};color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:.02em}
+    @media print{
+      body{background:#fff;padding:0}
+      .page{border-radius:0;box-shadow:none;max-width:100%}
+      .print-btn-row{display:none!important}
+      .paid-stamp{color:rgba(34,197,94,.25);border-color:rgba(34,197,94,.25)}
+    }
   </style></head><body>
-  <div class="inv-header">
-    <div>
-      <div class="co-name">${esc(co)}</div>
-      <div class="co-sub">${email}</div>
-      ${businessId?`<div class="co-sub">מספר עוסק: ${esc(businessId)}</div>`:''}
-      ${vatExempt?'<div class="co-sub" style="color:#b45309;font-weight:600">עוסק פטור ממע&quot;מ</div>':''}
+  <div class="page">
+    <div class="inv-header">
+      <div style="position:relative;z-index:1">
+        <div class="co-name">${esc(co)}</div>
+        <div class="co-details">${esc(coEn)}${vatNum?` · ח.פ. / ע.מ. ${esc(vatNum)}`:''}<br>${esc(coEmail)}${coPhone?` · ${esc(coPhone)}`:''}</div>
+        ${vatExempt?'<span class="exempt-badge">עוסק פטור ממע&quot;מ</span>':''}
+      </div>
+      <div class="inv-title-block">
+        <div class="inv-type">${vatExempt?'חשבונית עסקה':'חשבונית מס'}</div>
+        <div class="inv-num">${esc(inv.id)}</div>
+        <div class="inv-date-row">
+          הנפקה: ${dateStr(inv.issuedAt)}<br>
+          פירעון: ${dateStr(inv.dueDate||inv.issuedAt)}
+        </div>
+        <span class="status-pill">${INV_STATUS_HE[inv.status]||inv.status}</span>
+      </div>
+      <div class="paid-stamp">שולם</div>
     </div>
-    <div class="inv-meta">
-      <div class="inv-num">${vatExempt?'חשבונית עסקה':'חשבונית מס'} ${esc(inv.id)}</div>
-      <div class="inv-dates">תאריך הנפקה: ${dateStr(inv.issuedAt)}<br>תאריך פירעון: ${dateStr(inv.dueDate)}</div>
-      <div style="margin-top:6px"><span class="status-badge">${INV_STATUS_HE[inv.status]||inv.status}</span></div>
+    <div class="inv-body">
+      <div class="section">
+        <div class="section-label">חשבונית עבור</div>
+        <div class="bill-name">${esc(inv.name)}</div>
+        <div class="bill-sub">${esc(inv.email)}</div>
+      </div>
+      <div class="section">
+        <div class="section-label">פירוט</div>
+        <table class="items-table">
+          <thead><tr>
+            <th>שירות / מוצר</th>
+            <th>תקופה</th>
+            <th style="text-align:left">סכום</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="item-name">מנוי ${PLAN_NAMES[inv.plan]||inv.plan} — ${esc(co)}</div>${inv.note?`<div class="item-sub">${esc(inv.note)}</div>`:''}</td>
+              <td style="color:#666">${PERIOD_LBL[inv.period]||inv.period||'—'}</td>
+              <td style="text-align:left;font-weight:600">${fmt(inv.amount)}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="totals-wrap">
+          <div class="total-line"><span>סכום נטו</span><span>${fmt(inv.amount)}</span></div>
+          ${vatExempt
+            ?'<div class="total-line" style="color:#b45309"><span>מע&quot;מ (פטור)</span><span>₪0.00</span></div>'
+            :`<div class="total-line"><span>מע&quot;מ (${vatRate}%)</span><span>${fmt(inv.vatAmt)}</span></div>`
+          }
+          <div class="total-line grand"><span>סה&quot;כ לתשלום</span><span class="amount">${fmt(inv.total||inv.amount)}</span></div>
+        </div>
+      </div>
+      ${bank.name&&bank.account?`<div class="section">
+        <div class="section-label">העברה בנקאית</div>
+        <div class="bank-box">
+          <div class="bank-title">פרטי חשבון לתשלום</div>
+          ${bank.name?`<div class="bank-row"><span class="bank-label">בנק:</span><span class="bank-value">${esc(bank.name)}${bank.branch?' (סניף '+esc(bank.branch)+')':''}</span></div>`:''}
+          ${bank.account?`<div class="bank-row"><span class="bank-label">חשבון:</span><span class="bank-value">${esc(bank.account)}</span></div>`:''}
+          ${bank.holder?`<div class="bank-row"><span class="bank-label">שם בעל חשבון:</span><span class="bank-value">${esc(bank.holder)}</span></div>`:''}
+          ${bank.iban?`<div class="bank-row"><span class="bank-label">IBAN:</span><span class="bank-value">${esc(bank.iban)}</span></div>`:''}
+          ${bank.note?`<div style="font-size:11px;color:#15803d;margin-top:6px">📌 ${esc(bank.note)}</div>`:''}
+        </div>
+      </div>`:''}
+    </div>
+    <div class="inv-footer">
+      <div class="footer-text">${esc(co)} · ${esc(coEmail)}<br>מסמך זה הופק אוטומטית</div>
+      <div class="print-btn-row"><button class="print-btn" onclick="window.print()">🖨️ הדפס / שמור PDF</button></div>
     </div>
   </div>
-  <div class="section">
-    <div class="section-title">חייב בתשלום</div>
-    <div class="bill-name">${esc(inv.name)}</div>
-    <div class="bill-to">${esc(inv.email)}</div>
-  </div>
-  <div class="section">
-    <div class="section-title">פירוט</div>
-    <table><thead><tr><th>תיאור</th><th>תקופה</th><th>סכום</th></tr></thead>
-    <tbody>
-      <tr><td>מנוי ${PLAN_NAMES[inv.plan]||inv.plan} — ${co}</td><td>${PERIOD_LBL[inv.period]||inv.period}</td><td>${fmt(inv.amount)}</td></tr>
-      ${vatExempt?'':`<tr class="vat-row"><td colspan="2">מע"מ (${Math.round((inv.vatAmt/inv.amount)*100)}%)</td><td>${fmt(inv.vatAmt)}</td></tr>`}
-      <tr class="total-row"><td colspan="2"><strong>סה"כ לתשלום</strong></td><td><strong>${vatExempt?fmt(inv.amount):fmt(inv.total)}</strong></td></tr>
-    </tbody></table>
-  </div>
-  ${inv.note?`<div class="section"><div class="section-title">הערות</div><div style="font-size:12px">${esc(inv.note)}</div></div>`:''}
-  ${bank.name&&bank.account?`<div class="section" style="margin-top:20px;padding:14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px">
-    <div class="section-title" style="color:#15803d">פרטי העברה בנקאית</div>
-    <table style="font-size:12px;width:auto"><tbody>
-      ${bank.name?`<tr><td style="color:#666;padding:2px 12px 2px 0;border:none">בנק:</td><td style="font-weight:600;border:none">${esc(bank.name)}${bank.branch?' · סניף '+esc(bank.branch):''}</td></tr>`:''}
-      ${bank.account?`<tr><td style="color:#666;padding:2px 12px 2px 0;border:none">מספר חשבון:</td><td style="font-weight:700;font-family:monospace;border:none">${esc(bank.account)}</td></tr>`:''}
-      ${bank.holder?`<tr><td style="color:#666;padding:2px 12px 2px 0;border:none">שם החשבון:</td><td style="font-weight:600;border:none">${esc(bank.holder)}</td></tr>`:''}
-      ${bank.iban?`<tr><td style="color:#666;padding:2px 12px 2px 0;border:none">IBAN:</td><td style="font-family:monospace;border:none">${esc(bank.iban)}</td></tr>`:''}
-      ${bank.note?`<tr><td colspan="2" style="color:#15803d;padding-top:6px;border:none">📌 ${esc(bank.note)}</td></tr>`:''}
-    </tbody></table>
-  </div>`:''}
-  <div class="footer">${co} · ${email}<br>מסמך זה הופק על ידי ${co}</div>
-  <div style="margin-top:20px;text-align:center"><button onclick="window.print()" style="padding:10px 24px;background:${color};color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer"><i class="ti ti-printer"></i> הדפס / שמור PDF</button></div>
   </body></html>`);
   w.document.close();adminLog('print_invoice',inv.id);
 }
+
 
 // ── DUNNING ──
 function showAddFailed(){
@@ -3644,122 +3717,131 @@ function printReceipt(i){
   const coPhone=brand.phone||'';
   const coAddress=brand.address||'';
   const taxNow=ls(K.taxCfg,DEF_TAX);
-  const vatRate=(taxNow.vatRate||18);
+  const vatRate=Math.round(taxNow.vatRate||18);
   const vatExempt=taxNow.vatExempt||false;
   const businessId=taxNow.businessId||'';
   const vatNum=brand.vatNumber||businessId||'';
-  const color=brand.color||'#3a2000';
-  const w=window.open('','_blank','width=640,height=900');
+  const color=brand.color||'#1a1a2e';
+  const PM_HE={credit:'כרטיס אשראי',bank:'העברה בנקאית',cash:'מזומן',check:'צ\'ק',paypal:'PayPal',bit:'Bit',other:'אחר'};
+  const w=window.open('','_blank','width=660,height=940');
   w.document.write(`<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8">
   <title>קבלה ${rec.id}</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Segoe UI',Arial,sans-serif;direction:rtl;color:#222;background:#fff;padding:32px 40px;max-width:580px;margin:0 auto}
-    .rec-outer{border:2px solid ${color};border-radius:10px;overflow:hidden}
-    .rec-top{background:${color};color:#f5e6c0;padding:20px 24px;display:flex;justify-content:space-between;align-items:flex-start}
-    .co-name{font-size:22px;font-weight:900;letter-spacing:.02em}
-    .co-sub{font-size:10px;opacity:.7;margin-top:3px}
-    .rec-meta{text-align:left}
-    .rec-type{font-size:26px;font-weight:900;letter-spacing:.08em;opacity:.9}
-    .rec-num{font-size:11px;opacity:.65;margin-top:2px;letter-spacing:.04em}
-    .rec-body{padding:20px 24px}
-    .divider{border:none;border-top:1px dashed #ddd;margin:14px 0}
-    .section-lbl{font-size:10px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
-    .bill-name{font-size:16px;font-weight:800;color:#1a1a1a}
-    .bill-sub{font-size:12px;color:#666;margin-top:2px}
-    .pm-row{display:inline-flex;align-items:center;gap:6px;background:#f5f5f5;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;margin-top:6px}
-    table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
-    th{background:#f9f9f9;padding:7px 10px;text-align:right;font-size:10px;font-weight:800;color:#888;border-bottom:2px solid #eee;text-transform:uppercase}
-    td{padding:8px 10px;border-bottom:1px dashed #f0f0f0;font-size:13px}
-    .vat-row{color:#888;font-size:12px}
-    .total-row{background:#f9f9f9;font-size:15px;font-weight:900}
-    .stamp-area{border:2px dashed #ddd;border-radius:8px;padding:12px;text-align:center;margin-top:16px}
-    .stamp-title{font-size:14px;font-weight:800;color:${color};margin-bottom:3px}
-    .stamp-legal{font-size:9px;color:#999;margin-top:4px}
-    .footer{text-align:center;font-size:10px;color:#aaa;margin-top:16px;padding-top:12px;border-top:1px solid #eee}
-    @media print{button{display:none!important}.print-btn-wrap{display:none!important}}
-  
-@media(max-width:600px){
-  /* Nav */
-  nav{padding:0 12px}
-  .nav-logo span{display:none}
-  /* Tab bar */
-  .tab-bar{padding:0 8px;top:52px}
-  .tab{padding:10px 10px;font-size:11px;white-space:nowrap}
-  /* Page */
-  .page{padding:12px 10px}
-  /* Cards */
-  .card{padding:14px 12px}
-  /* Form rows */
-  .form-row{flex-direction:column;gap:8px}
-  /* Grids */
-  .grid2,.grid3,.grid4{grid-template-columns:1fr!important}
-  /* Tables — scroll horizontally */
-  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;width:100%;white-space:nowrap}
-  /* Modals */
-  .modal-box,.modal-content{width:calc(100vw - 24px)!important;max-width:100%!important;margin:12px auto}
-  /* Buttons */
-  .nbtn{padding:8px 12px;font-size:12px}
-  /* Export buttons wrap */
-  [style*="display:flex"][style*="gap:8px"]{flex-wrap:wrap}
-  /* KPI */
-  .kpi-grid{grid-template-columns:repeat(2,1fr)!important}
-}
-@media(max-width:400px){
-  .kpi-grid{grid-template-columns:1fr!important}
-  .tab{padding:8px 8px;font-size:10px}
-  .page{padding:8px 6px}
-}
-</style></head><body>
-  <div class="rec-outer">
-    <div class="rec-top">
-      <div>
-        <div class="co-name">${esc(co)}</div>
-        <div class="co-sub">${coEn}${vatNum?` · ח.פ. ${esc(vatNum)}`:''}</div>
-        ${vatExempt?'<div class="co-sub" style="color:#b45309;font-weight:600">עוסק פטור ממע&quot;מ</div>':''}
-        ${coAddress?`<div class="co-sub">${esc(coAddress)}</div>`:''}
-        ${coPhone?`<div class="co-sub">${esc(coPhone)} · ${esc(coEmail)}</div>`:`<div class="co-sub">${esc(coEmail)}</div>`}
+    body{font-family:'Heebo',sans-serif;direction:rtl;color:#1a1a1a;background:#f4f6f8;min-height:100vh;padding:32px 16px}
+    .page{background:#fff;max-width:580px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.10)}
+    /* HEADER */
+    .rec-header{background:${color};padding:28px 32px;position:relative;overflow:hidden}
+    .rec-header::before{content:'';position:absolute;top:-50px;left:-30px;width:180px;height:180px;background:rgba(255,255,255,.05);border-radius:50%}
+    .rec-header::after{content:'';position:absolute;bottom:-40px;right:20px;width:130px;height:130px;background:rgba(255,255,255,.04);border-radius:50%}
+    .header-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+    .co-name{font-size:20px;font-weight:900;color:#fff}
+    .co-details{font-size:10px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.7}
+    .exempt-badge{display:inline-block;margin-top:5px;background:rgba(255,255,255,.15);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;border:1px solid rgba(255,255,255,.3)}
+    .rec-type-block{text-align:left}
+    .rec-type{font-size:28px;font-weight:900;color:#fff;letter-spacing:.03em}
+    .rec-id{font-size:11px;color:rgba(255,255,255,.55);margin-top:3px;letter-spacing:.04em}
+    /* PAID RIBBON */
+    .paid-ribbon{background:rgba(255,255,255,.12);border-top:1px solid rgba(255,255,255,.15);margin-top:18px;padding:10px 0 0;display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+    .paid-icon{width:28px;height:28px;background:#22c55e;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+    .paid-text{font-size:11px;color:rgba(255,255,255,.8);font-weight:600}
+    .paid-amount{font-size:22px;font-weight:900;color:#fff;margin-right:auto}
+    /* BODY */
+    .rec-body{padding:24px 32px}
+    .divider{border:none;border-top:1px dashed #e5e7eb;margin:16px 0}
+    .section-label{font-size:10px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+    .payer-name{font-size:16px;font-weight:800;color:#1a1a1a}
+    .payer-sub{font-size:12px;color:#666;margin-top:2px}
+    .pm-chip{display:inline-flex;align-items:center;gap:5px;background:#f0f9ff;border:1px solid #bae6fd;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#0369a1;margin-top:6px}
+    /* ITEMS */
+    .item-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0f2f5}
+    .item-row:last-child{border-bottom:none}
+    .item-name{font-size:13px;font-weight:600;color:#1a1a1a}
+    .item-sub{font-size:11px;color:#999;margin-top:2px}
+    .item-price{font-size:14px;font-weight:700;color:#1a1a1a;white-space:nowrap}
+    /* TOTALS */
+    .totals-box{background:#f8f9fb;border-radius:10px;padding:14px 16px;margin-top:14px}
+    .total-line{display:flex;justify-content:space-between;font-size:12px;color:#666;padding:3px 0}
+    .total-final{display:flex;justify-content:space-between;align-items:center;border-top:2px solid #e5e7eb;margin-top:8px;padding-top:10px}
+    .total-final-label{font-size:14px;font-weight:800;color:#1a1a1a}
+    .total-final-amount{font-size:22px;font-weight:900;color:${color}}
+    /* STAMP */
+    .stamp-box{border:2px dashed #d1fae5;border-radius:12px;background:#f0fdf4;padding:14px 16px;text-align:center;margin-top:16px}
+    .stamp-title{font-size:15px;font-weight:900;color:#15803d;letter-spacing:.03em}
+    .stamp-sub{font-size:10px;color:#86efac;margin-top:3px}
+    .linked-inv{font-size:11px;color:#666;margin-top:6px}
+    /* FOOTER */
+    .rec-footer{padding:14px 32px;border-top:1px solid #f0f2f5;display:flex;justify-content:space-between;align-items:center}
+    .footer-text{font-size:10px;color:#bbb;line-height:1.6}
+    .print-btn{padding:9px 22px;background:${color};color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+    @media print{
+      body{background:#fff;padding:0}
+      .page{border-radius:0;box-shadow:none;max-width:100%}
+      .print-btn-row{display:none!important}
+    }
+  </style></head><body>
+  <div class="page">
+    <div class="rec-header">
+      <div class="header-top">
+        <div>
+          <div class="co-name">${esc(co)}</div>
+          <div class="co-details">${esc(coEn)}${vatNum?` · ח.פ. ${esc(vatNum)}`:''}<br>${esc(coEmail)}${coPhone?` · ${esc(coPhone)}`:''}</div>
+          ${vatExempt?'<span class="exempt-badge">עוסק פטור ממע&quot;מ</span>':''}
+        </div>
+        <div class="rec-type-block">
+          <div class="rec-type">קבלה</div>
+          <div class="rec-id">${esc(rec.id)}</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:4px">תאריך: ${dateStr(rec.paidAt||rec.at)}</div>
+        </div>
       </div>
-      <div class="rec-meta">
-        <div class="rec-type">קבלה</div>
-        <div class="rec-num">${esc(rec.id)}</div>
-        <div style="font-size:10px;opacity:.65;margin-top:4px">תאריך: ${dateStr(rec.paidAt||rec.at)}</div>
+      <div class="paid-ribbon">
+        <div class="paid-icon">✓</div>
+        <div class="paid-text">תשלום התקבל בהצלחה</div>
+        <div class="paid-amount">${fmt(rec.total||rec.amount)}</div>
       </div>
     </div>
     <div class="rec-body">
-      <div class="section-lbl">שולם על ידי</div>
-      <div class="bill-name">${esc(rec.name)}</div>
-      <div class="bill-sub">${esc(rec.email)}</div>
-      <div class="pm-row"><i class="ti ti-credit-card"></i> ${PM_LABELS_HE[rec.method]||rec.method}${rec.ref?` · ${esc(rec.ref)}`:''}</div>
+      <div class="section-label">שולם על ידי</div>
+      <div class="payer-name">${esc(rec.name)}</div>
+      <div class="payer-sub">${esc(rec.email)}</div>
+      ${rec.method?`<div class="pm-chip">💳 ${PM_HE[rec.method]||rec.method}</div>`:''}
       <hr class="divider">
-      <div class="section-lbl">פירוט</div>
-      <table>
-        <thead><tr><th>תיאור</th><th style="text-align:left">סכום</th></tr></thead>
-        <tbody>
-          <tr><td>${esc(rec.desc||`מנוי ${PLAN_NAMES[rec.plan]||rec.plan}`)}</td><td style="text-align:left">${fmt(rec.amount)}</td></tr>
-          ${vatExempt?'':`<tr class="vat-row"><td>מע"מ (${vatRate}%)</td><td style="text-align:left">${fmt(rec.vatAmt)}</td></tr>`}
-          <tr class="total-row"><td><strong>סה"כ שולם</strong></td><td style="text-align:left"><strong>${fmt(rec.total)}</strong></td></tr>
-        </tbody>
-      </table>
-      ${rec.invoiceId?`<div style="font-size:10px;color:#888;margin-top:8px">מסמך זה מתייחס לחשבונית מס מספר <strong>${esc(rec.invoiceId)}</strong></div>`:''}
-      <div class="stamp-area">
-        <div class="stamp-title">✅ התשלום התקבל</div>
-        <div style="font-size:11px;color:#555;margin-top:4px"><strong>${fmt(rec.total)}</strong> — ${dateStr(rec.paidAt||rec.at)}</div>
-        <div class="stamp-legal">קבלה זו משמשת אסמכתא לתשלום שהתקבל במלואו</div>
+      <div class="section-label">פירוט</div>
+      <div class="item-row">
+        <div>
+          <div class="item-name">${esc(rec.desc||'מנוי')}</div>
+          ${rec.ref?`<div class="item-sub">אסמכתא: ${esc(rec.ref)}</div>`:''}
+        </div>
+        <div class="item-price">${fmt(rec.amount)}</div>
       </div>
-      ${rec.note?`<div style="font-size:10px;color:#888;margin-top:10px;padding:8px;background:#f9f9f9;border-radius:6px">${esc(rec.note)}</div>`:''}
+      <div class="totals-box">
+        <div class="total-line"><span>סכום נטו</span><span>${fmt(rec.amount)}</span></div>
+        ${vatExempt
+          ?'<div class="total-line" style="color:#b45309"><span>מע&quot;מ (פטור)</span><span>₪0.00</span></div>'
+          :+rec.vatAmt?`<div class="total-line"><span>מע&quot;מ (${vatRate}%)</span><span>${fmt(rec.vatAmt)}</span></div>`:''
+        }
+        <div class="total-final">
+          <span class="total-final-label">סה&quot;כ שולם</span>
+          <span class="total-final-amount">${fmt(rec.total||rec.amount)}</span>
+        </div>
+      </div>
+      <div class="stamp-box">
+        <div class="stamp-title">✅ שולם במלואו</div>
+        <div class="stamp-sub">תאריך קבלת התשלום: ${dateStr(rec.paidAt||rec.at)}</div>
+        ${rec.linkedInv?`<div class="linked-inv">מקושר לחשבונית: ${esc(rec.linkedInv)}</div>`:''}
+      </div>
+    </div>
+    <div class="rec-footer">
+      <div class="footer-text">${esc(co)} · ${esc(coEmail)}<br>מסמך זה הופק אוטומטית ומהווה אישור תשלום</div>
+      <div class="print-btn-row"><button class="print-btn" onclick="window.print()">🖨️ הדפס / PDF</button></div>
     </div>
   </div>
-  <div class="footer">${esc(co)} · ${esc(coEmail)} · מסמך זה הופק ב-${new Date().toLocaleDateString('he-IL')}</div>
-  <div class="print-btn-wrap" style="text-align:center;margin-top:20px">
-    <button onclick="window.print()" style="padding:10px 28px;background:${color};color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit"><i class="ti ti-printer"></i> הדפס / שמור PDF</button>
-  </div>
   </body></html>`);
-  w.document.close();
-  adminLog('print_receipt',rec.id);
+  w.document.close();adminLog('print_receipt',rec.id);
 }
 
-// Quick receipt from paid invoice button (called from invoice list)
+
 function createReceiptFromInvoice(invIdx){
   const inv=ls(K.invoices,[])[invIdx];if(!inv)return;
   const recs=ls(K.receipts,[]);
