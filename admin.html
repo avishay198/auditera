@@ -834,6 +834,7 @@ nav {
 }
 </style>
 
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
 </head>
 <body>
 
@@ -5404,7 +5405,7 @@ function previewBrand(){
   document.getElementById('brandPrevNav').style.background=color;
   document.getElementById('brandPrevName').textContent=name;
   document.getElementById('brandPrevIcon').textContent=logo?'':('🔍');
-  if(logo){document.getElementById('brandPrevIcon').innerHTML=`<img src="${esc(logo)}" style="width:18px;height:18px;object-fit:contain">`;}
+  if(logo){document.getElementById('brandPrevIcon').innerHTML=`<img src="${esc(logo)}" alt="${esc(co)}" style="width:18px;height:18px;object-fit:contain">`;}
   document.getElementById('brandPrevTagline').textContent=tagline;
 }
 function saveBranding(){
