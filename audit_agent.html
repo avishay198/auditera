@@ -198,10 +198,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .chart-box canvas,.cb canvas{display:block!important;direction:ltr!important;}
 .upload-zone{border:2px dashed var(--border);border-radius:18px;padding:52px 28px;text-align:center;cursor:pointer;transition:.3s;background:var(--gold3);position:relative}
 .upload-zone:hover,.upload-zone.dg{border-color:var(--accent);background:#f5e6b8;box-shadow:0 4px 20px rgba(58,32,0,.1)}
-.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.upload-icon{font-size:52px;margin-bottom:12px}
-.upload-zone h2{font-size:18px;color:var(--primary);margin-bottom:6px;font-weight:700}
-.upload-zone p{color:var(--muted);font-size:14px}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
+.upload-icon{font-size:52px;margin-bottom:12px;pointer-events:none}
+.upload-zone h2{font-size:18px;color:var(--primary);margin-bottom:6px;font-weight:700;pointer-events:none}
+.upload-zone p{color:var(--muted);font-size:14px;pointer-events:none}
 .formats{display:flex;gap:7px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 .fbadge{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;color:var(--primary)}
 .file-list{margin-top:12px;display:flex;flex-direction:column;gap:7px}
