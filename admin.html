@@ -3394,7 +3394,10 @@ function printInvoice(i){
     </div>
     <div class="inv-footer">
       <div class="footer-text">${esc(co)} · ${esc(coEmail)}<br>מסמך זה הופק אוטומטית</div>
-      <div class="print-btn-row"><button class="print-btn" onclick="window.print()">🖨️ הדפס / שמור PDF</button></div>
+      <div class="print-btn-row" style="display:flex;gap:8px;align-items:center">
+        <button class="print-btn" onclick="window.print()">🖨️ הדפס / PDF</button>
+        <button class="print-btn" style="background:#374151" onclick="(function(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title.replace(/\s+/g,'_')+'.html';a.click()})()">⬇️ ייצוא HTML</button>
+      </div>
     </div>
   </div>
   </body></html>`);
@@ -3834,7 +3837,10 @@ function printReceipt(i){
     </div>
     <div class="rec-footer">
       <div class="footer-text">${esc(co)} · ${esc(coEmail)}<br>מסמך זה הופק אוטומטית ומהווה אישור תשלום</div>
-      <div class="print-btn-row"><button class="print-btn" onclick="window.print()">🖨️ הדפס / PDF</button></div>
+      <div class="print-btn-row" style="display:flex;gap:8px;align-items:center">
+      <button class="print-btn" onclick="window.print()">🖨️ הדפס / PDF</button>
+      <button class="print-btn" style="background:#374151" onclick="(function(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title.replace(/\s+/g,'_')+'.html';a.click()})()">⬇️ ייצוא HTML</button>
+    </div>
     </div>
   </div>
   </body></html>`);
