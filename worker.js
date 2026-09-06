@@ -246,13 +246,13 @@ async function handleForgotPassword(request, env) {
     );
 
     // קישור איפוס
-    const resetLink = (base_url || 'https://auditera.co/reset.html') + '?reset=' + token;
+    const resetLink = (base_url && !base_url.startsWith('file://') ? base_url : 'https://auditera.co/reset.html') + '?reset=' + token;
 
     // שליחה ל-Make
     if (env.MAKE_WEBHOOK_URL) {
       await fetch(env.MAKE_WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'x-make-apikey': env.MAKE_APIKEY || '' },
         body: JSON.stringify({
           event: 'password_reset',
           email: email.toLowerCase().trim(),

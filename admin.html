@@ -4940,7 +4940,7 @@ function closePayModal(){document.getElementById('payModal').classList.remove('s
 // ══════════════════════════════════════════════
 //  CSV IMPORT
 // ══════════════════════════════════════════════
-let _csvRows=[];
+let _csvImportRows=[];
 function showCSVImport(){
   const c=document.getElementById('csvImportCard');
   c.style.display=c.style.display==='none'?'block':'none';
@@ -4955,7 +4955,7 @@ function previewCSV(){
   if(!raw){document.getElementById('csvPreview').innerHTML='';return;}
   const lines=raw.split('\n').map(l=>l.trim()).filter(Boolean);
   const VALID_PLANS=['trial','starter','professional','premium','enterprise'];
-  _csvRows=[];const errs=[];
+  _csvImportRows=[];const errs=[];
   const start=lines[0].toLowerCase().includes('שם')||lines[0].toLowerCase().includes('name')?1:0;
   for(let i=start;i<lines.length;i++){
     const cols=lines[i].split(',').map(c=>c.trim().replace(/^"|"$/g,''));
@@ -4964,20 +4964,20 @@ function previewCSV(){
     if(!email.includes('@')){errs.push(`שורה ${i+1}: אימייל לא תקין`);continue;}
     const p=plan.toLowerCase();
     if(!VALID_PLANS.includes(p)){errs.push(`שורה ${i+1}: מסלול "${plan}" לא תקין`);continue;}
-    _csvRows.push({name,email:email.toLowerCase(),plan:p,pass});
+    _csvImportRows.push({name,email:email.toLowerCase(),plan:p,pass});
   }
   const errHtml=errs.length?`<div style="background:#fee2e2;border-radius:7px;padding:8px 10px;font-size:11px;color:#b91c1c;margin-bottom:8px">${errs.map(e=>'⚠️ '+esc(e)).join('<br>')}</div>`:'';
-  const previewHtml=_csvRows.length===0?'<div class="empty" style="padding:12px">אין שורות תקינות</div>'
+  const previewHtml=_csvImportRows.length===0?'<div class="empty" style="padding:12px">אין שורות תקינות</div>'
     :`<table class="tbl" style="font-size:11px"><thead><tr><th>שם</th><th>אימייל</th><th>מסלול</th><th>סיסמה</th></tr></thead><tbody>
-      ${_csvRows.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.email)}</td><td><span class="badge pb-${r.plan}">${PLAN_NAMES[r.plan]}</span></td><td>${r.pass?'••••••':'— (יידרש לאפס)'}</td></tr>`).join('')}
+      ${_csvImportRows.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.email)}</td><td><span class="badge pb-${r.plan}">${PLAN_NAMES[r.plan]}</span></td><td>${r.pass?'••••••':'— (יידרש לאפס)'}</td></tr>`).join('')}
     </tbody></table>`;
   document.getElementById('csvPreview').innerHTML=errHtml+previewHtml;
-  document.getElementById('csvImportBtn').style.display=_csvRows.length>0?'block':'none';
+  document.getElementById('csvImportBtn').style.display=_csvImportRows.length>0?'block':'none';
 }
 async function importCSV(){
-  if(!_csvRows.length){toast('❌ אין שורות לייבוא');return;}
+  if(!_csvImportRows.length){toast('❌ אין שורות לייבוא');return;}
   const users=getUsers();let added=0,skipped=0;
-  for(const r of _csvRows){
+  for(const r of _csvImportRows){
     if(users.find(u=>u.email===r.email)){skipped++;continue;}
     const hash=r.pass?await sha256(r.pass):'RESET_REQUIRED_'+Date.now();
     users.push({name:r.name,email:r.email,plan:r.plan,hash,created:new Date().toISOString()});
@@ -4986,7 +4986,7 @@ async function importCSV(){
   ss(UK,users);adminLog('csv_import',`+${added} משתמשים`);
   toast(`✓ יובאו ${added} משתמשים${skipped?' ('+skipped+' דולגו)':''}`);
   document.getElementById('csvImportCard').style.display='none';
-  _csvRows=[];document.getElementById('csvInput').value='';
+  _csvImportRows=[];document.getElementById('csvInput').value='';
   document.getElementById('csvPreview').innerHTML='';
   renderUsers();renderOverview();
 }
