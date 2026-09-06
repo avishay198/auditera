@@ -255,6 +255,15 @@ footer a{color:var(--muted);text-decoration:underline}
       </div>
     </div>
 
+    <div style="background:#fef9e7;border:1px solid #c99a2e;border-radius:8px;padding:12px 16px;margin-bottom:12px;font-size:12px;color:#7a5010;text-align:right">
+      ℹ️ המנוי <strong>אינו מתחדש אוטומטית</strong> — התשלום ידני בכל תקופת מנוי.
+    </div>
+    <div style="margin-bottom:16px;text-align:right;font-size:13px">
+      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
+        <input type="checkbox" id="termsAgreeBank" style="margin-top:3px;accent-color:#c99a2e">
+        <span>קראתי ואני מסכים/ה ל<a href="legal.html" target="_blank" style="color:#c99a2e">תנאי השימוש ומדיניות הפרטיות</a></span>
+      </label>
+    </div>
     <div id="sentSectionBank">
       <button class="cta-btn bank-cta" onclick="markSent('bank')">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0;margin-left:6px"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10"/></svg> ביצעתי את ההעברה — שלחו לי קוד הפעלה
@@ -300,6 +309,15 @@ footer a{color:var(--muted);text-decoration:underline}
       </div>
     </div>
 
+    <div style="background:#fef9e7;border:1px solid #c99a2e;border-radius:8px;padding:12px 16px;margin-bottom:12px;font-size:12px;color:#7a5010;text-align:right">
+      ℹ️ המנוי <strong>אינו מתחדש אוטומטית</strong> — התשלום ידני בכל תקופת מנוי.
+    </div>
+    <div style="margin-bottom:16px;text-align:right;font-size:13px">
+      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer">
+        <input type="checkbox" id="termsAgreeBit" style="margin-top:3px;accent-color:#c99a2e">
+        <span>קראתי ואני מסכים/ה ל<a href="legal.html" target="_blank" style="color:#c99a2e">תנאי השימוש ומדיניות הפרטיות</a></span>
+      </label>
+    </div>
     <div id="sentSectionBit">
       <button class="cta-btn bit-cta" onclick="markSent('bit')">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0;margin-left:6px"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10"/></svg> שלחתי ב-Bit — שלחו לי קוד הפעלה
@@ -432,6 +450,14 @@ function renderContact(){
 }
 
 function markSent(method){
+  const agreeId = method==='bank' ? 'termsAgreeBank' : 'termsAgreeBit';
+  const agreeEl = document.getElementById(agreeId);
+  if(agreeEl && !agreeEl.checked){
+    agreeEl.closest('label').style.outline='2px solid #c99a2e';
+    agreeEl.closest('label').style.borderRadius='4px';
+    alert('יש לאשר את תנאי השימוש לפני המשך');
+    return;
+  }
   const params=new URLSearchParams(location.search);
   const plan=params.get('plan')||'professional';
   const nameVal=document.getElementById('fullName')?document.getElementById('fullName').value.trim():'';
