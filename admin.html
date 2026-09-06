@@ -6769,7 +6769,7 @@ function renderSystem(){
 
   // Prefill security
   const creds=ls(K.adminCreds,{});
-  document.getElementById('secEmail').value=creds.email||'admin@auditera';
+  document.getElementById('secEmail').value=creds.email||'support@auditera.co';
 
   // Health cards
   const users=getUsers();
@@ -6900,7 +6900,7 @@ async function changeAdminCreds(){
   if(newPass&&newPass!==confPass){msg.textContent='❌ הסיסמאות אינן תואמות';msg.style.color='var(--red)';return;}
 
   const newHash=newPass?await sha256(newPass):storedHash||defPassHash;
-  ss(K.adminCreds,{email:newEmail||creds.email||'admin@auditera',passHash:newHash});
+  ss(K.adminCreds,{email:newEmail||creds.email||'support@auditera.co',passHash:newHash});
   adminLog('security','credentials updated');
   msg.textContent='✓ פרטים עודכנו בהצלחה';msg.style.color='var(--green)';
   ['secCurPass','secNewPass','secConfPass'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
