@@ -246,7 +246,7 @@ async function handleForgotPassword(request, env) {
     );
 
     // קישור איפוס
-    const resetLink = (base_url && !base_url.startsWith('file://') ? base_url : 'https://auditera.co/reset.html') + '?reset=' + token;
+    const resetLink = (base_url && base_url.startsWith('https://') ? base_url : 'https://auditera.co/reset.html') + '?reset=' + token;
 
     // שליחה ל-Make
     if (env.MAKE_WEBHOOK_URL) {
