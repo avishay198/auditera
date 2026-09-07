@@ -39,7 +39,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .plan-card{background:#fdf3dc;border-radius:16px;padding:28px 24px;margin-bottom:20px;color:var(--brown);position:relative;overflow:hidden;box-shadow:var(--shadow-lg);border:1.5px solid #e0c888;border-right:4px solid #c99a2e}
 .plan-card::after{content:none}
 .plan-card::before{content:none}
-.plan-badge{display:inline-block;background:var(--gold);color:var(--brown);font-size:11px;font-weight:800;padding:4px 14px;border-radius:20px;letter-spacing:.06em;margin-bottom:12px;text-transform:uppercase}
+.plan-badge{display:inline-block;background:var(--gold);color:#000;font-size:11px;font-weight:800;padding:4px 14px;border-radius:20px;letter-spacing:.06em;margin-bottom:12px;text-transform:uppercase}
 .plan-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
 .plan-name{font-size:28px;font-weight:900;color:var(--brown);line-height:1.1}
 .plan-price-wrap{text-align:left}
@@ -489,7 +489,7 @@ renderPlan();renderBank();renderBit();renderContact();selectMethod('bank');
 
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
   <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
-  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#3a2000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
+  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
 </body>

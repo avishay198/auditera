@@ -1293,7 +1293,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <h2 style="font-size:20px;font-weight:800;color:#3a2000;margin-bottom:8px" id="quotaModalTitle">הגעת למכסת התיקים</h2>
     <p style="font-size:14px;color:#7a5c2e;line-height:1.7;margin-bottom:20px" id="quotaModalBody"></p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <a href="pricing.html" style="padding:11px 24px;background:#c99a2e;color:#3a2000;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none">שדרג תוכנית ←</a>
+      <a href="pricing.html" style="padding:11px 24px;background:#c99a2e;color:#000;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none">שדרג תוכנית ←</a>
       <button onclick="document.getElementById('quotaModal').style.display='none'" style="padding:11px 20px;background:transparent;color:#9a7a4a;border:1.5px solid #e0c888;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">סגור</button>
     </div>
     <p style="font-size:11px;color:#9a7a4a;margin-top:16px">לשאלות: <a href="mailto:support@auditera.co" style="color:#c99a2e">support@auditera.co</a></p>
@@ -1312,7 +1312,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     </div>
     <p style="font-size:13px;color:#7a5c2e;margin-bottom:20px">האם להחליף את הקובץ הנוכחי?</p>
     <div style="display:flex;gap:10px;justify-content:center">
-      <button onclick="_confirmReplaceFile()" style="padding:11px 26px;background:#c99a2e;color:#3a2000;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">החלף קובץ</button>
+      <button onclick="_confirmReplaceFile()" style="padding:11px 26px;background:#c99a2e;color:#000;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">החלף קובץ</button>
       <button onclick="_cancelReplaceFile()" style="padding:11px 20px;background:transparent;color:#9a7a4a;border:1.5px solid #e0c888;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">שמור קובץ קיים</button>
     </div>
   </div>
@@ -1327,7 +1327,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <p style="font-size:13px;color:#7a5c2e;margin-bottom:18px;text-align:center">הדבק את קוד הרישיון שקיבלת מ-Auditera</p>
     <input id="licTokenInput" type="text" placeholder="AUD-eyJ..." style="width:100%;padding:10px 12px;border:1.5px solid #e0c888;border-radius:9px;font-family:monospace;font-size:12px;background:#fff;color:#3a2000;margin-bottom:6px;box-sizing:border-box">
     <div id="licTokenMsg" style="font-size:12px;min-height:18px;margin-bottom:14px;text-align:center"></div>
-    <button onclick="doActivateLicense()" style="width:100%;padding:13px;background:#c99a2e;color:#3a2000;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">✓ הפעל רישיון</button>
+    <button onclick="doActivateLicense()" style="width:100%;padding:13px;background:#c99a2e;color:#000;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">✓ הפעל רישיון</button>
     <p style="font-size:11px;color:#9a7a4a;margin-top:14px;text-align:center">אין לך קוד? <a href="mailto:support@auditera.co" style="color:#c99a2e">צור קשר עם Auditera</a></p>
   </div>
 </div>
@@ -1497,7 +1497,7 @@ function _updateLicenseBanner(){
     banner.innerHTML = `<span style="flex:1"><i class="ti ti-star" style="color:#c99a2e"></i> תוכנית <strong>ניסיון</strong> — תיק לקוח אחד, ביקורת חודשית בלבד. רוצה יותר? <a href="pricing.html" style="color:#c99a2e;font-weight:700">שדרג ←</a></span>`
       +(lic
         ? `<button onclick="document.getElementById('licenseModal').style.display='flex'" style="background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap"><i class="ti ti-key"></i> עדכן רישיון</button>`
-        : `<button onclick="document.getElementById('licenseModal').style.display='flex';document.getElementById('licTokenMsg').textContent=''" style="background:#c99a2e;color:#3a2000;border:none;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap"><i class="ti ti-key"></i> הפעל קוד מנוי</button>`
+        : `<button onclick="document.getElementById('licenseModal').style.display='flex';document.getElementById('licTokenMsg').textContent=''" style="background:#c99a2e;color:#000;border:none;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap"><i class="ti ti-key"></i> הפעל קוד מנוי</button>`
       );
   } else {
     banner.style.display = 'none';

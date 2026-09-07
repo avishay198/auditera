@@ -86,7 +86,7 @@ footer{background:var(--brown);padding:22px 6%;display:flex;align-items:center;j
 
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
   <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
-  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#3a2000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
+  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
 </body>

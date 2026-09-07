@@ -47,7 +47,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 .nbtn{padding:5px 11px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:.15s}
 .nbtn-ghost{background:transparent;border:1px solid rgba(245,230,192,.2);color:rgba(245,230,192,.55)}
 .nbtn-ghost:hover{border-color:rgba(245,230,192,.5);color:#f5e6c0}
-.nbtn-gold{background:var(--gold);color:var(--brown);border:none}
+.nbtn-gold{background:var(--gold);color:#000;border:none}
 .nbtn-gold:hover{opacity:.88}
 .nbtn-red{background:#dc2626;color:#fff;border:none}
 .nbtn-red:hover{opacity:.88}
@@ -283,7 +283,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 /* ── BULK ACTION BAR ── */
 #bulkBar{display:none;position:sticky;bottom:16px;z-index:400;margin:0 16px 16px;background:var(--brown);color:#f5e6c0;border-radius:12px;padding:10px 16px;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.3)}
 #bulkBar.show{display:flex}
-.bulk-count{background:var(--gold);color:var(--brown);border-radius:20px;padding:1px 10px;font-size:11px;font-weight:800}
+.bulk-count{background:var(--gold);color:#000;border-radius:20px;padding:1px 10px;font-size:11px;font-weight:800}
 .bulk-sep{width:1px;height:20px;background:rgba(245,230,192,.2);flex-shrink:0}
 .bulk-spacer{flex:1}
 
@@ -5145,7 +5145,7 @@ function buildKeyEmailHTML(name, plan, token, link){
 
     <!-- CTA -->
     <tr><td style="background:#ffffff;padding:0 40px 36px;text-align:center">
-      <a href="${link}" style="display:inline-block;background:#c99a2e;color:#3a2000;font-size:16px;font-weight:800;padding:15px 40px;border-radius:10px;text-decoration:none">
+      <a href="${link}" style="display:inline-block;background:#c99a2e;color:#000;font-size:16px;font-weight:800;padding:15px 40px;border-radius:10px;text-decoration:none">
         כניסה למערכת &larr;
       </a>
       <div style="font-size:12px;color:#9a7a4a;margin-top:12px">
@@ -5158,15 +5158,15 @@ function buildKeyEmailHTML(name, plan, token, link){
       <div style="font-size:13px;font-weight:700;color:#3a2000;margin-bottom:14px;text-align:right">🚀 איך מתחילים</div>
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
-          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#3a2000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">1</span></td>
+          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">1</span></td>
           <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl;padding-bottom:10px">היכנס עם הכתובת ומספר הטלפון שלך</td>
         </tr>
         <tr>
-          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#3a2000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">2</span></td>
+          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">2</span></td>
           <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl;padding-bottom:10px">הכנס את מפתח ההפעלה שקיבלת</td>
         </tr>
         <tr>
-          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#3a2000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">3</span></td>
+          <td style="width:28px;vertical-align:top"><span style="background:#c99a2e;color:#000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">3</span></td>
           <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl">העלה את קובץ הנהלת החשבונות והתחל לבקר</td>
         </tr>
       </table>
@@ -5976,7 +5976,7 @@ function showNewUserTokenModal(name,email,plan,token,isExisting=false){
       </div>
       <div style="display:flex;gap:8px;justify-content:flex-end">
         ${validPaidPlan?`<button onclick="openSendKeyModal('key_${safePlan}','${safePlanHe}','${safeEmail}','${safeName}');document.getElementById('newUserTokenModal').remove()"
-          style="padding:9px 18px;background:var(--gold);color:var(--brown);border:none;border-radius:8px;font-weight:700;cursor:pointer">✉️ שלח במייל</button>`:''}
+          style="padding:9px 18px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer">✉️ שלח במייל</button>`:''}
         <button onclick="document.getElementById('newUserTokenModal').remove()"
           style="padding:9px 18px;background:var(--cream);color:var(--brown);border:1px solid var(--border);border-radius:8px;font-weight:600;cursor:pointer">סגור</button>
       </div>
