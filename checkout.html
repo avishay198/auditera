@@ -14,7 +14,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5ede0;color:#3a2000;direction:rtl;overflow-x:hidden}
 :root{
-  --brown:#3a2000;--brown2:#5a3010;--gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;
+  --brown:#3a2000;--brown2:#5a3010;--gold:#c99a2e;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888;--green:#15803d;--green-bg:#f0fdf4;--green-border:#bbf7d0;
   --bit:#00AECF;--bit2:#0090b0;--bit-bg:#e8f9fd;--bit-border:#7dd8ed;
   --shadow:0 4px 24px rgba(58,32,0,.10);--shadow-lg:0 8px 40px rgba(58,32,0,.16);
@@ -43,14 +43,14 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .plan-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
 .plan-name{font-size:28px;font-weight:900;color:var(--brown);line-height:1.1}
 .plan-price-wrap{text-align:left}
-.plan-price{font-size:40px;font-weight:900;color:var(--gold);line-height:1}
+.plan-price{font-size:40px;font-weight:900;color:var(--gold-text);line-height:1}
 .plan-price small{font-size:15px;font-weight:600;color:var(--brown2)}
 .plan-vat{font-size:11px;color:#9a7a4a;margin-top:2px;text-align:left}
 .plan-cancel-note{font-size:11px;color:#9a7a4a;margin-top:-12px;margin-bottom:16px;padding:8px 12px;background:rgba(201,154,46,.08);border-radius:8px;border:1px solid #e0c888;display:none}
 .plan-divider{height:1px;background:#e0c888;margin:16px 0}
 .plan-features{display:flex;flex-wrap:wrap;gap:8px}
 .plan-feat{background:rgba(58,32,0,.06);border:1px solid #e0c888;border-radius:20px;padding:4px 12px;font-size:12px;color:var(--brown2);display:flex;align-items:center;gap:5px}
-.plan-feat::before{content:'✓';color:var(--gold);font-weight:900}
+.plan-feat::before{content:'✓';color:var(--gold-text);font-weight:900}
 
 /* ── SECTION CARD ─────────────────────────────────────────────────── */
 .section-card{background:#fff;border:1.5px solid #eddfc8;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:var(--shadow)}
@@ -60,7 +60,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 /* ── PAYMENT METHOD TABS ──────────────────────────────────────────── */
 .pay-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0}
 .pay-tab{border:2px solid #eddfc8;background:#fdf8f0;border-radius:14px;padding:16px 14px;text-align:center;cursor:pointer;transition:all .22s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:6px}
-.pay-tab:hover{border-color:var(--gold);background:var(--gold3);transform:translateY(-1px)}
+.pay-tab:hover{border-color:var(--gold-text);background:var(--gold3);transform:translateY(-1px)}
 .pay-tab.active-bank{border-color:var(--brown);background:var(--gold3);box-shadow:0 0 0 3px rgba(58,32,0,.06)}
 .pay-tab.active-bit{border-color:var(--bit);background:var(--bit-bg);box-shadow:0 0 0 3px rgba(0,174,207,.08)}
 .pay-tab-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:#f0e8d8;transition:background .2s}

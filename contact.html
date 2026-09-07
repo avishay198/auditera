@@ -38,7 +38,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff;color:#3a2000;direction:rtl;line-height:1.6}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;
-  --gold:#c99a2e;--gold2:#e8d4a0;--gold3:#fdf3dc;
+  --gold:#c99a2e;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--white:#fff;--muted:#9a7a4a;--border:#e0c888;
 }
 
@@ -60,7 +60,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .page-tag-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.75)}}
 .page-hero h1{font-size:36px;font-weight:800;color:var(--brown);line-height:1.2;margin-bottom:14px;letter-spacing:-.4px}
-.page-hero h1 em{color:var(--gold);font-style:normal;border-bottom:2px solid var(--gold2)}
+.page-hero h1 em{color:var(--gold-text);font-style:normal;border-bottom:2px solid var(--gold2)}
 .page-hero p{font-size:16.5px;color:var(--muted);line-height:1.75;max-width:500px}
 
 /* ── TRUST STRIP ── */
@@ -82,7 +82,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .form-label{font-size:13px;font-weight:700;color:var(--brown2)}
 .form-label span{color:#dc2626;margin-right:2px}
 .form-input,.form-select,.form-textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:15px;font-family:inherit;color:var(--brown);background:var(--cream);transition:border-color .2s,box-shadow .2s;outline:none;direction:rtl}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,154,46,.12)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold-text);box-shadow:0 0 0 3px rgba(201,154,46,.12)}
 .form-input::placeholder,.form-textarea::placeholder{color:var(--muted);opacity:.65}
 .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a7a4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 14px center;padding-left:36px;cursor:pointer}
 .form-textarea{resize:vertical;min-height:130px;line-height:1.6}
@@ -110,7 +110,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .info-label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:2px}
 .info-value{font-size:14.5px;font-weight:700;color:var(--brown)}
 .info-value a{color:var(--brown);text-decoration:none}
-.info-value a:hover{color:var(--gold)}
+.info-value a:hover{color:var(--gold-text)}
 .info-sub{font-size:12px;color:var(--muted);margin-top:2px}
 
 /* Response time badge */
@@ -125,18 +125,18 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .quick-links-card h4{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
 .quick-link-item{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:12px;background:var(--cream);border:1px solid var(--border);text-decoration:none;margin-bottom:10px;transition:background .18s,border-color .18s,transform .15s}
 .quick-link-item:last-child{margin-bottom:0}
-.quick-link-item:hover{background:var(--gold3);border-color:var(--gold);transform:translateX(-3px)}
-.quick-link-item:hover .quick-link-label{color:var(--gold)}
+.quick-link-item:hover{background:var(--gold3);border-color:var(--gold-text);transform:translateX(-3px)}
+.quick-link-item:hover .quick-link-label{color:var(--gold-text)}
 .quick-link-icon{width:38px;height:38px;background:var(--white);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--brown)}
 .quick-link-text{flex:1;min-width:0}
 .quick-link-label{font-size:14px;font-weight:700;color:var(--brown);display:block}
 .quick-link-desc{font-size:12px;color:var(--muted);display:block;margin-top:1px}
-.quick-link-arrow{font-size:16px;color:var(--gold);font-weight:700;flex-shrink:0}
+.quick-link-arrow{font-size:16px;color:var(--gold-text);font-weight:700;flex-shrink:0}
 
 /* ── FOOTER ── */
 footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
 .footer-brand{font-size:17px;font-weight:700;color:rgba(245,230,192,.8)}
-.footer-brand span{color:var(--gold)}
+.footer-brand span{color:var(--gold-text)}
 .footer-links{display:flex;gap:22px;flex-wrap:wrap}
 .footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:rgba(245,230,192,.7)}
@@ -279,7 +279,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
         <span>שלח הודעה</span>
         <span>←</span>
       </button>
-      <div class="form-note">לחלופין, פנה ישירות: <a href="mailto:support@auditera.co" style="color:var(--gold);font-weight:600">support@auditera.co</a></div>
+      <div class="form-note">לחלופין, פנה ישירות: <a href="mailto:support@auditera.co" style="color:var(--gold-text);font-weight:600">support@auditera.co</a></div>
     </div>
 
     <!-- Success -->
