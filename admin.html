@@ -5022,7 +5022,7 @@ function renderEmailTpls(){
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
         <span style="font-size:11px;font-weight:800;color:var(--brown)">${esc(t.name||DEF_TPLS[key].name)}</span>
         <div style="display:flex;gap:6px">
-          ${isKeyTpl?`<button class="nbtn" style="padding:2px 10px;font-size:10px;background:var(--gold);color:#fff;border:none;border-radius:6px;cursor:pointer" onclick="openSendKeyModal('${key}','${planHe}')">✉️ ייצר ושלח</button>`:''}
+          ${isKeyTpl?`<button class="nbtn" style="padding:2px 10px;font-size:10px;background:var(--gold);color:#000;border:none;border-radius:6px;cursor:pointer" onclick="openSendKeyModal('${key}','${planHe}')">✉️ ייצר ושלח</button>`:''}
           <button class="nbtn nbtn-outline" style="padding:2px 8px;font-size:10px" onclick="copyTpl('${key}')"><i class="ti ti-clipboard"></i> Copy</button>
           <button class="nbtn nbtn-gold" style="padding:2px 8px;font-size:10px" onclick="saveTpl('${key}')"><i class="ti ti-device-floppy"></i> שמור</button>
         </div>
@@ -5972,7 +5972,7 @@ function showNewUserTokenModal(name,email,plan,token,isExisting=false){
         <input id="nuTokenOut" readonly value="${esc(token)}"
           style="flex:1;font-family:monospace;font-size:10px;padding:8px 10px;border:1.5px solid var(--border);border-radius:8px;background:var(--gold3);color:var(--brown);word-break:break-all">
         <button onclick="navigator.clipboard.writeText(document.getElementById('nuTokenOut').value).then(()=>{this.textContent='✓ הועתק!';setTimeout(()=>this.textContent='<i class="ti ti-clipboard-list"></i> העתק',2000)})"
-          style="padding:8px 14px;background:var(--gold);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap"><i class="ti ti-clipboard"></i> העתק</button>
+          style="padding:8px 14px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer;white-space:nowrap"><i class="ti ti-clipboard"></i> העתק</button>
       </div>
       <div style="display:flex;gap:8px;justify-content:flex-end">
         ${validPaidPlan?`<button onclick="openSendKeyModal('key_${safePlan}','${safePlanHe}','${safeEmail}','${safeName}');document.getElementById('newUserTokenModal').remove()"

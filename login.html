@@ -278,7 +278,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
       <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונשלח לך קישור לאיפוס סיסמה — תקף לשעה אחת.</p>
       <input id="forgotEmail" type="email" placeholder="האימייל שלך" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
       <div style="display:flex;gap:8px">
-        <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#c99a2e;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
+        <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#c99a2e;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
         <button onclick="document.getElementById('forgotPanel').style.display='none'" style="padding:8px 14px;background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:8px;font-size:13px;cursor:pointer">ביטול</button>
       </div>
       <div id="forgotMsg" style="font-size:12px;margin-top:8px;color:#166534;display:none"></div>
@@ -713,7 +713,7 @@ async function sendForgotRequest(){
       <input id="newPass1" type="password" placeholder="סיסמה חדשה (לפחות 6 תווים)" style="width:100%;padding:9px 11px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;box-sizing:border-box">
       <input id="newPass2" type="password" placeholder="אימות סיסמה" style="width:100%;padding:9px 11px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:12px;box-sizing:border-box">
       <div id="resetMsg" style="font-size:12px;min-height:18px;margin-bottom:10px;color:#dc2626"></div>
-      <button onclick="doResetPass('${resetToken}')" style="width:100%;padding:10px;background:#c99a2e;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">שמור סיסמה חדשה</button>
+      <button onclick="doResetPass('${resetToken}')" style="width:100%;padding:10px;background:#c99a2e;color:#000;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">שמור סיסמה חדשה</button>
     </div>`;
     document.body.appendChild(panel);
   });
