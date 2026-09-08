@@ -75,7 +75,7 @@ Chart.register({
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
-:root{--primary:#3a2000;--brown:#3a2000;--pl:#7a5c2e;--accent:#c99a2e;--al:#c99a2e;--gold:#e8d4a0;--gold3:#fdf3dc;--danger:#a32d2d;--warn:#d97706;--purple:#7c3aed;--bg:#FEFAF3;--card:#fff;--border:#e0c888;--text:#3a2000;--muted:#9a7a4a;--shadow:0 2px 16px rgba(58,32,0,.07)}
+:root{--primary:#3a2000;--brown:#3a2000;--pl:#7a5c2e;--accent:#e0b840;--al:#e0b840;--gold:#e8d4a0;--gold3:#fdf3dc;--danger:#a32d2d;--warn:#d97706;--purple:#7c3aed;--bg:#FEFAF3;--card:#fff;--border:#e0c888;--text:#3a2000;--muted:#9a7a4a;--shadow:0 2px 16px rgba(58,32,0,.07)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:var(--bg);color:var(--text);direction:rtl;min-height:100vh;padding-bottom:36px}
 .header{background:#fff;color:var(--primary);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 1px 0 var(--border),0 2px 12px rgba(58,32,0,.06);position:sticky;top:0;z-index:200;border-bottom:2px solid var(--border)}
@@ -187,7 +187,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .stat{background:var(--card);border-radius:16px;padding:20px 22px;border:1px solid var(--border);box-shadow:0 2px 16px rgba(58,32,0,.07);position:relative;overflow:hidden;transition:box-shadow .2s,transform .2s}
 .stat:hover{box-shadow:0 8px 32px rgba(58,32,0,.12);transform:translateY(-2px)}
 .stat::before{content:'';position:absolute;top:0;right:0;width:5px;height:100%;border-radius:0 14px 14px 0}
-.stat.g::before{background:linear-gradient(180deg,#16a34a,#4ade80)} .stat.r::before{background:linear-gradient(180deg,#a32d2d,#f87171)} .stat.b::before{background:linear-gradient(180deg,#7a5c2e,#c99a2e)} .stat.o::before{background:linear-gradient(180deg,#d97706,#fbbf24)} .stat.p::before{background:linear-gradient(180deg,#7c3aed,#a78bfa)} .stat.c::before{background:linear-gradient(180deg,#0891b2,#38bdf8)}
+.stat.g::before{background:linear-gradient(180deg,#16a34a,#4ade80)} .stat.r::before{background:linear-gradient(180deg,#a32d2d,#f87171)} .stat.b::before{background:linear-gradient(180deg,#7a5c2e,#e0b840)} .stat.o::before{background:linear-gradient(180deg,#d97706,#fbbf24)} .stat.p::before{background:linear-gradient(180deg,#7c3aed,#a78bfa)} .stat.c::before{background:linear-gradient(180deg,#0891b2,#38bdf8)}
 .stat.g{background:linear-gradient(135deg,#f0fdf4 70%,#dcfce7)} .stat.r{background:linear-gradient(135deg,#fff5f5 70%,#fee2e2)} .stat.b{background:linear-gradient(135deg,#fffdf5 70%,#fef9eb)} .stat.o{background:linear-gradient(135deg,#fffbeb 70%,#fef3c7)} .stat.p{background:linear-gradient(135deg,#faf5ff 70%,#ede9fe)} .stat.c{background:linear-gradient(135deg,#f0f9ff 70%,#e0f2fe)}
 .sl{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:5px;letter-spacing:.2px}
 .sv{font-size:30px;font-weight:900;line-height:1.15;font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
@@ -482,7 +482,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 
 /* ACCESSIBILITY */
 *:focus{outline:none}
-*:focus-visible{outline:2px solid #c99a2e;outline-offset:3px;border-radius:4px}
+*:focus-visible{outline:2px solid #e0b840;outline-offset:3px;border-radius:4px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ── MOBILE TABS: smooth scroll + icon-only on tiny screens ── */
@@ -1190,7 +1190,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
             <div><label style="font-size:11.5px;font-weight:700;display:block;margin-bottom:4px">חובה (אופציונלי)</label>
               <select id="bankColDebit" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit"><option value="">-- אין --</option></select></div>
             <div style="display:flex;align-items:flex-end">
-              <button onclick="runBankReconcile()" style="width:100%;padding:8px;background:#3a2000;color:#C99A2E;border:2px solid #c99a2e;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 6px rgba(0,0,0,0.25)">בצע התאמה</button>
+              <button onclick="runBankReconcile()" style="width:100%;padding:8px;background:#3a2000;color:#C99A2E;border:2px solid #e0b840;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 6px rgba(0,0,0,0.25)">בצע התאמה</button>
             </div>
           </div>
         </div>
@@ -1293,10 +1293,10 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <h2 style="font-size:20px;font-weight:800;color:#3a2000;margin-bottom:8px" id="quotaModalTitle">הגעת למכסת התיקים</h2>
     <p style="font-size:14px;color:#7a5c2e;line-height:1.7;margin-bottom:20px" id="quotaModalBody"></p>
     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <a href="pricing.html" style="padding:11px 24px;background:#c99a2e;color:#000;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none">שדרג תוכנית ←</a>
+      <a href="pricing.html" style="padding:11px 24px;background:#e0b840;color:#000;border-radius:9px;font-size:14px;font-weight:700;text-decoration:none">שדרג תוכנית ←</a>
       <button onclick="document.getElementById('quotaModal').style.display='none'" style="padding:11px 20px;background:transparent;color:#9a7a4a;border:1.5px solid #e0c888;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">סגור</button>
     </div>
-    <p style="font-size:11px;color:#9a7a4a;margin-top:16px">לשאלות: <a href="mailto:support@auditera.co" style="color:#c99a2e">support@auditera.co</a></p>
+    <p style="font-size:11px;color:#9a7a4a;margin-top:16px">לשאלות: <a href="mailto:support@auditera.co" style="color:#e0b840">support@auditera.co</a></p>
   </div>
 </div>
 
@@ -1312,7 +1312,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     </div>
     <p style="font-size:13px;color:#7a5c2e;margin-bottom:20px">האם להחליף את הקובץ הנוכחי?</p>
     <div style="display:flex;gap:10px;justify-content:center">
-      <button onclick="_confirmReplaceFile()" style="padding:11px 26px;background:#c99a2e;color:#000;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">החלף קובץ</button>
+      <button onclick="_confirmReplaceFile()" style="padding:11px 26px;background:#e0b840;color:#000;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">החלף קובץ</button>
       <button onclick="_cancelReplaceFile()" style="padding:11px 20px;background:transparent;color:#9a7a4a;border:1.5px solid #e0c888;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">שמור קובץ קיים</button>
     </div>
   </div>
@@ -1327,8 +1327,8 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <p style="font-size:13px;color:#7a5c2e;margin-bottom:18px;text-align:center">הדבק את קוד הרישיון שקיבלת מ-Auditera</p>
     <input id="licTokenInput" type="text" placeholder="AUD-eyJ..." style="width:100%;padding:10px 12px;border:1.5px solid #e0c888;border-radius:9px;font-family:monospace;font-size:12px;background:#fff;color:#3a2000;margin-bottom:6px;box-sizing:border-box">
     <div id="licTokenMsg" style="font-size:12px;min-height:18px;margin-bottom:14px;text-align:center"></div>
-    <button onclick="doActivateLicense()" style="width:100%;padding:13px;background:#c99a2e;color:#000;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">✓ הפעל רישיון</button>
-    <p style="font-size:11px;color:#9a7a4a;margin-top:14px;text-align:center">אין לך קוד? <a href="mailto:support@auditera.co" style="color:#c99a2e">צור קשר עם Auditera</a></p>
+    <button onclick="doActivateLicense()" style="width:100%;padding:13px;background:#e0b840;color:#000;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit">✓ הפעל רישיון</button>
+    <p style="font-size:11px;color:#9a7a4a;margin-top:14px;text-align:center">אין לך קוד? <a href="mailto:support@auditera.co" style="color:#e0b840">צור קשר עם Auditera</a></p>
   </div>
 </div>
 
@@ -1494,10 +1494,10 @@ function _updateLicenseBanner(){
   if(plan === 'trial'){
     // ניסיון — מגביל ל-1 תיק אוטומטית, ללא צורך בטוקן
     banner.style.display = 'flex';
-    banner.innerHTML = `<span style="flex:1"><i class="ti ti-star" style="color:#c99a2e"></i> תוכנית <strong>ניסיון</strong> — תיק לקוח אחד, ביקורת חודשית בלבד. רוצה יותר? <a href="pricing.html" style="color:#c99a2e;font-weight:700">שדרג ←</a></span>`
+    banner.innerHTML = `<span style="flex:1"><i class="ti ti-star" style="color:#e0b840"></i> תוכנית <strong>ניסיון</strong> — תיק לקוח אחד, ביקורת חודשית בלבד. רוצה יותר? <a href="pricing.html" style="color:#e0b840;font-weight:700">שדרג ←</a></span>`
       +(lic
         ? `<button onclick="document.getElementById('licenseModal').style.display='flex'" style="background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap"><i class="ti ti-key"></i> עדכן רישיון</button>`
-        : `<button onclick="document.getElementById('licenseModal').style.display='flex';document.getElementById('licTokenMsg').textContent=''" style="background:#c99a2e;color:#000;border:none;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap"><i class="ti ti-key"></i> הפעל קוד מנוי</button>`
+        : `<button onclick="document.getElementById('licenseModal').style.display='flex';document.getElementById('licTokenMsg').textContent=''" style="background:#e0b840;color:#000;border:none;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap"><i class="ti ti-key"></i> הפעל קוד מנוי</button>`
       );
   } else {
     banner.style.display = 'none';
@@ -3789,7 +3789,7 @@ function renderDashboard(){
       const cats=Object.keys(byCategory)
         .sort((a,b)=>(byCategory[b].income+byCategory[b].expense)-(byCategory[a].income+byCategory[a].expense))
         .slice(0,8);
-      const palette=['#c99a2e','#3a7d44','#2563a8','#a32d2d','#7c3aed','#0891b2','#d97706','#64748b'];
+      const palette=['#e0b840','#3a7d44','#2563a8','#a32d2d','#7c3aed','#0891b2','#d97706','#64748b'];
       const totalVol=cats.reduce((s,c)=>s+(byCategory[c].income+byCategory[c].expense),0)||1;
       const catEl=document.getElementById('chCat');
       if(catEl){
@@ -4232,7 +4232,7 @@ function _drawDistSVG(absAmounts){
           stroke="#b45309" stroke-width="1.5" stroke-dasharray="4 3"/></svg>ממוצע</span>
       <span style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)">
         <svg width="22" height="8" style="overflow:visible"><line x1="0" y1="4" x2="22" y2="4"
-          stroke="#c99a2e" stroke-width="2.2"/></svg>עקומה</span>
+          stroke="#e0b840" stroke-width="2.2"/></svg>עקומה</span>
     </div>`;
 
   el.style.position='relative';
@@ -4266,15 +4266,15 @@ function _drawDistSVG(absAmounts){
       <defs>
         <linearGradient id="dBar" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#e8c86a" stop-opacity="0.9"/>
-          <stop offset="100%" stop-color="#c99a2e" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#e0b840" stop-opacity="0.55"/>
         </linearGradient>
         <linearGradient id="dBarHL" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#6b3a10"/>
           <stop offset="100%" stop-color="#3a2000" stop-opacity="0.85"/>
         </linearGradient>
         <linearGradient id="dArea" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#c99a2e" stop-opacity="0.1"/>
-          <stop offset="100%" stop-color="#c99a2e" stop-opacity="0"/>
+          <stop offset="0%" stop-color="#e0b840" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#e0b840" stop-opacity="0"/>
         </linearGradient>
         <clipPath id="dClip">
           <rect x="${PL}" y="${PT}" width="${CW}" height="${CH}"/>
@@ -4305,7 +4305,7 @@ function _drawDistSVG(absAmounts){
       ${bars}
 
       <!-- Curve line (clipped to chart area so it never floats above empty bins) -->
-      <path d="${curvePath}" fill="none" stroke="#c99a2e" stroke-width="2"
+      <path d="${curvePath}" fill="none" stroke="#e0b840" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round" opacity="0.65"
         clip-path="url(#dClip)"
         style="pointer-events:none"/>
@@ -4331,7 +4331,7 @@ function _drawDistSVG(absAmounts){
   window._dTipShow=function(e,g){
     const tip=document.getElementById('dTip');if(!tip)return;
     const c=+g.dataset.count,pct=g.dataset.pct,range=g.dataset.range;
-    tip.innerHTML=`<div style="font-size:10.5px;color:#c99a2e;font-weight:600;margin-bottom:4px">${range}</div>
+    tip.innerHTML=`<div style="font-size:10.5px;color:#e0b840;font-weight:600;margin-bottom:4px">${range}</div>
       <div style="display:flex;justify-content:space-between;gap:12px">
         <span style="color:#a09070">עסקאות</span><b>${c}</b>
       </div>
@@ -4719,7 +4719,7 @@ function renderBenford(){
         </div>
         <div style="display:flex;gap:16px;align-items:center;font-size:.75rem;color:var(--muted)">
           <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:14px;background:rgba(58,32,0,0.65);border-radius:3px"></span>בפועל</span>
-          <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:22px;height:3px;background:#c99a2e;border-radius:2px;position:relative;"><span style="position:absolute;top:-3px;left:8px;width:6px;height:6px;background:#c99a2e;border-radius:50%"></span></span>צפוי (בנפורד)</span>
+          <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:22px;height:3px;background:#e0b840;border-radius:2px;position:relative;"><span style="position:absolute;top:-3px;left:8px;width:6px;height:6px;background:#e0b840;border-radius:50%"></span></span>צפוי (בנפורד)</span>
           <span style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:14px;background:rgba(220,38,38,0.82);border-radius:3px"></span>חשד</span>
         </div>
       </div>
@@ -4836,11 +4836,11 @@ function renderBenford(){
             label:'צפוי (בנפורד)',
             data:[1,2,3,4,5,6,7,8,9].map(d=>+(BENFORD_EXP[d]*100).toFixed(3)),
             type:'line',
-            borderColor:'#c99a2e',
+            borderColor:'#e0b840',
             backgroundColor:'rgba(201,154,46,0.08)',
             borderWidth:2.5,
             borderDash:[7,4],
-            pointBackgroundColor:'#c99a2e',
+            pointBackgroundColor:'#e0b840',
             pointBorderColor:'#fff',
             pointBorderWidth:2,
             pointRadius:6,
@@ -5570,7 +5570,7 @@ function renderVendorNetwork(){
   });
   const donutCats=Object.keys(catExp).sort((a,b)=>catExp[b]-catExp[a]).slice(0,8);
   const donutVals=donutCats.map(c=>Math.round(catExp[c]));
-  const donutColors=donutCats.map(c=>catColor[c]||'#c99a2e');
+  const donutColors=donutCats.map(c=>catColor[c]||'#e0b840');
 
   // Cross-category table
   const crossRows=crossCat.slice(0,8).map(v=>{
@@ -5643,7 +5643,7 @@ function renderVendorNetwork(){
     const vnBarCtx=document.getElementById(vnBarId)?.getContext('2d');
     if(vnBarCtx){
       const vnLabels=top10.map(v=>v.name.length>18?v.name.slice(0,17)+'…':v.name);
-      const vnColors=top10.map(v=>catColor[v.cats[0]]||'#c99a2e');
+      const vnColors=top10.map(v=>catColor[v.cats[0]]||'#e0b840');
       const vnTooltip={backgroundColor:'rgba(255,253,245,0.98)',titleColor:'#3a2000',bodyColor:'#3a2000',borderColor:'#e0c888',borderWidth:1.5,padding:12,rtl:true,cornerRadius:8};
       new Chart(vnBarCtx,{
         type:'bar',
@@ -5731,7 +5731,7 @@ function drawBubbles(canvasId, vendors, catColor, totalExp){
   const overlaps=(x,y,r)=>placed.some(p=>Math.hypot(p.x-x,p.y-y)<p.r+r+5);
   top.forEach(v=>{
     const r=minR+(maxR-minR)*Math.sqrt(v.expense/maxExp);
-    const base=catColor[v.cats[0]]||'#c99a2e';
+    const base=catColor[v.cats[0]]||'#e0b840';
     let x,y,ok=false,tries=0;
     while(!ok&&tries<500){
       const angle=tries*0.48;
@@ -5821,7 +5821,7 @@ function drawLorenz(canvasId, vendors, totalExp){
   });
 
   // ── Axes ─────────────────────────────────────────────────────
-  ctx.strokeStyle='#c99a2e';
+  ctx.strokeStyle='#e0b840';
   ctx.lineWidth=2;
   ctx.beginPath();
   ctx.moveTo(pad.l,pad.t);
@@ -5885,7 +5885,7 @@ function drawLorenz(canvasId, vendors, totalExp){
   [[pts[0].x,pts[0].y],[pts[pts.length-1].x,pts[pts.length-1].y]].forEach(([x,y])=>{
     ctx.beginPath();
     ctx.arc(x,y,5,0,Math.PI*2);
-    ctx.fillStyle='#c99a2e';
+    ctx.fillStyle='#e0b840';
     ctx.fill();
     ctx.strokeStyle='#fff';
     ctx.lineWidth=2;
@@ -5934,7 +5934,7 @@ function drawLorenz(canvasId, vendors, totalExp){
   const lx=W-pad.r, ly=pad.t+10;
   // Lorenz line swatch
   ctx.fillStyle='#b8861a'; ctx.fillRect(lx-86,ly,22,3);
-  ctx.beginPath();ctx.arc(lx-75,ly+1.5,3,0,Math.PI*2);ctx.fillStyle='#c99a2e';ctx.fill();
+  ctx.beginPath();ctx.arc(lx-75,ly+1.5,3,0,Math.PI*2);ctx.fillStyle='#e0b840';ctx.fill();
   ctx.fillStyle='#5a3a10'; ctx.font='10.5px Segoe UI,Arial'; ctx.textAlign='left';
   ctx.fillText('עקומת לורנץ',lx-60,ly+5);
   // Equality line swatch
@@ -7590,13 +7590,13 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 .cmi-lbl{font-size:9px;opacity:.5;margin-bottom:5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase}
 .cmi-val{font-size:20px;font-weight:900}
 .body{padding:30px 56px}
-.disc{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;padding:12px 16px;font-size:11.5px;color:#7a5020;line-height:1.85;margin-bottom:24px}
+.disc{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;padding:12px 16px;font-size:11.5px;color:#7a5020;line-height:1.85;margin-bottom:24px}
 .sec{margin-bottom:28px}
 .sec-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e0c888;padding-bottom:8px;margin-bottom:16px}
-.sec-title{font-size:15px;font-weight:700;color:#3a2000;padding-right:13px;border-right:4px solid #c99a2e;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.sec-title{font-size:15px;font-weight:700;color:#3a2000;padding-right:13px;border-right:4px solid #e0b840;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .sec-tag{background:#fdf3dc;color:#7a5020;font-size:9px;padding:3px 10px;border-radius:3px;font-weight:700;letter-spacing:.7px;border:1px solid #e0c888;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12.5px}
-th{background:#fdf3dc;color:#3a2000;padding:9px 12px;text-align:right;font-size:11px;font-weight:700;border-bottom:2px solid #c99a2e;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+th{background:#fdf3dc;color:#3a2000;padding:9px 12px;text-align:right;font-size:11px;font-weight:700;border-bottom:2px solid #e0b840;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 td{padding:8px 12px;border-bottom:1px solid #f0ebe0;vertical-align:top}
 tr:last-child td{border-bottom:none}
 tr:nth-child(even) td{background:#fefaf3}
@@ -7619,7 +7619,7 @@ tr:nth-child(even) td{background:#fefaf3}
 .score-num{font-size:60px;font-weight:900;line-height:1}
 .score-lbl{font-size:18px;font-weight:700}
 .score-sub{font-size:12px;color:#64748b;margin-top:5px;line-height:1.6}
-.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:2px solid #c99a2e;padding-top:20px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:2px solid #e0b840;padding-top:20px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .sig-lbl{font-size:10px;font-weight:700;color:#9a7a4a;margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase}
 .sig-name{font-size:13px;color:#1e1e1e;margin-bottom:3px;font-weight:600}
 .sig-sub{font-size:11.5px;color:#64748b}
@@ -7672,11 +7672,11 @@ ${(_cpaN||_cpaF)?`<div class="cpa-bar"><div><span class="cpa-name">${_cpaN||'ר�
 </div>
 ${notes?`<div class="sec">
   <div class="sec-hdr"><div class="sec-title">הערות רואה החשבון</div><div class="sec-tag">NOTES</div></div>
-  <div style="background:#fefaf3;border-right:4px solid #c99a2e;padding:14px 18px;border-radius:4px;font-size:13px;line-height:1.8;color:#3a2000">${_en}</div>
+  <div style="background:#fefaf3;border-right:4px solid #e0b840;padding:14px 18px;border-radius:4px;font-size:13px;line-height:1.8;color:#3a2000">${_en}</div>
 </div>`:''}
 ${anomalies.length?`<div class="sec">
   <div class="sec-hdr"><div class="sec-title">ניתוח ממצאים מהותיים</div><div class="sec-tag">FINDINGS ANALYSIS</div></div>
-  ${[...new Set(anomalies.filter(a=>a.sev==='high').map(a=>a.type))].slice(0,4).map(t=>`<div style="margin-bottom:12px;padding:12px 16px;background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;font-size:12.5px;line-height:1.9;color:#3a2000"><strong>${escHtml(t)}:</strong> ${_anomNarrative(t)}</div>`).join('')}
+  ${[...new Set(anomalies.filter(a=>a.sev==='high').map(a=>a.type))].slice(0,4).map(t=>`<div style="margin-bottom:12px;padding:12px 16px;background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;font-size:12.5px;line-height:1.9;color:#3a2000"><strong>${escHtml(t)}:</strong> ${_anomNarrative(t)}</div>`).join('')}
 </div>
 <div class="sec">
   <div class="sec-hdr"><div class="sec-title">פעולות נדרשות</div><div class="sec-tag">REQUIRED ACTIONS</div></div>
@@ -7693,7 +7693,7 @@ ${anomalies.length?`<div class="sec">
   </ul></div>
 </div>`:''}
 </div>
-<div style="margin:0 56px 24px;background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;padding:12px 16px;font-size:11px;color:#5a3010;line-height:1.85">
+<div style="margin:0 56px 24px;background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;padding:12px 16px;font-size:11px;color:#5a3010;line-height:1.85">
   <strong>הצהרת ביקורת (ISA 230):</strong> הביקורת בוצעה בהתאם לתקני ביקורת בינלאומיים (ISA) ולהנחיות לשכת רואי החשבון בישראל. הממצאים מבוססים אך ורק על הנתונים שהוצגו בפנינו ומוגבלים לתקופה הנבדקת. אין בדוח זה משום חוות דעת על הדוחות הכספיים כולם. כל ממצא המחייב טיפול הועלה לידיעת ההנהלה.${_materiality>0?` | סף מהותיות: ₪${_materiality.toLocaleString('he-IL')} (ISA 320)`:''}</div>
 <div class="sig-row" style="margin:0 56px 28px">
   <div>
@@ -7739,14 +7739,14 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 .cpa-bar{display:flex;justify-content:space-between;align-items:center;padding:11px 56px;background:#fefaf3;border-bottom:2px solid #e0c888;font-size:11.5px;color:#5a3010}
 .cpa-name{font-weight:700;color:#3a2000;font-size:12.5px}
 .body{padding:30px 56px}
-.disc{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;padding:12px 16px;font-size:11.5px;color:#7a5020;line-height:1.85;margin-bottom:24px}
+.disc{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;padding:12px 16px;font-size:11.5px;color:#7a5020;line-height:1.85;margin-bottom:24px}
 .score-box{display:flex;align-items:center;gap:24px;padding:20px 24px;border-radius:10px;border:2px solid;margin-bottom:26px}
 .score-num{font-size:60px;font-weight:900;line-height:1}
 .score-lbl{font-size:18px;font-weight:700}
 .score-sub{font-size:12px;color:#64748b;margin-top:5px;line-height:1.6}
 .sec{margin-bottom:28px}
 .sec-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e0c888;padding-bottom:8px;margin-bottom:16px}
-.sec-title{font-size:15px;font-weight:700;color:#3a2000;padding-right:13px;border-right:4px solid #c99a2e;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.sec-title{font-size:15px;font-weight:700;color:#3a2000;padding-right:13px;border-right:4px solid #e0b840;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .sec-tag{background:#fdf3dc;color:#7a5020;font-size:9px;padding:3px 10px;border-radius:3px;font-weight:700;letter-spacing:.7px;border:1px solid #e0c888;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 .kpi{border:1px solid #e0c888;border-radius:8px;padding:14px 16px;text-align:center;background:#fefaf3;overflow:hidden}
@@ -7758,7 +7758,7 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 .vat-val{font-size:17px;font-weight:700}
 .vat-lbl{font-size:11px;color:#9a7a4a;margin-top:3px}
 table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:12.5px}
-th{background:#fdf3dc;color:#3a2000;padding:9px 12px;text-align:right;font-size:11px;font-weight:700;border-bottom:2px solid #c99a2e;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+th{background:#fdf3dc;color:#3a2000;padding:9px 12px;text-align:right;font-size:11px;font-weight:700;border-bottom:2px solid #e0b840;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 td{padding:8px 12px;border-bottom:1px solid #f0ebe0;vertical-align:top}
 tr:last-child td{border-bottom:none}
 tr:nth-child(even) td{background:#fefaf3}
@@ -7773,9 +7773,9 @@ tr:nth-child(even) td{background:#fefaf3}
 .action-box{background:#fffcf5;border:1px solid #fde68a;border-right:4px solid #f59e0b;border-radius:4px;padding:14px 20px;margin-bottom:14px}
 .action-box ul{padding-right:20px;line-height:2.2;font-size:12.5px;color:#1e1e1e}
 .action-box li::marker{color:#d97706;font-weight:700}
-.statement{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;padding:12px 16px;font-size:11px;color:#5a3010;line-height:1.85;margin-bottom:18px}
-.note-box{background:#fefaf3;border-right:4px solid #c99a2e;padding:14px 18px;border-radius:4px;font-size:13px;line-height:1.8;color:#3a2000}
-.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:2px solid #c99a2e;padding-top:20px;margin-top:28px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.statement{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;padding:12px 16px;font-size:11px;color:#5a3010;line-height:1.85;margin-bottom:18px}
+.note-box{background:#fefaf3;border-right:4px solid #e0b840;padding:14px 18px;border-radius:4px;font-size:13px;line-height:1.8;color:#3a2000}
+.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:2px solid #e0b840;padding-top:20px;margin-top:28px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .sig-lbl{font-size:10px;font-weight:700;color:#9a7a4a;margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase}
 .sig-name{font-size:13px;color:#1e1e1e;margin-bottom:3px;font-weight:600}
 .sig-sub{font-size:11.5px;color:#64748b}
@@ -8000,7 +8000,7 @@ ${notes?'הערות רו"ח: '+notes:''}
     const formatted=reportText
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
       .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      .replace(/^### (.+)$/gm,'<h3 style="font-size:14px;font-weight:700;color:#3a2000;margin:18px 0 7px;padding-right:11px;border-right:3px solid #c99a2e">$1</h3>')
+      .replace(/^### (.+)$/gm,'<h3 style="font-size:14px;font-weight:700;color:#3a2000;margin:18px 0 7px;padding-right:11px;border-right:3px solid #e0b840">$1</h3>')
       .replace(/^## (.+)$/gm,'<h2 style="font-size:15px;font-weight:800;color:#1e1b4b;margin:22px 0 9px;border-bottom:1px solid #c4b5fd;padding-bottom:5px">$1</h2>')
       .replace(/^# (.+)$/gm,'<h1 style="font-size:17px;font-weight:900;color:#1e1b4b;margin:26px 0 11px">$1</h1>')
       .replace(/^\*\*(.+)\*\*$/gm,'<h2 style="font-size:15px;font-weight:800;color:#1e1b4b;margin:22px 0 9px;border-bottom:1px solid #c4b5fd;padding-bottom:5px">$1</h2>')
@@ -8090,14 +8090,14 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 .cmi-lbl{font-size:9px;opacity:.5;margin-bottom:5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase}
 .cmi-val{font-size:14px;font-weight:800}
 .body{padding:30px 56px}
-.disc{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;padding:12px 16px;font-size:11.5px;color:#7a5020;line-height:1.85;margin-bottom:24px}
+.disc{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;padding:12px 16px;font-size:11.5px;color:#7a5020;line-height:1.85;margin-bottom:24px}
 .score-box{display:flex;align-items:center;gap:24px;padding:20px 24px;border-radius:10px;border:2px solid;margin-bottom:26px}
 .score-num{font-size:60px;font-weight:900;line-height:1}
 .score-lbl{font-size:18px;font-weight:700}
 .score-sub{font-size:12px;color:#64748b;margin-top:5px;line-height:1.6}
 .sec{margin-bottom:28px}
 .sec-hdr{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e0c888;padding-bottom:8px;margin-bottom:16px}
-.sec-title{font-size:15px;font-weight:700;color:#3a2000;padding-right:13px;border-right:4px solid #c99a2e;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.sec-title{font-size:15px;font-weight:700;color:#3a2000;padding-right:13px;border-right:4px solid #e0b840;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .sec-tag{background:#fdf3dc;color:#7a5020;font-size:9px;padding:3px 10px;border-radius:3px;font-weight:700;letter-spacing:.7px;border:1px solid #e0c888;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .kpi{border:1px solid #e0c888;border-radius:8px;padding:14px 16px;text-align:center;background:#fefaf3;overflow:hidden}
@@ -8113,8 +8113,8 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 .action-box{background:#fffcf5;border:1px solid #fde68a;border-right:4px solid #f59e0b;border-radius:4px;padding:14px 20px;margin-bottom:14px}
 .action-box ul{padding-right:20px;line-height:2.2;font-size:12.5px}
 .action-box li::marker{color:#d97706;font-weight:700}
-.statement{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #c99a2e;border-radius:4px;padding:12px 16px;font-size:11px;color:#5a3010;line-height:1.85;margin-bottom:18px}
-.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:2px solid #c99a2e;padding-top:20px;margin-top:24px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+.statement{background:#fefaf3;border:1px solid #e0c888;border-right:4px solid #e0b840;border-radius:4px;padding:12px 16px;font-size:11px;color:#5a3010;line-height:1.85;margin-bottom:18px}
+.sig-row{display:grid;grid-template-columns:1fr 1fr;gap:40px;border-top:2px solid #e0b840;padding-top:20px;margin-top:24px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
 .sig-lbl{font-size:10px;font-weight:700;color:#9a7a4a;margin-bottom:6px;letter-spacing:.4px;text-transform:uppercase}
 .sig-name{font-size:13px;color:#1e1e1e;margin-bottom:3px;font-weight:600}
 .sig-sub{font-size:11.5px;color:#64748b}
@@ -8189,7 +8189,7 @@ ${(_cpaN||_cpaF)?`<div class="cpa-bar"><div><span class="cpa-name">${_cpaN||'ר�
 
 ${notes?`<div class="sec">
   <div class="sec-hdr"><div class="sec-title">הערות רואה החשבון</div><div class="sec-tag">NOTES</div></div>
-  <div style="background:#fefaf3;border-right:4px solid #c99a2e;padding:14px 18px;border-radius:4px;font-size:13px;line-height:1.8;color:#3a2000">${_en}</div>
+  <div style="background:#fefaf3;border-right:4px solid #e0b840;padding:14px 18px;border-radius:4px;font-size:13px;line-height:1.8;color:#3a2000">${_en}</div>
 </div>`:''}
 
 <div class="sec">

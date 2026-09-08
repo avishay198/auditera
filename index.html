@@ -33,7 +33,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff;color:#3a2000;direction:rtl;line-height:1.6;overflow-x:hidden}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;
-  --gold:#c99a2e;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
+  --gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--white:#fff;--muted:#9a7a4a;--border:#e0c888;
 }
 
@@ -104,20 +104,20 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .browser-body{background:#fffdf5;padding:16px}
 .app-header{background:#3a2000;padding:8px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .app-header-logo{font-size:13px;font-weight:700;color:#f5e6c0}
-.app-header-tag{font-size:9px;background:rgba(201,154,46,.3);color:#c99a2e;padding:2px 8px;border-radius:10px}
+.app-header-tag{font-size:9px;background:rgba(201,154,46,.3);color:#e0b840;padding:2px 8px;border-radius:10px}
 .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
 .mini-stat{background:#fff;border:1px solid #e0c888;border-radius:7px;padding:8px 10px}
 .mini-stat-label{font-size:8px;color:#9a7a4a;margin-bottom:2px}
 .mini-stat-val{font-size:16px;font-weight:800;color:#3a2000}
 .mini-stat-val.green{color:#16a34a}
 .mini-stat-val.red{color:#dc2626}
-.mini-stat-val.gold{color:#c99a2e}
+.mini-stat-val.gold{color:#e0b840}
 .mini-chart{background:#fff;border:1px solid #e0c888;border-radius:7px;padding:10px;margin-bottom:10px}
 .chart-title{font-size:9px;font-weight:700;color:#3a2000;margin-bottom:8px}
 .bars{display:flex;align-items:flex-end;gap:4px;height:52px}
 .bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
 .bar{width:100%;border-radius:3px 3px 0 0}
-.bar.inc{background:#c99a2e}
+.bar.inc{background:#e0b840}
 .bar.exp{background:#e8d4a0}
 .bar-lbl{font-size:7px;color:#9a7a4a}
 .anomaly-row{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
@@ -127,7 +127,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .anom.blue{background:#eff6ff;border:1px solid #bfdbfe;color:#2563eb}
 .ai-bar{background:#3a2000;border-radius:7px;padding:8px 12px;display:flex;align-items:center;gap:8px}
 .ai-text{font-size:9px;color:rgba(245,230,192,.7);flex:1}
-.ai-send{width:22px;height:22px;background:#c99a2e;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px}
+.ai-send{width:22px;height:22px;background:#e0b840;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px}
 
 /* STATS BAR */
 .stats-bar{background:var(--white);border-bottom:1px solid var(--border);padding:22px 6%;display:flex;justify-content:center;gap:0}
@@ -271,7 +271,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 }
 /* ACCESSIBILITY */
 *:focus{outline:none}
-*:focus-visible{outline:2px solid #c99a2e;outline-offset:3px;border-radius:4px}
+*:focus-visible{outline:2px solid #e0b840;outline-offset:3px;border-radius:4px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .skip-link{position:absolute;top:-100px;right:0;background:#3a2000;color:#f5e6c0;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:9999;transition:top .2s}
 .skip-link:focus-visible{top:0}
@@ -526,8 +526,8 @@ document.addEventListener('click',function(e){
 </script>
 <!-- COOKIE CONSENT -->
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
-  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#c99a2e;text-decoration:underline">מדיניות פרטיות</a></span>
-  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#c99a2e;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
+  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#e0b840;text-decoration:underline">מדיניות פרטיות</a></span>
+  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#e0b840;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
 </body>
