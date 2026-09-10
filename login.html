@@ -2,7 +2,8 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,56 +24,90 @@
 <title>הרשמה / כניסה — Auditera</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--white:#fff;--muted:#9a7a4a;--border:#e0c888;--danger:#dc2626;
-  --panel-bg:#2e1800;
+  --panel-bg:#241400;
 }
 
-/* ── LAYOUT ── */
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown);direction:rtl;min-height:100vh;background:var(--cream);padding:112px 24px 32px;overflow-x:hidden}
+/* BASE */
+html{overflow-x:hidden;height:100%}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  color:var(--brown);direction:rtl;
+  min-height:100vh;background:var(--cream);
+  display:flex;flex-direction:column;overflow-x:hidden;
+}
 
-/* subtle dot grid */
+/* NAV */
+nav{
+  background:#fff;padding:0 6%;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  border-bottom:1.5px solid var(--border);
+  flex-shrink:0;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
+.nav-logo-text span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-link{color:var(--brown);text-decoration:none;font-size:15px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--brown);background:rgba(58,32,0,.06)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a:last-child{border-bottom:none}
+@media(max-width:720px){.hamburger{display:flex}.nav-links .nav-link{display:none}nav{padding:0 4%;height:56px}.mobile-menu{top:56px}}
 
-.form-panel{max-width:480px;width:100%;background:var(--cream);padding:40px 24px;margin:0 auto}
+/* SPLIT WRAPPER */
+.split-wrap{
+  flex:1;display:flex;flex-direction:row-reverse;
+  min-height:0;
+}
 
-/* ── BRAND PANEL ── */
+/* FORM PANEL */
+.form-panel{
+  flex:1;
+  background:#fafaf7;
+  display:flex;align-items:center;justify-content:center;
+  padding:60px 40px;
+  position:relative;
+}
+.form-panel::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(58,32,0,.05) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
 
-.bp-logo img{width:40px;height:40px;object-fit:contain}
-
-.bp-logo-text span{color:var(--gold-text)}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.bp-stat-text strong{color:rgba(245,230,192,.85);font-weight:700}
-
-.bp-back:hover{color:rgba(245,230,192,.65)}
-
-/* ── FORM CARD ── */
-.card{width:100%;max-width:400px;min-height:420px}
-.card-head{text-align:center;margin-bottom:28px;overflow:visible}
-.card-head img{vertical-align:top}
-
-.card-sub{font-size:13px;color:var(--muted);margin-top:5px}
+/* CARD */
+.card{
+  width:100%;max-width:420px;
+  background:#fff;
+  border-radius:20px;
+  padding:36px 36px 32px;
+  box-shadow:
+    0 2px 4px rgba(58,32,0,.04),
+    0 8px 24px rgba(58,32,0,.08),
+    0 24px 64px rgba(58,32,0,.06);
+  border:1px solid rgba(224,200,136,.35);
+  position:relative;z-index:1;
+}
+.card-logo{display:flex;align-items:center;gap:10px;margin-bottom:6px;justify-content:center}
+.card-logo img{width:32px;height:32px;object-fit:contain;border-radius:7px}
+.card-logo-text{font-size:19px;font-weight:800;color:var(--brown)}
+.card-logo-text span{color:var(--gold)}
+.card-subtitle{font-size:13px;color:var(--muted);text-align:center;margin-bottom:26px;line-height:1.5}
 
 /* TABS */
 .tabs{display:grid;grid-template-columns:1fr 1fr;background:#f0e4c8;border-radius:11px;padding:3px;margin-bottom:24px}
-.tab-btn{padding:9px;border:none;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;background:transparent;color:var(--muted);transition:all .2s}
-.tab-btn.active{background:var(--brown);color:#f5e6c0;box-shadow:0 2px 8px rgba(58,32,0,.2)}
+.tab-btn{padding:9px;border:none;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;background:transparent;color:var(--muted);transition:all .18s}
+.tab-btn.active{background:var(--brown);color:#f5e6c0;box-shadow:0 2px 8px rgba(58,32,0,.22)}
 
 /* ALERT */
 .alert{padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:14px;display:none}
@@ -82,10 +117,10 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
 
 /* FORM */
 .form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:11.5px;font-weight:700;color:var(--brown2);margin-bottom:6px;letter-spacing:.02em;text-transform:uppercase}
+.form-group label{display:block;font-size:11px;font-weight:700;color:var(--brown2);margin-bottom:6px;letter-spacing:.06em;text-transform:uppercase}
 .input-wrap{position:relative}
-.form-input{width:100%;padding:11px 14px;border:1.5px solid #e0c888;border-radius:9px;font-size:16px;font-family:inherit;color:var(--brown);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s}
-.form-input:focus{border-color:var(--gold-text);box-shadow:0 0 0 3px rgba(201,154,46,.12)}
+.form-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:15px;font-family:inherit;color:var(--brown);background:#fff;outline:none;transition:border-color .18s,box-shadow .18s}
+.form-input:focus{border-color:var(--gold-text);box-shadow:0 0 0 3px rgba(138,101,16,.1)}
 .form-input.error{border-color:var(--danger)}
 .input-wrap .form-input{padding-left:40px}
 .toggle-pass{position:absolute;left:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:15px;color:var(--muted);padding:2px;transition:color .2s}
@@ -100,53 +135,41 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
 .consent-label a:hover{text-decoration:underline}
 
 /* SUBMIT */
-.submit-btn{width:100%;padding:13px;background:var(--brown);color:#f5e6c0;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px;transition:opacity .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.01em}
-.submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px)}
-.submit-btn:active:not(:disabled){transform:translateY(0)}
+.submit-btn{
+  width:100%;padding:13px;
+  background:var(--brown);color:#f5e6c0;
+  border:none;border-radius:10px;
+  font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+  margin-top:8px;
+  transition:opacity .18s,transform .1s,box-shadow .18s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  letter-spacing:.01em;
+  box-shadow:0 4px 14px rgba(58,32,0,.25);
+}
+.submit-btn:hover:not(:disabled){opacity:.88;transform:translateY(-1px);box-shadow:0 6px 20px rgba(58,32,0,.3)}
+.submit-btn:active:not(:disabled){transform:translateY(0);box-shadow:0 2px 8px rgba(58,32,0,.2)}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
 .submit-btn .spinner{width:16px;height:16px;border:2px solid rgba(245,230,192,.35);border-top-color:#f5e6c0;border-radius:50%;animation:spin .7s linear infinite;display:none}
 .submit-btn.loading .spinner{display:block}
 .submit-btn.loading .btn-text{opacity:.6}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* DIVIDER & NOTE */
-.form-note{font-size:12px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6}
+/* NOTES */
+.form-note{font-size:12.5px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6}
 .form-note a{color:var(--gold-text);text-decoration:none;font-weight:600}
+.form-note a:hover{text-decoration:underline}
 
 /* TRUST */
-.trust-row{display:flex;justify-content:center;gap:16px;margin-top:22px;flex-wrap:wrap}
-.trust-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:#f5ede0;border-radius:20px;padding:4px 11px;border:1px solid #e8d4a0}
+.trust-row{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap}
+.trust-badge{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);background:#f8f2e8;border-radius:20px;padding:4px 12px;border:1px solid var(--gold2)}
 
 /* SETUP OVERLAY */
 .setup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 .setup-overlay.show{display:flex}
 .setup-card{background:var(--white);border-radius:18px;padding:36px;width:100%;max-width:440px;box-shadow:0 24px 64px rgba(0,0,0,.45);border:1px solid var(--border)}
-.setup-header{margin-bottom:20px}
 .setup-title{font-size:19px;font-weight:800;color:var(--brown);margin-bottom:5px}
 .setup-subtitle{font-size:12.5px;color:var(--muted);line-height:1.6}
 .setup-info{background:#fef9ee;border:1px solid var(--gold2);border-radius:8px;padding:11px 14px;font-size:12px;color:var(--brown2);line-height:1.65;margin-bottom:20px}
-
-/* MOBILE */
-@media(max-width:720px){
-  body{padding:24px 16px 32px}
-  .form-panel{padding:28px 16px 36px}
-  .card{max-width:100%}
-  .trust-row{gap:8px;flex-wrap:wrap;justify-content:center}
-  .trust-badge{font-size:10.5px;padding:3px 9px}
-  .setup-card{padding:24px 18px}
-}
-@media(max-width:400px){
-  .form-panel{padding:20px 12px 28px}
-  .card-head img{width:64px!important;height:64px!important}
-
-  .form-input{font-size:16px;padding:10px 12px}
-  .submit-btn{font-size:14px;padding:12px}
-  .tabs{margin-bottom:18px}
-  .tab-btn{font-size:13px;padding:8px}
-  .trust-row{display:none}
-}
-
-
 
 /* ACCESSIBILITY */
 *:focus{outline:none}
@@ -155,29 +178,45 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:var(--brown
 .skip-link{position:absolute;top:-100px;right:0;background:#3a2000;color:#f5e6c0;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:9999;transition:top .2s}
 .skip-link:focus-visible{top:0}
 
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;right:0;left:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo-text{font-size:20px;font-weight:700;color:#f5e6c0}
-.nav-logo-text span{color:var(--gold-text)}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{color:rgba(245,230,192,.6);text-decoration:none;font-size:16px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
-.nav-link:hover{color:#f5e6c0;background:rgba(255,255,255,.08)}
+/* FOOTER */
+footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.footer-brand{font-size:18px;font-weight:700;color:rgba(245,230,192,.8)}
+.footer-brand span{color:var(--gold-text)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none}
+.footer-links a:hover{color:rgba(245,230,192,.7)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
 
-
-.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
-.hamburger span{display:block;width:22px;height:2px;background:#f5e6c0;border-radius:2px;transition:all .3s}
-.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
-.mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
-.mobile-menu a:last-child{border-bottom:none}
-.mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:#000;font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
-@media(max-width:720px){.hamburger{display:flex}.nav-links .nav-link{display:none}nav{padding:0 4%;height:56px}.mobile-menu{top:56px}body{padding:88px 16px 28px}}
+/* MOBILE */
+@media(max-width:840px){
+  .split-wrap{flex-direction:column}
+  .card{padding:28px 24px 24px}
+}
+@media(max-width:520px){
+  .form-panel{padding:24px 16px 36px}
+  .card{padding:24px 20px 20px;border-radius:16px}
+  .trust-row{gap:8px}
+  .trust-badge{font-size:10.5px;padding:3px 9px}
+}
+@media(max-width:400px){
+  .form-input{font-size:16px;padding:10px 12px}
+  .submit-btn{font-size:14px;padding:12px}
+  .trust-row{display:none}
+}
+@media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 </style>
+  <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="כניסה - Auditera">
+  <meta property="og:description" content="כניסה למערכת ביקורת החשבונאית של Auditera.">
+  <meta property="og:url" content="https://auditera.co/login.html">
+  <meta property="og:image" content="https://auditera.co/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="he_IL">
 </head>
 <body>
+<a href="#main-form" class="skip-link">דלג לטופס</a>
 <nav>
   <a class="nav-logo" href="index.html">
     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="Auditera" style="height:34px;width:34px;object-fit:contain">
@@ -187,6 +226,7 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
     <a href="features.html" class="nav-link">תכונות</a>
     <a href="how.html" class="nav-link">איך זה עובד</a>
     <a href="pricing.html" class="nav-link">תמחור</a>
+    <a href="contact.html" class="nav-link">צור קשר</a>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="תפריט">
     <span></span><span></span><span></span>
@@ -196,118 +236,113 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
   <a href="features.html">תכונות</a>
   <a href="how.html">איך זה עובד</a>
   <a href="pricing.html">תמחור</a>
+  <a href="contact.html">צור קשר</a>
 </div>
 
-<!-- FORM PANEL -->
-<div class="form-panel">
-  <div class="card">
+<div class="split-wrap" style="justify-content:center;">
 
-    <div class="card-head">
-      <div class="card-sub" id="card-subtitle">ברוך השב</div>
-    </div>
+  <!-- FORM PANEL -->
+  <div class="form-panel" id="main-form">
+    <div class="card">
 
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab-btn" id="tab-register" onclick="showTab('register')">הרשמה</button>
-      <button class="tab-btn active" id="tab-login" onclick="showTab('login')">כניסה</button>
-    </div>
-
-    <!-- ALERT -->
-    <div class="alert" id="alertBox"></div>
-
-    <!-- REGISTER FORM -->
-    <form id="registerForm" style="display:none" onsubmit="doRegister(event)">
-      <div class="form-group">
-        <label for="regName">שם מלא</label>
-        <input class="form-input" id="regName" type="text" placeholder="ישראל ישראלי" autocomplete="name">
-        <div class="field-err" id="regNameErr">נא הזן שם מלא</div>
+      <div class="card-logo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="Auditera" style="height:32px;width:32px;object-fit:contain">
+        <div class="card-logo-text"><span>Au</span>ditera</div>
       </div>
-      <div class="form-group">
-        <label for="regEmail">כתובת אימייל</label>
-        <input class="form-input" id="regEmail" type="email" placeholder="name@example.com" autocomplete="email" style="direction:ltr;text-align:left">
-        <div class="field-err" id="regEmailErr">נא הזן כתובת אימייל תקינה</div>
+      <div class="card-subtitle" id="card-subtitle">ברוך השב — המשך לחשבונך</div>
+
+      <div class="tabs">
+        <button class="tab-btn" id="tab-register" onclick="showTab('register')">הרשמה</button>
+        <button class="tab-btn active" id="tab-login" onclick="showTab('login')">כניסה</button>
       </div>
-      <div class="form-group">
-        <label for="regPass">סיסמה</label>
-        <div class="input-wrap">
-          <input class="form-input" id="regPass" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password">
-          <button type="button" class="toggle-pass" onclick="togglePass('regPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+
+      <div class="alert" id="alertBox"></div>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" style="display:none" onsubmit="doRegister(event)">
+        <div class="form-group">
+          <label for="regName">שם מלא</label>
+          <input class="form-input" id="regName" type="text" placeholder="ישראל ישראלי" autocomplete="name">
+          <div class="field-err" id="regNameErr">נא הזן שם מלא</div>
         </div>
-        <div class="field-err" id="regPassErr">סיסמה חייבת להכיל לפחות 6 תווים</div>
-      </div>
-      <div class="form-group" style="margin-bottom:10px">
-        <label class="consent-label">
-          <input type="checkbox" id="regConsent">
-          <span>קראתי ואני מסכים/ה ל<a href="legal.html" target="_blank">תנאי השימוש</a> ול<a href="legal.html#privacy" target="_blank">מדיניות הפרטיות</a> של Auditera, לרבות עיבוד פרטי ההרשמה בהתאם לתיקון 13 לחוק הגנת הפרטיות.</span>
-        </label>
-        <div class="field-err" id="regConsentErr">יש לאשר את תנאי השימוש ומדיניות הפרטיות</div>
-      </div>
-      <button class="submit-btn" type="submit" id="regBtn">
-        <div class="spinner"></div>
-        <span class="btn-text">צור חשבון ←</span>
-      </button>
-      <div class="form-note">כבר יש לך חשבון? <a href="#" onclick="showTab('login');return false">התחבר כאן</a></div>
-    </form>
-
-    <!-- LOGIN FORM -->
-    <form id="loginForm" onsubmit="doLogin(event)" novalidate>
-      <div class="form-group">
-        <label for="loginEmail">כתובת אימייל</label>
-        <input class="form-input" id="loginEmail" type="text" inputmode="email" placeholder="name@example.com" autocomplete="email" style="direction:ltr;text-align:left">
-        <div class="field-err" id="loginEmailErr">נא הזן כתובת אימייל</div>
-      </div>
-      <div class="form-group">
-        <label for="loginPass">סיסמה</label>
-        <div class="input-wrap">
-          <input class="form-input" id="loginPass" type="password" placeholder="הסיסמה שלך" autocomplete="current-password">
-          <button type="button" class="toggle-pass" onclick="togglePass('loginPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+        <div class="form-group">
+          <label for="regEmail">כתובת אימייל</label>
+          <input class="form-input" id="regEmail" type="email" placeholder="name@example.com" autocomplete="email" style="direction:ltr;text-align:left">
+          <div class="field-err" id="regEmailErr">נא הזן כתובת אימייל תקינה</div>
         </div>
-        <div class="field-err" id="loginPassErr">נא הזן סיסמה</div>
+        <div class="form-group">
+          <label for="regPass">סיסמה</label>
+          <div class="input-wrap">
+            <input class="form-input" id="regPass" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password">
+            <button type="button" class="toggle-pass" onclick="togglePass('regPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          </div>
+          <div class="field-err" id="regPassErr">סיסמה חייבת להכיל לפחות 6 תווים</div>
+        </div>
+        <div class="form-group" style="margin-bottom:10px">
+          <label class="consent-label">
+            <input type="checkbox" id="regConsent">
+            <span>קראתי ואני מסכים/ה ל<a href="legal.html" target="_blank">תנאי השימוש</a> ול<a href="legal.html#privacy" target="_blank">מדיניות הפרטיות</a> של Auditera, לרבות עיבוד פרטי ההרשמה בהתאם לתיקון 13 לחוק הגנת הפרטיות.</span>
+          </label>
+          <div class="field-err" id="regConsentErr">יש לאשר את תנאי השימוש ומדיניות הפרטיות</div>
+        </div>
+        <button class="submit-btn" type="submit" id="regBtn">
+          <div class="spinner"></div>
+          <span class="btn-text">צור חשבון ←</span>
+        </button>
+        <div class="form-note">כבר יש לך חשבון? <a href="#" onclick="showTab('login');return false">התחבר כאן</a></div>
+      </form>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" onsubmit="doLogin(event)" novalidate>
+        <div class="form-group">
+          <label for="loginEmail">כתובת אימייל</label>
+          <input class="form-input" id="loginEmail" type="text" inputmode="email" placeholder="name@example.com" autocomplete="email" style="direction:ltr;text-align:left">
+          <div class="field-err" id="loginEmailErr">נא הזן כתובת אימייל</div>
+        </div>
+        <div class="form-group">
+          <label for="loginPass">סיסמה</label>
+          <div class="input-wrap">
+            <input class="form-input" id="loginPass" type="password" placeholder="הסיסמה שלך" autocomplete="current-password">
+            <button type="button" class="toggle-pass" onclick="togglePass('loginPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          </div>
+          <div class="field-err" id="loginPassErr">נא הזן סיסמה</div>
+        </div>
+        <button class="submit-btn" type="submit" id="loginBtn">
+          <div class="spinner"></div>
+          <span class="btn-text">כניסה למערכת ←</span>
+        </button>
+        <div class="form-note">אין לך חשבון? <a href="#" onclick="showTab('register');return false">הירשם חינם</a></div>
+        <div class="form-note" style="margin-top:6px"><a href="#" onclick="showForgotPass();return false" style="color:var(--muted);font-size:12px">שכחתי סיסמה</a></div>
+      </form>
+
+      <!-- FORGOT PASSWORD PANEL -->
+      <div id="forgotPanel" style="display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #e0c888;border-radius:12px;text-align:right">
+        <p style="font-size:13px;font-weight:700;color:#3a2000;margin:0 0 8px">איפוס סיסמה</p>
+        <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונשלח לך קישור לאיפוס סיסמה — תקף לשעה אחת.</p>
+        <input id="forgotEmail" type="email" placeholder="האימייל שלך" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
+        <div style="display:flex;gap:8px">
+          <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#e0b840;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
+          <button onclick="document.getElementById('forgotPanel').style.display='none'" style="padding:8px 14px;background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:8px;font-size:13px;cursor:pointer">ביטול</button>
+        </div>
+        <div id="forgotMsg" style="font-size:12px;margin-top:8px;color:#166534;display:none"></div>
       </div>
-      <button class="submit-btn" type="submit" id="loginBtn">
-        <div class="spinner"></div>
-        <span class="btn-text">כניסה למערכת ←</span>
-      </button>
-      <div class="form-note">אין לך חשבון? <a href="#" onclick="showTab('register');return false">הירשם חינם</a></div>
-      <div class="form-note" style="margin-top:6px"><a href="#" onclick="showForgotPass();return false" style="color:var(--muted);font-size:12px">שכחתי סיסמה</a></div>
-    </form>
 
-    <!-- FORGOT PASSWORD PANEL -->
-    <div id="forgotPanel" style="display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #e0c888;border-radius:12px;text-align:right">
-      <p style="font-size:13px;font-weight:700;color:#3a2000;margin:0 0 8px">איפוס סיסמה</p>
-      <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונשלח לך קישור לאיפוס סיסמה — תקף לשעה אחת.</p>
-      <input id="forgotEmail" type="email" placeholder="האימייל שלך" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
-      <div style="display:flex;gap:8px">
-        <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#e0b840;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
-        <button onclick="document.getElementById('forgotPanel').style.display='none'" style="padding:8px 14px;background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:8px;font-size:13px;cursor:pointer">ביטול</button>
+      <div class="trust-row">
+        <div class="trust-badge">🔒 מוצפן PBKDF2</div>
+        <div class="trust-badge">🇮🇱 עיבוד מקומי</div>
       </div>
-      <div id="forgotMsg" style="font-size:12px;margin-top:8px;color:#166534;display:none"></div>
-    </div>
 
-    <!-- TRUST BADGES -->
-    <div class="trust-row">
-      <div class="trust-badge">🔒 מוצפן PBKDF2</div>
-      <div class="trust-badge">🇮🇱 עיבוד מקומי</div>
     </div>
-
   </div>
 </div>
 
 <script>
 const USERS_KEY   = 'auditera_users_v1';
 const SESSION_KEY = 'auditera_session';
-// ── פרטי מנהל — שנה לפני הפצה ────────────────────────────
-const ADMIN_EMAIL    = 'support@auditera.co';
-// SHA-256(adminPass + SALT) — pre-computed; change via admin panel before distribution
-
-// ── Google Sheets — הדבק כאן את ה-URL מ-Apps Script ───────
-const SHEETS_URL = ''; // לדוגמה: 'https://script.google.com/macros/s/AKfyc.../exec'
-// ── Make Webhook — הדבק כאן את ה-URL מ-Make ────────────────
+const ADMIN_EMAIL    = 'admin@auditera.co';
+const SHEETS_URL = '';
 const MAKE_WEBHOOK_URL = 'https://auditera-license.auditera.workers.dev/notify';
-// ──────────────────────────────────────────────────────────
 
-// שולח נתוני הרשמה ל-Make → Airtable (fire-and-forget)
-// אין סיסמה / hash / salt — מידע רגיסטרציה בלבד
 function notifyMake(name, email, plan) {
   if (!MAKE_WEBHOOK_URL) return;
   try {
@@ -316,9 +351,7 @@ function notifyMake(name, email, plan) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         event: 'register',
-        name,
-        email,
-        plan,
+        name, email, plan,
         registered_at: new Date().toISOString(),
         consent_at: new Date().toISOString(),
         consent_version: '2026-08',
@@ -328,328 +361,202 @@ function notifyMake(name, email, plan) {
   } catch(e) {}
 }
 
-// ── עדכון פרטי לקוח ב-Make ────────────────────────────────
-// מנגנון: שמירת snapshot בכניסה אחרונה → השוואה בכניסה הנוכחית →
-// אם יש שינוי: event='profile_update' + שדות שהשתנו → Make מעדכן Airtable.
-// תמיד נשלח גם event='login' עם timestamp — שני ה-webhooks פועלים במקביל.
-
 const _SYNC_KEY_PFX = 'af_last_sync_';
-
 function _getSyncKey(email) { return _SYNC_KEY_PFX + email; }
-
 function _readCPAFromStorage(email) {
-  // קרא פרטי ר״ח שנשמרו ב-audit_agent (localStorage, מפתח גלובלי)
-  try {
-    const v = localStorage.getItem('af_cpa_info');
-    return v ? JSON.parse(v) : {};
-  } catch(e) { return {}; }
+  try { const v = localStorage.getItem('af_cpa_info'); return v ? JSON.parse(v) : {}; } catch(e) { return {}; }
 }
-
 function _getAnalysisCount(email) {
-  try {
-    const key = 'af_analysis_count_' + email;
-    return parseInt(localStorage.getItem(key) || '0', 10);
-  } catch(e) { return 0; }
+  try { return parseInt(localStorage.getItem('af_analysis_count_' + email) || '0', 10); } catch(e) { return 0; }
 }
-
 function _buildUserSnapshot(user) {
   const cpa = _readCPAFromStorage(user.email);
   return {
-    plan:          user.plan || 'trial',
-    name:          user.name || '',
-    licenseQuota:  user.licenseQuota || null,
-    cpaName:       cpa.name || '',
-    cpaLicense:    cpa.license || '',
-    cpaFirm:       cpa.firm || '',
-    cpaAddress:    cpa.address || '',
+    plan: user.plan || 'trial', name: user.name || '',
+    licenseQuota: user.licenseQuota || null,
+    cpaName: cpa.name || '', cpaLicense: cpa.license || '',
+    cpaFirm: cpa.firm || '', cpaAddress: cpa.address || '',
     analysisCount: _getAnalysisCount(user.email)
   };
 }
-
 function _detectChanges(prev, current) {
-  // השווה כל שדה — החזר מערך שמות שדות שהשתנו
   const changed = [];
-  const keys = Object.keys(current);
-  keys.forEach(k => {
-    if (String(prev[k] ?? '') !== String(current[k] ?? '')) changed.push(k);
-  });
+  Object.keys(current).forEach(k => { if (String(prev[k] ?? '') !== String(current[k] ?? '')) changed.push(k); });
   return changed;
 }
-
-// שולח עדכון כניסה ל-Make — כולל מסלול עדכני (fire-and-forget)
 function notifyMakeLogin(user) {
   if (!MAKE_WEBHOOK_URL) return;
   const now = new Date().toISOString();
-  const daysSinceReg = user.created
-    ? Math.floor((Date.now() - new Date(user.created)) / 86400000)
-    : null;
-
-  // ── 1. event=login — תמיד נשלח ─────────────────────────
   try {
     fetch(MAKE_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        event:    'login',
-        email:    user.email,
-        name:     user.name || '',
-        plan:     user.plan || 'trial',
-        login_at: now
-      })
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ event: 'login', email: user.email, name: user.name || '', plan: user.plan || 'trial', login_at: now })
     }).catch(() => {});
   } catch(e) {}
-
-  // ── 2. event=profile_update — רק אם יש שינוי ──────────
   try {
-    const syncKey  = _getSyncKey(user.email);
-    const current  = _buildUserSnapshot(user);
-    const prevRaw  = localStorage.getItem(syncKey);
-    const prev     = prevRaw ? JSON.parse(prevRaw) : {};
-    const changed  = _detectChanges(prev, current);
-
+    const syncKey = _getSyncKey(user.email);
+    const current = _buildUserSnapshot(user);
+    const prev = JSON.parse(localStorage.getItem(syncKey) || '{}');
+    const changed = _detectChanges(prev, current);
     if (changed.length > 0) {
-      // בנה payload עם רק השדות שהשתנו + מטה-דאטה
       const updatedFields = {};
       changed.forEach(k => { updatedFields[k] = current[k]; });
-
       fetch(MAKE_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event:         'profile_update',
-          email:         user.email,
-          name:          current.name,
-          plan:          current.plan,
-          updated_at:    now,
-          updatedFields: updatedFields
-        })
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event: 'profile_update', email: user.email, name: current.name, plan: current.plan, updated_at: now, updatedFields })
       }).catch(() => {});
     }
-
-    // שמור snapshot עדכני לכניסה הבאה
     localStorage.setItem(syncKey, JSON.stringify(current));
   } catch(e) {}
 }
-
-// שולח נתוני הרשמה ל-Google Sheets (fire-and-forget)
 function notifySheets(name, email, plan) {
-  if (!SHEETS_URL) return; // אם URL לא הוגדר — דלג
+  if (!SHEETS_URL) return;
   try {
     fetch(SHEETS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' }, // Apps Script דורש text/plain למניעת CORS preflight
-      body: JSON.stringify({
-        name,
-        email,
-        plan,
-        source: document.referrer ? 'קישור חיצוני' : 'כתובת ישירה',
-        version: '1.0',
-        ip: '—'
-      })
-    }).catch(() => {}); // לא חוסם את ההרשמה גם אם נכשל
+      method: 'POST', headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ name, email, plan, source: document.referrer ? 'קישור חיצוני' : 'כתובת ישירה', version: '1.0', ip: '—' })
+    }).catch(() => {});
   } catch(e) {}
 }
-// ──────────────────────────────────────────────────────────
 
-// ── הפנייה אוטומטית אם כבר מחובר ──────────────────────────
 (function(){
-  try{
+  try {
     const s = JSON.parse(sessionStorage.getItem(SESSION_KEY));
     if(s && s.loggedIn) window.location.replace('audit_agent.html');
-  }catch(e){}
-  // קביעת טאב מ-URL param
+  } catch(e) {}
   const p = new URLSearchParams(window.location.search);
   if(p.get('tab')==='register') showTab('register');
 })();
 
-// ── TABS ───────────────────────────────────────────────────
-function showTab(tab){
+function showTab(tab) {
   const isReg = tab==='register';
   document.getElementById('registerForm').style.display = isReg ? 'block' : 'none';
   document.getElementById('loginForm').style.display    = isReg ? 'none'  : 'block';
   document.getElementById('tab-register').classList.toggle('active', isReg);
   document.getElementById('tab-login').classList.toggle('active', !isReg);
-  document.getElementById('card-subtitle').textContent = isReg ? 'צור חשבון חינם' : 'ברוך השב';
+  document.getElementById('card-subtitle').textContent = isReg ? 'צור חשבון חינם — ללא כרטיס אשראי' : 'ברוך השב — המשך לחשבונך';
   clearAlert();
 }
 
-// ── HELPERS ────────────────────────────────────────────────
-
-// יצירת salt אקראי (16 bytes → hex)
-function generateSalt(){
-  return Array.from(crypto.getRandomValues(new Uint8Array(16)))
-    .map(b=>b.toString(16).padStart(2,'0')).join('');
+function generateSalt() {
+  return Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-
-// PBKDF2 — איטי בכוונה (100,000 iterations), salt אקראי פר-משתמש
-// אין salt קבוע בקוד — אין rainbow tables אפשריות
-async function hashPassPBKDF2(pass, salt){
+async function hashPassPBKDF2(pass, salt) {
   const enc = new TextEncoder();
-  const keyMat = await crypto.subtle.importKey(
-    'raw', enc.encode(pass), {name:'PBKDF2'}, false, ['deriveBits']
-  );
-  const bits = await crypto.subtle.deriveBits(
-    {name:'PBKDF2', salt:enc.encode(salt), iterations:100000, hash:'SHA-256'},
-    keyMat, 256
-  );
+  const keyMat = await crypto.subtle.importKey('raw', enc.encode(pass), {name:'PBKDF2'}, false, ['deriveBits']);
+  const bits = await crypto.subtle.deriveBits({name:'PBKDF2', salt:enc.encode(salt), iterations:100000, hash:'SHA-256'}, keyMat, 256);
   return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-
-// legacy — SHA-256 עם salt קבוע (לצורך migration בלבד)
-async function _hashPassLegacy(pass){
+async function _hashPassLegacy(pass) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pass+'bskc$szWk0fH=1Bx%E49Ck7M^w=gEpJY'));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-function showAlert(msg, type='error'){
+function showAlert(msg, type='error') {
   const el = document.getElementById('alertBox');
-  el.textContent = msg;
-  el.className = `alert show ${type}`;
+  el.textContent = msg; el.className = `alert show ${type}`;
 }
-function clearAlert(){
-  document.getElementById('alertBox').className = 'alert';
-}
-function setLoading(btnId, on){
+function clearAlert() { document.getElementById('alertBox').className = 'alert'; }
+function setLoading(btnId, on) {
   const btn = document.getElementById(btnId);
-  btn.classList.toggle('loading', on);
-  btn.disabled = on;
+  btn.classList.toggle('loading', on); btn.disabled = on;
 }
-function fieldErr(id, msg, show){
+function fieldErr(id, msg, show) {
   const el = document.getElementById(id);
-  el.textContent = msg;
-  el.classList.toggle('show', show);
-  el.previousElementSibling?.classList?.toggle('error', show);
-  // input is the sibling before the error div (or inside input-wrap)
+  el.textContent = msg; el.classList.toggle('show', show);
   const inp = document.getElementById(id.replace('Err',''));
   if(inp) inp.classList.toggle('error', show);
 }
-function togglePass(inputId, btn){
+function togglePass(inputId, btn) {
   const inp = document.getElementById(inputId);
   const isPass = inp.type==='password';
   inp.type = isPass ? 'text' : 'password';
-  btn.innerHTML = isPass ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>' : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+  btn.innerHTML = isPass
+    ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+    : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
 }
 
-// ── REGISTER ───────────────────────────────────────────────
-async function doRegister(e){
-  e.preventDefault();
-  clearAlert();
+async function doRegister(e) {
+  e.preventDefault(); clearAlert();
   const name  = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
   const pass  = document.getElementById('regPass').value;
-  let ok = true;
   const consent = document.getElementById('regConsent').checked;
+  let ok = true;
   if(!name){ fieldErr('regNameErr','נא הזן שם מלא',true); ok=false; } else fieldErr('regNameErr','',false);
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ fieldErr('regEmailErr','נא הזן כתובת אימייל תקינה',true); ok=false; } else fieldErr('regEmailErr','',false);
   if(pass.length<6){ fieldErr('regPassErr','סיסמה חייבת להכיל לפחות 6 תווים',true); ok=false; } else fieldErr('regPassErr','',false);
   if(!consent){ fieldErr('regConsentErr','יש לאשר את תנאי השימוש ומדיניות הפרטיות כדי להמשיך',true); ok=false; } else fieldErr('regConsentErr','',false);
   if(!ok) return;
-
   setLoading('regBtn', true);
-  try{
+  try {
     const users = JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
-    if(users.find(u=>u.email===email)){
-      showAlert('כתובת האימייל הזו כבר רשומה. נסה להתחבר.');
-      setLoading('regBtn', false);
-      return;
-    }
+    if(users.find(u=>u.email===email)){ showAlert('כתובת האימייל הזו כבר רשומה. נסה להתחבר.'); setLoading('regBtn',false); return; }
     const salt = generateSalt();
     const hash = await hashPassPBKDF2(pass, salt);
     users.push({ name, email, hash, salt, created: new Date().toISOString(), plan: 'trial' });
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    notifySheets(name, email, 'trial'); // ← שולח ל-Google Sheets
-    notifyMake(name, email, 'trial');   // ← שולח ל-Make → Airtable
+    notifySheets(name, email, 'trial');
+    notifyMake(name, email, 'trial');
     const session = { email, name, loggedIn:true };
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
     showAlert('החשבון נוצר בהצלחה! מעביר אותך למערכת...', 'success');
     setTimeout(()=>{ window.location.href='audit_agent.html'; }, 900);
-  }catch(err){
-    showAlert('אירעה שגיאה. נסה שוב.');
-    setLoading('regBtn', false);
-  }
+  } catch(err) { showAlert('אירעה שגיאה. נסה שוב.'); setLoading('regBtn', false); }
 }
 
-// ── LOGIN ──────────────────────────────────────────────────
-async function doLogin(e){
-  e.preventDefault();
-  clearAlert();
+async function doLogin(e) {
+  e.preventDefault(); clearAlert();
   const email = document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass  = document.getElementById('loginPass').value;
   let ok = true;
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ fieldErr('loginEmailErr','נא הזן כתובת אימייל תקינה',true); ok=false; } else fieldErr('loginEmailErr','',false);
-  if(!pass){  fieldErr('loginPassErr','נא הזן סיסמה',true); ok=false; } else fieldErr('loginPassErr','',false);
+  if(!pass){ fieldErr('loginPassErr','נא הזן סיסמה',true); ok=false; } else fieldErr('loginPassErr','',false);
   if(!ok) return;
-
   setLoading('loginBtn', true);
-  try{
-    // ── כניסת מנהל ────────────────────────────────────────
-    if(email === ADMIN_EMAIL){
-      // אימות מול Cloudflare Worker — hash לא נמצא בסורס
+  try {
+    if(email === ADMIN_EMAIL) {
       let adminOk = false;
       try {
         const ar = await fetch(MAKE_WEBHOOK_URL.replace('/notify','/admin-auth'), {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ password: pass })
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ password: pass })
         });
         const aj = await ar.json();
-        if (aj.ok && aj.token) {
-          sessionStorage.setItem('af_admin_token', aj.token);
-          adminOk = true;
-        }
-      } catch(e) {
-        adminOk = false;
-      }
-      if(adminOk){
+        if(aj.ok && aj.token){ sessionStorage.setItem('af_admin_token', aj.token); if(aj.expires) sessionStorage.setItem('af_admin_expires', aj.expires); adminOk = true; }
+      } catch(e) { adminOk = false; }
+      if(adminOk) {
         const session = { email:'admin', name:'מנהל מערכת', loggedIn:true, isAdmin:true };
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
         showAlert('כניסת מנהל מוצלחת! מעביר אותך...', 'success');
         setTimeout(()=>{ window.location.href='admin.html'; }, 700);
         return;
-      } else {
-        showAlert('סיסמה שגויה. נסה שנית.');
-        setLoading('loginBtn', false);
-        return;
-      }
+      } else { showAlert('סיסמה שגויה. נסה שנית.'); setLoading('loginBtn', false); return; }
     }
-    // ── כניסה רגילה ───────────────────────────────────────
     const users = JSON.parse(localStorage.getItem(USERS_KEY)||'[]');
     const user  = users.find(u=>u.email===email);
     if(!user){ showAlert('לא נמצא חשבון עם כתובת אימייל זו.'); setLoading('loginBtn',false); return; }
-
-    // ── אימות סיסמה + migration אוטומטי ──────────────────
     let passOk = false;
-    if(user.salt){
-      // PBKDF2 — פורמט חדש
+    if(user.salt) {
       const hash = await hashPassPBKDF2(pass, user.salt);
       passOk = (hash === user.hash);
     } else {
-      // SHA-256 legacy — בדוק ואז שדרג ל-PBKDF2
       const legacyHash = await _hashPassLegacy(pass);
-      if(legacyHash === user.hash){
+      if(legacyHash === user.hash) {
         passOk = true;
-        // שדרוג שקט ל-PBKDF2
         const newSalt = generateSalt();
         user.salt = newSalt;
         user.hash = await hashPassPBKDF2(pass, newSalt);
       }
     }
     if(!passOk){ showAlert('סיסמה שגויה. נסה שנית.'); setLoading('loginBtn',false); return; }
-
-    // ── עדכון כניסה אחרונה ────────────────────────────────
     user.lastLogin = new Date().toISOString();
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    notifyMakeLogin(user); // ← שולח עדכון מסלול + פרטי כניסה ל-Make
+    notifyMakeLogin(user);
     const session = { email, name:user.name||email, loggedIn:true };
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
     showAlert('כניסה מוצלחת! מעביר אותך...', 'success');
     setTimeout(()=>{ window.location.href='audit_agent.html'; }, 700);
-  }catch(err){
-    showAlert('אירעה שגיאה. נסה שוב.');
-    setLoading('loginBtn', false);
-  }
+  } catch(err) { showAlert('אירעה שגיאה. נסה שוב.'); setLoading('loginBtn', false); }
 }
-
-
-
 </script>
 
 <!-- COOKIE CONSENT -->
@@ -660,50 +567,44 @@ async function doLogin(e){
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
 
 <script>
-function toggleMobileMenu(){
+function toggleMobileMenu() {
   document.getElementById('hamburger').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
 }
-document.addEventListener('click',function(e){
-  var m=document.getElementById('mobileMenu'),h=document.getElementById('hamburger');
+document.addEventListener('click', function(e) {
+  var m=document.getElementById('mobileMenu'), h=document.getElementById('hamburger');
   if(m&&m.classList.contains('open')&&!m.contains(e.target)&&!h.contains(e.target)){m.classList.remove('open');h.classList.remove('open');}
 });
-function showForgotPass(){
+function showForgotPass() {
   const panel=document.getElementById('forgotPanel');
   panel.style.display=panel.style.display==='none'?'block':'none';
   const em=document.getElementById('loginEmail').value;
   if(em) document.getElementById('forgotEmail').value=em;
   document.getElementById('forgotMsg').style.display='none';
 }
-
-async function sendForgotRequest(){
+async function sendForgotRequest() {
   const email=(document.getElementById('forgotEmail').value||'').trim().toLowerCase();
   const msg=document.getElementById('forgotMsg');
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-    msg.style.color='#dc2626';msg.textContent='נא הזן כתובת אימייל תקינה';msg.style.display='block';return;
-  }
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.style.color='#dc2626';msg.textContent='נא הזן כתובת אימייל תקינה';msg.style.display='block';return;}
   msg.style.color='#7a5c2e';msg.textContent='שולח...';msg.style.display='block';
-  try{
+  try {
     const resp=await fetch('https://auditera-license.auditera.workers.dev/forgot-password',{
       method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({email,base_url:window.location.origin + '/reset.html'})
     });
     const data=await resp.json();
     if(!data.ok){msg.style.color='#dc2626';msg.textContent='שגיאה — נסה שוב';return;}
-  }catch(e){}
+  } catch(e) {}
   msg.style.color='#166534';
   msg.textContent='✓ קישור איפוס נשלח לאימייל שלך — תקף לשעה אחת.';
 }
 
-// ── איפוס סיסמה דרך קישור ?reset=TOKEN ──────────────────────
 (function(){
   const params=new URLSearchParams(window.location.search);
   const resetToken=params.get('reset');
   if(!resetToken) return;
   history.replaceState(null,'',window.location.pathname);
-  // הצג מסך איפוס
   document.addEventListener('DOMContentLoaded',()=>{
-    const box=document.querySelector('.auth-box')||document.querySelector('.card')||document.body;
     const panel=document.createElement('div');
     panel.id='resetPassPanel';
     panel.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:9999';
@@ -719,7 +620,7 @@ async function sendForgotRequest(){
   });
 })();
 
-async function doResetPass(token){
+async function doResetPass(token) {
   const p1=(document.getElementById('newPass1').value||'').trim();
   const p2=(document.getElementById('newPass2').value||'').trim();
   const msg=document.getElementById('resetMsg');
@@ -727,29 +628,36 @@ async function doResetPass(token){
   if(p1!==p2){msg.textContent='הסיסמאות אינן תואמות';return;}
   msg.style.color='#7a5c2e';msg.textContent='מאמת...';
   let email;
-  try{
+  try {
     const resp=await fetch('https://auditera-license.auditera.workers.dev/verify-reset',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({token})
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token})
     });
     const data=await resp.json();
     if(!data.ok){msg.style.color='#dc2626';msg.textContent='הקישור פג תוקף או כבר שומש — בקש קישור חדש';return;}
     email=data.email;
-  }catch(e){msg.style.color='#dc2626';msg.textContent='שגיאת רשת — נסה שוב';return;}
-  // שמור סיסמה חדשה ב-localStorage
+  } catch(e) {msg.style.color='#dc2626';msg.textContent='שגיאת רשת — נסה שוב';return;}
   const users=JSON.parse(localStorage.getItem('auditera_users_v1')||'[]');
   const u=users.find(x=>x.email===email);
   if(!u){msg.style.color='#dc2626';msg.textContent='משתמש לא נמצא במכשיר זה — התחבר מהמכשיר המקורי';return;}
-  u.hash=await sha256(p1);
+  u.hash=await _hashPassLegacy(p1);
   localStorage.setItem('auditera_users_v1',JSON.stringify(users));
   msg.style.color='#166534';msg.textContent='✓ סיסמה עודכנה בהצלחה!';
   setTimeout(()=>{document.getElementById('resetPassPanel').remove();},1500);
 }
-
 </script>
-<div style="text-align:center;padding:12px;font-size:12px;color:#999;border-top:1px solid #f0f0f0;margin-top:24px">
-  <a href="accessibility.html" style="color:#999;text-decoration:underline">הצהרת נגישות</a> ·
-  <a href="legal.html" style="color:#999;text-decoration:underline">תנאי שימוש ופרטיות</a>
-</div>
+
+<footer>
+  <div class="footer-brand"><span>Au</span>ditera</div>
+  <div class="footer-links">
+    <a href="features.html">תכונות</a>
+    <a href="how.html">איך זה עובד</a>
+    <a href="pricing.html">תמחור</a>
+    <a href="contact.html">צור קשר</a>
+    <a href="legal.html">תנאי שימוש</a>
+    <a href="legal.html#privacy">פרטיות</a>
+    <a href="accessibility.html">נגישות</a>
+  </div>
+  <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות.</div>
+</footer>
 </body>
 </html>

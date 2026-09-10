@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Auditera",
+  "name_for_model": "auditera",
+  "description_for_human": "כלי ביקורת פיננסית חכם לרואי חשבון ישראליים — ניתוח עסקאות, זיהוי חריגות, דוחות מקצועיים.",
+  "description_for_model": "Auditera is an AI-powered financial audit tool for Israeli CPAs. It analyzes CSV/Excel accounting files to detect anomalies, verify Benford's law, compute VAT and withholding tax, generate professional audit reports, and export to Israeli accounting software (Priority, Rivhit, HashIT). All processing is local — no data leaves the browser.",
+  "auth": { "type": "none" },
+  "api": { "type": "none" },
+  "logo_url": "https://auditera.co/og-image.png",
+  "contact_email": "support@auditera.co",
+  "legal_info_url": "https://auditera.co/legal.html"
+}

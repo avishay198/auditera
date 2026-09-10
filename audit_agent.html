@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';">
 <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
 <!-- CSP applied server-side only; removed for local file:// usage -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -86,12 +87,12 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .exp-menu-item{display:block;width:100%;text-align:right;padding:8px 14px;background:none;border:none;cursor:pointer;font-size:12px;color:var(--text);transition:background .15s}
 .exp-menu-item:hover{background:var(--gold3)}
 .hbtn:hover{background:var(--gold3);border-color:var(--accent)}
-.hbtn.demo{background:var(--primary);border-color:var(--primary);color:#C99A2E;font-weight:700}
+.hbtn.demo{background:var(--primary);border-color:var(--primary);color:#e0b840;font-weight:700}
 .hbtn.demo:hover{background:#5a3010;border-color:#5a3010}
 .container{max-width:1300px;margin:0 auto;padding:18px}
 .tabs{display:flex;gap:3px;background:var(--card);border-radius:12px;padding:5px;margin-bottom:18px;box-shadow:var(--shadow);border:1px solid var(--border);overflow-x:auto}
 .tab{flex:1;min-width:80px;padding:8px 8px;border:none;background:transparent;border-radius:9px;cursor:pointer;font-size:12px;font-weight:600;color:#9A7A00;transition:.18s;white-space:nowrap;text-align:center}
-.tab.active{background:var(--primary);color:#C99A2E;box-shadow:0 2px 8px rgba(58,32,0,.22);font-weight:600}
+.tab.active{background:var(--primary);color:#e0b840;box-shadow:0 2px 8px rgba(58,32,0,.22);font-weight:600}
 .tab:hover:not(.active){background:var(--gold3)}
 .tab-panel{display:none}.tab-panel.active{display:block}
 .card{background:var(--card);border-radius:16px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px}
@@ -211,7 +212,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .sl-ok{background:#dcfce7;color:#15803d}.sl-err{background:#fee2e2;color:#dc2626}
 .btn-rm{background:none;border:none;cursor:pointer;color:var(--muted);font-size:16px;padding:3px;border-radius:4px}
 .btn-rm:hover{color:var(--danger);background:#fee2e2}
-.analyze-btn{width:100%;margin-top:16px;padding:15px;background:var(--gold3);color:#C99A2E;border:1.5px solid var(--border);border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px;box-shadow:0 2px 12px rgba(58,32,0,.10)}
+.analyze-btn{width:100%;margin-top:16px;padding:15px;background:var(--gold3);color:#e0b840;border:1.5px solid var(--border);border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;letter-spacing:.2px;box-shadow:0 2px 12px rgba(58,32,0,.10)}
 .analyze-btn:hover:not(:disabled){background:var(--gold3);border-color:var(--accent);box-shadow:0 4px 20px rgba(58,32,0,.15);transform:translateY(-1px)}
 .analyze-btn:disabled{opacity:.7;cursor:not-allowed;box-shadow:none;transform:none;filter:grayscale(20%)}
 .tab-ai{background:linear-gradient(135deg,#7c3aed,#4f46e5)!important;color:#fff!important;font-weight:700!important}
@@ -221,7 +222,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .sub-tabs .tab.active{background:#fff;color:var(--primary);font-weight:700;box-shadow:0 2px 8px rgba(58,32,0,.12);border-bottom:2.5px solid var(--accent);border-radius:8px 8px 5px 5px}
 .sub-tabs .tab:hover:not(.active){background:rgba(255,255,255,.6)}
 .qq-chip{padding:5px 11px;background:#fdf3dc;border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;color:var(--pl);font-family:inherit;transition:.15s;white-space:nowrap}
-.qq-chip:hover{background:#C99A2E;border-color:var(--accent);color:var(--primary)}
+.qq-chip:hover{background:#e0b840;border-color:var(--accent);color:var(--primary)}
 .chat-msg{display:flex;gap:9px;align-items:flex-start;animation:fadeIn .2s ease}
 .chat-msg.user{flex-direction:row-reverse}
 .chat-bubble{max-width:82%;padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.55;word-break:break-word}
@@ -246,7 +247,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .cl-item.sel{background:#fdf3dc;border-color:var(--accent)}
 .cl-iname{font-size:13px;font-weight:700;color:var(--text)}
 .cl-imeta{font-size:11px;color:var(--muted);margin-top:1px}
-.cl-ibadge{font-size:10px;padding:1px 7px;border-radius:20px;background:#C99A2E;color:var(--pl);margin-top:4px;display:inline-block}
+.cl-ibadge{font-size:10px;padding:1px 7px;border-radius:20px;background:#e0b840;color:var(--pl);margin-top:4px;display:inline-block}
 .cl-detail{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow-y:auto}
 .cl-dhead{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:14px}
 .cl-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0;color:#fff;background:var(--primary)}
@@ -262,7 +263,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;background:
 .cl-form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cl-form label{font-size:11px;font-weight:600;display:block;margin-bottom:3px;color:var(--muted)}
 .cl-btn{padding:6px 13px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid;color:#9A7A00}
-.cl-btn-pri{background:var(--primary);color:#C99A2E;border-color:var(--primary)}
+.cl-btn-pri{background:var(--primary);color:#e0b840;border-color:var(--primary)}
 .cl-btn-sec{background:#fff;color:var(--text);border-color:var(--border)}
 .cl-btn-del{background:#fff;color:var(--danger);border-color:var(--danger)}
 .col-mapper{background:#fffdf5;border:1px solid var(--border);border-radius:9px;padding:14px;margin-top:10px}
@@ -302,7 +303,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 .atitle{font-weight:700;font-size:13px;margin-bottom:3px}
 .adesc{font-size:12px;color:var(--muted);line-height:1.5}
 .sbadge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;align-self:flex-start;flex-shrink:0}
-.sh{background:#fde8e8;color:#a32d2d}.sm{background:#fdf3dc;color:#7a5c2e}.sl2{background:#C99A2E;color:var(--pl)}
+.sh{background:#fde8e8;color:#a32d2d}.sm{background:#fdf3dc;color:#7a5c2e}.sl2{background:#e0b840;color:var(--pl)}
 /* ── anomaly accordion ── */
 .anom-grp{margin-bottom:8px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
 .anom-grp-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;background:var(--bg);transition:background .15s}
@@ -312,7 +313,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 .anom-rpanel{gap:8px;padding:8px 14px 10px;border-top:1px dashed rgba(58,32,0,.12);background:rgba(255,255,255,.55)}
 .anom-flt-btn{padding:5px 11px;font-size:12px;font-family:inherit;border:1px solid var(--border);border-radius:18px;background:var(--card);color:var(--text);cursor:pointer;font-weight:600;transition:all .15s;white-space:nowrap}
 .anom-flt-btn:hover{border-color:var(--primary);color:var(--primary)}
-.anom-flt-btn.af-active{background:var(--primary);color:#C99A2E;border-color:var(--primary)}
+.anom-flt-btn.af-active{background:var(--primary);color:#e0b840;border-color:var(--primary)}
 .comp-col{padding:20px;text-align:center;background:linear-gradient(135deg,var(--bg),#f5f0e8);border-radius:12px;border:1px solid var(--border);transition:.15s}
 .comp-col:hover{box-shadow:0 4px 16px rgba(58,32,0,.1);transform:translateY(-1px)}
 .comp-col h4{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);letter-spacing:.3px}
@@ -349,7 +350,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 .cf-sel{font-size:11px;padding:4px 8px;border:1px solid var(--border);border-radius:8px;background:#fff;font-family:inherit;direction:rtl;cursor:pointer;color:var(--text);transition:border-color .2s}
 .cf-sel:hover{border-color:var(--gold)}
 .cf-total{display:flex;justify-content:space-between;padding:10px 18px;font-weight:700;font-size:13px;background:rgba(58,32,0,.04);border-top:1px solid var(--border)}
-.cf-grand{display:flex;justify-content:space-between;align-items:center;padding:15px 22px;font-weight:800;font-size:16px;background:#3a2000;color:#C99A2E;border-radius:14px;margin-top:18px;box-shadow:0 4px 16px rgba(58,32,0,.28)}
+.cf-grand{display:flex;justify-content:space-between;align-items:center;padding:15px 22px;font-weight:800;font-size:16px;background:#3a2000;color:#e0b840;border-radius:14px;margin-top:18px;box-shadow:0 4px 16px rgba(58,32,0,.28)}
 .cf-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}@media(max-width:600px){.cf-kpi-row{grid-template-columns:1fr 1fr;gap:8px}}
 .cf-kpi{padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--white);box-shadow:0 2px 8px rgba(58,32,0,.07);transition:box-shadow .2s;position:relative;overflow:hidden}
 .cf-kpi:hover{box-shadow:0 4px 18px rgba(58,32,0,.13)}
@@ -358,7 +359,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 .cf-kpi .cf-kpi-val{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
 .oi-filter{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);cursor:pointer;background:#fff;color:var(--muted);transition:.15s;user-select:none}
 .oi-filter:hover{border-color:var(--primary);color:var(--primary)}
-.oi-filter.active{background:var(--primary);color:#C99A2E;border-color:var(--primary)}
+.oi-filter.active{background:var(--primary);color:#e0b840;border-color:var(--primary)}
 .oi-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
 .oi-row:last-child{border-bottom:none}
 .oi-row.done-row .oi-text{text-decoration:line-through;color:var(--muted)}
@@ -441,14 +442,14 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 .period-clear{font-size:11.5px;color:var(--muted);cursor:pointer;border:1px solid var(--border);background:none;font-family:inherit;padding:3px 9px;border-radius:6px}
 .period-clear:hover{background:var(--border)}
 /* ── BALANCE CARD ── */
-.balance-card{display:none;background:linear-gradient(135deg,#3a2000 0%,#5a3010 100%);border-radius:12px;padding:16px 20px;color:#C99A2E;margin-bottom:14px}
+.balance-card{display:none;background:linear-gradient(135deg,#3a2000 0%,#5a3010 100%);border-radius:12px;padding:16px 20px;color:#e0b840;margin-bottom:14px}
 .balance-card.show{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .balance-item{text-align:center;min-width:100px}
 .balance-lbl{font-size:11px;opacity:.6;margin-bottom:4px}
 .balance-val{font-size:20px;font-weight:800}
 .balance-sep{font-size:22px;opacity:.45}
-.balance-input{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.35);color:#C99A2E;border-radius:7px;padding:4px 8px;font-size:15px;font-weight:700;width:130px;text-align:center;font-family:inherit;direction:ltr}
-.balance-input::placeholder{opacity:.35;color:#C99A2E}
+.balance-input{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.35);color:#e0b840;border-radius:7px;padding:4px 8px;font-size:15px;font-weight:700;width:130px;text-align:center;font-family:inherit;direction:ltr}
+.balance-input::placeholder{opacity:.35;color:#e0b840}
 /* ── BUDGET ── */
 .budget-table{width:100%;border-collapse:collapse;font-size:13px}
 .budget-table th{background:var(--gold3);color:var(--primary);padding:9px 12px;text-align:right;font-size:12px;font-weight:700;border-bottom:2px solid var(--border)}
@@ -468,7 +469,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 .recon-tbl td{padding:7px 12px;border-bottom:1px solid rgba(0,0,0,.06);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 .analyze-btn.loading{background:var(--gold3);opacity:.85;cursor:not-allowed}
-.analyze-btn.loading .btn-spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(245,230,192,.35);border-top-color:#C99A2E;border-radius:50%;animation:spin .75s linear infinite;vertical-align:middle;margin-left:6px}
+.analyze-btn.loading .btn-spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(245,230,192,.35);border-top-color:#e0b840;border-radius:50%;animation:spin .75s linear infinite;vertical-align:middle;margin-left:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .skel{background:linear-gradient(90deg,#f0e8d8 25%,#e8dcc8 50%,#f0e8d8 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -555,10 +556,10 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       <button class="hbtn" onclick="toggleExportMenu()" style="background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700"><i class="ti ti-upload"></i> ייצוא למערכות ▾</button>
       <div id="exportMenu" style="display:none;position:absolute;top:110%;left:0;min-width:200px;background:var(--card);border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:300;padding:6px 0">
         <div style="padding:6px 14px 4px;font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase">בחר פורמט</div>
-        <button onclick="exportPriority();toggleExportMenu()" class="exp-menu-item">פריוריטי — יומן ראשי</button>
+        <button onclick="_featureAllowed('export_prio')?exportPriority():_showUpgradePlan('ייצוא פריוריטי');toggleExportMenu()" class="exp-menu-item">פריוריטי — יומן ראשי</button>
         <button onclick="exportHashIT();toggleExportMenu()" class="exp-menu-item">חשבIT — ייבוא תנועות</button>
         <button onclick="exportHashIT('hashavshevet');toggleExportMenu()" class="exp-menu-item">חשבשבת — תנועות יומן</button>
-        <button onclick="exportRivhit();toggleExportMenu()" class="exp-menu-item">ריווחית — פקודות יומן</button>
+        <button onclick="_featureAllowed('export_rivhit')?exportRivhit():_showUpgradePlan('ייצוא ריווחית');toggleExportMenu()" class="exp-menu-item">ריווחית — פקודות יומן</button>
         <div style="border-top:1px solid var(--border);margin:4px 0"></div>
         <button onclick="exportWHTForPriority();toggleExportMenu()" class="exp-menu-item">פריוריטי — ניכוי מס במקור</button>
       </div>
@@ -600,7 +601,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <button class="tab" onclick="switchTab('analysis',this)"><i class="ti ti-chart-bar"></i> ניתוח</button>
     <button class="tab" onclick="switchTab('trialbalance',this)"><i class="ti ti-scale"></i> מאזן</button>
     <button class="tab" onclick="switchTab('tax',this)"><i class="ti ti-receipt-tax"></i> מיסוי</button>
-    <button class="tab tab-ai" onclick="switchTab('ai',this)"><i class="ti ti-robot"></i> AI</button>
+    <button class="tab tab-ai" onclick="_featureAllowed('ai')?switchTab('ai',this):_showUpgradePlan('דוח AI מקצועי')"><i class="ti ti-robot"></i> AI</button>
     <button class="tab" onclick="switchTab('bank',this)"><i class="ti ti-building-bank"></i> בנק</button>
     <button class="tab" onclick="switchTab('report',this)"><i class="ti ti-file-report"></i> דוח</button>
   </div>
@@ -764,15 +765,15 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   <div id="tab-analysis" class="tab-panel">
     <div class="sub-tabs">
       <!-- ביקורת שנתית (נסתרים במצב חודשי) -->
-      <button class="tab active" id="stab-benford" onclick="switchSubTab('analysis','benford',this)"><i class="ti ti-123"></i> בנפורד</button>
-      <button class="tab" id="stab-vendors" onclick="switchSubTab('analysis','vendors',this)"><i class="ti ti-users"></i> ספקים</button>
-      <button class="tab" id="stab-mus" onclick="switchSubTab('analysis','mus',this)"><i class="ti ti-chart-dots-3"></i> מדגם MUS</button>
+      <button class="tab active" id="stab-benford" onclick="_planGateSubTab('analysis','benford',this,'חוק בנפורד')"><i class="ti ti-123"></i> בנפורד</button>
+      <button class="tab" id="stab-vendors" onclick="_planGateSubTab('analysis','vendors',this,'רשת ספקים')"><i class="ti ti-users"></i> ספקים</button>
+      <button class="tab" id="stab-mus" onclick="_planGateSubTab('analysis','mus',this,'מדגם MUS')"><i class="ti ti-chart-dots-3"></i> מדגם MUS</button>
       <!-- ביקורת חודשית: תקציב (ימין) → תזרים (אמצע) → השוואה (שמאל) -->
-      <button class="tab" id="stab-budget" onclick="switchSubTab('analysis','budget',this)"><i class="ti ti-calculator"></i> תקציב</button>
+      <button class="tab" id="stab-budget" onclick="_planGateSubTab('analysis','budget',this,'השוואה לתקציב')"><i class="ti ti-calculator"></i> תקציב</button>
       <button class="tab" id="stab-cashflow" onclick="switchSubTab('analysis','cashflow',this)"><i class="ti ti-cash"></i> תזרים</button>
-      <button class="tab" id="stab-compare" onclick="switchSubTab('analysis','compare',this)"><i class="ti ti-arrows-exchange"></i> השוואה</button>
+      <button class="tab" id="stab-compare" onclick="_planGateSubTab('analysis','compare',this,'השוואת תקופות')"><i class="ti ti-arrows-exchange"></i> השוואה</button>
       <!-- שנתי בלבד -->
-      <button class="tab" id="stab-materiality" onclick="switchSubTab('analysis','materiality',this)"><i class="ti ti-scale-outline"></i> מהותיות</button>
+      <button class="tab" id="stab-materiality" onclick="_planGateSubTab('analysis','materiality',this,'מהותיות')"><i class="ti ti-scale-outline"></i> מהותיות</button>
     </div>
     <div id="subpanel-analysis-benford" data-subpanel>
       <div id="benfordContent"><div class="empty"><div class="ei"><i class="ti ti-wave-sine"></i></div><h3>חוק בנפורד</h3><p>הפעל ניתוח כדי לבחון התפלגות ספרות ראשונות</p></div></div>
@@ -843,7 +844,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         <div class="ch">
           <span class="ct">&#x1F4CB; השוואה לתקציב חודשי</span>
           <div style="display:flex;gap:8px">
-            <button onclick="saveBudget()" class="hbtn" style="background:var(--primary);color:#C99A2E;border-color:var(--primary);font-size:12px"><i class="ti ti-device-floppy"></i> שמור</button>
+            <button onclick="saveBudget()" class="hbtn" style="background:var(--primary);color:#e0b840;border-color:var(--primary);font-size:12px"><i class="ti ti-device-floppy"></i> שמור</button>
             <button onclick="clearBudget()" class="hbtn" style="font-size:12px">&#x1F5D1; נקה</button>
           </div>
         </div>
@@ -883,8 +884,8 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 
   <div id="tab-tax" class="tab-panel">
     <div class="sub-tabs">
-      <button class="tab active" id="stab-vat" onclick="switchSubTab('tax','vat',this)"><i class="ti ti-file-invoice"></i> מע"מ</button>
-      <button class="tab" id="stab-wht" onclick="switchSubTab('tax','wht',this)"><i class="ti ti-building-bank"></i> ניכוי מס</button>
+      <button class="tab active" id="stab-vat" onclick="_planGateSubTab('tax','vat',this,'חישוב מע&quot;מ')"><i class="ti ti-file-invoice"></i> מע"מ</button>
+      <button class="tab" id="stab-wht" onclick="_planGateSubTab('tax','wht',this,'ניכוי מס במקור')"><i class="ti ti-building-bank"></i> ניכוי מס</button>
       <button class="tab" id="stab-il" onclick="switchSubTab('tax','il',this)"><i class="ti ti-receipt-2"></i> חשבוניות ישראל</button>
     </div>
     <div id="subpanel-tax-vat" data-subpanel>
@@ -1002,6 +1003,28 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
             <input type="text" id="cpaAddress" placeholder="רחוב, עיר | טל׳ 03-XXXXXXX" class="si" style="width:100%" oninput="saveCPAInfo()">
           </div>
         </div>
+        <!-- לוגו משרד — מסלול פרמיום -->
+        <div id="firmLogoSection" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+          <label style="font-size:12px;font-weight:600;display:block;margin-bottom:6px"><i class="ti ti-photo"></i> לוגו המשרד בדוחות <span style="background:var(--gold);color:var(--brown);font-size:10px;padding:1px 7px;border-radius:10px;font-weight:700;margin-right:6px">פרמיום</span></label>
+          <div id="firmLogoLocked" style="display:none;background:#f8f5ee;border-radius:10px;padding:12px 14px;text-align:center">
+            <div style="font-size:20px;margin-bottom:4px">🔒</div>
+            <div style="font-size:12px;color:#64748b;margin-bottom:8px">לוגו המשרד על הדוחות זמין במסלול <strong>פרמיום</strong></div>
+            <a href="pricing.html" style="font-size:12px;font-weight:700;color:var(--brown);text-decoration:none;background:var(--gold);padding:4px 14px;border-radius:8px">שדרג עכשיו →</a>
+          </div>
+          <div id="firmLogoUnlocked" style="display:none">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div id="firmLogoPreview" style="width:72px;height:48px;border:1.5px dashed #d4b896;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#faf7f2;flex-shrink:0">
+                <span style="font-size:10px;color:#b0a090;text-align:center">אין<br>לוגו</span>
+              </div>
+              <div style="flex:1">
+                <label for="firmLogoInput" style="display:inline-block;padding:6px 14px;background:var(--primary);color:#fff;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600"><i class="ti ti-upload"></i> העלה לוגו</label>
+                <input type="file" id="firmLogoInput" accept="image/*" style="display:none" onchange="uploadFirmLogo(this)">
+                <div style="font-size:11px;color:var(--muted);margin-top:4px">PNG / JPG / SVG — עד 200KB</div>
+                <button id="firmLogoClearBtn" onclick="clearFirmLogo()" style="display:none;margin-top:4px;font-size:11px;color:#dc2626;background:none;border:none;cursor:pointer;padding:0">× הסר לוגו</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1057,7 +1080,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         <div id="reportExportRow" style="display:none;margin-top:10px">
           <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600">ייצוא:</div>
           <div style="display:flex;gap:8px">
-            <button onclick="exportReportXLSX()" style="flex:1;padding:9px;background:#0a3622;border:1.5px solid #1d7a3a;border-radius:9px;color:#fff;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='#1d7a3a'" onmouseout="this.style.background='#0a3622'"><i class="ti ti-table-export"></i> הורד Excel</button>
+            <button onclick="_featureAllowed('export_csv')?exportReportXLSX():_showUpgradePlan('ייצוא Excel')" style="flex:1;padding:9px;background:#0a3622;border:1.5px solid #1d7a3a;border-radius:9px;color:#fff;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='#1d7a3a'" onmouseout="this.style.background='#0a3622'"><i class="ti ti-table-export"></i> הורד Excel</button>
           </div>
           <button onclick="generateAIReport()" id="aiReportBtn" style="width:100%;margin-top:7px;padding:9px;background:#1e1b4b;border:1.5px solid #4338ca;border-radius:9px;color:#ede9fe;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='#312e81'" onmouseout="this.style.background='#1e1b4b'" title="יוצר דוח ביקורת מפורט בעזרת AI — דורש חיבור ל-AI בלשונית AI"><i class="ti ti-sparkles"></i> דוח AI מקצועי <span style="font-size:10px;opacity:.7">(דורש AI)</span></button>
         </div>
@@ -1190,7 +1213,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
             <div><label style="font-size:11.5px;font-weight:700;display:block;margin-bottom:4px">חובה (אופציונלי)</label>
               <select id="bankColDebit" style="width:100%;padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:inherit"><option value="">-- אין --</option></select></div>
             <div style="display:flex;align-items:flex-end">
-              <button onclick="runBankReconcile()" style="width:100%;padding:8px;background:#3a2000;color:#C99A2E;border:2px solid #e0b840;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 6px rgba(0,0,0,0.25)">בצע התאמה</button>
+              <button onclick="runBankReconcile()" style="width:100%;padding:8px;background:#3a2000;color:#e0b840;border:2px solid #e0b840;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 2px 6px rgba(0,0,0,0.25)">בצע התאמה</button>
             </div>
           </div>
         </div>
@@ -1252,7 +1275,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <!-- כפתורים -->
     <div style="display:flex;gap:10px">
       <button id="aiPrivacyAcceptBtn" onclick="acceptAIPrivacy()" disabled
-        style="flex:1;padding:13px;background:#3a2000;color:#C99A2E;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;opacity:.4;transition:opacity .2s">
+        style="flex:1;padding:13px;background:#3a2000;color:#e0b840;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;opacity:.4;transition:opacity .2s">
         אני מסכים/ה — המשך לצ'אט AI
       </button>
       <button onclick="document.getElementById('aiPrivacyModal').style.display='none'"
@@ -1276,7 +1299,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <select id="monthFilterSel" style="width:100%;padding:10px 14px;border:1.5px solid #d4b896;border-radius:10px;font-size:14px;font-family:inherit;color:#3a2000;background:#fff;margin-bottom:18px;direction:rtl">
     </select>
     <div style="display:flex;gap:10px">
-      <button onclick="_applyMonthFilter()" style="flex:1;padding:13px;background:#3a2000;color:#C99A2E;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
+      <button onclick="_applyMonthFilter()" style="flex:1;padding:13px;background:#3a2000;color:#e0b840;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">
         סנן לחודש זה
       </button>
       <button onclick="_skipMonthFilter()" style="padding:13px 16px;background:transparent;color:#9a7a4a;border:1.5px solid #e0c888;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">
@@ -1352,11 +1375,11 @@ const _DEF_QUOTAS={trial:1,starter:35,professional:80,premium:200,enterprise:999
 function _loadAdminQuotas(){try{const v=localStorage.getItem('af_plan_quotas');return v?JSON.parse(v):_DEF_QUOTAS;}catch(e){return _DEF_QUOTAS;}}
 const PLAN_QUOTAS_LIVE=_loadAdminQuotas();
 const PLAN_QUOTAS={
-  trial:        PLAN_QUOTAS_LIVE.trial        ?? 1,
-  starter:      PLAN_QUOTAS_LIVE.starter      ?? 35,
-  professional: PLAN_QUOTAS_LIVE.professional ?? 80,
-  premium:      PLAN_QUOTAS_LIVE.premium      ?? 200,
-  enterprise:   PLAN_QUOTAS_LIVE.enterprise   ?? 9999,
+  trial:        PLAN_QUOTAS_LIVE.trial        || 1,
+  starter:      PLAN_QUOTAS_LIVE.starter      || 35,
+  professional: PLAN_QUOTAS_LIVE.professional || 80,
+  premium:      PLAN_QUOTAS_LIVE.premium      || 200,
+  enterprise:   PLAN_QUOTAS_LIVE.enterprise   || 9999,
 };
 const PLAN_NAMES_HE = {
   trial:'ניסיון', starter:'סטארטר', professional:'מקצועי', premium:'פרמיום', enterprise:'ארגוני'
@@ -1518,11 +1541,12 @@ function getUserQuota(){
   if(window._auditSession && window._auditSession.isDemo) return 60;
   const email=(window._auditSession&&window._auditSession.email)||'';
   const lic = _getLicenseData(email);
-  if(lic) return lic.quota;
-  return PLAN_QUOTAS[getUserPlan()]??1;
+  if(lic) return Math.max(1, lic.quota||1); // defensive: never return 0
+  return Math.max(1, PLAN_QUOTAS[getUserPlan()]||1); // defensive: never return 0
 }
 
 let loadedFileCount=0; // מונה תיקי לקוח שנטענו בסשן הנוכחי
+let _isAnalyzing=false; // מונע קריאה כפולה ל-analyzeData
 
 function showQuotaModal(){
   const plan=getUserPlan();
@@ -1628,6 +1652,11 @@ function _restoreMonthlySession() {
     if(!saved) return false;
     var payload = JSON.parse(saved);
     if(!payload.rows || !payload.rows.length) return false;
+    // פג תוקף: אל תשחזר נתונים ישנים יותר מ-4 שעות
+    if(payload.ts && (Date.now()-payload.ts) > 4*3600*1000){
+      sessionStorage.removeItem(_MONTHLY_SESSION_KEY);
+      return false;
+    }
 
     // שחזור תאריכים
     var rows = payload.rows.map(function(r) {
@@ -1713,7 +1742,7 @@ function loadCPAInfo(){
 function getCPAInfo(){
   // קרא ישירות מה-DOM — אפס localStorage
   const get=id=>{const el=document.getElementById(id);return el?el.value.trim():'';};
-  return{cpaName:get('cpaName'),cpaLicense:get('cpaLicense'),cpaFirm:get('cpaFirm'),cpaAddress:get('cpaAddress')};
+  return{cpaName:get('cpaName'),cpaLicense:get('cpaLicense'),cpaFirm:get('cpaFirm'),cpaAddress:get('cpaAddress'),cpaLogo:getFirmLogo()};
 }
 function updateRelatedParties(){
   const ta=document.getElementById('relatedPartiesInput');
@@ -2030,7 +2059,7 @@ function renderTB(){
       ${!balanced?`<div style="padding:10px 14px;background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;font-size:12px;color:#dc2626;margin-bottom:12px">⚠️ הפרש חובה/זכות: ${fmt2(Math.abs(totalDebit-totalCredit))} — בדוק נתוני הקובץ</div>`:''}
       <div style="overflow-x:auto">
         <table style="width:100%;border-collapse:collapse;font-size:12px">
-          <thead><tr style="background:var(--primary);color:#C99A2E">
+          <thead><tr style="background:var(--primary);color:#e0b840">
             <th style="padding:8px 10px;text-align:right;font-weight:700">מספר חשבון</th>
             <th style="padding:8px 10px;text-align:right;font-weight:700">שם חשבון</th>
             <th style="padding:8px 10px;text-align:right;font-weight:700">סיווג</th>
@@ -2056,7 +2085,7 @@ function renderTB(){
               </tr>`;
             }).join('')}
           </tbody>
-          <tfoot><tr style="background:var(--primary);color:#C99A2E;font-weight:700">
+          <tfoot><tr style="background:var(--primary);color:#e0b840;font-weight:700">
             <td colspan="3" style="padding:8px 10px">סה"כ</td>
             <td style="padding:8px 10px;text-align:left;direction:ltr;color:#dc2626">${fmt2(totalDebit)}</td>
             <td style="padding:8px 10px;text-align:left;direction:ltr;color:#22c55e">${fmt2(totalCredit)}</td>
@@ -2066,7 +2095,7 @@ function renderTB(){
         </table>
       </div>
       <div style="margin-top:10px;display:flex;gap:8px">
-        <button onclick="exportTBCSV()" style="padding:7px 14px;background:#3a2000;color:#C99A2E;border:none;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit"><i class="ti ti-download"></i> ייצוא CSV</button>
+        <button onclick="exportTBCSV()" style="padding:7px 14px;background:#3a2000;color:#e0b840;border:none;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit"><i class="ti ti-download"></i> ייצוא CSV</button>
       </div>
     </div>
   </div>`;
@@ -2528,6 +2557,11 @@ function handleFiles(files){
 }
 
 function loadFile(file){
+  // ── בדיקת כפילות קבצים — אל תטען אותו שם פעמיים ──────
+  if(_rowsByFile[file.name]){
+    showToast(`הקובץ "${file.name}" כבר טעון — מדלג`,'warning');
+    return;
+  }
   // ── בדיקת מכסת תיקים ──────────────────────────────────
   if(loadedFileCount>=getUserQuota()){
     showQuotaModal();
@@ -3008,6 +3042,7 @@ function updateQuotaBadge(){
 
 function processRows(rows,headers,source){
   if(!rows||!rows.length)return;
+  const _isNew=!_rowsByFile[source]; // האם מקור חדש (לא עדכון)
   if(!allRows.length){autoMapColumns(headers,rows);showColumnMapper(headers);}
   rows.forEach(r=>r.__source=source);
   _rowsByFile[source]=rows;
@@ -3088,6 +3123,11 @@ function showColumnMapper(headers){
   _mapperValidate();
 }
 
+function _safeIncrFileCount(source){
+  // מונע צריכת מכסה כפולה אם אותו קובץ נטען מחדש — processRows כבר דרס
+  // הספירה כבר כוללת אותו ב-_rowsByFile; רק אם חדש לגמרי — הוסף
+  // (loadedFileCount מעודכן ע"י הקורא לאחר processRows)
+}
 function updateAnalyzeBtn(){
   if(!allRows.length&&!loadedFileCount){document.getElementById('analyzeBtn').disabled=true;return;}
   _mapperValidate(); // בדוק שעמודות חובה (תאריך + סכום) מוגדרות
@@ -3196,6 +3236,8 @@ function _setAnalyzeBtnLoading(on){
 }
 function analyzeData(){
   if(!allRows.length)return;
+  if(_isAnalyzing){showToast('ניתוח כבר רץ — המתן לסיומו','warning');return;} // re-entrancy guard
+  _isAnalyzing=true;
   // ── חסימת ניסיון לאחר 1 ביקורת חודשית ──────────────────────
   const _isTrial = !window._auditSession?.isAdmin && !window._auditSession?.isDemo && getUserPlan()==='trial';
   const _isMonthlyMode = (localStorage.getItem(_modeKey())||'monthly')==='monthly';
@@ -3205,6 +3247,7 @@ function analyzeData(){
       'חשבון הניסיון מאפשר <strong>ביקורת חודשית אחת בלבד</strong>.<br>'+
       'לסקירות נוספות ללא הגבלה, שדרג לתוכנית <strong>Starter</strong> ומעלה.';
     document.getElementById('quotaModal').style.display='flex';
+    _isAnalyzing=false; // שחרר guard — יציאה מוקדמת לפני setTimeout
     return;
   }
   // שמור מיפוי עמודות לזיכרון (לשימוש חוזר בקבצים עם אותם כותרות)
@@ -3250,6 +3293,7 @@ function analyzeData(){
           const _filtered=rows.filter(r=>r.date&&`${r.date.getFullYear()}-${String(r.date.getMonth()+1).padStart(2,'0')}`===_domKey);
           const heMonths=['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
           const [_fy,_fm]=_domKey.split('-');
+          _setAnalyzeBtnLoading(false);hideLoading(); // חובה לפני _reRunWithRows — אחרת overlay נשאר תקוע
           showToast(`מוצג: ${heMonths[+_fm-1]} ${_fy} (${_filtered.length} עסקאות)`, 'info');
           _reRunWithRows(_filtered);
           return;
@@ -3275,6 +3319,10 @@ function analyzeData(){
     }catch(e){
       if(analyzedData)document.getElementById('generateBtn').disabled=false;
       _setAnalyzeBtnLoading(false);hideLoading();console.error(e);showToast('שגיאה בעיבוד הנתונים — בדוק שהקובץ תקין ונסה שוב. אם הבעיה חוזרת, נסה לייצא ל-CSV חדש','error');
+    } finally {
+      // בטיחות: ודא שה-overlay לא נשאר תקוע בשום מקרה
+      hideLoading();
+      _isAnalyzing=false; // שחרר guard
     }
   },700);
 }
@@ -5118,7 +5166,7 @@ function renderAnomalies(){
                 </div>
                 <!-- jump to tx -->
                 ${a.row?.idx!=null?`<button onclick="jumpToTx(${a.row.idx})"
-                  style="font-size:10px;padding:3px 8px;background:var(--primary);color:#C99A2E;border:none;border-radius:5px;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;font-weight:600">
+                  style="font-size:10px;padding:3px 8px;background:var(--primary);color:#e0b840;border:none;border-radius:5px;cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;font-weight:600">
                   ← לעסקה</button>`:''}
               </div>
               <!-- review controls — always visible -->
@@ -6310,7 +6358,7 @@ function renderWHT(){
       <div style="font-size:11px;color:var(--muted)">שיעורי מס לפי פקודת מס הכנסה ותקנות ניכוי מס במקור (ישראל)</div>
       <div style="margin-right:auto;display:flex;gap:6px">
         <button class="hbtn" onclick="exportWHT()"><i class="ti ti-file-export"></i> ייצא CSV</button>
-        ${_isMonthlyWHT?'':'<button class="hbtn" onclick="exportForm856()" style="background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700"><i class="ti ti-list"></i> טופס 856</button>'}
+        ${_isMonthlyWHT?'':'<button class="hbtn" onclick="_featureAllowed('form856')?exportForm856():_showUpgradePlan('טופס 856')" style="background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700"><i class="ti ti-list"></i> טופס 856</button>'}
       </div>
     </div>
     ${_isMonthlyWHT?`<div style="margin:0 14px 10px;padding:8px 12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;font-size:11px;color:#1e40af;line-height:1.6">
@@ -6911,6 +6959,7 @@ const WP_SECTIONS=[
 let _wpSignoffs={}; // id → {prepared,reviewed,date}
 
 function renderWorkingPapers(){
+  if(!_featureAllowed('isa')){const el=document.getElementById('workingPapersContent');if(el)el.innerHTML='<div style="text-align:center;padding:24px"><div style="font-size:28px">🔒</div><div style="font-size:13px;color:var(--muted);margin-top:8px">דפי עבודה ISA זמינים במסלול המקצועי ומעלה</div><a href="pricing.html" style="font-size:12px;color:var(--gold);text-decoration:none">שדרג עכשיו →</a></div>';return;}
   const el=document.getElementById('workingPapersContent');
   const btnWP=document.getElementById('wpPrintBtn');
   const btnML=document.getElementById('mgmtLetterBtn');
@@ -7110,7 +7159,7 @@ ${risk?`<div class="risk-box" style="border-color:${risk.color};background:${ris
   <div><div style="font-size:10px;font-weight:700;margin-bottom:4px">חתימת שותף/מנהל ביקורת</div><div class="sig-box"></div></div>
 </div>
 <div class="footer">הופק על-ידי Auditera — לצרכי תיעוד ביקורת פנימי. יש לשמור במסגרת תיק הביקורת לפי הוראות תקינה מקצועית.</div>
-</div></body></html>`);
+</div>`);
   w.document.close();
 }
 
@@ -7214,7 +7263,7 @@ ${findingsHTML}
   <div><div class="sig-line">חתימת נציג ההנהלה<br>_______________</div></div>
 </div>
 <div class="footer">הופק על-ידי Auditera | מכתב זה מיועד לשימוש פנימי בלבד ואינו מהווה חוות דעת משפטית</div>
-</div></body></html>`);
+</div>`);
   w.document.close();
   addLog('מכתב להנהלה',`${clientName} | ${todayStr} | ${findings.length} ממצאים`);
 }
@@ -7255,6 +7304,12 @@ function renderPL(){
   const btnExp=document.getElementById('plExportBtn');
   const btnPrt=document.getElementById('plPrintBtn');
   if(!el) return;
+  if(!_featureAllowed('pl')){
+    el.innerHTML=`<div style="text-align:center;padding:32px 16px"><div style="font-size:36px;margin-bottom:12px">🔒</div><div style="font-size:16px;font-weight:800;color:var(--brown);margin-bottom:6px">דוח רווח והפסד</div><div style="font-size:13px;color:#64748b;margin-bottom:18px">תכונה זו זמינה במסלול <strong>Professional</strong> ומעלה</div><a href="pricing.html" style="padding:9px 22px;border-radius:9px;background:var(--gold);color:var(--brown);font-weight:700;text-decoration:none;font-size:13px">שדרג עכשיו →</a></div>`;
+    if(btnExp) btnExp.disabled=true;
+    if(btnPrt) btnPrt.disabled=true;
+    return;
+  }
   const d=_buildPLData();
   if(!d){
     el.innerHTML=`<div class="empty"><div class="ei"><i class="ti ti-report-analytics"></i></div><h3>דוח רווח והפסד</h3><p>הפעל ניתוח כדי לחשב</p></div>`;
@@ -7457,7 +7512,7 @@ tfoot td{background:#f5f5f5;font-weight:700;font-size:12px}
   <div style="font-size:22px;font-weight:800;color:${pc}">${Math.abs(net).toLocaleString('he-IL',{maximumFractionDigits:0})} ₪</div>
 </div>
 <div class="footer">הופק על-ידי Auditera — לצרכי בדיקה פנימית. יש לוודא מול ספרי החשבונות המלאים.</div>
-</div></body></html>`);
+</div>`);
   w.document.close();
 }
 
@@ -7537,6 +7592,7 @@ function _generateReportInner(){
   const _ec=escHtml(client), _eid=escHtml(clientId), _en=escHtml(notes);
   const cpa=getCPAInfo();
   const _cpaN=escHtml(cpa.cpaName||''), _cpaF=escHtml(cpa.cpaFirm||''), _cpaL=escHtml(cpa.cpaLicense||''), _cpaA=escHtml(cpa.cpaAddress||'');
+  const _cpaLogoHtml=cpa.cpaLogo?`<img src="${cpa.cpaLogo}" alt="לוגו המשרד" style="max-height:48px;max-width:120px;object-fit:contain;display:block">`:``; 
   const now=new Date();
   const sc=ratios.score;
   const scColor=sc>=80?'#22c55e':sc>=60?'#f59e0b':'#dc2626';
@@ -7640,7 +7696,7 @@ tr:nth-child(even) td{background:#fefaf3}
     <div class="cmi"><div class="cmi-lbl">סה"כ ממצאים</div><div class="cmi-val">${anomalies.length}</div></div>
   </div>
 </div>
-${(_cpaN||_cpaF)?`<div class="cpa-bar"><div><span class="cpa-name">${_cpaN||'רואה חשבון מוסמך'}</span>${_cpaF?' · '+_cpaF:''}</div><div style="font-size:11px;color:#9a7a4a">${_cpaL?'רישיון '+_cpaL:''}${_cpaA?' · '+_cpaA:''}</div></div>`:''}
+${(_cpaN||_cpaF||_cpaLogoHtml)?`<div class="cpa-bar">${_cpaLogoHtml?`<div style="margin-left:14px">${_cpaLogoHtml}</div>`:''}<div><span class="cpa-name">${_cpaN||'רואה חשבון מוסמך'}</span>${_cpaF?' · '+_cpaF:''}</div><div style="font-size:11px;color:#9a7a4a">${_cpaL?'רישיון '+_cpaL:''}${_cpaA?' · '+_cpaA:''}</div></div>`:''}
 <div class="body">
 <div class="disc">⚠️ <strong>הגבלת אחריות:</strong> כלי זה הוא עזר טכנולוגי לניתוח נתונים פיננסיים ואינו מהווה חוות דעת מקצועית. מסקנות הביקורת הסופיות מחייבות שיקול דעת מקצועי של רואה חשבון מוסמך בהתאם לתקני ביקורת ISA.</div>
 <div class="score-box" style="border-color:${scColor}">
@@ -7714,7 +7770,7 @@ ${anomalies.length?`<div class="sec">
   <span>${anomalies.length} ממצאים${_cpaN?' · נערך ע"י: '+_cpaN:''}</span>
 </div>
 <p style="text-align:center;padding:14px;font-size:12px;color:#9ca3af" class="np"><button onclick="window.print()" style="padding:8px 20px;background:#3a2000;color:#fdf3dc;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;font-weight:700">הדפס / שמור PDF</button></p>
-</body></html>`;
+`;
     _saveReportHTML(html);
     const blob=new Blob([html],{type:'text/html;charset=utf-8'});
     dlBlob(blob,`ממצאי_ביקורת_${client}_${now.toISOString().slice(0,10)}.html`);
@@ -7799,7 +7855,8 @@ tr:nth-child(even) td{background:#fefaf3}
   </div>
 </div>
 
-${(_cpaF||_cpaN)?`<div class="cpa-bar">
+${(_cpaF||_cpaN||_cpaLogoHtml)?`<div class="cpa-bar">
+  ${_cpaLogoHtml?`<div style="margin-left:14px">${_cpaLogoHtml}</div>`:''}
   <div>${_cpaF?`<strong>${_cpaF}</strong>`:''} ${_cpaN?`${_cpaF?' · ':''}רו"ח ${_cpaN}${_cpaL?' | רישיון: '+_cpaL:''}`:''}</div>
   <div style="font-size:11px;color:#9a7a4a">${_cpaA}</div>
 </div>`:''}
@@ -7914,7 +7971,7 @@ ${notes?`<div class="sec">
   <span>${rows.length.toLocaleString()} עסקאות${_cpaN?' · נערך ע"י: '+_cpaN:''}</span>
 </div>
 <p style="text-align:center;padding:14px;font-size:12px;color:#9ca3af" class="np"><button onclick="window.print()" style="padding:8px 20px;background:#3a2000;color:#fdf3dc;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;font-weight:700">הדפס / שמור PDF</button></p>
-</body></html>`;
+`;
 
   _saveReportHTML(html);
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
@@ -8056,7 +8113,7 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
   <span>${escHtml(selectedModel)}</span>
 </div>
 <div class="no-print"><button onclick="window.print()">הדפס / שמור כ-PDF</button></div>
-</body></html>`;
+`;
 
     const w=window.open('','_blank','width=1000,height=840,scrollbars=yes,resizable=yes');
     if(w){w.document.write(html);w.document.close();}
@@ -8143,7 +8200,7 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
     <div class="cmi"><div class="cmi-lbl">ממצאים מהותיים</div><div class="cmi-val" style="color:${high.length>0?'#fca5a5':'#86efac'}">${high.length}</div></div>
   </div>
 </div>
-${(_cpaN||_cpaF)?`<div class="cpa-bar"><div><span class="cpa-name">${_cpaN||'רואה חשבון מוסמך'}</span>${_cpaF?' · '+_cpaF:''}</div><div style="font-size:11px;color:#9a7a4a">${_cpaL?'רישיון '+_cpaL:''}${_cpaA?' · '+_cpaA:''}</div></div>`:''}
+${(_cpaN||_cpaF||_cpaLogoHtml)?`<div class="cpa-bar">${_cpaLogoHtml?`<div style="margin-left:14px">${_cpaLogoHtml}</div>`:''}<div><span class="cpa-name">${_cpaN||'רואה חשבון מוסמך'}</span>${_cpaF?' · '+_cpaF:''}</div><div style="font-size:11px;color:#9a7a4a">${_cpaL?'רישיון '+_cpaL:''}${_cpaA?' · '+_cpaA:''}</div></div>`:''}
 
 <div class="body">
 
@@ -8231,7 +8288,7 @@ ${notes?`<div class="sec">
   <span>${_cpaN?'נערך ע"י: '+_cpaN:''}</span>
 </div>
 <p style="text-align:center;padding:12px;font-size:12px;color:#9ca3af" class="np"><button onclick="window.print()" style="padding:8px 20px;background:#3a2000;color:#fdf3dc;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;font-weight:700">הדפס / שמור PDF</button></p>
-</body></html>`;
+`;
   _saveReportHTML(html);
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
   dlBlob(blob,`סיכום_מנהלים_${client}_${now.toISOString().slice(0,10)}.html`);
@@ -8952,8 +9009,23 @@ function switchSubTab(group,sub,btn){
   const fn=reRenderMap[group+'-'+sub];
   if(fn) setTimeout(fn, 80); // delay ensures browser has laid out the visible container
 }
-function showLoading(t,s){document.getElementById('loadingText').textContent=t;document.getElementById('loadingSub').textContent=s||'';document.getElementById('loadingOverlay').classList.add('show');}
-function hideLoading(){document.getElementById('loadingOverlay').classList.remove('show');}
+function showLoading(t,s){
+  document.getElementById('loadingText').textContent=t;
+  document.getElementById('loadingSub').textContent=s||'';
+  document.getElementById('loadingOverlay').classList.add('show');
+  // watchdog: אם ה-overlay תקוע יותר מ-20 שניות — הסר אוטומטית
+  clearTimeout(window._overlayWatchdog);
+  window._overlayWatchdog=setTimeout(()=>{
+    if(document.getElementById('loadingOverlay').classList.contains('show')){
+      hideLoading();
+      console.warn('Overlay watchdog: auto-hidden after 20s timeout');
+    }
+  },20000);
+}
+function hideLoading(){
+  clearTimeout(window._overlayWatchdog);
+  document.getElementById('loadingOverlay').classList.remove('show');
+}
 
 function _updateStatusBar(){
   try{
@@ -9021,6 +9093,8 @@ document.addEventListener('keydown', function(e){
 
 function dlBlob(blob,name){const a=document.createElement('a');const u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(u),5000);}
 function resetAll(silent){
+  _isAnalyzing=false; // שחרר guard גם אם reset נקרא באמצע ניתוח
+  _pendingReplaceFiles=null; // נקה קבצים ממתינים
   allRows=[];_rowsByFile={};analyzedData=null;_allRows=null;_bankRows=[];auditLog=[];txNotes={};txFlags={};txCats={};anomReviews={};_anomGroupOpen={};_anomSevFilter='all';_anomRevFilter='all';
   sessionStorage.removeItem(CL_KEY);
   try{renderChecklist();}catch(e){}
@@ -10081,10 +10155,10 @@ function renderBudget(){
         +'<th style="width:21%">ניצול</th>'
       +'</tr></thead>'
       +'<tbody>'+rows+'</tbody>'
-      +'<tfoot><tr style="background:var(--primary);color:#C99A2E;font-weight:700">'
+      +'<tfoot><tr style="background:var(--primary);color:#e0b840;font-weight:700">'
         +'<td><i class="ti ti-sigma"></i> סה"כ</td>'
-        +'<td style="color:#C99A2E">'+fmtCur(totalBud)+'</td>'
-        +'<td style="color:#C99A2E">'+fmtCur(totalActual)+'</td>'
+        +'<td style="color:#e0b840">'+fmtCur(totalBud)+'</td>'
+        +'<td style="color:#e0b840">'+fmtCur(totalActual)+'</td>'
         +'<td>'+tvBadge+'</td>'
         +'<td>'+totalBar+'</td>'
       +'</tr></tfoot>'
@@ -10307,4 +10381,138 @@ function runBankReconcile(){
   <span style="flex:1"></span>
   <span id="sbUpdated" style="opacity:.45;font-size:10px">Auditera</span>
 </div>
+
+<!-- PLAN UPGRADE MODAL -->
+<div id="upgradeModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.45);align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:18px;padding:36px 32px;max-width:380px;width:90%;text-align:center;box-shadow:0 16px 56px rgba(0,0,0,.22);direction:rtl">
+    <div style="width:64px;height:64px;background:#fff8e1;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px">🔒</div>
+    <div style="font-size:21px;font-weight:800;color:var(--brown);margin-bottom:8px">תכונה מקצועית</div>
+    <div style="font-size:14px;color:#64748b;margin-bottom:6px"><strong id="upgradeFeatureName" style="color:var(--brown)"></strong> זמינה במסלול Professional ומעלה</div>
+    <div style="font-size:13px;color:#94a3b8;margin-bottom:26px">שדרג כדי לפתוח גישה מלאה לכל התכונות המקצועיות</div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button onclick="document.getElementById('upgradeModal').style.display='none'" style="padding:10px 22px;border-radius:10px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit">סגור</button>
+      <a href="pricing.html" style="padding:10px 22px;border-radius:10px;background:var(--gold);color:var(--brown);font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center">שדרג עכשיו →</a>
+    </div>
+  </div>
+</div>
+<script>
+// ── PLAN FEATURE GATING ─────────────────────────────────────────────
+// ברירות מחדל — חייב להיות זהה ל-DEF_FEATURES ב-admin.html
+const _DEF_FEATURES=[
+  {key:'anomalies',    s:true, p:true, pr:true},
+  {key:'cashlaw',      s:true, p:true, pr:true},
+  {key:'ilinv',        s:true, p:true, pr:true},
+  {key:'pl',           s:true, p:true, pr:true},
+  {key:'cashflow',     s:true, p:true, pr:true},
+  {key:'open_items',   s:true, p:true, pr:true},
+  {key:'bank',         s:true, p:true, pr:true},
+  {key:'multi_file',   s:true, p:true, pr:true},
+  {key:'risk_score',   s:true, p:true, pr:true},
+  {key:'trial_balance',s:true, p:true, pr:true},
+  {key:'export_csv',   s:true, p:true, pr:true},
+  {key:'vat',          s:false,p:true, pr:true},
+  {key:'wht',          s:false,p:true, pr:true},
+  {key:'related',      s:false,p:true, pr:true},
+  {key:'benford',      s:false,p:true, pr:true},
+  {key:'ratios',       s:false,p:true, pr:true},
+  {key:'mus',          s:false,p:true, pr:true},
+  {key:'materiality',  s:false,p:true, pr:true},
+  {key:'isa',          s:false,p:true, pr:true},
+  {key:'compare',      s:false,p:true, pr:true},
+  {key:'export_rivhit',s:true, p:true, pr:true},
+  {key:'export_prio',  s:true, p:true, pr:true},
+  {key:'budget',       s:false,p:false,pr:true},
+  {key:'vendors',      s:false,p:false,pr:true},
+  {key:'form856',      s:false,p:false,pr:true},
+  {key:'ai',           s:false,p:false,pr:true},
+];
+// בדוק אם תכונה מותרת למסלול הנוכחי — קורא מה-localStorage של המנהל
+function _featureAllowed(key){
+  try{
+    const plan=getUserPlan();
+    if(['premium','enterprise'].includes(plan)) return true;
+    // בדוק תכונות מותאמות אישית למשתמש (עדיפות על מסלול)
+    const email=(window._auditSession&&window._auditSession.email)||'';
+    if(email){
+      const users=JSON.parse(localStorage.getItem(USERS_KEY_APP)||'[]');
+      const u=users.find(x=>x.email===email);
+      if(u&&u.customFeatures&&key in u.customFeatures){
+        return u.customFeatures[key]===true;
+      }
+    }
+    // לפי מסלול + דגלי תכונות
+    const saved=JSON.parse(localStorage.getItem('af_feature_flags')||'null')||_DEF_FEATURES;
+    const feat=saved.find(f=>f.key===key);
+    if(!feat) return true; // מפתח לא מוכר = פתוח
+    if(plan==='professional') return feat.p!==false;
+    if(plan==='starter')      return feat.s!==false;
+    return false; // trial
+  }catch(e){ return false; }
+}
+function _isProfessional(){
+  try{ const p=getUserPlan(); return ['professional','premium','enterprise'].includes(p); }catch(e){ return false; }
+}
+function _isAtLeastPremium(){
+  try{ const p=getUserPlan(); return ['premium','enterprise'].includes(p); }catch(e){ return false; }
+}
+function _showUpgradePlan(featureName){
+  const el=document.getElementById('upgradeFeatureName');
+  if(el) el.textContent=featureName||'תכונה זו';
+  const modal=document.getElementById('upgradeModal');
+  if(modal) modal.style.display='flex';
+}
+// sub — מפתח התכונה (mus, compare, ...) חייב להתאים לkeys ב-_DEF_FEATURES
+function _planGateSubTab(group,sub,btn,featureName){
+  if(_featureAllowed(sub)){ switchSubTab(group,sub,btn); return; }
+  _showUpgradePlan(featureName);
+}
+// ── FIRM LOGO (פרמיום) ───────────────────────────────────────────────
+const _LOGO_KEY='af_firm_logo';
+function getFirmLogo(){ try{return localStorage.getItem(_LOGO_KEY)||'';}catch(e){return '';} }
+function _initLogoSection(){
+  const locked=document.getElementById('firmLogoLocked');
+  const unlocked=document.getElementById('firmLogoUnlocked');
+  if(!locked||!unlocked) return;
+  if(_isAtLeastPremium()){
+    locked.style.display='none';
+    unlocked.style.display='block';
+    _refreshLogoPreview();
+  } else {
+    locked.style.display='block';
+    unlocked.style.display='none';
+  }
+}
+function _refreshLogoPreview(){
+  const logo=getFirmLogo();
+  const preview=document.getElementById('firmLogoPreview');
+  const clearBtn=document.getElementById('firmLogoClearBtn');
+  if(!preview) return;
+  if(logo){
+    preview.innerHTML=`<img src="${logo}" style="max-width:68px;max-height:44px;object-fit:contain">`;
+    if(clearBtn) clearBtn.style.display='block';
+  } else {
+    preview.innerHTML='<span style="font-size:10px;color:#b0a090;text-align:center">אין<br>לוגו</span>';
+    if(clearBtn) clearBtn.style.display='none';
+  }
+}
+function uploadFirmLogo(input){
+  if(!_isAtLeastPremium()){ _showUpgradePlan('לוגו המשרד'); return; }
+  const file=input.files[0];
+  if(!file) return;
+  if(file.size>200*1024){ showToast('הקובץ גדול מ-200KB — בחר תמונה קטנה יותר','error'); return; }
+  const reader=new FileReader();
+  reader.onload=e=>{
+    try{ localStorage.setItem(_LOGO_KEY, e.target.result); }catch(ex){ showToast('לא ניתן לשמור — אחסון מלא','error'); return; }
+    _refreshLogoPreview();
+    showToast('✓ לוגו המשרד נשמר','success');
+  };
+  reader.readAsDataURL(file);
+}
+function clearFirmLogo(){
+  try{ localStorage.removeItem(_LOGO_KEY); }catch(e){}
+  _refreshLogoPreview();
+  showToast('לוגו הוסר','success');
+}
+document.addEventListener('DOMContentLoaded',()=>{ _initLogoSection(); });
+</script>
 </body></html>

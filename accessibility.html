@@ -2,10 +2,36 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#3a2000">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests; frame-ancestors 'self';">
 <link rel="canonical" href="https://auditera.co/accessibility.html">
 <title>הצהרת נגישות — Auditera</title>
+<meta name="keywords" content="נגישות, WCAG, תקן ת"י 5568">
+<meta property="og:title" content="הצהרת נגישות — Auditera">
+<meta property="og:description" content="הצהרת נגישות של Auditera — מחויבות לנגישות לכלל המשתמשים.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://auditera.co/accessibility.html">
+<meta property="og:image" content="https://auditera.co/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="Auditera">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="הצהרת נגישות — Auditera">
+<meta name="twitter:description" content="הצהרת נגישות של Auditera — מחויבות לנגישות לכלל המשתמשים.">
+<meta name="twitter:image" content="https://auditera.co/og-image.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"בית","item":"https://auditera.co/"},{"@type":"ListItem","position":2,"name":"נגישות","item":"https://auditera.co/accessibility.html"}]}
+</script>
 <meta property="og:title" content="הצהרת נגישות — Auditera">
 <meta property="og:description" content="הצהרת נגישות של Auditera — מחויבות לנגישות אתר לכלל המשתמשים.">
 <meta property="og:type" content="website">
@@ -14,16 +40,17 @@
 <meta name="description" content="הצהרת נגישות של Auditera — מחויבות לנגישות אתר לכלל המשתמשים בהתאם לחוק ולתקן הישראלי.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:hidden}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fff;color:#3a2000;direction:rtl;line-height:1.7;overflow-x:hidden}
 :root{--brown:#3a2000;--brown2:#5a3010;--gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;--cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888}
 /* NAV */
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-text{font-size:20px;font-weight:700;color:#f5e6c0}
-.nav-logo-text span{color:var(--gold-text)}
+.nav-logo-text span{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:4px}
-.nav-link{color:rgba(245,230,192,.6);text-decoration:none;font-size:16px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
-.nav-link:hover{color:#f5e6c0;background:rgba(255,255,255,.08)}
+.nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
+.nav-link:hover,.nav-link.active{color:var(--brown);background:rgba(58,32,0,.06)}
 .nav-cta{padding:8px 20px;background:var(--gold);color:#000;border:none;border-radius:7px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s;text-decoration:none;margin-right:8px}
 .nav-cta:hover{opacity:.88}
 /* PAGE */
@@ -48,32 +75,32 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .skip-link{position:absolute;top:-100px;right:0;background:#3a2000;color:#f5e6c0;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:9999;transition:top .2s}
 .skip-link:focus-visible{top:0}
 /* FOOTER */
-footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
-.footer-brand{font-size:17px;font-weight:700;color:rgba(245,230,192,.8)}
-.footer-brand span{color:var(--gold-text)}
-.footer-links{display:flex;gap:22px;flex-wrap:wrap}
-.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:rgba(245,230,192,.7)}
-.footer-copy{font-size:13.5px;color:rgba(245,230,192,.24)}
 @media(max-width:640px){
-  .nav-link{display:none}
-  footer{flex-direction:column;align-items:flex-start;gap:16px;padding:24px 5%}
-  .footer-links{gap:14px}
-  .page-header h1{font-size:26px}
+  .nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
+  
+    .page-header h1{font-size:26px}
   .content{padding:32px 5% 60px}
 }
 /* HAMBURGER MENU */
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
-.hamburger span{display:block;width:22px;height:2px;background:#f5e6c0;border-radius:2px;transition:all .3s}
+.hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a{color:var(--brown3);font-size:15px;padding:11px 4px;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:#000;font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
-@media(max-width:768px){.nav-links .nav-link{display:none}.hamburger{display:flex}}
+@media(max-width:768px){.nav-links .nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}.hamburger{display:flex}}
+footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
+.footer-brand{font-size:18px;font-weight:700;color:rgba(245,230,192,.8)}
+.footer-brand span{color:var(--gold-text)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none}
+.footer-links a:hover{color:rgba(245,230,192,.7)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
+@media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 </style>
 </head>
 <body>
@@ -177,14 +204,15 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 </main>
 
 <footer>
-  <div class="footer-brand">Audit<span>era</span></div>
+  <div class="footer-brand"><span>Au</span>ditera</div>
   <div class="footer-links">
     <a href="features.html">תכונות</a>
     <a href="how.html">איך זה עובד</a>
     <a href="pricing.html">תמחור</a>
+    <a href="contact.html">צור קשר</a>
     <a href="legal.html">תנאי שימוש</a>
     <a href="legal.html#privacy">פרטיות</a>
-    <a href="accessibility.html" aria-current="page">נגישות</a>
+    <a href="accessibility.html">נגישות</a>
   </div>
   <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות.</div>
 </footer>

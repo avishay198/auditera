@@ -2,6 +2,18 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#3a2000">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Auditera">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="
@@ -20,6 +32,34 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <title>Auditera — ביקורת פיננסית חכמה לרואי חשבון</title>
 <meta name="description" content="Auditera — כלי ביקורת פיננסית חכם לרואי חשבון ישראליים. ניתוח CSV/Excel, זיהוי 12 סוגי חריגות, בנפורד, מע&quot;מ, ניכוי מס במקור ועוד.">
+<meta name="keywords" content="ביקורת פיננסית, רואי חשבון, ניתוח חשבונאי, חריגות, ISA, בנפורד, מע&quot;מ, ניכוי מס במקור">
+<meta property="og:title" content="Auditera — ביקורת פיננסית חכמה לרואי חשבון">
+<meta property="og:description" content="כלי ביקורת פיננסית חכם לרואי חשבון ישראליים — ניתוח עסקאות, דוחות מקצועיים וזיהוי חריגות אוטומטי.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://auditera.co/">
+<meta property="og:image" content="https://auditera.co/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Auditera — ביקורת פיננסית חכמה לרואי חשבון">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="Auditera">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Auditera — ביקורת פיננסית חכמה לרואי חשבון">
+<meta name="twitter:description" content="כלי ביקורת פיננסית חכם לרואי חשבון ישראליים — ניתוח עסקאות, דוחות מקצועיים וזיהוי חריגות אוטומטי.">
+<meta name="twitter:image" content="https://auditera.co/og-image.png">
+<link rel="canonical" href="https://auditera.co/">
+<script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type":"Organization","@id":"https://auditera.co/#organization","name":"Auditera","url":"https://auditera.co/","logo":"https://auditera.co/og-image.png","contactPoint":{"@type":"ContactPoint","email":"support@auditera.co","contactType":"customer support","availableLanguage":"Hebrew"}},
+    {"@type":"SoftwareApplication","@id":"https://auditera.co/#app","name":"Auditera — סוכן ביקורת פיננסית","applicationCategory":"BusinessApplication","operatingSystem":"Web","inLanguage":"he","offers":{"@type":"AggregateOffer","priceCurrency":"ILS","lowPrice":"0","highPrice":"2490","offerCount":"3"},"publisher":{"@id":"https://auditera.co/#organization"}},
+    {"@type":"WebSite","@id":"https://auditera.co/#website","url":"https://auditera.co/","name":"Auditera","publisher":{"@id":"https://auditera.co/#organization"},"inLanguage":"he"}
+  ]
+}
+</script>
+<meta name="description" content="Auditera — כלי ביקורת פיננסית חכם לרואי חשבון ישראליים. ניתוח CSV/Excel, זיהוי 12 סוגי חריגות, בנפורד, מע&quot;מ, ניכוי מס במקור ועוד.">
 <meta property="og:title" content="Auditera — ביקורת פיננסית חכמה לרואי חשבון">
 <meta property="og:description" content="כלי ביקורת פיננסית חכם לרואי חשבון ישראליים — ניתוח עסקאות, דוחות PDF מקצועיים וזיהוי חריגות אוטומטי.">
 <meta property="og:type" content="website">
@@ -29,7 +69,7 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:#3a2000;direction:rtl;line-height:1.6;overflow-x:hidden}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;
@@ -42,7 +82,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px}
 .nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
-.nav-logo-text span{color:var(--gold-text)}
+.nav-logo-text span{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-link{color:var(--brown3);text-decoration:none;font-size:16px;font-weight:500;padding:6px 14px;border-radius:6px;transition:all .2s}
 .nav-link:hover{color:var(--brown);background:rgba(58,32,0,.06)}
@@ -79,7 +119,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .modal-close{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s}
 .modal-close:hover{background:rgba(255,255,255,.28)}
 .modal-video{width:100%;display:block;max-height:80vh}
-.modal-footer{background:#1e1408;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.modal-
 .modal-footer-text{color:rgba(245,230,192,.75);font-size:15px}
 .modal-footer-text strong{color:#f5e6c0}
 .modal-cta{padding:11px 24px;background:var(--gold);color:#000;border:none;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .2s}
@@ -205,13 +245,6 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .cta-note{font-size:13.5px;color:rgba(245,230,192,.32);position:relative}
 
 /* FOOTER */
-footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
-.footer-brand{font-size:17px;font-weight:700;color:rgba(245,230,192,.8)}
-.footer-brand span{color:var(--gold-text)}
-.footer-links{display:flex;gap:22px;flex-wrap:wrap}
-.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:rgba(245,230,192,.7)}
-.footer-copy{font-size:13.5px;color:rgba(245,230,192,.24)}
 
 /* ── MOBILE ── */
 @media(max-width:768px){
@@ -232,7 +265,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 
   .modal-bg{padding:12px}
   .modal-box{border-radius:10px}
-  .modal-footer{flex-direction:column;align-items:flex-start;gap:12px;padding:16px 18px}
+  .modal-
   .modal-footer-text{font-size:13px}
   .modal-cta{width:100%;justify-content:center}
 
@@ -255,9 +288,8 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
   .cta-inner h2{font-size:22px}
   .cta-btns{flex-direction:column;align-items:center}
 
-  footer{flex-direction:column;align-items:flex-start;gap:16px;padding:24px 5%}
-  .footer-links{gap:14px}
-}
+  
+  }
 
 
 @media(max-width:400px){
@@ -266,8 +298,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
   .btn-main,.btn-outline{font-size:14px;padding:11px 12px}
   .steps{grid-template-columns:1fr}
   .stat-item{min-width:100%;border-left:none!important}
-  .footer-links{flex-direction:column;gap:8px}
-  .cta-inner h2{font-size:19px}
+    .cta-inner h2{font-size:19px}
 }
 /* ACCESSIBILITY */
 *:focus{outline:none}
@@ -286,7 +317,20 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 .mobile-menu a{color:var(--brown3);font-size:15px;padding:11px 4px;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 .mobile-menu .m-cta{margin-top:10px;text-align:center;background:var(--gold);color:#000;font-weight:700;border-radius:7px;padding:11px 20px;border-bottom:none}
+
+.share-btn svg{flex-shrink:0}
+footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
+.footer-brand{font-size:18px;font-weight:700;color:rgba(245,230,192,.8)}
+.footer-brand span{color:var(--gold-text)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none}
+.footer-links a:hover{color:rgba(245,230,192,.7)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
+@media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Auditera","description":"מערכת ביקורת חשבונאית חכמה לרואי חשבון בישראל","brand":{"@type":"Brand","name":"Auditera"},"url":"https://auditera.co","offers":[{"@type":"Offer","name":"סטארטר","price":"590","priceCurrency":"ILS","priceSpecification":{"@type":"UnitPriceSpecification","price":"590","priceCurrency":"ILS","billingDuration":"P1M"},"availability":"https://schema.org/InStock","url":"https://auditera.co/checkout.html?plan=starter"},{"@type":"Offer","name":"מקצועי","price":"990","priceCurrency":"ILS","priceSpecification":{"@type":"UnitPriceSpecification","price":"990","priceCurrency":"ILS","billingDuration":"P1M"},"availability":"https://schema.org/InStock","url":"https://auditera.co/checkout.html?plan=professional"},{"@type":"Offer","name":"פרמיום","price":"2490","priceCurrency":"ILS","priceSpecification":{"@type":"UnitPriceSpecification","price":"2490","priceCurrency":"ILS","billingDuration":"P1M"},"availability":"https://schema.org/InStock","url":"https://auditera.co/checkout.html?plan=premium"}]}
+</script>
 </head>
 <body>
 
@@ -492,7 +536,7 @@ footer{background:var(--brown);padding:28px 6%;display:flex;align-items:center;j
 </section>
 
 <footer>
-  <div class="footer-brand">Audit<span style="color:var(--gold-text)">era</span></div>
+  <div class="footer-brand"><span>Au</span>ditera</div>
   <div class="footer-links">
     <a href="features.html">תכונות</a>
     <a href="how.html">איך זה עובד</a>
@@ -527,10 +571,110 @@ document.addEventListener('click',function(e){
 });
 </script>
 <!-- COOKIE CONSENT -->
-<div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
-  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#e0b840;text-decoration:underline">מדיניות פרטיות</a></span>
-  <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#e0b840;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
+<!-- Cookie Consent (תיקון 13) -->
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#2c1a00;color:#fdf3dc;padding:14px 20px;direction:rtl;font-family:inherit;box-shadow:0 -4px 24px rgba(0,0,0,.25)">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="flex:1;min-width:220px;font-size:13px;line-height:1.6">🍪 אנו משתמשים ב-cookies הכרחיים בלבד לתפעול האתר. אין פרסום, אין מעקב, אין שיתוף נתונים עם צד שלישי. <a href="/legal.html" style="color:#e0b840;text-decoration:underline;margin-right:6px">מדיניות פרטיות</a></div>
+    <div style="display:flex;gap:8px;flex-shrink:0">
+      <button onclick="_cookieDecline()" style="padding:7px 16px;border-radius:8px;border:1px solid rgba(224,184,64,.4);background:transparent;color:#fdf3dc;cursor:pointer;font-size:13px;font-family:inherit">רק הכרחיים</button>
+      <button onclick="_cookieAccept()" style="padding:7px 20px;border-radius:8px;border:none;background:#e0b840;color:#2c1a00;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit">הבנתי ✓</button>
+    </div>
+  </div>
 </div>
-<script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
+<script>
+(function(){var KEY='af_cookie_consent';function _cookieAccept(){localStorage.setItem(KEY,'accepted');document.getElementById('cookieBanner').style.display='none';}function _cookieDecline(){localStorage.setItem(KEY,'essential');document.getElementById('cookieBanner').style.display='none';}window._cookieAccept=_cookieAccept;window._cookieDecline=_cookieDecline;if(!localStorage.getItem(KEY)){setTimeout(function(){var b=document.getElementById('cookieBanner');if(b)b.style.display='block';},800);}})();
+</script>
+
+
+<!-- Floating Share Bubble -->
+<style>
+#floatShareWrap{position:fixed;right:22px;bottom:96px;z-index:9990}
+#floatShareBtn{width:50px;height:50px;border-radius:50%;background:linear-gradient(145deg,#3a2000,#2c1a00);border:1.5px solid rgba(224,184,64,.55);color:#e0b840;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 14px rgba(44,26,0,.32),0 0 0 3px rgba(224,184,64,.09);outline:none;flex-shrink:0;transition:box-shadow .2s}
+#floatShareBtn:hover{box-shadow:0 4px 22px rgba(44,26,0,.42),0 0 0 5px rgba(224,184,64,.15)}#floatShareBtn:active{transform:none}
+#floatSharePanel{display:none;position:absolute;bottom:60px;right:0;background:#fff;border-radius:18px;box-shadow:0 24px 64px rgba(44,26,0,.16),0 4px 16px rgba(44,26,0,.06),0 0 0 1px rgba(0,0,0,.05);overflow:hidden;width:248px;direction:rtl;animation:_spIn .18s cubic-bezier(.22,.68,0,1.2)}
+@keyframes _spIn{from{opacity:0;transform:scale(.9) translateY(6px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.sp-head{padding:16px 18px 14px;background:linear-gradient(135deg,#1e0f00 0%,#3a2000 100%);position:relative;overflow:hidden}
+.sp-head::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle fill='%23ffffff' fill-opacity='0.03' cx='20' cy='20' r='18'/%3E%3C/g%3E%3C/svg%3E");opacity:.5}
+.sp-logo{font-size:17px;font-weight:900;color:#fdf3dc;letter-spacing:-.3px;position:relative}
+.sp-logo em{color:#e0b840;font-style:normal}
+.sp-tagline{font-size:11px;color:rgba(253,243,220,.5);margin-top:3px;position:relative}
+.sp-url-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(224,184,64,.12);border:1px solid rgba(224,184,64,.25);border-radius:20px;padding:3px 10px;font-size:10px;color:rgba(253,243,220,.7);margin-top:8px;position:relative}
+.sp-body{padding:10px 10px 6px}
+.sp-item{display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:12px;text-decoration:none;color:#1a1208;font-size:13px;font-weight:600;cursor:pointer;background:none;border:none;width:100%;text-align:right;font-family:inherit;transition:background .13s;letter-spacing:-.1px}
+.sp-item:hover{background:#f7f2e8}
+.sp-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.sp-label{flex:1}
+.sp-arrow{color:#cbb880;font-size:12px;opacity:.6;font-weight:400}
+.sp-sep{height:1px;background:#f0e8d8;margin:6px 10px}
+.sp-foot{padding:8px 14px 12px;text-align:center}
+.sp-url-display{font-size:10px;color:#b09060;background:#faf5eb;border:1px solid #ede0c4;border-radius:6px;padding:5px 12px;display:inline-block;letter-spacing:.04em;font-family:monospace;user-select:all}
+</style>
+
+<div id="floatShareWrap">
+  <div id="floatSharePanel">
+    <div class="sp-head">
+      <div class="sp-logo"><em>Au</em>ditera</div>
+      <div class="sp-tagline">ביקורת חשבונאית חכמה לרואי חשבון</div>
+      <div class="sp-url-pill">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        auditera.co
+      </div>
+    </div>
+    <div class="sp-body">
+      <a href="https://wa.me/?text=https%3A%2F%2Fauditera.co" target="_blank" class="sp-item" onclick="_closeSharePanel()">
+        <div class="sp-icon" style="background:#e9fbe9"><svg viewBox="0 0 24 24" fill="#25D366" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></div>
+        <span class="sp-label">וואטסאפ</span>
+        <span class="sp-arrow">↗</span>
+      </a>
+      <a href="mailto:?body=https%3A%2F%2Fauditera.co" class="sp-item" onclick="_closeSharePanel()">
+        <div class="sp-icon" style="background:#fef2f2"><svg viewBox="0 0 24 24" fill="none" stroke="#EA4335" stroke-width="1.8" width="20" height="20"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
+        <span class="sp-label">אימייל</span>
+        <span class="sp-arrow">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fauditera.co" target="_blank" class="sp-item" onclick="_closeSharePanel()">
+        <div class="sp-icon" style="background:#eff6ff"><svg viewBox="0 0 24 24" fill="#0A66C2" width="20" height="20"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+        <span class="sp-label">לינקדאין</span>
+        <span class="sp-arrow">↗</span>
+      </a>
+      <div class="sp-sep"></div>
+      <button class="sp-item" onclick="_copyShareLink()">
+        <div class="sp-icon" style="background:#f5f3ff"><svg viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2" width="20" height="20"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <span class="sp-label" id="copyLinkLabel">העתק קישור</span>
+        <span class="sp-arrow" id="copyArrow">⌘C</span>
+      </button>
+    </div>
+    <div class="sp-foot">
+      <div class="sp-url-display">https://auditera.co</div>
+    </div>
+  </div>
+
+  <button id="floatShareBtn" onclick="_toggleSharePanel()" aria-label="שתף" title="שתף את Auditera">
+    <svg width="19" height="19" fill="none" stroke="#e0b840" stroke-width="2.2" viewBox="0 0 24 24">
+      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+    </svg>
+  </button>
+</div>
+
+<div id="_shareCopiedToast2" style="position:fixed;bottom:108px;right:80px;background:#1a1208;color:#fdf3dc;padding:8px 18px;border-radius:22px;font-size:12px;font-weight:700;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9999;direction:rtl;box-shadow:0 4px 18px rgba(0,0,0,.22);letter-spacing:.01em">✓ הקישור הועתק</div>
+
+<script>
+function _toggleSharePanel(){var p=document.getElementById('floatSharePanel');p.style.display=p.style.display==='block'?'none':'block';}
+function _closeSharePanel(){var p=document.getElementById('floatSharePanel');if(p)p.style.display='none';}
+function _copyShareLink(){
+  navigator.clipboard&&navigator.clipboard.writeText('https://auditera.co').then(function(){
+    var lbl=document.getElementById('copyLinkLabel');
+    var arr=document.getElementById('copyArrow');
+    if(lbl)lbl.textContent='✓ הועתק!';
+    if(arr)arr.textContent='';
+    setTimeout(function(){if(lbl)lbl.textContent='העתק קישור';if(arr)arr.textContent='⌘C';},2000);
+    _closeSharePanel();
+    var t=document.getElementById('_shareCopiedToast2');
+    if(t){t.style.opacity='1';setTimeout(function(){t.style.opacity='0';},2400);}
+  });
+}
+document.addEventListener('click',function(e){var w=document.getElementById('floatShareWrap');if(w&&!w.contains(e.target))_closeSharePanel();});
+</script>
 </body>
 </html>

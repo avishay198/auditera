@@ -3,20 +3,37 @@
 <head>
 <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';">
 <meta charset="UTF-8">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#3a2000">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Auditera">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404 — הדף לא נמצא | Auditera</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="הדף שחיפשת לא נמצא — Auditera">
+<meta property="og:title" content="404 — דף לא נמצא | Auditera">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="Auditera">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#fdf3dc;color:#3a2000;direction:rtl;display:flex;flex-direction:column;min-height:100vh}
-:root{--brown:#3a2000;--gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--cream:#fdf3dc;--muted:#9a7a4a;--border:#e0c888}
+html,html{overflow-x:hidden}
+body{height:100%overflow-x:hidden;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:#3a2000;direction:rtl;display:flex;flex-direction:column;min-height:100vh}
+:root{--brown:#3a2000;--gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888}
 
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--border);box-shadow:0 2px 12px rgba(58,32,0,.06)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;direction:ltr}
-.nav-logo-text{font-size:20px;font-weight:700;color:#fff}
-.nav-logo-text span{color:#e0b840}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
+.nav-logo-text span{color:var(--gold)}
 
 .main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 6%;text-align:center}
 .card{max-width:520px;width:100%}
@@ -36,10 +53,6 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 .quick-link:hover{color:var(--brown)}
 .quick-link::before{content:'← ';font-size:12px}
 
-footer{background:var(--brown);padding:22px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.footer-brand{font-size:16px;font-weight:700;color:rgba(245,230,192,.7)}
-.footer-brand span{color:var(--gold-text)}
-.footer-copy{font-size:13px;color:rgba(245,230,192,.22)}
 
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
 @media(max-width:480px){
@@ -48,7 +61,16 @@ footer{background:var(--brown);padding:22px 6%;display:flex;align-items:center;j
   .btn-group{flex-direction:column;align-items:center}
   .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center}
 }
+footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
+.footer-brand{font-size:18px;font-weight:700;color:rgba(245,230,192,.8)}
+.footer-brand span{color:var(--gold-text)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none}
+.footer-links a:hover{color:rgba(245,230,192,.7)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
+@media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 </style>
+  <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 
@@ -81,7 +103,16 @@ footer{background:var(--brown);padding:22px 6%;display:flex;align-items:center;j
 
 <footer>
   <div class="footer-brand"><span>Au</span>ditera</div>
-  <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות. · <a href="accessibility.html" style="color:rgba(245,230,192,.4);text-decoration:underline">נגישות</a></div>
+  <div class="footer-links">
+    <a href="features.html">תכונות</a>
+    <a href="how.html">איך זה עובד</a>
+    <a href="pricing.html">תמחור</a>
+    <a href="contact.html">צור קשר</a>
+    <a href="legal.html">תנאי שימוש</a>
+    <a href="legal.html#privacy">פרטיות</a>
+    <a href="accessibility.html">נגישות</a>
+  </div>
+  <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות.</div>
 </footer>
 
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">

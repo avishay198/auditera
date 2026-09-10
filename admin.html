@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
@@ -40,7 +41,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f0e8;color:#3a200
 nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:300;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .nav-logo{display:flex;align-items:center;gap:8px}
 .nav-logo-icon{width:26px;height:26px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px}
-.nav-logo-text{font-size:15px;font-weight:800;color:#ffffff}.nav-logo-text span{color:#e0b840}
+.nav-logo-text{font-size:15px;font-weight:800;color:#ffffff}.nav-logo-text span{color:var(--gold)}
 .admin-badge{background:rgba(220,38,38,.3);border:1px solid rgba(220,38,38,.6);color:#fca5a5;font-size:9px;font-weight:800;padding:1px 7px;border-radius:12px;letter-spacing:.06em}
 .nav-right{display:flex;align-items:center;gap:8px}
 .nav-clock{font-size:11px;color:rgba(245,230,192,.4);margin-left:4px}
@@ -1423,10 +1424,10 @@ nav {
     <!-- QUOTAS -->
     <div class="card">
       <div class="card-head"><div class="card-title"><i class="ti ti-folders"></i> מכסת תיקי לקוח</div></div>
-      <div class="fg"><label>ניסיון</label><input id="quotaTrial" type="number" min="1"></div>
-      <div class="fg"><label>סטארטר</label><input id="quotaStarter" type="number" min="1"></div>
-      <div class="fg"><label>מקצועי</label><input id="quotaPro" type="number" min="1"></div>
-      <div class="fg"><label>פרמיום</label><input id="quotaPremium" type="number" min="1"></div>
+      <div class="fg"><label>ניסיון</label><input id="quotaTrial" type="number" min="1" oninput="if(+this.value<1)this.value=1"></div>
+      <div class="fg"><label>סטארטר</label><input id="quotaStarter" type="number" min="1" oninput="if(+this.value<1)this.value=1"></div>
+      <div class="fg"><label>מקצועי</label><input id="quotaPro" type="number" min="1" oninput="if(+this.value<1)this.value=1"></div>
+      <div class="fg"><label>פרמיום</label><input id="quotaPremium" type="number" min="1" oninput="if(+this.value<1)this.value=1"></div>
       <div class="fg"><label>ארגוני</label><input id="quotaEnt" type="number" min="1"><div class="hint">9999 = ללא הגבלה</div></div>
       <button class="nbtn nbtn-gold" onclick="saveQuotas()"><i class="ti ti-device-floppy"></i> שמור מכסות</button>
     </div>
@@ -2260,25 +2261,38 @@ nav {
   <!-- Custom Plan per user -->
   <div class="card">
     <div class="card-head"><div class="card-title"><i class="ti ti-tool"></i> מסלול מותאם אישית למשתמש</div></div>
-    <p style="font-size:11px;color:var(--muted);margin-bottom:12px">קבע מחיר ומכסת תיקים ייחודיים לחשבון ספציפי (דרך כלל לארגוניים)</p>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:12px">קבע מסלול, מחיר, מכסה ותכונות ייחודיים לחשבון ספציפי</p>
     <div class="form-row">
-      <div class="fg"><label>אימייל משתמש</label>
-        <select id="cpUserSel">
+      <div class="fg"><label>משתמש</label>
+        <select id="cpUserSel" onchange="_cpOnUserChange()">
           <option value="">בחר משתמש...</option>
         </select>
       </div>
       <div class="fg"><label>מסלול בסיס</label>
-        <select id="cpPlan">
+        <select id="cpPlan" onchange="_cpOnPlanChange()">
           <option value="enterprise">ארגוני</option><option value="premium">פרמיום</option>
           <option value="professional">מקצועי</option><option value="starter">סטארטר</option>
         </select>
       </div>
     </div>
     <div class="form-row" style="margin-bottom:12px">
-      <div class="fg"><label>מחיר מותאם (₪/חודש)</label><input id="cpPrice" type="number" min="0" placeholder="1500"></div>
-      <div class="fg"><label>מכסת תיקים מותאמת</label><input id="cpQuota" type="number" min="1" placeholder="200"></div>
+      <div class="fg"><label>מחיר מותאם (₪/חודש)</label><input id="cpPrice" type="number" min="0" placeholder="לפי מסלול"></div>
+      <div class="fg"><label>מכסת תיקים מותאמת</label><input id="cpQuota" type="number" min="1" placeholder="לפי מסלול"></div>
     </div>
-    <button class="nbtn nbtn-gold" onclick="saveCustomPlan()">✓ שמור מסלול מותאם</button>
+
+    <!-- Custom Features Override Grid -->
+    <div id="cpFeatSection" style="display:none;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:700;color:var(--brown);margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:6px">
+        <i class="ti ti-adjustments-horizontal"></i> תכונות מותאמות אישית
+        <span style="font-weight:400;color:var(--muted);font-size:11px;margin-right:8px">לחץ על תכונה לשינוי — כחול=הפעלה, אדום=כיבוי, אפור=לפי מסלול</span>
+      </div>
+      <div id="cpFeatGrid" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button class="nbtn nbtn-gold" onclick="saveCustomPlan()">✓ שמור מסלול מותאם</button>
+      <button class="nbtn nbtn-outline" onclick="_cpResetFeatures()" style="font-size:12px">↺ אפס תכונות</button>
+    </div>
     <div id="cpMsg" style="font-size:11px;margin-top:8px"></div>
   </div>
 
@@ -2644,19 +2658,18 @@ const DEF_FEATURES=[
   {key:'vat',          label:'חישוב מע"מ (18%)',                   s:false,p:true, pr:true},
   {key:'wht',          label:'ניכוי מס במקור',                    s:false,p:true, pr:true},
   {key:'related',      label:'גילוי צדדים קשורים',                s:false,p:true, pr:true},
-  {key:'budget',       label:'השוואה לתקציב [חודשי]',             s:false,p:true, pr:true},
+  {key:'budget',       label:'השוואה לתקציב [חודשי]',             s:false,p:false,pr:true},
   // ── ביקורת שנתית בלבד ─────────────────────────────────────
   {section:'ביקורת שנתית'},
   {key:'trial_balance',label:'מאזן בוחן',                        s:true, p:true, pr:true},
   {key:'benford',      label:'חוק בנפורד + MAD + χ²',            s:false,p:true, pr:true},
   {key:'ratios',       label:'יחסים פיננסיים',                    s:false,p:true, pr:true},
-  {key:'vendor',       label:'רשת ספקים + לורנץ',                 s:false,p:true, pr:true},
+  {key:'vendors',      label:'רשת ספקים + לורנץ',                 s:false,p:false,pr:true},
   {key:'mus',          label:'MUS Sampling (דגימה)',               s:false,p:true, pr:true},
   {key:'materiality',  label:'מהותיות (Materiality)',             s:false,p:true, pr:true},
   {key:'isa',          label:'דפי עבודה ISA',                     s:false,p:true, pr:true},
   {key:'compare',      label:'השוואה שנה לשנה (YoY)',             s:false,p:true, pr:true},
-  {key:'cross_month',  label:'חריגות בין-חודשיות',                s:false,p:true, pr:true},
-  {key:'form856',      label:'טופס 856',                          s:false,p:true, pr:true},
+  {key:'form856',      label:'טופס 856',                          s:false,p:false,pr:true},
   // ── ייצוא ──────────────────────────────────────────────────
   {section:'ייצוא'},
   {key:'export_pdf',   label:'ייצוא PDF',                        s:true, p:true, pr:true},
@@ -2665,7 +2678,7 @@ const DEF_FEATURES=[
   {key:'export_prio',  label:'ייצוא פריוריטי / חשבIT / חשבשבת',  s:false,p:true, pr:true},
   // ── AI ─────────────────────────────────────────────────────
   {section:'AI'},
-  {key:'ai',           label:'דוח AI מקצועי (BYOK)',              s:false,p:true, pr:true},
+  {key:'ai',           label:'דוח AI מקצועי (BYOK)',              s:false,p:false,pr:true},
 ];
 
 const PLAN_COLORS={trial:'#9ca3af',starter:'#3b82f6',professional:'#16a34a',premium:'#e0b840',enterprise:'#3a2000'};
@@ -5279,7 +5292,7 @@ async function execSendKey(){
       body:JSON.stringify({email,plan,quota,expiry,admin_token:adminToken})
     });
     const data=await resp.json();
-    if(!data.ok){toast('❌ שגיאה ביצירת מפתח — '+(data.error||'נסה שוב'));return;}
+    if(!data.ok){const _errMsg=data.error==='session_expired'?'פג תוקף הסשן — התנתק והתחבר מחדש לפאנל האדמין':data.error||'נסה שוב';toast('❌ שגיאה ביצירת מפתח — '+_errMsg);return;}
     token=data.token;
   }catch(e){
     toast('❌ שגיאת רשת — ודא חיבור לאינטרנט');return;
@@ -5465,6 +5478,77 @@ function loadCustomPlanSelect(){
     }
   };
 }
+// ── CUSTOM PLAN HELPERS ─────────────────────────────────────────
+let _cpFeatureState={};  // key → true(on) | false(off) | null(default)
+
+function _cpOnUserChange(){
+  const email=document.getElementById('cpUserSel').value;
+  const users=getUsers();
+  const u=users.find(x=>x.email===email);
+  if(!u){document.getElementById('cpFeatSection').style.display='none';return;}
+  // populate fields
+  document.getElementById('cpPlan').value=u.plan||'starter';
+  document.getElementById('cpPrice').value=u.customPrice||'';
+  document.getElementById('cpQuota').value=u.customQuota||'';
+  _cpFeatureState=Object.assign({},u.customFeatures||{});
+  document.getElementById('cpFeatSection').style.display='block';
+  _cpRenderFeatGrid();
+}
+
+function _cpOnPlanChange(){
+  _cpRenderFeatGrid();
+}
+
+function _planHasFeature(plan,feat){
+  if(['premium','enterprise'].includes(plan)) return feat.pr!==false;
+  if(plan==='professional') return feat.p!==false;
+  if(plan==='starter') return feat.s!==false;
+  return false;
+}
+
+function _cpRenderFeatGrid(){
+  const grid=document.getElementById('cpFeatGrid');
+  if(!grid) return;
+  const plan=document.getElementById('cpPlan').value;
+  const saved=ls(K.features,null)||DEF_FEATURES;
+  const rows=saved.filter(f=>f.key);
+  let html='';
+  rows.forEach(f=>{
+    const planHas=_planHasFeature(plan,f);
+    const state=_cpFeatureState[f.key]; // true/false/undefined
+    let bg,color,icon,tip;
+    if(state===true){bg='#1d4ed8';color='#fff';icon='✓';tip='הופעל ידנית';}
+    else if(state===false){bg='#dc2626';color='#fff';icon='✗';tip='כובה ידנית';}
+    else{
+      bg=planHas?'#dcfce7':'#f3f4f6';
+      color=planHas?'#15803d':'#9ca3af';
+      icon=planHas?'✓':'—';
+      tip='לפי מסלול';
+    }
+    html+=`<button onclick="_cpToggleFeat('${f.key}')" title="${tip}"
+      style="padding:4px 10px;border-radius:20px;border:1px solid rgba(0,0,0,.12);
+             background:${bg};color:${color};font-size:11px;cursor:pointer;
+             font-family:inherit;transition:.15s;white-space:nowrap">
+      ${icon} ${f.label}
+    </button>`;
+  });
+  grid.innerHTML=html;
+}
+
+function _cpToggleFeat(key){
+  const cur=_cpFeatureState[key];
+  // cycle: undefined → true → false → undefined
+  if(cur===undefined||cur===null) _cpFeatureState[key]=true;
+  else if(cur===true) _cpFeatureState[key]=false;
+  else delete _cpFeatureState[key];
+  _cpRenderFeatGrid();
+}
+
+function _cpResetFeatures(){
+  _cpFeatureState={};
+  _cpRenderFeatGrid();
+}
+
 function saveCustomPlan(){
   const email=document.getElementById('cpUserSel').value;
   const plan=document.getElementById('cpPlan').value;
@@ -5475,8 +5559,16 @@ function saveCustomPlan(){
   u.plan=plan;
   if(price!=='')u.customPrice=+price;else delete u.customPrice;
   if(quota!=='')u.customQuota=+quota;else delete u.customQuota;
-  ss(UK,users);adminLog('custom_plan',`${email}: ${plan} ₪${price||'—'} ${quota||'—'}תיקים`);
-  document.getElementById('cpMsg').textContent='✓ מסלול מותאם נשמר ל-'+u.name;
+  // save feature overrides (only non-empty)
+  const overrides=Object.fromEntries(
+    Object.entries(_cpFeatureState).filter(([,v])=>v===true||v===false)
+  );
+  if(Object.keys(overrides).length>0) u.customFeatures=overrides;
+  else delete u.customFeatures;
+  ss(UK,users);
+  const ovCount=Object.keys(overrides).length;
+  adminLog('custom_plan',`${email}: ${plan} ₪${price||'—'} ${quota||'—'}תיקים ${ovCount?ovCount+' תכונות מותאמות':''}`)
+  document.getElementById('cpMsg').textContent=`✓ מסלול מותאם נשמר ל-${u.name}${ovCount?' ('+ovCount+' תכונות)':''}`;
   document.getElementById('cpMsg').style.color='var(--green)';
   toast('✓ מסלול מותאם נשמר');renderOverview();
 }
@@ -6580,11 +6672,12 @@ function savePrices(){
   toast('✓ מחירים עודכנו');renderOverview();
 }
 function saveQuotas(){
-  const q={trial:+document.getElementById('quotaTrial').value,
-    starter:+document.getElementById('quotaStarter').value,
-    professional:+document.getElementById('quotaPro').value,
-    premium:+document.getElementById('quotaPremium').value,
-    enterprise:+document.getElementById('quotaEnt').value};
+  const _qv=id=>Math.max(1,+document.getElementById(id).value||1);
+  const q={trial:_qv('quotaTrial'),
+    starter:_qv('quotaStarter'),
+    professional:_qv('quotaPro'),
+    premium:_qv('quotaPremium'),
+    enterprise:Math.max(1,+document.getElementById('quotaEnt').value||9999)};
   ss(K.quotas,q);adminLog('quotas',JSON.stringify(q));toast('✓ מכסות עודכנו');
 }
 function saveTaxCfg(){
@@ -7653,6 +7746,29 @@ function copyCampaign(){
 //  INIT
 // ══════════════════════════════════════════════
 renderOverview();
+
+// ── אזהרת פקיעת טוקן אדמין ─────────────────────────────────
+(function _checkAdminTokenExpiry(){
+  const exp=parseInt(sessionStorage.getItem('af_admin_expires')||'0',10);
+  if(!exp) return;
+  const remaining=exp-Date.now();
+  if(remaining<=0){
+    toast('⚠️ תוקף הסשן פג — התנתק והתחבר מחדש כדי לבצע פעולות כתיבה');
+    return;
+  }
+  // אזהרה 30 דקות לפני פקיעה
+  const warnAt=remaining-30*60*1000;
+  if(warnAt<=0){
+    toast('⏰ פחות מ-30 דקות לפקיעת הסשן — שמור עבודה והתחבר מחדש בקרוב');
+  } else {
+    setTimeout(()=>toast('⏰ פחות מ-30 דקות לפקיעת סשן האדמין — שמור עבודה והתחבר מחדש בקרוב'),warnAt);
+  }
+  // אזהרה בזמן פקיעה ממש
+  if(remaining>0){
+    setTimeout(()=>toast('🚫 סשן האדמין פג — פעולות כתיבה יכשלו. התנתק והתחבר מחדש'),remaining);
+  }
+})();
+
 // Restore last active tab
 (function(){
   try{
@@ -7784,11 +7900,11 @@ function deleteInquiry(idx){
   }catch(e){}
   renderInquiries();
 }
+</script>
 
 <div style="text-align:center;padding:12px;font-size:11px;color:#bbb;border-top:1px solid #f0f0f0">
   <a href="accessibility.html" style="color:#bbb;text-decoration:underline">הצהרת נגישות</a> ·
   <a href="legal.html" style="color:#bbb;text-decoration:underline">תנאי שימוש ופרטיות</a>
 </div>
-</script>
 </body>
 </html>

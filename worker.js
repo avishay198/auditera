@@ -16,6 +16,23 @@ const CORS = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// ── RATE LIMITING (per-isolate, כל endpoint) ─────────────────────
+const _RL = new Map();
+function _rateLimit(key, limit, windowMs = 60_000) {
+  const now = Date.now();
+  let e = _RL.get(key) || { count: 0, reset: now + windowMs };
+  if (now > e.reset) { e.count = 0; e.reset = now + windowMs; }
+  e.count++;
+  _RL.set(key, e);
+  return e.count > limit;
+}
+function _rlResp() {
+  return new Response(
+    JSON.stringify({ error: 'יותר מדי בקשות — נסה שוב בעוד דקה' }),
+    { status: 429, headers: { ...CORS, 'Content-Type': 'application/json', 'Retry-After': '60' } }
+  );
+}
+
 export default {
   async fetch(request, env) {
     // OPTIONS preflight
@@ -24,6 +41,16 @@ export default {
     }
 
     const url = new URL(request.url);
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+
+    // ── RATE LIMITS ────────────────────────────────────────────
+    // endpoints רגישים — 10 בקשות/דקה לכל IP
+    const _sensitiveRoutes = ['/admin-auth', '/generate-token', '/revoke', '/forgot-password', '/verify-reset'];
+    if (_sensitiveRoutes.includes(url.pathname)) {
+      if (_rateLimit(`${ip}:${url.pathname}`, 10, 60_000)) return _rlResp();
+    }
+    // כלל כללי — 60 בקשות/דקה לכל IP
+    if (_rateLimit(ip, 60, 60_000)) return _rlResp();
 
     // ── POST /validate — אימות רישיון ─────────────────────────
     if (request.method === 'POST' && url.pathname === '/validate') {

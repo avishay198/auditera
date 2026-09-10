@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,7 +13,8 @@
 <title>רכישת מנוי — Auditera</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5ede0;color:#3a2000;direction:rtl;overflow-x:hidden}
+html,html{overflow-x:hidden}
+body{min-height:100%;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:#3a2000;direction:rtl;overflow-x:hidden}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888;--green:#15803d;--green-bg:#f0fdf4;--green-border:#bbf7d0;
@@ -23,10 +25,10 @@ html,body{min-height:100%;font-family:'Segoe UI',system-ui,-apple-system,sans-se
 /* ── NAV ─────────────────────────────────────────────────────────── */
 .nav-back{color:var(--brown);background:var(--gold);font-size:13px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;padding:7px 16px;border-radius:7px;transition:background .2s}
 .nav-back:hover{background:#b8881f}
-nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
+nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--border);box-shadow:0 2px 12px rgba(58,32,0,.06)}
 .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nav-logo-text{font-size:20px;font-weight:700;color:#fff}
-.nav-logo-text span{color:#e0b840}
+.nav-logo-text{font-size:20px;font-weight:700;color:var(--brown)}
+.nav-logo-text span{color:var(--gold)}
 /* ── PAGE LAYOUT ──────────────────────────────────────────────────── */
 .page{max-width:560px;margin:0 auto;padding:52px 20px 70px}
 
@@ -125,7 +127,6 @@ nav{background:var(--brown);padding:0 6%;height:64px;display:flex;align-items:ce
 
 .no-bank-box,.no-bit-box{background:#fef3c7;border:1.5px solid #fcd34d;border-radius:10px;padding:14px 16px;font-size:13px;color:#92400e;text-align:center;line-height:1.6}
 
-footer{text-align:center;padding:28px 20px;font-size:11px;color:var(--muted)}
 footer a{color:var(--muted);text-decoration:underline}
 [hidden]{display:none!important}
 
@@ -158,7 +159,25 @@ footer a{color:var(--muted);text-decoration:underline}
   .pay-tabs{grid-template-columns:1fr}
   .plan-price{font-size:28px}
 }
+@media(max-width:768px){}
+footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
+.footer-brand{font-size:18px;font-weight:700;color:rgba(245,230,192,.8)}
+.footer-brand span{color:var(--gold-text)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none}
+.footer-links a:hover{color:rgba(245,230,192,.7)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
+@media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 </style>
+  <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="רכישה - Auditera">
+  <meta property="og:description" content="הצטרפו ל-Auditera — פלטפורמת ביקורת חשבונאית חכמה לרואי חשבון.">
+  <meta property="og:url" content="https://auditera.co/checkout.html">
+  <meta property="og:image" content="https://auditera.co/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="he_IL">
 </head>
 <body>
 <a href="#main-content" class="skip-link">דלג לתוכן</a>
@@ -345,10 +364,18 @@ footer a{color:var(--muted);text-decoration:underline}
 
 </div>
 
-<footer>Auditera · כל הנתונים מעובדים מקומית בדפדפן בלבד ·
-  <a href="legal.html">תנאי שימוש</a> ·
-  <a href="legal.html#privacy">פרטיות</a> ·
-  <a href="accessibility.html">נגישות</a>
+<footer>
+  <div class="footer-brand"><span>Au</span>ditera</div>
+  <div class="footer-links">
+    <a href="features.html">תכונות</a>
+    <a href="how.html">איך זה עובד</a>
+    <a href="pricing.html">תמחור</a>
+    <a href="contact.html">צור קשר</a>
+    <a href="legal.html">תנאי שימוש</a>
+    <a href="legal.html#privacy">פרטיות</a>
+    <a href="accessibility.html">נגישות</a>
+  </div>
+  <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות.</div>
 </footer>
 
 <script>
@@ -384,7 +411,7 @@ function renderPlan(){
     const displayPrice=(isAnnual && p.annualPrice) ? p.annualPrice : p.price;
     _planPrice=displayPrice;
     document.getElementById('planPrice').innerHTML=displayPrice.toLocaleString('he-IL')+'<small> ₪/חודש</small>';
-    document.getElementById('planVat').textContent=isAnnual ? '• חיוב חודשי בהתחייבות שנתית' : '';
+    document.getElementById('planVat').textContent=isAnnual ? '• חיוב חודשי בהתחייבות שנתית | + מע"מ 18%' : '+ מע"מ 18% על המחיר המוצג';
     document.getElementById('cancelNote').style.display=isAnnual?'block':'none';
   } else {
     document.getElementById('planPrice').innerHTML='<small style="font-size:16px">מחיר בהתאמה אישית</small>';

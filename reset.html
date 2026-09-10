@@ -15,7 +15,8 @@
   --brown:#3a2000;--brown2:#5a3010;--gold:#e0b840;--gold2:#e8d4a0;
   --cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888;--danger:#dc2626;
 }
-html,body{min-height:100%;background:var(--cream);color:var(--brown);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;direction:rtl}
+html,html{overflow-x:hidden}
+body{min-height:100%;background:var(--cream);color:var(--brown);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;direction:rtloverflow-x:hidden;}
 body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px 16px}
 
 /* ── CARD ── */
@@ -82,7 +83,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .divider{border:none;border-top:1px solid #f0e4c8;margin:18px 0 0}
 
 /* ── FOOTER ── */
-.footer{margin-top:20px;text-align:center;font-size:11.5px;color:var(--muted)}
+.
 .footer a{color:var(--gold);text-decoration:none;font-weight:600}
 .footer a:hover{text-decoration:underline}
 
@@ -90,7 +91,25 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .noscript-box{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:12px 16px;border-radius:9px;font-size:13px;text-align:center;margin-bottom:16px}
 
 @media(max-width:440px){.card{padding:24px 16px}}
+@media(max-width:768px){}
+footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
+.footer-brand{font-size:18px;font-weight:700;color:rgba(245,230,192,.8)}
+.footer-brand span{color:var(--gold-text)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:14px;color:rgba(245,230,192,.36);text-decoration:none}
+.footer-links a:hover{color:rgba(245,230,192,.7)}
+.footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
+@media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 </style>
+  <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="איפוס סיסמה - Auditera">
+  <meta property="og:description" content="איפוס סיסמה למערכת Auditera.">
+  <meta property="og:url" content="https://auditera.co/reset.html">
+  <meta property="og:image" content="https://auditera.co/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="he_IL">
 </head>
 <body>
 
@@ -348,5 +367,19 @@ document.addEventListener('keydown', e => {
   }
 });
 </script>
+
+<footer>
+  <div class="footer-brand"><span>Au</span>ditera</div>
+  <div class="footer-links">
+    <a href="features.html">תכונות</a>
+    <a href="how.html">איך זה עובד</a>
+    <a href="pricing.html">תמחור</a>
+    <a href="contact.html">צור קשר</a>
+    <a href="legal.html">תנאי שימוש</a>
+    <a href="legal.html#privacy">פרטיות</a>
+    <a href="accessibility.html">נגישות</a>
+  </div>
+  <div class="footer-copy">© 2026 Auditera. כל הזכויות שמורות.</div>
+</footer>
 </body>
 </html>
