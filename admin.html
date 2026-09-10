@@ -5087,117 +5087,80 @@ function closeSendKeyModal(){
 
 // ── HTML EMAIL BUILDER ────────────────────────────────────────────────
 function buildKeyEmailHTML(name, plan, token, link){
-  const PLAN_DATA={
-    starter:  {label:'סטארטר',  price:'590',  quota:'35',  features:['35 תיקי לקוח','ביקורת חודשית ושנתית','זיהוי 12 סוגי חריגות אוטומטי','התאמת בנק + תזרים מזומנים','ייצוא PDF ו-Excel','תמיכה במייל']},
-    professional:{label:'מקצועי', price:'990', quota:'80',  features:['80 תיקי לקוח','כל יכולות הסטארטר','דוח AI מקצועי','ייצוא לריווחית','תמיכה טלפונית עדיפות']},
-    premium:  {label:'פרמיום',  price:'2,490',quota:'200', features:['200 תיקי לקוח','כל יכולות המקצועי','API גישה','מנהל חשבון אישי','SLA מובטח']},
-    enterprise:{label:'ארגוני', price:'בהתאמה',quota:'∞', features:['תיקים ללא הגבלה','כל יכולות הפרמיום','הטמעה מותאמת','הדרכת צוות','תמיכה 24/7']},
-    trial:    {label:'ניסיון', price:'0',    quota:'1',  features:['תיק לקוח אחד','ביקורת חודשית','גישה מלאה לתכונות']}
-  };
-  const pd = PLAN_DATA[plan] || PLAN_DATA.starter;
-  const featureRows = pd.features.map(f=>
-    `<tr><td style="padding:5px 0;font-size:14px;color:#5a3010;direction:rtl;text-align:right">
-      <span style="color:#e0b840;font-weight:700;margin-left:8px">✓</span>${f}
-    </td></tr>`
-  ).join('');
-
+  const PLAN_NAMES_EMAIL={starter:'Starter',professional:'Professional',premium:'Premium',enterprise:'Enterprise',trial:'Trial'};
+  const planLabel=PLAN_NAMES_EMAIL[plan]||plan;
+  const year=new Date().getFullYear();
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f0e8d8;font-family:'Segoe UI',Arial,sans-serif;direction:rtl">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0e8d8;padding:32px 16px">
-  <tr><td align="center">
-  <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ברוך הבא ל-Auditera</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f0e8;font-family:'Segoe UI',Arial,sans-serif;direction:rtl">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f0e8;padding:28px 16px">
+<tr><td align="center">
+<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;border-radius:18px;overflow:hidden;box-shadow:0 4px 32px rgba(58,32,0,.13)">
 
-    <!-- HEADER -->
-    <tr><td style="background:#3a2000;border-radius:14px 14px 0 0;padding:28px 40px;text-align:center">
-      <div style="font-size:28px;font-weight:900;color:#f5e6c0;letter-spacing:-0.5px">
-        <span style="color:#e0b840">Au</span>ditera
-      </div>
-      <div style="font-size:13px;color:rgba(245,230,192,0.6);margin-top:4px">כלי ביקורת חשבונאית חכם</div>
-    </td></tr>
+  <!-- HEADER — cream + logo -->
+  <tr><td style="background:#faf6ef;padding:32px 40px 24px;text-align:center;border-bottom:1px solid #e8dcc8">
+    <div style="font-size:36px;font-weight:900;letter-spacing:-1px;color:#c9a02e">AUDITERA</div>
+    <div style="font-size:13px;color:#a08050;margin-top:5px;font-weight:500">מערכת ניהול ביקורת חשבונות</div>
+  </td></tr>
 
-    <!-- HERO -->
-    <tr><td style="background:#ffffff;padding:36px 40px 28px;text-align:center">
-      <div style="font-size:40px;margin-bottom:12px">🎉</div>
-      <h1 style="margin:0 0 8px;font-size:24px;font-weight:800;color:#3a2000">ברוך הבא ל-Auditera, ${name}!</h1>
-      <p style="margin:0;font-size:15px;color:#7a5a30;line-height:1.6">
-        המנוי שלך אושר ומוכן לשימוש.<br>מפתח ההפעלה שלך מצורף למטה.
-      </p>
-    </td></tr>
+  <!-- DARK BODY -->
+  <tr><td style="background:#2e2a24;padding:40px 40px 32px">
 
-    <!-- PLAN BADGE -->
-    <tr><td style="background:#ffffff;padding:0 40px 24px">
-      <table width="100%" cellpadding="0" cellspacing="0" style="background:#fdf8ee;border:1.5px solid #e8d4a0;border-radius:10px;padding:20px">
-        <tr>
-          <td style="text-align:right;direction:rtl">
-            <div style="font-size:11px;font-weight:800;color:#e0b840;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">מסלול פעיל</div>
-            <div style="font-size:22px;font-weight:900;color:#3a2000">${pd.label}</div>
-            <div style="font-size:13px;color:#9a7a4a;margin-top:2px">עד ${pd.quota} תיקי לקוח · ₪${pd.price}/חודש</div>
-          </td>
-          <td style="text-align:left;vertical-align:top">
-            <span style="background:#3a2000;color:#e0b840;font-size:11px;font-weight:800;padding:5px 14px;border-radius:20px">פעיל ✓</span>
-          </td>
-        </tr>
-        <tr><td colspan="2" style="padding-top:16px">
-          <table width="100%" cellpadding="0" cellspacing="0">${featureRows}</table>
-        </td></tr>
-      </table>
-    </td></tr>
+    <!-- Greeting -->
+    <h2 style="margin:0 0 10px;font-size:24px;font-weight:800;color:#f5ecd8;text-align:right">!Auditera-ברוך הבא ל</h2>
+    <p style="margin:0 0 6px;font-size:15px;color:#d4c5a0;text-align:right">שלום ${name},</p>
+    <p style="margin:0 0 28px;font-size:14px;color:#b8a880;line-height:1.7;text-align:right">
+      החשבון שלך נוצר בהצלחה. אנחנו שמחים שהצטרפת אלינו.
+    </p>
 
-    <!-- ACTIVATION KEY -->
-    <tr><td style="background:#ffffff;padding:0 40px 28px">
-      <div style="font-size:13px;font-weight:700;color:#3a2000;margin-bottom:10px;text-align:right">🔑 מפתח ההפעלה שלך</div>
-      <div style="background:#1a0a00;border-radius:10px;padding:20px 24px;text-align:center">
-        <div style="font-family:'Courier New',Courier,monospace;font-size:12px;color:#e0b840;word-break:break-all;letter-spacing:.03em;line-height:1.7">${token}</div>
-      </div>
-      <div style="font-size:11px;color:#9a7a4a;text-align:center;margin-top:8px">
-        ⚠ שמור את המפתח במקום בטוח — תזדקק לו בכל התקנה חדשה
-      </div>
-    </td></tr>
+    <!-- Info card -->
+    <table width="100%" cellpadding="0" cellspacing="0"
+      style="background:rgba(255,255,255,.06);border:1px solid rgba(224,184,64,.25);border-radius:12px;padding:20px 24px;margin-bottom:28px">
+      <tr>
+        <td style="font-size:13px;color:#a08050;padding-bottom:10px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08)">
+          <strong style="color:#d4c5a0">אימייל:</strong>&nbsp;${link.replace('https://','').split('/')[0]}</td>
+      </tr>
+      <tr>
+        <td style="font-size:13px;color:#a08050;padding-top:10px;text-align:right">
+          <strong style="color:#d4c5a0">מסלול:</strong>&nbsp;${planLabel}</td>
+      </tr>
+    </table>
+
+    <!-- License key -->
+    <div style="font-size:12px;font-weight:700;color:#c9a02e;margin-bottom:8px;text-align:right">🔑 מפתח הפעלה</div>
+    <div style="background:#1a1410;border:1px solid rgba(224,184,64,.3);border-radius:10px;padding:16px 20px;margin-bottom:28px;text-align:center">
+      <div style="font-family:'Courier New',Courier,monospace;font-size:11px;color:#e0b840;word-break:break-all;letter-spacing:.04em;line-height:1.8">${token}</div>
+    </div>
+    <div style="font-size:11px;color:#8a7a58;text-align:center;margin-bottom:32px">
+      הזן את המפתח בתוכנה לאחר ההתחברות כדי להפעיל את המנוי שלך
+    </div>
 
     <!-- CTA -->
-    <tr><td style="background:#ffffff;padding:0 40px 36px;text-align:center">
-      <a href="${link}" style="display:inline-block;background:#e0b840;color:#000;font-size:16px;font-weight:800;padding:15px 40px;border-radius:10px;text-decoration:none">
-        כניסה למערכת &larr;
+    <div style="text-align:center">
+      <a href="${link}"
+        style="display:inline-block;background:#c9a02e;color:#1a1000;font-size:15px;font-weight:800;padding:14px 48px;border-radius:10px;text-decoration:none;letter-spacing:.02em">
+        כניסה למערכת
       </a>
-      <div style="font-size:12px;color:#9a7a4a;margin-top:12px">
-        ${link}
-      </div>
-    </td></tr>
+    </div>
 
-    <!-- STEPS -->
-    <tr><td style="background:#f9f4ea;padding:24px 40px;border-top:1px solid #e8d4a0">
-      <div style="font-size:13px;font-weight:700;color:#3a2000;margin-bottom:14px;text-align:right">🚀 איך מתחילים</div>
-      <table width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="width:28px;vertical-align:top"><span style="background:#e0b840;color:#000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">1</span></td>
-          <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl;padding-bottom:10px">היכנס עם הכתובת ומספר הטלפון שלך</td>
-        </tr>
-        <tr>
-          <td style="width:28px;vertical-align:top"><span style="background:#e0b840;color:#000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">2</span></td>
-          <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl;padding-bottom:10px">הכנס את מפתח ההפעלה שקיבלת</td>
-        </tr>
-        <tr>
-          <td style="width:28px;vertical-align:top"><span style="background:#e0b840;color:#000;font-weight:800;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-block;text-align:center;line-height:22px">3</span></td>
-          <td style="padding-right:10px;font-size:13px;color:#5a3010;direction:rtl">העלה את קובץ הנהלת החשבונות והתחל לבקר</td>
-        </tr>
-      </table>
-    </td></tr>
-
-    <!-- FOOTER -->
-    <tr><td style="background:#3a2000;border-radius:0 0 14px 14px;padding:20px 40px;text-align:center">
-      <div style="font-size:12px;color:rgba(245,230,192,0.6);line-height:1.8">
-        לשאלות ותמיכה — ענה לאימייל זה<br>
-        <span style="color:#e0b840">support@auditera.co</span>
-      </div>
-      <div style="font-size:10px;color:rgba(245,230,192,0.35);margin-top:10px">© ${new Date().getFullYear()} Auditera · כל הזכויות שמורות</div>
-    </td></tr>
-
-  </table>
   </td></tr>
+
+  <!-- FOOTER — cream -->
+  <tr><td style="background:#faf6ef;padding:22px 40px;text-align:center;border-top:1px solid #e8dcc8">
+    <div style="font-size:12px;color:#a08050;line-height:1.8">
+      שאלות? פנה אלינו ב-<a href="mailto:support@auditera.co" style="color:#c9a02e;text-decoration:none">support@auditera.co</a>
+    </div>
+    <div style="font-size:11px;color:#c0b090;margin-top:6px">© Auditera ${year}. כל הזכויות שמורות.</div>
+  </td></tr>
+
+</table>
+</td></tr>
 </table>
 </body></html>`;
+
 }
 
 function showEmailPreview(html, toEmail, subject){
