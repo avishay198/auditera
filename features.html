@@ -299,6 +299,24 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 .footer-links a:hover{color:rgba(245,230,192,.7)}
 .footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
 @media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
+
+/* ANOMALY GRID */
+.anom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.anom-card{background:var(--gold3);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.anom-name{font-size:13px;font-weight:700;color:var(--brown);margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.anom-name .ti{font-size:14px;color:var(--gold-text)}
+.anom-desc{font-size:12px;color:var(--muted);line-height:1.55}
+
+/* FCARD ICON */
+.fcard-icon{font-size:22px;color:var(--gold-text);margin-bottom:4px}
+.fcard:hover{border-color:var(--gold-text);box-shadow:0 4px 16px rgba(58,32,0,.08)}
+
+@media(max-width:768px){
+  .anom-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .anom-grid{grid-template-columns:1fr}
+}
 </style>
 <script type="application/ld+json">
 {
@@ -445,18 +463,20 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <div class="cap-row-sub">זיהוי אוטומטי — כל חריגה עם הסבר ורמת סיכון</div>
         </div>
         <div class="cap-row-right">
-          <span class="cap-tag">סכום חריג</span>
-          <span class="cap-tag">כפילות</span>
-          <span class="cap-tag">פיצול עסקאות</span>
-          <span class="cap-tag">ספק חדש</span>
-          <span class="cap-tag">תשלום חוזר שהופסק</span>
-          <span class="cap-tag">מספר עגול</span>
-          <span class="cap-tag">עסקה בשישי / שבת</span>
-          <span class="cap-tag">שעות חריגות</span>
-          <span class="cap-tag">חוק מזומן</span>
-          <span class="cap-tag">צד קשור</span>
-          <span class="cap-tag">חשבוניות ישראל</span>
-          <span class="cap-tag">אסמכתא חסרה</span>
+          <div class="anom-grid">
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-trending-up"></i> סכום חריג</div><div class="anom-desc">עסקה שסכומה חורג באופן משמעותי מממוצע הספק — מצביעה על חיוב שגוי או הונאה.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-copy"></i> כפילות</div><div class="anom-desc">שתי עסקאות או יותר לאותו ספק בסכום זהה בתוך 30 יום — חשד לחיוב כפול.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-cut"></i> פיצול עסקאות</div><div class="anom-desc">מספר עסקאות קטנות לאותו ספק ביום אחד שסכומן המצטבר גדול — עוקף סף אישור.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-user-plus"></i> ספק חדש</div><div class="anom-desc">ספק המופיע לראשונה בנתונים — דורש אימות קיום ורישום תקין.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-player-stop"></i> תשלום חוזר שהופסק</div><div class="anom-desc">תשלום קבוע שנעצר לפתע — ייתכן שהסכם הסתיים ללא הודעה רשמית.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-circle"></i> מספר עגול</div><div class="anom-desc">עסקאות בסכומים עגולים (₪5,000, ₪10,000) — נפוץ בהערכות לא מבוססות.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-calendar-off"></i> עסקה בשישי/שבת</div><div class="anom-desc">חיוב שבוצע בסוף שבוע — יוצא דופן לרוב הספקים העסקיים.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-clock-off"></i> שעות חריגות</div><div class="anom-desc">עסקה שבוצעה בשעות הלילה — מחוץ לשעות הפעילות הרגילות של העסק.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-cash-off"></i> חוק מזומן</div><div class="anom-desc">עסקת מזומן מעל ₪11,000 — חובת דיווח לרשות המסים לפי חוק.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-users"></i> צד קשור</div><div class="anom-desc">עסקה עם גורם קשור לבעל העסק (קרוב משפחה, חברה קשורה) — דורשת גילוי.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-file-invoice"></i> חשבוניות ישראל</div><div class="anom-desc">בדיקת תקינות חשבוניות מול מערכת רשות המסים — שדות חובה ותאריכים.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-file-off"></i> אסמכתא חסרה</div><div class="anom-desc">עסקה ללא מספר אסמכתא — לא ניתן לאמת את מקור החיוב.</div></div>
+          </div>
         </div>
       </div>
 
@@ -588,77 +608,72 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   <div class="section-inner">
     <div class="section-tag">כל התכונות</div>
     <div class="section-title">תכונות לפי מסלול</div>
-    <div class="section-sub">תכונות המסומנות <span style="background:#fdf3dc;border:1px solid #e0b840;color:#3a2000;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px">שנתי</span> זמינות בביקורת שנתית בלבד.</div>
-    <div class="plan-filter">
-      <button class="pf-btn active" onclick="filterPlan('all',this)">כל התכונות</button>
-      <button class="pf-btn" onclick="filterPlan('starter',this)">סטארטר</button>
-      <button class="pf-btn" onclick="filterPlan('professional',this)">מקצועי</button>
-      <button class="pf-btn" onclick="filterPlan('premium',this)">פרמיום</button>
-    </div>
+    <div class="section-sub">תכונות המסומנות <span style="background:#fdf3dc;border:1px solid #e0b840;color:#3a2000;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px">שנתי</span> זמינות בביקורת שנתית בלבד. לפירוט תכונות לפי מסלול — <a href="pricing.html" style="color:var(--gold-text);text-decoration:underline">ראה דף תמחור</a>.</div>
+
     <div class="fcard-grid">
 
       <div class="fcard" data-plans="starter professional premium">
-        <div class="fcard-name">12 סוגי חריגות</div>
+        <div class="fcard-icon"><i class="ti ti-alert-triangle"></i></div><div class="fcard-name">12 סוגי חריגות</div>
         <div class="fcard-desc">זיהוי אוטומטי: כפילויות, סכומים עגולים, פיצול עסקאות, עסקאות סוף תקופה, ריכוז ספקים ועוד.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">אימות מע"מ 18%</div>
+        <div class="fcard-icon"><i class="ti ti-percentage"></i></div><div class="fcard-name">אימות מע"מ 18%</div>
         <div class="fcard-desc">בדיקה שכל חשבונית משקפת את שיעור המע"מ הנוכחי — כולל זיהוי חשבוניות פטורות וחשבוניות כפולות.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">ניכוי מס במקור (WHT)</div>
+        <div class="fcard-icon"><i class="ti ti-receipt-tax"></i></div><div class="fcard-name">ניכוי מס במקור (WHT)</div>
         <div class="fcard-desc">אימות שיעורי ניכוי מול ספי הפטור של רשות המסים, לפי סוג ספק וסכום שנתי מצטבר.</div>
       </div>
       <div class="fcard" data-plans="starter professional premium">
-        <div class="fcard-name">חשבוניות ישראל</div>
+        <div class="fcard-icon"><i class="ti ti-file-invoice"></i></div><div class="fcard-name">חשבוניות ישראל</div>
         <div class="fcard-desc">ייבוא קבצי JSON ו-CSV ישירות ממערכת חשבוניות ישראל — אימות שדות חובה וזיהוי חריגות.</div>
       </div>
       <div class="fcard" data-plans="starter professional premium">
-        <div class="fcard-name">חוק מזומן ₪11,000</div>
+        <div class="fcard-icon"><i class="ti ti-cash"></i></div><div class="fcard-name">חוק מזומן ₪11,000</div>
         <div class="fcard-desc">סריקה לעסקאות מזומן מעל הסף החוקי — עם סימון וציון ההשלכה הרגולטורית הרלוונטית.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">דפי עבודה ISA</div>
+        <div class="fcard-icon"><i class="ti ti-clipboard-check"></i></div><div class="fcard-name">דפי עבודה ISA</div>
         <div class="fcard-desc">תיעוד ביקורת לפי תקנים בינלאומיים ISA — בעברית, בפורמט המקובל, מוכן לתיוק ולהצגה.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">דוח רווח והפסד</div>
+        <div class="fcard-icon"><i class="ti ti-chart-line"></i></div><div class="fcard-name">דוח רווח והפסד</div>
         <div class="fcard-desc">ריכוז אוטומטי של הכנסות והוצאות לפי קטגוריות, עם פירוט חודשי ושנתי.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">תזרים מזומנים</div>
+        <div class="fcard-icon"><i class="ti ti-arrows-exchange"></i></div><div class="fcard-name">תזרים מזומנים</div>
         <div class="fcard-desc">סיווג אוטומטי של תנועות לפעילות שוטפת, פעילות השקעה ופעילות מימון.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">דגימה סטטיסטית</div>
+        <div class="fcard-icon"><i class="ti ti-math"></i></div><div class="fcard-name">דגימה סטטיסטית</div>
         <div class="fcard-desc">בחירה סטטיסטית של עסקאות לבדיקה מעמיקה, לפי תקנים בינלאומיים.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">השוואה לתקציב</div>
+        <div class="fcard-icon"><i class="ti ti-target"></i></div><div class="fcard-name">השוואה לתקציב</div>
         <div class="fcard-desc">הצגת חריגות בפועל מול תקציב שהועלה — לזיהוי סעיפים חורגים בלחיצת כפתור.</div>
       </div>
       <div class="fcard" data-plans="professional premium">
-        <div class="fcard-name">סיכום AI בעברית</div>
+        <div class="fcard-icon"><i class="ti ti-brain"></i></div><div class="fcard-name">סיכום AI בעברית</div>
         <div class="fcard-desc">תיאור ממצאים בשפה טבעית לדוח הלקוח — מבוסס על הנתונים שנותחו, מותאם לסגנון.</div>
       </div>
 
       <div class="fcard annual" data-plans="professional premium">
-        <div class="fcard-name">חוק בנפורד + MAD</div>
+        <div class="fcard-icon"><i class="ti ti-chart-bar"></i></div><div class="fcard-name">חוק בנפורד + MAD</div>
         <div class="fcard-desc">ניתוח התפלגות ספרות ראשונות עם מדד סטייה ממוצעת — לזיהוי מניפולציות בנתונים.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
       <div class="fcard annual" data-plans="professional premium">
-        <div class="fcard-name">מבחן χ² + ערך p</div>
+        <div class="fcard-icon"><i class="ti ti-sigma"></i></div><div class="fcard-name">מבחן χ² + ערך p</div>
         <div class="fcard-desc">בדיקה סטטיסטית לחריגות בנפורד — מאפשרת לנמק ממצאים בשפה אקדמית מוכרת.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
       <div class="fcard annual" data-plans="professional premium">
-        <div class="fcard-name">ניתוח מגמות YoY</div>
+        <div class="fcard-icon"><i class="ti ti-trending-up"></i></div><div class="fcard-name">ניתוח מגמות YoY</div>
         <div class="fcard-desc">השוואת שנה מול שנה קודמת — לזיהוי שינויים מהותיים בסעיפים ספציפיים.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
       <div class="fcard annual" data-plans="professional premium">
-        <div class="fcard-name">חריגות בין-חודשיות</div>
+        <div class="fcard-icon"><i class="ti ti-calendar-stats"></i></div><div class="fcard-name">חריגות בין-חודשיות</div>
         <div class="fcard-desc">זיהוי שינויים חדים בין חודשים עוקבים — תבניות שאינן מזוהות בניתוח חודשי בודד.</div>
         <span class="fcard-badge">שנתי</span>
       </div>
