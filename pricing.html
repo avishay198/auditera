@@ -408,17 +408,17 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <div class="section-tag">למה Auditera</div>
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-icon">⏱</div>
+        <div class="why-icon"><i class="ti ti-clock-hour-4" style="font-size:28px;color:var(--gold)"></i></div>
         <div class="why-title">חוסך 80% מזמן הביקורת</div>
         <div class="why-text">ניתוח חריגות שלוקח ידנית שעות — Auditera מבצעת תוך שניות, עם דוח מוכן לייצוא.</div>
       </div>
       <div class="why-card">
-        <div class="why-icon">🔍</div>
+        <div class="why-icon"><i class="ti ti-search" style="font-size:28px;color:var(--gold)"></i></div>
         <div class="why-title">12 סוגי חריגות אוטומטיות</div>
         <div class="why-text">מזהה חשבוניות כפולות, עסקאות חריגות, אי-התאמות מע"מ וניכוי מס במקור — ללא פספוסים.</div>
       </div>
       <div class="why-card">
-        <div class="why-icon">📋</div>
+        <div class="why-icon"><i class="ti ti-file-description" style="font-size:28px;color:var(--gold)"></i></div>
         <div class="why-title">דפי עבודה ISA מוכנים</div>
         <div class="why-text">מייצר אוטומטית דפי עבודה לפי תקני ISA, מוכנים לחתימה ולתיק הביקורת.</div>
       </div>
@@ -445,7 +445,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <li>ביקורת חודשית וביקורת שנתית</li>
           <li>12 סוגי חריגות</li>
           <li>מיסוי ישראלי מלא + חשבוניות ישראל</li>
-          <li>ייצוא CSV</li>
+          <li>ייצוא CSV, פריוריטי, חשבIT, ריווחית</li>
           <li>תמיכה באימייל עד 48 שעות</li>
         </ul>
         <a href="checkout.html?plan=starter" class="pc-btn">רכוש עכשיו ←</a>
@@ -467,6 +467,10 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <li>חוק בנפורד + השוואה שנה לשנה</li>
           <li>אימות מע"מ וניכוי מס במקור</li>
           <li>דפי עבודה ISA מלאים</li>
+          <li>צדדים קשורים (Related Parties)</li>
+          <li>יחסים פיננסיים אוטומטיים</li>
+          <li>MUS — דגימה סטטיסטית</li>
+          <li>מהותיות (Materiality)</li>
           <li>ייצוא פריוריטי / חשבIT / ריווחית</li>
           <li>AI עם מפתח אישי (OpenAI / Groq)</li>
           <li>תמיכה בעדיפות</li>
@@ -498,7 +502,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
     <!-- TRIAL BAR -->
     <div class="trial-bar">
-      <div class="trial-bar-icon">★</div>
+      <div class="trial-bar-icon"><i class="ti ti-star-filled" style="font-size:18px;color:var(--gold)"></i></div>
       <div class="trial-bar-text">
         <div class="trial-bar-title">ניסיון חינם - ביקורת חודשית אחת ללא תשלום</div>
         <div class="trial-bar-sub">לקוח אחד, כל תכונות הניתוח, ניתוח מלא. ללא כרטיס אשראי, ללא התחייבות.</div>
@@ -744,7 +748,7 @@ document.addEventListener('click',function(e){
 <!-- Cookie Consent (תיקון 13) -->
 <div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#2c1a00;color:#fdf3dc;padding:14px 20px;direction:rtl;font-family:inherit;box-shadow:0 -4px 24px rgba(0,0,0,.25)">
   <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-    <div style="flex:1;min-width:220px;font-size:13px;line-height:1.6">🍪 אנו משתמשים ב-cookies הכרחיים בלבד לתפעול האתר. אין פרסום, אין מעקב, אין שיתוף נתונים עם צד שלישי. <a href="/legal.html" style="color:#e0b840;text-decoration:underline;margin-right:6px">מדיניות פרטיות</a></div>
+    <div style="flex:1;min-width:220px;font-size:13px;line-height:1.6">אנו משתמשים ב-cookies הכרחיים בלבד לתפעול האתר. אין פרסום, אין מעקב, אין שיתוף נתונים עם צד שלישי. <a href="/legal.html" style="color:#e0b840;text-decoration:underline;margin-right:6px">מדיניות פרטיות</a></div>
     <div style="display:flex;gap:8px;flex-shrink:0">
       <button onclick="_cookieDecline()" style="padding:7px 16px;border-radius:8px;border:1px solid rgba(224,184,64,.4);background:transparent;color:#fdf3dc;cursor:pointer;font-size:13px;font-family:inherit">רק הכרחיים</button>
       <button onclick="_cookieAccept()" style="padding:7px 20px;border-radius:8px;border:none;background:#e0b840;color:#2c1a00;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit">הבנתי ✓</button>

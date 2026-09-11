@@ -540,6 +540,20 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   .sv{font-size:18px!important}
   .container{padding:4px!important}
 }
+
+/* ── FILE UPLOAD PROGRESS BAR ───────────────────────── */
+.fi-progress{height:3px;background:#e8dcc8;border-radius:2px;margin-top:7px;overflow:hidden;width:100%}
+.fi-progress-bar{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),#e0b840);width:0;transition:width .4s ease}
+.fi-progress-bar.indeterminate{width:40%;animation:fi-indeterminate 1.2s ease-in-out infinite}
+.fi-progress-bar.done{width:100%;background:#16a34a;animation:none}
+.fi-progress-bar.error{width:100%;background:#dc2626;animation:none}
+@keyframes fi-indeterminate{0%{transform:translateX(-100%)}100%{transform:translateX(280%)}}
+
+/* ── DRAG ICON ANIMATION ────────────────────────────── */
+.upload-zone.dg .upload-icon{animation:uz-bounce .4s ease infinite alternate}
+@keyframes uz-bounce{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+.upload-zone.dg h2{color:var(--accent)}
+.upload-zone{transition:border-color .2s,background .2s,box-shadow .2s}
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
 </head>
@@ -1759,7 +1773,7 @@ function updateMaterialityDisplay(){
   el.style.color='var(--primary)';el.style.fontWeight='700';
 }
 function calcAutoMateriality(pct){
-  if(!analyzedData){showToast('הפעל ניתוח תחילה','error');return;}
+  if(!analyzedData){showToast('יש להפעיל ניתוח תחילה — העלה קובץ ולחץ על כפתור הניתוח','error');return;}
   const income=analyzedData.stats.income||0;
   const mat=Math.round(income*(pct/100)/100)*100; // round to nearest 100
   _materiality=mat;
@@ -1897,7 +1911,7 @@ function renderMUSPage(){
 function musGoPage(p){musCurrentPage=p;renderMUSPage();}
 
 function exportMUSSample(){
-  if(!window._musSample||!window._musSample.length){showToast('אין מדגם לייצוא','error');return;}
+  if(!window._musSample||!window._musSample.length){showToast('אין עסקאות במדגם — הפעל ניתוח ובחר חודש תחילה','error');return;}
   const rows=[['#','תאריך','תיאור','ספק','קטגוריה','סכום','סמן'],...window._musSample.map((r,i)=>[
     i+1, r.date?fmtDate(r.date):'', r.desc||'', r.vendor||'', r.cat||'',
     r.amount, {r:'חריגה',y:'לבדיקה',g:'אומת'}[txFlags[r.idx]]||''
@@ -1928,7 +1942,7 @@ async function handleTBFile(file){
       const ws=wb.Sheets[wb.SheetNames[0]];
       raw=XLSX.utils.sheet_to_json(ws,{defval:''});
     }
-    if(!raw.length){showToast('הקובץ ריק','error');return;}
+    if(!raw.length){showToast('הקובץ שהועלה ריק — ייצא מחדש מהנה"ח ונסה להעלות שוב','error');return;}
     tbRows=raw;
     autoMapTBColumns(Object.keys(raw[0]||{}));
     showTBStatus(`✅ ${file.name} — ${raw.length} שורות נטענו`);
@@ -2103,7 +2117,7 @@ function renderTB(){
 }
 
 function exportTBCSV(){
-  if(!tbData||!tbData.length){showToast('אין נתוני מאזן','error');return;}
+  if(!tbData||!tbData.length){showToast('לא נמצאו נתוני מאזן — וודא שהקובץ מכיל עמודות סכום תקינות','error');return;}
   const fmtNum=v=>v?v:'';
   const rows=[
     ['מספר חשבון','שם חשבון','סיווג','חובה','זכות','יתרה','כיוון'],
@@ -3010,7 +3024,7 @@ function addFileItem(file){
   const srcColor=_srcColors[fileIdx%_srcColors.length];
   const srcLabel='קובץ '+(fileIdx+1);
   el.dataset.srcLabel=srcLabel;
-  el.innerHTML=`<span class="fi-icon">${icons[ext]||'<i class="ti ti-file" style="font-size:18px;color:#64748b"></i>'}</span><div class="fi-info"><div class="fi-name">${escHtml(file.name)}</div><div class="fi-meta">${sz}</div></div><span style="padding:2px 8px;border-radius:12px;font-size:10.5px;font-weight:700;color:#fff;background:${srcColor};white-space:nowrap">${srcLabel}</span><span class="fi-status">⏳ טוען...</span><button class="btn-rm" onclick="removeClientFile(this)">✕</button>`;
+  el.innerHTML=`<span class="fi-icon">${icons[ext]||'<i class="ti ti-file" style="font-size:18px;color:#64748b"></i>'}</span><div class="fi-info"><div class="fi-name">${escHtml(file.name)}</div><div class="fi-meta">${sz}</div><div class="fi-progress"><div class="fi-progress-bar indeterminate"></div></div></div><span style="padding:2px 8px;border-radius:12px;font-size:10.5px;font-weight:700;color:#fff;background:${srcColor};white-space:nowrap">${srcLabel}</span><span class="fi-status">⏳ טוען...</span><button class="btn-rm" onclick="removeClientFile(this)">✕</button>`;
   document.getElementById('fileList').appendChild(el);return el;
 }
 function removeClientFile(btn){
@@ -3027,7 +3041,16 @@ function removeClientFile(btn){
   updateAnalyzeBtn();
   updateFileSummary();
 }
-function setStatus(item,type,text){const s=item.querySelector('.fi-status');s.className='fi-status '+(type==='ok'?'sl-ok':'sl-err');s.textContent=text;}
+function setStatus(item,type,text){
+  const s=item.querySelector('.fi-status');
+  s.className='fi-status '+(type==='ok'?'sl-ok':'sl-err');
+  s.textContent=text;
+  const bar=item.querySelector('.fi-progress-bar');
+  if(bar){
+    bar.classList.remove('indeterminate');
+    bar.classList.add(type==='ok'?'done':'error');
+  }
+}
 
 function updateQuotaBadge(){
   const quota=getUserQuota();
@@ -3184,7 +3207,7 @@ function loadCompareFile(file){
   if(!file)return;
   const ext=file.name.split('.').pop().toLowerCase();
   const setMeta=(rows)=>{
-    if(!rows||!rows.length){showToast('הקובץ ריק או לא ניתן לקריאה','error');return;}
+    if(!rows||!rows.length){showToast('הקובץ ריק או לא ניתן לקריאה — ייצא ל-CSV חדש מהנה"ח ונסה שוב','error');return;}
     const stats=computeStats(rows);
     compareDataset={rows,stats,filename:file.name};
     document.getElementById('compareFileMeta').style.display='flex';
@@ -6358,7 +6381,7 @@ function renderWHT(){
       <div style="font-size:11px;color:var(--muted)">שיעורי מס לפי פקודת מס הכנסה ותקנות ניכוי מס במקור (ישראל)</div>
       <div style="margin-right:auto;display:flex;gap:6px">
         <button class="hbtn" onclick="exportWHT()"><i class="ti ti-file-export"></i> ייצא CSV</button>
-        ${_isMonthlyWHT?'':'<button class="hbtn" onclick="_featureAllowed('form856')?exportForm856():_showUpgradePlan('טופס 856')" style="background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700"><i class="ti ti-list"></i> טופס 856</button>'}
+        ${_isMonthlyWHT?'':'<button class="hbtn" onclick="_featureAllowed(\'form856\')?exportForm856():_showUpgradePlan(\'טופס 856\')" style="background:var(--primary);color:#fff;border-color:var(--primary);font-weight:700"><i class="ti ti-list"></i> טופס 856</button>'}
       </div>
     </div>
     ${_isMonthlyWHT?`<div style="margin:0 14px 10px;padding:8px 12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;font-size:11px;color:#1e40af;line-height:1.6">
@@ -6513,7 +6536,7 @@ function _buildWHTVendors(){
 }
 
 function exportForm856(){
-  if(!analyzedData){showToast('יש לטעון קובץ נתונים ולהפעיל ניתוח תחילה','error');return;}
+  if(!analyzedData){showToast('טרם הועלה קובץ נתונים — העלה CSV/Excel והפעל ניתוח','error');return;}
   const vendors=_buildWHTVendors();
   if(!vendors||!vendors.length){showToast('לא נמצאו ספקים — ייתכן שנדרש ניתוח מחדש או שאין נתוני ספקים בקובץ','warning');return;}
 
@@ -7086,7 +7109,7 @@ function renderWorkingPapers(){
 }
 
 function printWorkingPapers(){
-  if(!analyzedData){showToast('הפעל ניתוח תחילה','error');return;}
+  if(!analyzedData){showToast('יש להפעיל ניתוח תחילה — העלה קובץ ולחץ על כפתור הניתוח','error');return;}
   const risk=computeRiskScore();
   const d=_buildPLData();
   const clientName=document.getElementById('clientName')?.value||'';
@@ -7167,7 +7190,7 @@ ${risk?`<div class="risk-box" style="border-color:${risk.color};background:${ris
 // ✉️ מכתב להנהלה
 // ══════════════════════════════════════════════════════════════
 function generateManagementLetter(){
-  if(!analyzedData){showToast('הפעל ניתוח תחילה','error');return;}
+  if(!analyzedData){showToast('יש להפעיל ניתוח תחילה — העלה קובץ ולחץ על כפתור הניתוח','error');return;}
   const risk=computeRiskScore();
   const d=_buildPLData();
   const clientName=document.getElementById('clientName')?.value||'הנהלת החברה';
@@ -7403,7 +7426,7 @@ function renderPL(){
 function exportPLCSV(){
   // Export as professional XLSX instead of raw CSV
   const d=_buildPLData();
-  if(!d){showToast('אין נתונים לייצוא','error');return;}
+  if(!d){showToast('אין נתונים לייצוא — הפעל ניתוח ולאחר מכן נסה שוב','error');return;}
   const{incRows,expRows,totalInc,totalExp,net,margin,periodLabel}=d;
   const N=v=>Math.round(v);
   const pct=(v,tot)=>tot>0?+(v/tot*100).toFixed(1):0;
@@ -7451,7 +7474,7 @@ function exportPLCSV(){
 
 function printPL(){
   const d=_buildPLData();
-  if(!d){showToast('אין נתונים להדפסה','error');return;}
+  if(!d){showToast('אין נתונים להדפסה — הפעל ניתוח ופתח דוח לפני הדפסה','error');return;}
   const{incRows,expRows,totalInc,totalExp,net,margin,periodLabel}=d;
   const pc=net>=0?'#15803d':'#dc2626';
   const plLabel=net>=0?'רווח נטו':'הפסד נטו';
@@ -8051,7 +8074,7 @@ ${notes?'הערות רו"ח: '+notes:''}
     }
     const data=await resp.json();
     const reportText=data.choices?.[0]?.message?.content||'';
-    if(!reportText){showToast('לא התקבלה תשובה מה-AI','error');return;}
+    if(!reportText){showToast('לא התקבלה תשובה מה-AI — בדוק את מפתח ה-API ואת חיבור האינטרנט','error');return;}
 
     // Format markdown → HTML
     const formatted=reportText
@@ -10239,7 +10262,7 @@ function _budgetPartialUpdate(budget){
 function handleBankDrop(file){
   if(!file)return;
   var ext=file.name.split('.').pop().toLowerCase();
-  if(['csv','xlsx','xls'].indexOf(ext)<0){showToast('סוג קובץ לא נתמך','error');return;}
+  if(['csv','xlsx','xls'].indexOf(ext)<0){showToast('סוג קובץ לא נתמך — ניתן להעלות CSV או Excel בלבד (.csv, .xlsx, .xls)','error');return;}
   var reader=new FileReader();
   reader.onload=function(e){
     try{
@@ -10250,7 +10273,7 @@ function handleBankDrop(file){
         var ws=wb.Sheets[wb.SheetNames[0]];
         raw=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
       }
-      if(!raw||raw.length<2){showToast('הקובץ ריק','error');return;}
+      if(!raw||raw.length<2){showToast('הקובץ שהועלה ריק — ייצא מחדש מהנה"ח ונסה להעלות שוב','error');return;}
       var headers=raw[0].map(function(h){return String(h).trim();});
       ['bankColDate','bankColDesc','bankColAmt','bankColDebit'].forEach(function(id){
         var sel=document.getElementById(id);
@@ -10301,8 +10324,8 @@ function _parseBankDate(str){
   return isNaN(d.getTime())?null:d;
 }
 function runBankReconcile(){
-  if(!analyzedData){showToast('הפעל ניתוח של הספרים תחילה','error');return;}
-  if(!_bankRows.length){showToast('העלה דף בנק תחילה','error');return;}
+  if(!analyzedData){showToast('יש להפעיל ניתוח ספרים תחילה — העלה קובץ עסקאות ולחץ על ניתוח','error');return;}
+  if(!_bankRows.length){showToast('יש להעלות דף בנק תחילה — לחץ על «העלה דף בנק» ובחר קובץ','error');return;}
   var dI=parseInt(document.getElementById('bankColDate').value);
   var descI=document.getElementById('bankColDesc').value!==''?parseInt(document.getElementById('bankColDesc').value):-1;
   var aI=parseInt(document.getElementById('bankColAmt').value);
@@ -10424,7 +10447,7 @@ const _DEF_FEATURES=[
   {key:'budget',       s:false,p:false,pr:true},
   {key:'vendors',      s:false,p:false,pr:true},
   {key:'form856',      s:false,p:false,pr:true},
-  {key:'ai',           s:false,p:false,pr:true},
+  {key:'ai',           s:false,p:true, pr:true},
 ];
 // בדוק אם תכונה מותרת למסלול הנוכחי — קורא מה-localStorage של המנהל
 function _featureAllowed(key){
