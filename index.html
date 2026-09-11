@@ -212,7 +212,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 /* PRICING */
 .pricing{background:var(--white);padding:72px 6%}
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:840px;margin:44px auto 0}
-.pc{border:1px solid var(--border);border-radius:14px;padding:26px;background:var(--cream)}
+.pc{background:#fdf3dc;border:1.5px solid #e0c888;border-radius:18px;padding:28px 24px;transition:box-shadow .2s;position:relative}
 .pc.featured{background:var(--brown);border-color:var(--brown);box-shadow:0 8px 32px rgba(58,32,0,.18)}
 .pc-name{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
 .pc.featured .pc-name{color:rgba(245,230,192,.5)}
@@ -221,15 +221,15 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .pc.featured .pc-price{color:#f5e6c0}
 .pc-price small{font-size:15px;font-weight:400;color:var(--muted)}
 .pc.featured .pc-price small{color:rgba(245,230,192,.5)}
-.pc-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin:16px 0 20px}
+.pc-items{list-style:none;display:flex;flex-direction:column;gap:8px;margin:16px 0 20px}
 .pc-features li{display:flex;align-items:flex-start;gap:8px;font-size:14.5px;color:var(--brown2)}
 .pc.featured .pc-features li{color:rgba(245,230,192,.82)}
 .fchk{width:16px;height:16px;border-radius:50%;background:var(--gold3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--gold-text);flex-shrink:0;margin-top:2px}
 .pc.featured .fchk{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
-.pc-btn{width:100%;padding:11px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.pc-btn{display:block;width:100%;padding:12px;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;background:var(--cream);color:var(--brown);border:1.5px solid var(--border);transition:.15s}
 .pc-btn:hover{opacity:.88}
-.pc-btn-outline{background:var(--white);color:var(--brown);border:1.5px solid var(--border)}
-.pc-btn-gold{background:var(--gold);color:#000;border:none}
+
+
 
 /* CTA */
 .cta-wrap{background:var(--cream);border-top:1px solid var(--border);padding:72px 6%}
@@ -518,16 +518,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <div class="step-num">3</div>
       <h4>שאלות AI</h4>
       <p>שאל שאלות על הנתונים בעברית חופשית</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h4>ייצוא דוח</h4>
-      <p>PDF מוכן ללקוח תוך שניות</p>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
+    </<!-- PRICING -->
 <section class="pricing">
   <div class="section-head">
     <div class="section-tag">תמחור</div>
@@ -535,41 +526,62 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <p>ללא כרטיס אשראי · ביטול מיידי</p>
   </div>
   <div class="price-grid">
+
+    <!-- STARTER -->
     <div class="pc">
-      <div class="pc-name">סטארטר</div>
-        <div class="pc-price">₪590 <small>/ חודש</small></div>
-        <ul class="pc-features">
-<li><div class="fchk">✓</div>עד 35 לקוחות</li>
-<li><div class="fchk">✓</div>ביקורת חודשית ושנתית</li>
-<li><div class="fchk">✓</div>12 סוגי חריגות</li>
-<li><div class="fchk">✓</div>מיסוי ישראלי + חשבוניות ישראל</li>
-<li><div class="fchk">✓</div>ייצוא CSV</li>
-        </ul>
-        <button class="pc-btn pc-btn-outline" onclick="location.href='checkout.html?plan=starter'">רכוש עכשיו ←</button>
-    </div>
-    <div class="pc featured">
-      <div class="pc-badge">הכי פופולרי</div>
-      <div class="pc-name">מקצועי</div>
-      <div class="pc-price">₪990 <small>/ חודש</small></div>
-      <ul class="pc-features">
-        <li><div class="fchk">✓</div>עד 80 לקוחות</li>
+      <div class="pc-tier">סטארטר</div>
+      <div class="pc-price">₪590 <small style="font-size:16px;font-weight:500">/ חודש</small></div>
+      <div class="pc-period">או ₪472 בהתחייבות שנתית</div>
+      <div class="pc-div"></div>
+      <ul class="pc-items">
+        <li><div class="fchk">✓</div>עד 35 לקוחות</li>
         <li><div class="fchk">✓</div>ביקורת חודשית ושנתית</li>
         <li><div class="fchk">✓</div>12 סוגי חריגות</li>
-        <li><div class="fchk">✓</div>ייצוא PDF + ריווחית</li>
-        <li><div class="fchk">✓</div>תמיכה בדוא״ל</li>
+        <li><div class="fchk">✓</div>מיסוי ישראלי + חשבוניות ישראל</li>
+        <li><div class="fchk">✓</div>ייצוא CSV, פריוריטי, חשבIT</li>
       </ul>
-      <button class="pc-btn pc-btn-gold" onclick="location.href='checkout.html?plan=professional'">רכוש עכשיו ←</button>
+      <a class="pc-btn" href="checkout.html?plan=starter">רכוש עכשיו ←</a>
     </div>
-    <div class="pc">
-      <div class="pc-name">פרמיום</div>
-      <div class="pc-price">₪2,490 <small>/ חודש</small></div>
-      <ul class="pc-features">
-        <li><div class="fchk">✓</div>עד 200 לקוחות</li>
-        <li><div class="fchk">✓</div>כל תכונות מקצועי</li>
-        <li><div class="fchk">✓</div>ריבוי משתמשים</li>
-        <li><div class="fchk">✓</div>White-label + API</li>
-        <li><div class="fchk">✓</div>תמיכה טלפונית</li>
+
+    <!-- PROFESSIONAL -->
+    <div class="pc featured">
+      <div class="pc-badge">הכי פופולרי</div>
+      <div class="pc-tier">מקצועי</div>
+      <div class="pc-price">₪990 <small style="font-size:16px;font-weight:500">/ חודש</small></div>
+      <div class="pc-period">או ₪792 בהתחייבות שנתית</div>
+      <div class="pc-div"></div>
+      <ul class="pc-items">
+        <li><div class="fchk">✓</div>עד 80 לקוחות</li>
+        <li><div class="fchk">✓</div>אימות מע"מ וניכוי מס במקור</li>
+        <li><div class="fchk">✓</div>חוק בנפורד + השוואה שנה לשנה</li>
+        <li><div class="fchk">✓</div>דפי עבודה ISA מלאים</li>
+        <li><div class="fchk">✓</div>AI עם מפתח אישי</li>
       </ul>
+      <a class="pc-btn" href="checkout.html?plan=professional">רכוש עכשיו ←</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pc">
+      <div class="pc-tier">פרמיום</div>
+      <div class="pc-price">₪2,490 <small style="font-size:16px;font-weight:500">/ חודש</small></div>
+      <div class="pc-period">או ₪1,992 בהתחייבות שנתית</div>
+      <div class="pc-div"></div>
+      <ul class="pc-items">
+        <li><div class="fchk">✓</div>עד 200 לקוחות</li>
+        <li><div class="fchk">✓</div>כל תכונות המקצועי</li>
+        <li><div class="fchk">✓</div>מיתוג מלא — לוגו המשרד</li>
+        <li><div class="fchk">✓</div>מנהל חשבון ייעודי</li>
+        <li><div class="fchk">✓</div>תמיכה 24/7</li>
+      </ul>
+      <a class="pc-btn" href="checkout.html?plan=premium">רכוש עכשיו ←</a>
+    </div>
+
+  </div>
+  <div style="text-align:center;margin-top:18px">
+    <a href="pricing.html" style="font-size:13px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)">השוואה מלאה בין המסלולים ←</a>
+  </div>
+</section>
+/ul>
       <button class="pc-btn pc-btn-outline" onclick="location.href='checkout.html?plan=professional'">רכוש עכשיו ←</button>
     </div>
   </div>

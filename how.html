@@ -212,6 +212,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 .footer-links a:hover{color:rgba(245,230,192,.7)}
 .footer-copy{font-size:13px;color:rgba(245,230,192,.24)}
 @media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
+
+/* STEP TIPS */
+.step-tips{margin:12px 0 14px;display:flex;flex-direction:column;gap:7px}
+.tip-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--brown2);line-height:1.55}
+.tip-icon{font-size:14px;color:#16a34a;flex-shrink:0;margin-top:1px}
+.tip-warn .tip-icon{color:#d97706}
+.tip-warn{color:var(--muted)}
 </style>
 <script type="application/ld+json">
 {
@@ -296,9 +303,15 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <div class="step-card">
         <i class="ti ti-upload step-ti" aria-hidden="true"></i>
         <div class="step-name">העלאת קובץ</div>
-        <div class="step-desc">ייבא Excel או CSV מתוכנת הנהלת החשבונות שלך. המערכת קוראת את הנתונים ומציגה תצוגה מקדימה לפני הניתוח.</div>
+        <div class="step-desc">ייצא מתוכנת הנהלת החשבונות שלך לקובץ Excel או CSV — ולאחר מכן גרור אותו ישירות לאזור ההעלאה, או לחץ לבחירה.</div>
+        <div class="step-tips">
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>תומך בפריוריטי, חשבIT, ריווחית, חשבשבת, ממוכנת ועוד</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>ניתן להעלות מספר קבצים ולנתחם יחד (לפי מסלול)</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>הקובץ נשאר בדפדפן בלבד — לא נשלח לשום שרת</span></div>
+          <div class="tip-item tip-warn"><i class="ti ti-alert-triangle tip-icon"></i><span>אם הקובץ ריק — ייצא מחדש מהנה"ח ווודא שיש שורות נתונים</span></div>
+        </div>
         <div class="step-badges">
-          <span class="badge-auto">אוטומטי</span>
+          <span class="badge-auto">גרור ושחרר</span>
           <span class="badge-manual">Excel · CSV</span>
         </div>
       </div>
@@ -310,7 +323,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <div class="step-card">
         <i class="ti ti-layout-columns step-ti" aria-hidden="true"></i>
         <div class="step-name">מיפוי עמודות</div>
-        <div class="step-desc">המערכת מזהה עמודות אוטומטית — תאריך, סכום, ספק ועוד. במקרה שהזיהוי חלקי, תסמן ידנית את העמודות שנותרו.</div>
+        <div class="step-desc">לאחר ההעלאה, המערכת מזהה אוטומטית את עמודות התאריך, הסכום, הספק והתיאור — ומציגה תצוגה מקדימה לאישורך.</div>
+        <div class="step-tips">
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>הזיהוי האוטומטי עובד בעברית ובאנגלית</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>המיפוי נשמר לקובץ הבא מאותה תוכנה — לא צריך לחזור</span></div>
+          <div class="tip-item tip-warn"><i class="ti ti-alert-triangle tip-icon"></i><span>אם עמודה לא זוהתה — בחר אותה ידנית מהרשימה הנפתחת</span></div>
+          <div class="tip-item tip-warn"><i class="ti ti-alert-triangle tip-icon"></i><span>עמודת "חובה/זכות" חיונית לניתוח מע"מ וניכוי מס</span></div>
+        </div>
         <div class="step-badges">
           <span class="badge-auto">אוטומטי ברוב המקרים</span>
           <span class="badge-manual">סימון ידני במידת הצורך</span>
@@ -323,10 +342,16 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <div class="step-num-wrap"><div class="step-num">3</div></div>
       <div class="step-card">
         <i class="ti ti-list-check step-ti" aria-hidden="true"></i>
-        <div class="step-name">בחירת בדיקות</div>
-        <div class="step-desc">בחר אילו מ-12 סוגי החריגות לבדוק — כפילויות, ניכוי מס, מע"מ, בנפורד ועוד. ניתוח AI עם מפתח OpenAI/Groq שלך הוא אופציונלי לחלוטין.</div>
+        <div class="step-name">ניתוח וסינון תוצאות</div>
+        <div class="step-desc">לחץ על "הפעל ניתוח" — המערכת סורקת את כל העסקאות ומחזירה ממצאים בקודי עדיפות: אדום (חמור), כתום (בינוני), צהוב (לתשומת לב).</div>
+        <div class="step-tips">
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>12 סוגי חריגות: כפילויות, סכומים עגולים, עסקאות בסוף שבוע, חוק מזומן, מע"מ, ניכוי מס ועוד</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>ניתן לסנן לפי חודש, ספק, קטגוריה או סוג חריגה</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>לחץ על כל עסקה לפרטים נוספים ולהוספת הערה לדוח</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>AI (OpenAI/Groq) — שאל שאלות על הנתונים בעברית חופשית (אופציונלי)</span></div>
+        </div>
         <div class="step-badges">
-          <span class="badge-manual">בחירה שלך</span>
+          <span class="badge-auto">ניתוח אוטומטי מלא</span>
           <span class="badge-optional">AI — אופציונלי</span>
         </div>
       </div>
@@ -338,7 +363,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <div class="step-card">
         <i class="ti ti-file-export step-ti" aria-hidden="true"></i>
         <div class="step-name">ייצוא דוח</div>
-        <div class="step-desc">קבל דוח מסודר לפי עדיפות ממצאים. ייצא ישירות לפריוריטי, חשבשבת, ריווחית, חשבIT, Excel ועוד — סה"כ 8+ פורמטי ייצוא.</div>
+        <div class="step-desc">בחר פורמט ייצוא בהתאם לצורך — דוח Excel מפורט, ייצוא ישיר לתוכנת הנהלת חשבונות, או דפי עבודה ISA מוכנים לתיק הביקורת.</div>
+        <div class="step-tips">
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>Excel מלא — 10 גיליונות עם כל הממצאים, גרפים וסטטיסטיקות</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>ייצוא ישיר: פריוריטי, חשבIT, ריווחית, חשבשבת</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>דפי עבודה ISA — לפי תקן ביקורת (מסלול מקצועי ומעלה)</span></div>
+          <div class="tip-item"><i class="ti ti-check tip-icon"></i><span>טופס 856 — ייצוא לרשות המיסים (מסלול פרמיום)</span></div>
+        </div>
         <div class="step-badges">
           <span class="badge-auto">מיידי</span>
           <span class="badge-manual">8+ פורמטי ייצוא</span>
