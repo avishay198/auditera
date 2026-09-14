@@ -855,7 +855,7 @@ nav {
 
 
 
-<div id="maintBanner">⚠️ מצב תחזוקה פעיל — המשתמשים רואים הודעת תחזוקה</div>
+<div id="maintBanner"><i class="ti ti-alert-triangle"></i> מצב תחזוקה פעיל — המשתמשים רואים הודעת תחזוקה</div>
 
 <!-- IMPERSONATION BANNER -->
 <div id="impBanner">
@@ -927,11 +927,11 @@ nav {
       <div class="kpi-val" id="kpiARPU">₪0</div><div class="kpi-label">ARPU (ממוצע למשתמש)</div>
     </div>
     <div class="kpi"><div class="kpi-bar" style="background:var(--orange)"></div>
-      <div class="kpi-top"><span class="kpi-icon">🆕</span><span class="kpi-trend" id="kpiNewTrend"></span></div>
+      <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-user-plus"></i></span><span class="kpi-trend" id="kpiNewTrend"></span></div>
       <div class="kpi-val" id="kpiNewMonth">0</div><div class="kpi-label">הצטרפו החודש</div>
     </div>
     <div class="kpi"><div class="kpi-bar" style="background:var(--red)"></div>
-      <div class="kpi-top"><span class="kpi-icon">⏸</span></div>
+      <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-player-pause-filled"></i></span></div>
       <div class="kpi-val" id="kpiSuspended">0</div><div class="kpi-label">חשבונות מושהים</div>
     </div>
     <div class="kpi"><div class="kpi-bar" style="background:var(--green)"></div>
@@ -946,7 +946,7 @@ nav {
   <div class="grid2">
     <!-- Recent -->
     <div class="card">
-      <div class="card-head"><div class="card-title">🆕 הצטרפויות אחרונות</div><a href="#" onclick="showTab('users',tabEl('users'));return false" style="font-size:11px;color:var(--gold)">כל המשתמשים ←</a></div>
+      <div class="card-head"><div class="card-title"><i class="ti ti-user-plus"></i> הצטרפויות אחרונות</div><a href="#" onclick="showTab('users',tabEl('users'));return false" style="font-size:11px;color:var(--gold)">כל המשתמשים ←</a></div>
       <div id="recentUsers"></div>
     </div>
     <!-- Quick actions -->
@@ -1528,9 +1528,9 @@ nav {
       <p style="font-size:11px;color:var(--muted);margin-bottom:10px">מוצג בראש ממשק ה-audit_agent עד שמבוטל</p>
       <div class="fg"><label>סוג</label>
         <select id="annType" onchange="previewAnn()">
-          <option value="info">ℹ️ מידע (כחול)</option>
-          <option value="warning">⚠️ אזהרה (כתום)</option>
-          <option value="success">✅ עדכון (ירוק)</option>
+          <option value="info">מידע (כחול)</option>
+          <option value="warning">אזהרה (כתום)</option>
+          <option value="success">עדכון (ירוק)</option>
         </select>
       </div>
       <div class="fg"><label>טקסט</label><input id="annText" oninput="previewAnn()" placeholder="גרסה 2.1 זמינה — כולל שיפורי ביצועים"></div>
@@ -1553,7 +1553,7 @@ nav {
         <select id="clTag">
           <option value="feature">תכונה חדשה</option><option value="fix">תיקון באג</option>
           <option value="improvement"><i class="ti ti-bolt"></i> שיפור</option><option value="security"><i class="ti ti-lock"></i> אבטחה</option>
-          <option value="breaking">⚠️ שינוי שוברני</option>
+          <option value="breaking">שינוי שוברני</option>
         </select>
       </div>
       <button class="nbtn nbtn-gold" onclick="addChangelog()"><i class="ti ti-plus"></i> פרסם עדכון</button>
@@ -1581,7 +1581,7 @@ nav {
     <!-- NPS -->
     <div class="card">
       <div class="card-head">
-        <div class="card-title">⭐ NPS — שביעות רצון לקוחות</div>
+        <div class="card-title"><i class="ti ti-star-filled" style="color:var(--gold-text)"></i> NPS — שביעות רצון לקוחות</div>
         <button onclick="exportNPS()" class="nbtn nbtn-outline"><i class="ti ti-download"></i> ייצוא</button>
       </div>
       <div style="margin-bottom:10px">
@@ -1669,7 +1669,7 @@ nav {
   <!-- ①  WEBHOOKS -->
   <div class="card int-section">
     <div class="int-header">
-      <div class="int-header-icon" style="background:#f0e8d8">⚡</div>
+      <div class="int-header-icon" style="background:#f0e8d8"><i class="ti ti-bolt"></i></div>
       <div>
         <div class="int-header-title">Webhooks — Zapier / Make / n8n</div>
         <div class="int-header-sub">שלח אירועים אוטומטית לכל כתובת URL חיצונית בעת התרחשותם</div>
@@ -1800,7 +1800,7 @@ nav {
       <button class="nbtn nbtn-gold" onclick="saveBankDetails()"><i class="ti ti-device-floppy"></i> שמור פרטים</button>
     </div>
     <div style="margin-top:12px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:11px;color:#15803d">
-      ✅ פרטי הבנק יופיעו אוטומטית בכל חשבונית ודרישת תשלום שמודפסת מהמערכת
+      <i class="ti ti-circle-check" style="color:var(--green)"></i> פרטי הבנק יופיעו אוטומטית בכל חשבונית ודרישת תשלום שמודפסת מהמערכת
     </div>
   </div>
 
@@ -1851,7 +1851,7 @@ nav {
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f0e8d8">
       <div style="font-size:12px;font-weight:800;color:var(--brown);margin-bottom:4px"><i class="ti ti-message"></i> WhatsApp (CallMeBot)</div>
       <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">
-        שירות חינמי לשליחת הודעות WhatsApp. להפעלה: הוסף <strong>+34 644 44 73 78</strong> לאנשי קשר ✉️ שלח הודעה:
+        שירות חינמי לשליחת הודעות WhatsApp. להפעלה: הוסף <strong>+34 644 44 73 78</strong> לאנשי קשר <i class="ti ti-brand-whatsapp"></i> שלח הודעה:
         <code style="background:#f0e8d8;padding:1px 5px;border-radius:4px;font-size:10px">I allow callmebot to send me messages</code>
         ← תקבל מפתח API בחזרה.
         <a href="https://www.callmebot.com/blog/free-api-whatsapp-messages/" target="_blank" style="color:var(--gold);text-decoration:none">📖 מדריך מלא ←</a>
@@ -2230,7 +2230,7 @@ nav {
       <div class="fg"><label>URL לוגו</label><input id="brandLogo" placeholder="https://..." oninput="previewBrand()"></div>
       <div id="brandPreview" class="brand-prev" style="display:none">
         <div class="brand-prev-nav" id="brandPrevNav">
-          <div style="width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px" id="brandPrevIcon">🔍</div>
+          <div style="width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px" id="brandPrevIcon"><i class="ti ti-search" style="font-size:11px"></i></div>
           <span style="font-size:13px;font-weight:800;color:#f5e6c0" id="brandPrevName">Auditera</span>
         </div>
         <div class="brand-prev-body" id="brandPrevTagline">ביקורת פיננסית מבוססת AI</div>
@@ -2333,7 +2333,7 @@ nav {
       </div>
     </div>
     <div class="card" style="border-color:#fecaca">
-      <div class="card-head"><div class="card-title" style="color:var(--red)">⚠️ אזור מסוכן</div></div>
+      <div class="card-head"><div class="card-title" style="color:var(--red)"><i class="ti ti-alert-triangle"></i> אזור מסוכן</div></div>
       <div style="display:flex;flex-direction:column;gap:8px">
         <button class="nbtn nbtn-red" style="justify-content:center" onclick="confirmAct('deleteAllUsers','למחוק את כל המשתמשים לצמיתות?')"><i class="ti ti-trash"></i> מחק כל המשתמשים</button>
         <button class="nbtn" style="justify-content:center;background:#fff7ed;color:var(--orange);border:1px solid #fed7aa" onclick="confirmAct('resetProduct','לאפס את כל הגדרות המוצר?')">↺ אפס הגדרות מוצר</button>
@@ -2407,7 +2407,7 @@ nav {
 
     <!-- Generate button -->
     <button class="nbtn nbtn-gold" style="width:100%;justify-content:center;padding:12px;font-size:14px;font-weight:700" id="mktGenBtn" onclick="generateMktContent()">
-      ✨ צור תוכן
+      <i class="ti ti-sparkles"></i> צור תוכן
     </button>
   </div>
 
@@ -2421,7 +2421,7 @@ nav {
         <button class="nbtn nbtn-outline" style="padding:3px 10px;font-size:11px" onclick="regenerateMktContent()"><i class="ti ti-refresh"></i> צור מחדש</button>
       </div>
     </div>
-    <div class="mkt-result" id="mktResult">בחר סוג תוכן ולחץ ✨ צור תוכן</div>
+    <div class="mkt-result" id="mktResult">בחר סוג תוכן ולחץ <i class="ti ti-sparkles"></i> צור תוכן</div>
     <div class="mkt-char-count" id="mktCharCount"></div>
   </div>
 
@@ -2482,7 +2482,7 @@ nav {
     <input type="hidden" id="skPlanKey">
     <div class="modal-btns">
       <button class="nbtn nbtn-outline" onclick="closeSendKeyModal()">ביטול</button>
-      <button class="nbtn nbtn-gold" onclick="execSendKey()">✉️ ייצר ושלח</button>
+      <button class="nbtn nbtn-gold" onclick="execSendKey()"><i class="ti ti-send"></i> ייצר ושלח</button>
     </div>
   </div>
 </div>
@@ -2545,13 +2545,13 @@ nav {
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <select id="inqFilter" onchange="renderInquiries()" style="border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer">
           <option value="all">כל הסוגים</option>
-          <option value="payment_request">💳 בקשת קוד הפעלה</option>
-          <option value="contact">✉️ צור קשר</option>
+          <option value="payment_request">בקשת קוד הפעלה</option>
+          <option value="contact">צור קשר</option>
         </select>
       <select id="inqStatus" onchange="renderInquiries()" style="border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;font-family:inherit;background:#fff;cursor:pointer">
           <option value="all">כל הסטטוסים</option>
           <option value="new">🔵 חדש</option>
-          <option value="handled">✅ טופל</option>
+          <option value="handled">טופל</option>
         </select>
       <button class="nbtn nbtn-outline" onclick="renderInquiries()" style="padding:6px 14px;font-size:12px;border-radius:8px;display:flex;align-items:center;gap:5px"><i class="ti ti-refresh"></i> רענן</button>
     </div>
@@ -2693,11 +2693,11 @@ const IT_BRACKETS=[
 ];
 
 const TAG_META={
-  feature:{lbl:'✨ תכונה',bg:'#dcfce7',tx:'#15803d'},
+  feature:{lbl:'תכונה',bg:'#dcfce7',tx:'#15803d'},
   fix:{lbl:'🐛 תיקון',bg:'#fee2e2',tx:'#b91c1c'},
   improvement:{lbl:'<i class="ti ti-bolt"></i> שיפור',bg:'#dbeafe',tx:'#1d4ed8'},
-  security:{lbl:'🔒 אבטחה',bg:'#fef3c7',tx:'#92400e'},
-  breaking:{lbl:'⚠️ שוברני',bg:'#ffedd5',tx:'#c2410c'},
+  security:{lbl:'אבטחה',bg:'#fef3c7',tx:'#92400e'},
+  breaking:{lbl:'שוברני',bg:'#ffedd5',tx:'#c2410c'},
 };
 
 // ══════════════════════════════════════════════
@@ -3019,14 +3019,14 @@ function renderFinance(){
   const recThisMonth=receipts.filter(r=>(r.paidAt||r.at||'').startsWith(thisMonth)).reduce((s,r)=>s+(+r.total||0),0);
 
   document.getElementById('finKpis').innerHTML=[
-    {v:fmt(mrr),l:'MRR נוכחי',c:'var(--green)',icon:'💳'},
-    {v:fmt(arr),l:'ARR חזוי',c:'var(--blue)',icon:'📈'},
-    {v:fmt(totalInvPaid),l:'חשבוניות — שולמו',c:'var(--brown)',icon:'✅'},
+    {v:fmt(mrr),l:'MRR נוכחי',c:'var(--green)',icon:'<i class="ti ti-currency-shekel"></i>'},
+    {v:fmt(arr),l:'ARR חזוי',c:'var(--blue)',icon:'<i class="ti ti-trending-up"></i>'},
+    {v:fmt(totalInvPaid),l:'חשבוניות — שולמו',c:'var(--brown)',icon:'<i class="ti ti-circle-check"></i>'},
     {v:fmt(pendingAmt),l:'חשבוניות ממתינות',c:'var(--orange)',icon:'⏳'},
-    {v:fmt(recTotal),l:'סה"כ קבלות שהופקו',c:'var(--purple)',icon:'🧾'},
-    {v:fmt(recThisMonth),l:'קבלות החודש',c:'var(--green)',icon:'📅'},
-    {v:fmt(vatCollected),l:'מע"מ שנגבה',c:'var(--brown2)',icon:'🏦'},
-    {v:failedCount,l:'כשלי תשלום פתוחים',c:'var(--red)',icon:'⚠️'},
+    {v:fmt(recTotal),l:'סה"כ קבלות שהופקו',c:'var(--purple)',icon:'<i class="ti ti-receipt"></i>'},
+    {v:fmt(recThisMonth),l:'קבלות החודש',c:'var(--green)',icon:'<i class="ti ti-calendar"></i>'},
+    {v:fmt(vatCollected),l:'מע"מ שנגבה',c:'var(--brown2)',icon:'<i class="ti ti-building-bank"></i>'},
+    {v:failedCount,l:'כשלי תשלום פתוחים',c:'var(--red)',icon:'<i class="ti ti-alert-triangle"></i>'},
   ].map(x=>`<div class="kpi"><div class="kpi-bar" style="background:${x.c}"></div>
     <div class="kpi-top"><span class="kpi-icon">${x.icon}</span></div>
     <div class="kpi-val" style="font-size:18px">${x.v}</div>
@@ -3108,7 +3108,7 @@ function renderVATReport(invoices,vatRate,users,prices){
   }));
 
   if(!allPayments.length){
-    document.getElementById('vatReport').innerHTML='<div class="empty"><div class="empty-icon">🧾</div>אין נתונים לדוח מע"מ</div>';
+    document.getElementById('vatReport').innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-receipt"></i></div>אין נתונים לדוח מע"מ</div>';
     return;
   }
 
@@ -3218,7 +3218,7 @@ function renderInvoiceList(){
     return ms&&mq;
   });
   if(!filtered.length){
-    document.getElementById('invoiceList').innerHTML='<div class="empty"><div class="empty-icon">📄</div>אין חשבוניות</div>';return;
+    document.getElementById('invoiceList').innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-file-text"></i></div>אין חשבוניות</div>';return;
   }
   document.getElementById('invoiceList').innerHTML=`<table class="tbl">
     <thead><tr><th>מספר</th><th>לקוח</th><th>מסלול</th><th>נטו</th><th>מע"מ</th><th>סה"כ</th><th>הנפקה</th><th>סטטוס</th><th>פעולות</th></tr></thead>
@@ -3402,15 +3402,15 @@ function printInvoice(i){
           ${bank.account?`<div class="bank-row"><span class="bank-label">חשבון:</span><span class="bank-value">${esc(bank.account)}</span></div>`:''}
           ${bank.holder?`<div class="bank-row"><span class="bank-label">שם בעל חשבון:</span><span class="bank-value">${esc(bank.holder)}</span></div>`:''}
           ${bank.iban?`<div class="bank-row"><span class="bank-label">IBAN:</span><span class="bank-value">${esc(bank.iban)}</span></div>`:''}
-          ${bank.note?`<div style="font-size:11px;color:#15803d;margin-top:6px">📌 ${esc(bank.note)}</div>`:''}
+          ${bank.note?`<div style="font-size:11px;color:#15803d;margin-top:6px"><i class="ti ti-pin"></i> ${esc(bank.note)}</div>`:''}
         </div>
       </div>`:''}
     </div>
     <div class="inv-footer">
       <div class="footer-text">${esc(co)} · ${esc(coEmail)}<br>מסמך זה הופק אוטומטית</div>
       <div class="print-btn-row" style="display:flex;gap:8px;align-items:center">
-        <button class="print-btn" onclick="window.print()">🖨️ הדפס / PDF</button>
-        <button class="print-btn" style="background:#374151" onclick="(function(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title.replace(/\s+/g,'_')+'.html';a.click()})()">⬇️ ייצוא HTML</button>
+        <button class="print-btn" onclick="window.print()"><i class="ti ti-printer"></i> הדפס / PDF</button>
+        <button class="print-btn" style="background:#374151" onclick="(function(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title.replace(/\s+/g,'_')+'.html';a.click()})()"><i class="ti ti-download"></i> ייצוא HTML</button>
       </div>
     </div>
   </div>
@@ -3442,7 +3442,7 @@ function addFailedPayment(){
 function renderDunningList(){
   const failed=ls(K.failedPay,[]);
   if(!failed.length){
-    document.getElementById('dunningList').innerHTML='<div class="empty"><div class="empty-icon">✅</div>אין כשלי תשלום פתוחים</div>';return;
+    document.getElementById('dunningList').innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-circle-check"></i></div>אין כשלי תשלום פתוחים</div>';return;
   }
   document.getElementById('dunningList').innerHTML=failed.map((f,i)=>`
     <div class="dun-row">
@@ -3509,7 +3509,7 @@ function renderRevenueBreakdown(users,prices,receipts){
         </div>
         <div class="plan-bar-track"><div class="plan-bar-fill" style="width:${pct}%;background:${PLAN_COLORS[p]}"></div></div>
       </div>`;
-    }).join('')||'<div class="empty"><div class="empty-icon">👥</div>אין משתמשים פעילים</div>';
+    }).join('')||'<div class="empty"><div class="empty-icon"><i class="ti ti-users"></i></div>אין משתמשים פעילים</div>';
 }
 
 function renderMonthlyCollections(receipts,invoices){
@@ -3559,7 +3559,7 @@ function renderPayMethodBreakdown(receipts){
   });
   const methods=Object.keys(counts).sort((a,b)=>amts[b]-amts[a]);
   if(!methods.length){
-    document.getElementById('payMethodBreakdown').innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">💳</div>אין נתוני אמצעי תשלום עדיין</div>';
+    document.getElementById('payMethodBreakdown').innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon"><i class="ti ti-credit-card"></i></div>אין נתוני אמצעי תשלום עדיין</div>';
     return;
   }
   document.getElementById('payMethodBreakdown').innerHTML=methods.map(m=>`
@@ -3685,7 +3685,7 @@ function renderReceiptList(){
     return mm&&mq;
   });
   if(!filtered.length){
-    document.getElementById('receiptList').innerHTML='<div class="empty"><div class="empty-icon">🧾</div>אין קבלות עדיין</div>';return;
+    document.getElementById('receiptList').innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-receipt"></i></div>אין קבלות עדיין</div>';return;
   }
   document.getElementById('receiptList').innerHTML=`<table class="tbl">
     <thead><tr><th>מספר</th><th>לקוח</th><th>תיאור</th><th>נטו</th><th>מע"מ</th><th>סה"כ</th><th>אמצעי תשלום</th><th>תאריך</th><th>פעולות</th></tr></thead>
@@ -3822,7 +3822,7 @@ function printReceipt(i){
       <div class="section-label">שולם על ידי</div>
       <div class="payer-name">${esc(rec.name)}</div>
       <div class="payer-sub">${esc(rec.email)}</div>
-      ${rec.method?`<div class="pm-chip">💳 ${PM_HE[rec.method]||rec.method}</div>`:''}
+      ${rec.method?`<div class="pm-chip"><i class="ti ti-credit-card"></i> ${PM_HE[rec.method]||rec.method}</div>`:''}
       <hr class="divider">
       <div class="section-label">פירוט</div>
       <div class="item-row">
@@ -3844,7 +3844,7 @@ function printReceipt(i){
         </div>
       </div>
       <div class="stamp-box">
-        <div class="stamp-title">✅ שולם במלואו</div>
+        <div class="stamp-title"><i class="ti ti-circle-check"></i> שולם במלואו</div>
         <div class="stamp-sub">תאריך קבלת התשלום: ${dateStr(rec.paidAt||rec.at)}</div>
         ${rec.linkedInv?`<div class="linked-inv">מקושר לחשבונית: ${esc(rec.linkedInv)}</div>`:''}
       </div>
@@ -3852,8 +3852,8 @@ function printReceipt(i){
     <div class="rec-footer">
       <div class="footer-text">${esc(co)} · ${esc(coEmail)}<br>מסמך זה הופק אוטומטית ומהווה אישור תשלום</div>
       <div class="print-btn-row" style="display:flex;gap:8px;align-items:center">
-      <button class="print-btn" onclick="window.print()">🖨️ הדפס / PDF</button>
-      <button class="print-btn" style="background:#374151" onclick="(function(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title.replace(/\s+/g,'_')+'.html';a.click()})()">⬇️ ייצוא HTML</button>
+      <button class="print-btn" onclick="window.print()"><i class="ti ti-printer"></i> הדפס / PDF</button>
+      <button class="print-btn" style="background:#374151" onclick="(function(){const blob=new Blob([document.documentElement.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title.replace(/\s+/g,'_')+'.html';a.click()})()"><i class="ti ti-download"></i> ייצוא HTML</button>
     </div>
     </div>
   </div>
@@ -3988,7 +3988,7 @@ function saveWebhook(){
 function renderWebhookList(){
   const hooks=ls(K.webhooks,[]);
   const el=document.getElementById('webhookList');if(!el)return;
-  if(!hooks.length){el.innerHTML='<div class="empty"><div class="empty-icon">⚡</div>אין Webhooks מוגדרים</div>';return;}
+  if(!hooks.length){el.innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-bolt"></i></div>אין Webhooks מוגדרים</div>';return;}
   el.innerHTML=hooks.map((h,i)=>`
     <div class="wh-row">
       <div class="wh-row-top">
@@ -4379,7 +4379,7 @@ function renderGDPRList(){
   const sf=(document.getElementById('gdprStatusF')||{}).value||'';
   const filtered=reqs.filter(r=>!sf||r.status===sf);
   const el=document.getElementById('gdprList');if(!el)return;
-  if(!filtered.length){el.innerHTML='<div class="empty"><div class="empty-icon">🔒</div>אין בקשות GDPR</div>';return;}
+  if(!filtered.length){el.innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-lock"></i></div>אין בקשות GDPR</div>';return;}
   el.innerHTML=filtered.map((r,fi)=>{
     const origIdx=reqs.indexOf(r);
     const daysLeft=Math.ceil((new Date(r.deadline)-Date.now())/86400000);
@@ -4501,7 +4501,7 @@ function render2FASection(){
     <span class="${u.totpEnabled?'tfa-on':'tfa-off'}">${u.totpEnabled?'<i class="ti ti-key"></i> TOTP מופעל':'— ללא 2FA'}</span>
     ${u.phone?`<span class="tfa-off" style="margin-right:4px"><i class="ti ti-device-mobile"></i> ${esc(u.phone)}</span>`:''}
     ${u.totpEnabled?`<button class="nbtn nbtn-red" style="padding:1px 6px;font-size:9px" onclick="disable2FA('${esc(u.email)}')">הסר 2FA</button>`:''}
-  </div>`).join('')||'<div class="empty"><div class="empty-icon">👤</div>אין משתמשים</div>';
+  </div>`).join('')||'<div class="empty"><div class="empty-icon"><i class="ti ti-user"></i></div>אין משתמשים</div>';
 }
 
 function save2FAConfig(){
@@ -4823,7 +4823,7 @@ function renderAnalytics(){
       <div class="pb-track"><div class="pb-fill" style="width:${pct}%;background:${PLAN_COLORS[p]}">${planRevenues[p]>99?fmt(planRevenues[p]):''}</div></div>
       <div class="pb-val">${planRevenues[p]>0?fmt(planRevenues[p]):'—'}</div>
     </div>`;
-  }).join('')||'<div class="empty"><div class="empty-icon">📦</div>אין נתונים</div>';
+  }).join('')||'<div class="empty"><div class="empty-icon"><i class="ti ti-package"></i></div>אין נתונים</div>';
 
   const planDistEl=document.getElementById('planDist');
   if(planDistEl) planDistEl.innerHTML=`<div class="donut-wrap">
@@ -4845,9 +4845,9 @@ function renderChurnList(){
   const churn=ls(K.churnLog,[]);
   const REASON={price:'יקר',features:'חסרות תכונות',competitor:'מתחרה',stopped:'הפסיק',other:'אחר'};
   document.getElementById('churnList').innerHTML=churn.length===0
-    ?'<div class="empty"><div class="empty-icon">✅</div>אין ביטולים רשומים</div>'
+    ?'<div class="empty"><div class="empty-icon"><i class="ti ti-circle-check"></i></div>אין ביטולים רשומים</div>'
     :churn.slice(0,10).map((c,i)=>`<div class="log-item">
-        <div class="log-icon">📉</div>
+        <div class="log-icon"><i class="ti ti-trending-down"></i></div>
         <div class="log-text"><strong>${esc(c.email)}</strong> — <span class="badge pb-${c.plan||'trial'}">${PLAN_NAMES[c.plan]||c.plan}</span> · ${REASON[c.reason]||c.reason}${c.note?' · '+esc(c.note):''}
         </div>
         <div class="log-time">${dateStr(c.at)}</div>
@@ -4925,7 +4925,7 @@ function renderPayList(){
   const pays=(u?.payments||[]).slice().reverse();
   const total=pays.reduce((s,p)=>s+(+p.amount||0),0);
   document.getElementById('payLogList').innerHTML=pays.length===0
-    ?'<div class="empty" style="padding:12px"><div class="empty-icon">💰</div>אין תשלומים</div>'
+    ?'<div class="empty" style="padding:12px"><div class="empty-icon"><i class="ti ti-cash"></i></div>אין תשלומים</div>'
     :`<div style="margin-bottom:6px;font-size:11px;color:var(--muted)">סה"כ: <strong style="color:var(--brown)">${fmt(total)}</strong></div>`
     +pays.map(p=>`<div class="pay-row">
       <span class="pay-method">${esc(p.method)}</span>
@@ -5035,7 +5035,7 @@ function renderEmailTpls(){
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
         <span style="font-size:11px;font-weight:800;color:var(--brown)">${esc(t.name||DEF_TPLS[key].name)}</span>
         <div style="display:flex;gap:6px">
-          ${isKeyTpl?`<button class="nbtn" style="padding:2px 10px;font-size:10px;background:var(--gold);color:#000;border:none;border-radius:6px;cursor:pointer" onclick="openSendKeyModal('${key}','${planHe}')">✉️ ייצר ושלח</button>`:''}
+          ${isKeyTpl?`<button class="nbtn" style="padding:2px 10px;font-size:10px;background:var(--gold);color:#000;border:none;border-radius:6px;cursor:pointer" onclick="openSendKeyModal('${key}','${planHe}')"><i class="ti ti-send"></i> ייצר ושלח</button>`:''}
           <button class="nbtn nbtn-outline" style="padding:2px 8px;font-size:10px" onclick="copyTpl('${key}')"><i class="ti ti-clipboard"></i> Copy</button>
           <button class="nbtn nbtn-gold" style="padding:2px 8px;font-size:10px" onclick="saveTpl('${key}')"><i class="ti ti-device-floppy"></i> שמור</button>
         </div>
@@ -5308,7 +5308,7 @@ function addWaitEntry(){
 function renderWaitList(){
   const list=ls(K.waitList,[]);
   document.getElementById('waitList').innerHTML=list.length===0
-    ?'<div class="empty" style="padding:16px"><div class="empty-icon">📋</div>רשימה ריקה</div>'
+    ?'<div class="empty" style="padding:16px"><div class="empty-icon"><i class="ti ti-clipboard-list"></i></div>רשימה ריקה</div>'
     :list.map((e,i)=>`<div class="log-item">
       <div class="log-icon">📧</div>
       <div class="log-text"><strong>${esc(e.name)}</strong><br><span style="font-size:10px">${esc(e.email)}</span></div>
@@ -7232,7 +7232,7 @@ async function generateMktContent(){
     result.className='mkt-result error';
     result.textContent=`❌ שגיאה: ${e.message}`;
   }finally{
-    if(btn){btn.disabled=false;btn.textContent='✨ צור תוכן';}
+    if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-sparkles"></i> צור תוכן';}
   }
 }
 
@@ -7294,7 +7294,7 @@ function renderMktLibrary(){
   const wrap=document.getElementById('mktLibraryList');
   if(!wrap) return;
   if(!filtered.length){
-    wrap.innerHTML='<div class="empty"><div class="empty-icon">📚</div>'+( lib.length?'אין תוצאות לחיפוש':'הספרייה ריקה — צור וצור תוכן ולחץ "שמור לספרייה"')+'</div>';return;
+    wrap.innerHTML='<div class="empty"><div class="empty-icon"><i class="ti ti-books"></i></div>'+( lib.length?'אין תוצאות לחיפוש':'הספרייה ריקה — צור וצור תוכן ולחץ "שמור לספרייה"')+'</div>';return;
   }
 
   wrap.innerHTML=filtered.map((item,i)=>{
