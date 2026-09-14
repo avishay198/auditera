@@ -10,6 +10,7 @@
 <meta name="theme-color" content="#3a2000">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -17,10 +18,10 @@
   <link rel="canonical" href="https://auditera.co/legal.html">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-inline' https://plausible.io;
+  style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
   img-src 'self' data: blob:;
-  font-src 'self';
+  font-src 'self' https://cdn.jsdelivr.net;
   object-src 'none';
   frame-src 'none';
   base-uri 'self';
@@ -54,7 +55,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:#3a2000;direction:rtl;line-height:1.7overflow-x:hidden;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--cream);color:#3a2000;direction:rtl;line-height:1.7;overflow-x:hidden;}
 :root{
   --brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;
   --gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
@@ -63,9 +64,9 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 
 /* ── NAV ── */
 nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(58,32,0,.18)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;direction:ltr}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-logo-icon{width:34px;height:34px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px}
-.nav-logo-text{font-size:18px;font-weight:700;color:#ffffff}
+.nav-logo-text{font-size:18px;font-weight:700;color:var(--brown)}
 .nav-logo-text span{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:4px}
 .nav-link{color:var(--brown3);text-decoration:none;font-size:15px;font-weight:500;padding:6px 13px;border-radius:6px;transition:all .2s}
@@ -113,6 +114,13 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 /* ── PANE ── */
 .pane{display:none}.pane.active{display:block}
 
+
+/* ── ICON STYLES ── */
+.contact-row i{font-size:15px;color:var(--gold-text);flex-shrink:0;width:18px;text-align:center}
+.info-box i{font-size:15px;vertical-align:middle;margin-left:4px;color:#1e40af}
+.warn-box i{font-size:15px;vertical-align:middle;margin-left:4px;color:#9a3412}
+.tab i{font-size:14px;vertical-align:middle;margin-left:5px}
+
 /* ── FOOTER ── */
 
 @media(max-width:600px){
@@ -155,7 +163,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="index.html">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="A" style="height:36px;width:36px;display:block;object-fit:contain;">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAEXUlEQVR4nO2cu3HbQBCGFxoXolCRClANjlyBM8VKWQBSxsxUgSPXwAIUMWQncqA5GSTusXu4x97i/2Y0I5PEQ/fhOx44Y06UycsjfeZuC+ScrzTlbCfaCFJ1IJHNeiHE6oQj+iH1AsjVC8dN9Argyj0enrnnBAS8zR+s18VKDj6RkgupbUnJDkn2PhiT6xPLvdKADOlY+ySvHuDKhdS2cMf+XvLNP0JyuTs/vD6lzhMwmE+X4HMcF0vJ37/kyl1KjZ0Y4JMaU4nkH9yDhuRCanmWY+ob47f5g73InYjS9d7LdVcY5LYhNN4hP47zlaag4JhciO2Db+xjks9XmpKfZKUOANoxny7iheyDpF6gD+fI95788kif7IJRrw6kFbMEQ64uJJJXgjE9j0dsmhYtssB4JAVjetYJd5pGwcbZheA/f99Fj1uC/Vn0qDiJMcm/fv5udj6t2UXBe8a0YO4UbHmqNi0YGBYsrdJqxWYFgy9MCs6t0WLFJgWD/5gTnKowdc9rrWJzgsEtpgRz691TxaYEgzVmBEvfe/dSsRnBwI8Jwbkr5z1UbEIwCDO84K33vdYrHl4wiDO04K31cl83csVDCwZphhVcql7u60eteEjBpeVytxtR8pCCAZ/hBNeql7v9aBUPJxjIGEpw7Xq5+xmp4qEEAznDCG5VL3d/o1Q8jGCQxxCCW9fL3e8IFQ8hGOSjXnCvern7116xesFgG6oF966XexzNFasWDLajVrCWernH01qxWsGgDCoFa6uXe1yNFasUDMqhTrDWernH11axqu/J4gyOtgH0oem7t9QVDMqiRvAIZUrQ8veoEQzqoEKwlqu9NBr+LlWLrBBaFiw+NEiM0b1g7bdFKbTfNnUXDOrSVfDo9To0V4yCjdNNsJV6HVorRsHG6SLYWr0OjRWjYOM0F2y1Xoe2ilGwcZoKtl6vQ1PFKNg4zQTvpV6HlopRsHGaCN5bvQ4NFVcXvFe5jt6SMUUbp6rgvdfr6FkxCjZONcGo95ZeFaNg41QRjHr99KgYBRunuGDUG6d1xSjYOEUFo14eLStGwcYpJhj1ymhVMQo2ThHBqDePFhWjYONsFox6t1G7YhRsnKTg+XShw+uT9znUW4acig+vTzSfLsl9b/oKh+WJ9f6f7BYpEciq4Lf5g4iIjodn8cm4n1IntyeW47YcRw7OlXO3hPUeHJumfUBuHtxx407PRIJFllQyqINELhHRw/lK0/2DudM0aE9sej5faRLdJqHivkjrJaKvel8e6dP3ZOjqcJKlBwN5hMY7Vi/RV8Hf07NUsjswJNclNMYcuUSC++Dj4Xm1s/spG7LLkBpTydroZoGVqpgofMXcnxjIJxYKx8Vy4bxaQYckc3cO6sAd+/u7opVgIr5kzgFBPtKx9t3yegUTxSWHDg7qkYrIJ5coIpgoLdkB2XXgzowhuUQJwUR8yaAPMblEjM+iUzsA/eC4EclDzTqQRJddJ2S3JXcm/QftbicAqzWV6AAAAABJRU5ErkJggg==" alt="Auditera" style="height:36px;width:36px;display:block;object-fit:contain;">
     <div class="nav-logo-text"><span>Au</span>ditera</div>
   </a>
   <div class="nav-links">
@@ -186,8 +194,8 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
 <!-- TABS -->
 <div class="tab-bar">
-  <a class="tab active" onclick="showPane('terms',this)" href="#">📋 תנאי שימוש</a>
-  <a class="tab" onclick="showPane('privacy',this)" href="#">🔒 מדיניות פרטיות</a>
+  <a class="tab active" onclick="showPane('terms',this)" href="#"><i class="ti ti-file-text"></i> תנאי שימוש</a>
+  <a class="tab" onclick="showPane('privacy',this)" href="#"><i class="ti ti-lock"></i> מדיניות פרטיות</a>
 </div>
 
 <!-- ════════════════════════════════════════
@@ -276,10 +284,10 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <li><strong>שימוש בתכונות AI — אחריות המשתמש:</strong> בחירה להפעיל את תכונות ה-AI מהווה הסכמה מפורשת של המשתמש לשליחת שאלות ונתונים לספק ה-AI שנבחר (OpenAI / Groq). אחריות מלאה על המידע שנשלח לספקים אלו מוטלת על המשתמש בלבד — לרבות עמידה בתנאי השירות ומדיניות הפרטיות של OpenAI ו-Groq ובדרישות הגנת הפרטיות החלות עליו לפי חוק. המשתמש מתחייב שלא לשלוח לספקי AI מידע מזהה של לקוחות (שמות, מספרי ת"ז, שמות עסקים) ללא הסכמתם המפורשת</li>
     </ul>
     <div class="info-box" style="margin-bottom:16px">
-      🧾 <strong>חשבוניות ישראל — חובת מספר הקצאה (יוני 2026):</strong> החל מ-1 ביוני 2026, חשבוניות מס לעסקאות B2B בסכום <strong>₪5,000 ומעלה (כולל מע"מ)</strong> מחייבות <strong>מספר הקצאה</strong> מרשות המסים, ללא קשר לאמצעי הפקה. על המשתמשים באודיטרה המפיקים חשבוניות ומנתחים נתוני לקוחות לוודא עמידה בדרישה זו. Auditera מזהה חשבוניות ישראל בפלטפורמה וסומנת חריגות בהתאם, אך <strong>האחריות לציות חלה על המשתמש בלבד</strong>.
+      <i class="ti ti-receipt"></i> <strong>חשבוניות ישראל — חובת מספר הקצאה (יוני 2026):</strong> החל מ-1 ביוני 2026, חשבוניות מס לעסקאות B2B בסכום <strong>₪5,000 ומעלה (כולל מע"מ)</strong> מחייבות <strong>מספר הקצאה</strong> מרשות המסים, ללא קשר לאמצעי הפקה. על המשתמשים באודיטרה המפיקים חשבוניות ומנתחים נתוני לקוחות לוודא עמידה בדרישה זו. Auditera מזהה חשבוניות ישראל בפלטפורמה וסומנת חריגות בהתאם, אך <strong>האחריות לציות חלה על המשתמש בלבד</strong>.
     </div>
     <div class="warn-box">
-      ⚠️ <strong>אחריות מקצועית — חשוב:</strong> Auditera היא כלי עזר טכנולוגי בלבד ואינה מהווה תחליף לשיקול הדעת המקצועי של רואה החשבון. <strong>האחריות המקצועית המלאה</strong> לממצאי הביקורת, לדוחות, לחוות הדעת, לאמינות הניתוח ולהחלטות המבוססות עליו — נותרת על רואה החשבון המשתמש בלבד, בהתאם לחוק רואי חשבון התשט"ו-1955, תקני הביקורת הישראליים (ISA) ודרישות לשכת רואי החשבון. Auditera אינה רואה חשבון, אינה בעלת רישיון לייעוץ פיננסי, ואינה אחראית לכל שגיאה, מחדל או נזק הנובע משימוש בתוצאות המערכת.
+      <i class="ti ti-alert-triangle"></i> <strong>אחריות מקצועית — חשוב:</strong> Auditera היא כלי עזר טכנולוגי בלבד ואינה מהווה תחליף לשיקול הדעת המקצועי של רואה החשבון. <strong>האחריות המקצועית המלאה</strong> לממצאי הביקורת, לדוחות, לחוות הדעת, לאמינות הניתוח ולהחלטות המבוססות עליו — נותרת על רואה החשבון המשתמש בלבד, בהתאם לחוק רואי חשבון התשט"ו-1955, תקני הביקורת הישראליים (ISA) ודרישות לשכת רואי החשבון. Auditera אינה רואה חשבון, אינה בעלת רישיון לייעוץ פיננסי, ואינה אחראית לכל שגיאה, מחדל או נזק הנובע משימוש בתוצאות המערכת.
     </div>
   </div>
 
@@ -324,15 +332,15 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <h3>שיפוי:</h3>
     <p>המשתמש מתחייב לשפות את Auditera בגין כל תביעה, נזק או הוצאה הנובעים מהפרת תנאי שימוש אלו על ידו.</p>
     <div class="info-box">
-      ℹ️ אחריותה המרבית של Auditera מוגבלת לגובה דמי המנוי ששולמו בחודשיים שקדמו לאירוע הנזק.
+      <i class="ti ti-info-circle"></i> אחריותה המרבית של Auditera מוגבלת לגובה דמי המנוי ששולמו בחודשיים שקדמו לאירוע הנזק.
     </div>
     <div class="warn-box" style="margin-top:10px">
-      ⚠️ <strong>תכונות AI — הגבלת אחריות מפורשת:</strong> Auditera אינה אחראית בכל צורה לאופן שבו ספקי AI חיצוניים (OpenAI, Groq או כל ספק אחר שהמשתמש בוחר) מעבדים, שומרים, או משתמשים בנתונים שנשלחו אליהם. הנתונים עוברים <strong>ישירות מהדפדפן לספק ה-AI</strong> — Auditera אינה מתווכת, אינה רואה ואינה שומרת נתונים אלה בשום שלב. כל שימוש בתכונות AI הוא על <strong>אחריות המשתמש הבלעדית</strong>, בהתאם למדיניות הפרטיות ותנאי השירות של הספק שנבחר.
+      <i class="ti ti-alert-triangle"></i> <strong>תכונות AI — הגבלת אחריות מפורשת:</strong> Auditera אינה אחראית בכל צורה לאופן שבו ספקי AI חיצוניים (OpenAI, Groq או כל ספק אחר שהמשתמש בוחר) מעבדים, שומרים, או משתמשים בנתונים שנשלחו אליהם. הנתונים עוברים <strong>ישירות מהדפדפן לספק ה-AI</strong> — Auditera אינה מתווכת, אינה רואה ואינה שומרת נתונים אלה בשום שלב. כל שימוש בתכונות AI הוא על <strong>אחריות המשתמש הבלעדית</strong>, בהתאם למדיניות הפרטיות ותנאי השירות של הספק שנבחר.
     </div>
   </div>
 
   <div class="section" id="t8">
-    <h2>©️ 8. קניין רוחני</h2>
+    <h2>8. קניין רוחני</h2>
     <p>כל הזכויות בפלטפורמה, לרבות קוד המקור, עיצוב הממשק, אלגוריתמי הניתוח, לוגו, שם המותג ותוכן השיווקי — שמורות ל-Auditera.</p>
     <p>הנתונים שהמשתמש מעלה נותרים בבעלותו המלאה. Auditera אינה רוכשת כל זכות בהם, ואינה משתמשת בהם לכל מטרה פרט לאספקת השירות הישיר למשתמש.</p>
   </div>
@@ -352,10 +360,10 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <p>תנאי שימוש אלו כפופים לדיני מדינת ישראל. כל מחלוקת תועבר לבוררות או לבית המשפט המוסמך בתל אביב.</p>
     <div class="contact-card">
       <h3>פרטי יצירת קשר</h3>
-      <div class="contact-row">📧 <a href="mailto:support@auditera.co">support@auditera.co</a></div>
-      <div class="contact-row">🌐 <a href="https://auditera.co">auditera.co</a></div>
-      <div class="contact-row">📍 ישראל</div>
-      <div class="contact-row">🕐 שעות תמיכה: ראשון–חמישי, 09:00–18:00</div>
+      <div class="contact-row"><i class="ti ti-mail"></i> <a href="mailto:support@auditera.co">support@auditera.co</a></div>
+      <div class="contact-row"><i class="ti ti-world"></i> <a href="https://auditera.co">auditera.co</a></div>
+      <div class="contact-row"><i class="ti ti-map-pin"></i> ישראל</div>
+      <div class="contact-row"><i class="ti ti-clock"></i> שעות תמיכה: ראשון–חמישי, 09:00–18:00</div>
     </div>
   </div>
 
@@ -389,7 +397,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <p>Auditera מחויבת להגנה על פרטיות משתמשיה בהתאם לחוק הגנת הפרטיות התשמ"א-1981, תקנות הגנת הפרטיות (אבטחת מידע) ותיקון 13 לחוק (2023). מדיניות זו מסבירה אילו נתונים אנו אוספים, כיצד אנו משתמשים בהם ומהן זכויותיך.</p>
     <p>עקרונות הליבה של מדיניותנו: מינימום איסוף נתונים — אנו אוספים רק את המידע ההכרחי למתן השירות. שקיפות מלאה — המשתמש יודע תמיד מה נאסף ולמה. שליטת המשתמש — ניתן לגשת לנתונים, לתקנם ולמחוק אותם בכל עת.</p>
     <div class="info-box">
-      🔐 <strong>נתונים פיננסיים — רמת רגישות מוגברת:</strong> נתוני ביקורת פיננסית עשויים להיחשב "מידע רגיש" לפי תיקון 13 לחוק הגנת הפרטיות, הכולל מידע על מצבו הכלכלי של אדם. Auditera מיישמת עיקרון Privacy by Design: הנתונים הפיננסיים מעובדים <strong>בדפדפן בלבד ואינם מועברים לשרת כלל</strong> — ולכן אינם נאספים על ידי Auditera ואינם כפופים לסיכוני אחסון מרכזי.
+      <i class="ti ti-lock"></i> <strong>נתונים פיננסיים — רמת רגישות מוגברת:</strong> נתוני ביקורת פיננסית עשויים להיחשב "מידע רגיש" לפי תיקון 13 לחוק הגנת הפרטיות, הכולל מידע על מצבו הכלכלי של אדם. Auditera מיישמת עיקרון Privacy by Design: הנתונים הפיננסיים מעובדים <strong>בדפדפן בלבד ואינם מועברים לשרת כלל</strong> — ולכן אינם נאספים על ידי Auditera ואינם כפופים לסיכוני אחסון מרכזי.
     </div>
   </div>
 
@@ -408,10 +416,10 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <li>העדפות ממשק (מצב תצוגה, הגדרות) — נשמרות ב-localStorage מקומית</li>
     </ul>
     <div class="info-box">
-      ℹ️ <strong>עיבוד מקומי לחלוטין:</strong> הנתונים הפיננסיים (קבצי CSV/Excel) מעובדים <strong>בדפדפן שלך בלבד</strong> ואינם מועברים לשרתי Auditera כלל. Auditera אינה שומרת עותק של הנתונים הפיננסיים בשרת. הנתונים קיימים רק בזיכרון הדפדפן לאורך הפגישה הנוכחית.
+      <i class="ti ti-info-circle"></i> <strong>עיבוד מקומי לחלוטין:</strong> הנתונים הפיננסיים (קבצי CSV/Excel) מעובדים <strong>בדפדפן שלך בלבד</strong> ואינם מועברים לשרתי Auditera כלל. Auditera אינה שומרת עותק של הנתונים הפיננסיים בשרת. הנתונים קיימים רק בזיכרון הדפדפן לאורך הפגישה הנוכחית.
     </div>
     <div class="info-box" style="margin-top:10px">
-      🔑 <strong>מפתח AI (BYOK):</strong> אם בחרת להשתמש בתכונות ה-AI, עליך להזין מפתח API אישי משלך (OpenAI). המפתח נשמר ב-<code>sessionStorage</code> של הדפדפן בלבד — נמחק אוטומטית עם סגירת הלשונית. Auditera לא רואה את המפתח ואינה שומרת אותו.
+      <i class="ti ti-key"></i> <strong>מפתח AI (BYOK):</strong> אם בחרת להשתמש בתכונות ה-AI, עליך להזין מפתח API אישי משלך (OpenAI). המפתח נשמר ב-<code>sessionStorage</code> של הדפדפן בלבד — נמחק אוטומטית עם סגירת הלשונית. Auditera לא רואה את המפתח ואינה שומרת אותו.
     </div>
   </div>
 
@@ -440,10 +448,10 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <li><strong>ניהול מנויים:</strong> רישום ואישור מנוי מנוהלים ידנית על ידי Auditera ללא שרת אוטומטי</li>
     </ul>
     <div class="info-box">
-      ℹ️ <strong>ארכיטקטורת אפס נתונים:</strong> מכיוון שהנתונים הפיננסיים מעובדים לחלוטין בדפדפן ואינם מועלים לשרת, Auditera אינה יכולה לחשוף אותם — גם במקרה של פרצת אבטחה בצד השרת.
+      <i class="ti ti-info-circle"></i> <strong>ארכיטקטורת אפס נתונים:</strong> מכיוון שהנתונים הפיננסיים מעובדים לחלוטין בדפדפן ואינם מועלים לשרת, Auditera אינה יכולה לחשוף אותם — גם במקרה של פרצת אבטחה בצד השרת.
     </div>
     <div class="warn-box">
-      ⚠️ במקרה של אירוע אבטחה המשפיע על נתוני הרשמה (אימייל, פרופיל), Auditera תיידע את המשתמשים הנפגעים ואת הרשות להגנת הפרטיות תוך 72 שעות, בהתאם לחוק.
+      <i class="ti ti-alert-triangle"></i> במקרה של אירוע אבטחה המשפיע על נתוני הרשמה (אימייל, פרופיל), Auditera תיידע את המשתמשים הנפגעים ואת הרשות להגנת הפרטיות תוך 72 שעות, בהתאם לחוק.
     </div>
   </div>
 
@@ -457,7 +465,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <li><strong>OpenAI / Groq / ספק AI שנבחר על ידי המשתמש</strong> — בעת שימוש בתכונות ה-AI, שאלות ונתונים שנשלחים עוברים <strong>ישירות מהדפדפן של המשתמש לספק ה-AI</strong> — ללא תיווך שרתי Auditera. Auditera אינה רואה, אינה שומרת ואינה עוברת על תוכן הפניות. <strong>אחריות מלאה על כל מידע שנשלח לספק ה-AI מוטלת על המשתמש בלבד.</strong> <em>לעולם אל תכלול בשאלות ה-AI שמות לקוחות, מספרי ת"ז, שמות עסקים מזהים או כל פרט שיכול לאפשר זיהוי אדם ספציפי ללא הסכמתו.</em></li>
     </ul>
     <div class="info-box" style="margin-top:14px">
-      🤖 <strong>ארכיטקטורת AI — שקיפות מלאה:</strong>
+      <i class="ti ti-robot"></i> <strong>ארכיטקטורת AI — שקיפות מלאה:</strong>
       <ul style="margin:8px 0 0 0; padding-right:18px">
         <li><strong>מה Auditera עושה:</strong> שולחת את שאלת המשתמש (prompt) ישירות מהדפדפן לספק ה-AI באמצעות ה-API key שהמשתמש הזין. ה-key מאוחסן ב-sessionStorage בלבד ונמחק אוטומטית עם סגירת הלשונית</li>
         <li><strong>מה Auditera לא עושה:</strong> אינה עוברת על הנתונים, אינה שומרת את הפניות ואינה רואה את תשובות הספק — בשום שלב</li>
@@ -465,11 +473,11 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       </ul>
     </div>
     <div class="warn-box" style="margin-top:10px">
-      ⚠️ <strong>אחריות המשתמש לשימוש ב-AI:</strong> הפעלת תכונות AI מהווה הסכמה מפורשת של המשתמש לתנאי השירות ומדיניות הפרטיות של הספק שנבחר. Auditera אינה אחראית לאופן שבו ספקי AI מעבדים, שומרים או משתמשים בנתונים שנשלחו אליהם על ידי המשתמש.
+      <i class="ti ti-alert-triangle"></i> <strong>אחריות המשתמש לשימוש ב-AI:</strong> הפעלת תכונות AI מהווה הסכמה מפורשת של המשתמש לתנאי השירות ומדיניות הפרטיות של הספק שנבחר. Auditera אינה אחראית לאופן שבו ספקי AI מעבדים, שומרים או משתמשים בנתונים שנשלחו אליהם על ידי המשתמש.
     </div>
     <p style="margin-top:14px">כל ספקי הצד השלישי האחרים (Netlify/Cloudflare Pages) חתמו על הסכמי אי-גילוי ועיבוד נתונים עם Auditera. ספקי AI פועלים ישירות מול המשתמש בלבד — ולא מול Auditera.</p>
     <div class="info-box" style="margin-top:14px">
-      🌍 <strong>העברת מידע מחוץ לישראל — בסיס משפטי (תיקון 13):</strong> מידע הרשמה (שם, אימייל) מועבר ל-Airtable ו-Make, המאוחסנים בשרתים בארה"ב. העברה זו מבוצעת על בסיס הסכמת המשתמש המפורשת בהרשמה, ובכפוף לתנאי עיבוד הנתונים (DPA) של הספקים, הכוללים ערבויות הגנה שווות-ערך לדרישות הדין הישראלי. Airtable: <a href="https://airtable.com/privacy" target="_blank" rel="noopener">airtable.com/privacy</a>. המשתמש רשאי לדרוש הסרת רשומתו מ-Airtable בפנייה לממונה הפרטיות.
+      <i class="ti ti-world"></i> <strong>העברת מידע מחוץ לישראל — בסיס משפטי (תיקון 13):</strong> מידע הרשמה (שם, אימייל) מועבר ל-Airtable ו-Make, המאוחסנים בשרתים בארה"ב. העברה זו מבוצעת על בסיס הסכמת המשתמש המפורשת בהרשמה, ובכפוף לתנאי עיבוד הנתונים (DPA) של הספקים, הכוללים ערבויות הגנה שווות-ערך לדרישות הדין הישראלי. Airtable: <a href="https://airtable.com/privacy" target="_blank" rel="noopener">airtable.com/privacy</a>. המשתמש רשאי לדרוש הסרת רשומתו מ-Airtable בפנייה לממונה הפרטיות.
     </div>
   </div>
 
@@ -506,7 +514,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <li><strong>נתוני תשלום:</strong> מבוצעים דרך העברה בנקאית / Bit — אישורי תשלום נשמרים 7 שנים בהתאם לדרישות חוק</li>
     </ul>
     <div class="info-box">
-      ℹ️ בהתאם לחוק, על רואה החשבון לשמור תיעוד של ביקורות שבוצעו למשך 7 שנים לפחות. מומלץ לייצא ולאחסן דוחות מסיים בהתאם לחובה זו.
+      <i class="ti ti-info-circle"></i> בהתאם לחוק, על רואה החשבון לשמור תיעוד של ביקורות שבוצעו למשך 7 שנים לפחות. מומלץ לייצא ולאחסן דוחות מסיים בהתאם לחובה זו.
     </div>
   </div>
 
@@ -520,11 +528,11 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <p>לכל שאלה, בקשה או תלונה בנושא פרטיות ועיבוד מידע, ניתן לפנות לממונה הפרטיות של Auditera:</p>
     <div class="contact-card">
       <h3>ממונה הגנת הפרטיות — Auditera</h3>
-      <div class="contact-row">📧 <a href="mailto:privacy@auditera.co">privacy@auditera.co</a></div>
-      <div class="contact-row">📧 תמיכה כללית: <a href="mailto:support@auditera.co">support@auditera.co</a></div>
-      <div class="contact-row">🌐 <a href="https://auditera.co">auditera.co</a></div>
-      <div class="contact-row">📍 ישראל</div>
-      <div class="contact-row">⏱ זמן מענה מרבי: 30 יום מיום קבלת הפנייה</div>
+      <div class="contact-row"><i class="ti ti-mail"></i> <a href="mailto:privacy@auditera.co">privacy@auditera.co</a></div>
+      <div class="contact-row"><i class="ti ti-mail"></i> תמיכה כללית: <a href="mailto:support@auditera.co">support@auditera.co</a></div>
+      <div class="contact-row"><i class="ti ti-world"></i> <a href="https://auditera.co">auditera.co</a></div>
+      <div class="contact-row"><i class="ti ti-map-pin"></i> ישראל</div>
+      <div class="contact-row"><i class="ti ti-hourglass"></i> זמן מענה מרבי: 30 יום מיום קבלת הפנייה</div>
     </div>
     <p style="margin-top:16px;font-size:13px;color:var(--muted)">ניתן גם לפנות לרשות להגנת הפרטיות בישראל בכתובת <strong>ppa.gov.il</strong> בכל עניין הנוגע לזכויותיך.</p>
   </div>
@@ -570,7 +578,7 @@ document.addEventListener('click',function(e){
 </script>
 <!-- COOKIE CONSENT -->
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
-  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#e0b840;text-decoration:underline">מדיניות פרטיות</a></span>
+  <span><i class="ti ti-cookie" style="font-size:15px;vertical-align:middle;margin-left:4px"></i> אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#e0b840;text-decoration:underline">מדיניות פרטיות</a></span>
   <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#e0b840;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>

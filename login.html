@@ -2,6 +2,8 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -10,10 +12,10 @@
 <link rel="canonical" href="https://auditera.co/login.html">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline';
+  script-src 'self' 'unsafe-inline' https://plausible.io;
+  style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
   img-src 'self' data: blob:;
-  font-src 'self';
+  font-src 'self' https://cdn.jsdelivr.net;
   object-src 'none';
   frame-src 'self';
   base-uri 'self';
@@ -204,6 +206,40 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .trust-row{display:none}
 }
 @media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
+
+/* INFO PANEL */
+.info-panel{
+  width:380px;flex-shrink:0;
+  background:linear-gradient(160deg,#241400 0%,#3a2000 55%,#4a2c08 100%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:60px 44px;
+  position:relative;overflow:hidden;
+}
+.info-panel::before{
+  content:'';position:absolute;top:-80px;left:-80px;
+  width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,184,64,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.info-panel::after{
+  content:'';position:absolute;bottom:-60px;right:-60px;
+  width:250px;height:250px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,184,64,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.ip-brand{font-size:24px;font-weight:800;color:rgba(245,230,192,.95);margin-bottom:6px;letter-spacing:-.01em}
+.ip-brand span{color:var(--gold)}
+.ip-tagline{font-size:13.5px;color:rgba(245,230,192,.45);margin-bottom:44px;line-height:1.6}
+.ip-features{list-style:none;display:flex;flex-direction:column;gap:22px;margin-bottom:44px}
+.ip-feat{display:flex;align-items:flex-start;gap:14px}
+.ip-feat-icon{width:38px;height:38px;background:rgba(224,184,64,.12);border:1px solid rgba(224,184,64,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;color:var(--gold)}
+.ip-feat-text{}
+.ip-feat-title{font-size:14px;font-weight:700;color:rgba(245,230,192,.9);margin-bottom:2px}
+.ip-feat-sub{font-size:12px;color:rgba(245,230,192,.38);line-height:1.55}
+.ip-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(224,184,64,.1);border:1px solid rgba(224,184,64,.22);border-radius:20px;padding:7px 16px;font-size:12px;color:rgba(245,230,192,.6)}
+.ip-badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:fdot-pulse 2s infinite}
+@media(max-width:900px){.info-panel{display:none}}
+
 </style>
   <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
   <meta property="og:type" content="website">
@@ -239,7 +275,40 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   <a href="contact.html">צור קשר</a>
 </div>
 
-<div class="split-wrap" style="justify-content:center;">
+<div class="split-wrap">
+
+  <!-- INFO PANEL -->
+  <div class="info-panel" aria-hidden="true">
+    <div class="ip-brand"><span>Au</span>ditera</div>
+    <div class="ip-tagline">מערכת ביקורת חשבונאית לרואי חשבון ישראלים</div>
+    <ul class="ip-features">
+      <li class="ip-feat">
+        <div class="ip-feat-icon"><i class="ti ti-file-analytics"></i></div>
+        <div class="ip-feat-text">
+          <div class="ip-feat-title">ניתוח חכם של נתוני לקוחות</div>
+          <div class="ip-feat-sub">זיהוי אוטומטי של חריגות ועמידה בתקני ISA</div>
+        </div>
+      </li>
+      <li class="ip-feat">
+        <div class="ip-feat-icon"><i class="ti ti-shield-check"></i></div>
+        <div class="ip-feat-text">
+          <div class="ip-feat-title">אבטחה ברמה הגבוהה ביותר</div>
+          <div class="ip-feat-sub">הצפנת PBKDF2, עיבוד מקומי — הנתונים לא עוזבים את המכשיר</div>
+        </div>
+      </li>
+      <li class="ip-feat">
+        <div class="ip-feat-icon"><i class="ti ti-clock-hour-4"></i></div>
+        <div class="ip-feat-text">
+          <div class="ip-feat-title">חוסך שעות עבודה</div>
+          <div class="ip-feat-sub">דוחות אוטומטיים, בדיקות מיסוי ישראלי מלא</div>
+        </div>
+      </li>
+    </ul>
+    <div class="ip-badge">
+      <span class="ip-badge-dot"></span>
+      ניסיון חינמי — ללא כרטיס אשראי
+    </div>
+  </div>
 
   <!-- FORM PANEL -->
   <div class="form-panel" id="main-form">
@@ -328,8 +397,8 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       </div>
 
       <div class="trust-row">
-        <div class="trust-badge">🔒 מוצפן PBKDF2</div>
-        <div class="trust-badge">🇮🇱 עיבוד מקומי</div>
+        <div class="trust-badge"><i class="ti ti-shield-lock" style="font-size:13px;color:var(--gold-text)"></i> מוצפן PBKDF2</div>
+        <div class="trust-badge"><i class="ti ti-device-desktop" style="font-size:13px;color:var(--gold-text)"></i> עיבוד מקומי</div>
       </div>
 
     </div>
@@ -561,7 +630,7 @@ async function doLogin(e) {
 
 <!-- COOKIE CONSENT -->
 <div id="cookieBanner" style="position:fixed;bottom:0;right:0;left:0;z-index:9999;background:#3a2000;color:#f5e6c0;padding:14px 5%;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 -2px 16px rgba(58,32,0,.18);font-size:14px;line-height:1.5;display:none">
-  <span>🍪 אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#e0b840;text-decoration:underline">מדיניות פרטיות</a></span>
+  <span><i class="ti ti-cookie" style="font-size:15px;vertical-align:middle;margin-left:4px"></i> אנחנו משתמשים רק בעוגיות הכרחיות לתפעול האתר — לא לשיווק, לא למעקב. <a href="legal.html#privacy" style="color:#e0b840;text-decoration:underline">מדיניות פרטיות</a></span>
   <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#e0b840;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
