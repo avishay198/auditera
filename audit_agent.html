@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html dir="rtl" lang="he">
 <head>
-<meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: blob:; connect-src 'self' https://api.anthropic.com https://auditera-license.auditera.workers.dev; worker-src blob:; frame-ancestors 'self';">
 <meta charset="UTF-8">
 <meta name="robots" content="noindex,nofollow">
 <!-- CSP applied server-side only; removed for local file:// usage -->
@@ -27,6 +27,8 @@
   };
 })();
 </script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 // Belt-and-suspenders: also force LTR via plugin and internal flag
