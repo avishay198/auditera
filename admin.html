@@ -1847,6 +1847,22 @@ nav {
       </div>
     </div>
 
+    <!-- Make.com (automation) -->
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f0e8d8">
+      <div style="font-size:12px;font-weight:800;color:var(--brown);margin-bottom:4px"><i class="ti ti-refresh"></i> Make.com — אוטומציה</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">
+        הדבק את ה-Webhook URL מתוך הסנריו שלך ב-Make.com. כאשר לוחצים "ייצר ושלח" — Make ישלח את אימייל ההפעלה ללקוח אוטומטית.
+      </div>
+      <div class="fg" style="margin-bottom:8px">
+        <label>Webhook URL (Make.com)</label>
+        <input id="makeWebhookUrl" type="url" placeholder="https://hook.eu2.make.com/xxxxxxxxxxxxxxxx" style="direction:ltr;font-size:12px;font-family:monospace" oninput="checkMakeStatus()">
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="nbtn nbtn-outline" onclick="testMakeWebhook()"><i class="ti ti-send"></i> בדוק חיבור</button>
+        <span id="makeStatusBadge" style="font-size:11px;color:var(--muted)"></span>
+      </div>
+    </div>
+
     <!-- WhatsApp -->
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid #f0e8d8">
       <div style="font-size:12px;font-weight:800;color:var(--brown);margin-bottom:4px"><i class="ti ti-message"></i> WhatsApp (CallMeBot)</div>
@@ -2475,9 +2491,9 @@ nav {
     </div>
     <div style="background:var(--cream);border:1px solid var(--border);border-radius:7px;padding:10px;margin-bottom:14px;font-size:11px;color:var(--muted);line-height:1.7">
       <strong style="color:var(--brown)">איך זה עובד:</strong><br>
-      ① המפתח מיוצר אוטומטית<br>
-      ② נפתח לקוח המייל עם הכל ממולא<br>
-      ③ לחץ שלח — זהו
+      ① המפתח מיוצר ב-Cloudflare<br>
+      ② Make.com שולח את האימייל אוטומטית<br>
+      ③ המנוי מופעל מיד — ללא פעולה נוספת
     </div>
     <input type="hidden" id="skPlanKey">
     <div class="modal-btns">
@@ -2592,7 +2608,8 @@ const K={prices:'af_plan_prices',quotas:'af_plan_quotas',features:'af_feature_fl
   gdpr:'af_gdpr_requests',tfa:'af_2fa_config',retention:'af_data_retention',
   admins:'af_admins', orgs:'af_orgs',
   tickets:'af_support_tickets', faq:'af_faq',
-  marketing:'af_mkt_library'};
+  marketing:'af_mkt_library',
+  makeWebhook:'af_make_webhook_url'};
 
 const DEF_PRICES={trial:0,starter:590,professional:990,premium:2490,enterprise:0};
 // חייב להיות זהה ל-_DEF_QUOTAS ב-audit_agent.html!
@@ -3945,6 +3962,9 @@ function renderIntegrations(){
       <label class="toggle-wrap"><input type="checkbox" id="ale_${e.id}" ${enabledEvents.includes(e.id)?'checked':''}><span class="toggle-slider"></span></label>
     </div>`).join('');
   checkAlertsStatus();
+  // Restore Make webhook URL
+  const mwEl=document.getElementById('makeWebhookUrl');
+  if(mwEl){mwEl.value=ls(K.makeWebhook,'')||'';checkMakeStatus();}
 
   // Render webhooks
   renderWebhookList();
@@ -4247,8 +4267,44 @@ function saveAlerts(){
     waApiKey:document.getElementById('waApiKey').value.trim(),
     events,savedAt:new Date().toISOString()
   };
-  ss('af_int_alerts',cfg);adminLog('alerts_config','saved');
+  ss('af_int_alerts',cfg);
+  // שמור Make webhook בנפרד
+  const mwUrl=(document.getElementById('makeWebhookUrl')||{}).value||'';
+  if(mwUrl!==undefined)ss(K.makeWebhook,mwUrl.trim());
+  adminLog('alerts_config','saved');
   checkAlertsStatus();toast('<i class="ti ti-device-floppy"></i> הגדרות התראות נשמרו');
+}
+
+function checkMakeStatus(){
+  const url=(document.getElementById('makeWebhookUrl')||{}).value||'';
+  const badge=document.getElementById('makeStatusBadge');
+  if(!badge)return;
+  if(!url){badge.textContent='';return;}
+  if(url.startsWith('https://hook.')||url.includes('make.com/'))
+    badge.innerHTML='<span style="color:green">✓ URL נראה תקין</span>';
+  else
+    badge.innerHTML='<span style="color:#dc2626">⚠️ URL לא תקין — בדוק שהעתקת נכון מ-Make</span>';
+}
+
+async function testMakeWebhook(){
+  const url=(document.getElementById('makeWebhookUrl')||{}).value.trim()||ls(K.makeWebhook,'')||'';
+  const badge=document.getElementById('makeStatusBadge');
+  if(!url){toast('❌ הכנס Webhook URL לפני הבדיקה');return;}
+  if(badge)badge.innerHTML='<span style="color:var(--muted)">בודק...</span>';
+  try{
+    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({test:true,source:'auditera_admin',sent_at:new Date().toISOString()})});
+    if(r.ok){
+      if(badge)badge.innerHTML='<span style="color:green">✅ Make מחובר ומקבל!</span>';
+      toast('✅ Make Webhook פעיל ומוכן');
+    } else {
+      if(badge)badge.innerHTML=`<span style="color:#dc2626">❌ Make ענה עם שגיאה ${r.status}</span>`;
+      toast(`❌ Make ענה ${r.status} — בדוק את הסנריו`);
+    }
+  }catch(e){
+    if(badge)badge.innerHTML='<span style="color:#dc2626">❌ לא נגיש — CORS או רשת</span>';
+    toast('❌ לא ניתן להגיע ל-Make — בדוק את ה-URL');
+  }
 }
 
 async function sendWhatsAppNotification(phone, apiKey, text){
@@ -5086,77 +5142,83 @@ function closeSendKeyModal(){
 }
 
 // ── HTML EMAIL BUILDER ────────────────────────────────────────────────
-function buildKeyEmailHTML(name, plan, token, link){
-  const PLAN_NAMES_EMAIL={starter:'Starter',professional:'Professional',premium:'Premium',enterprise:'Enterprise',trial:'Trial'};
+function buildKeyEmailHTML(name, plan, token, link, email){
+  const PLAN_NAMES_EMAIL={starter:'סטארטר',professional:'מקצועי',premium:'פרמיום',enterprise:'ארגוני',trial:'ניסיון'};
   const planLabel=PLAN_NAMES_EMAIL[plan]||plan;
   const year=new Date().getFullYear();
   return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ברוך הבא ל-Auditera</title>
+<title>מפתח ההפעלה שלך — Auditera</title>
 </head>
-<body style="margin:0;padding:0;background:#f5f0e8;font-family:'Segoe UI',Arial,sans-serif;direction:rtl">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f0e8;padding:28px 16px">
-<tr><td align="center">
-<table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;border-radius:18px;overflow:hidden;box-shadow:0 4px 32px rgba(58,32,0,.13)">
+<body style="margin:0;padding:32px 16px;background:#2a2520;font-family:'Segoe UI',Arial,sans-serif;direction:rtl">
 
-  <!-- HEADER — cream + logo -->
-  <tr><td style="background:#faf6ef;padding:32px 40px 24px;text-align:center;border-bottom:1px solid #e8dcc8">
-    <div style="font-size:36px;font-weight:900;letter-spacing:-1px;color:#c9a02e">AUDITERA</div>
-    <div style="font-size:13px;color:#a08050;margin-top:5px;font-weight:500">מערכת ניהול ביקורת חשבונות</div>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr><td align="center">
+<table width="580" cellpadding="0" cellspacing="0" style="max-width:580px;width:100%;border-radius:20px;overflow:hidden;box-shadow:0 8px 48px rgba(0,0,0,.45)">
+
+  <!-- HEADER -->
+  <tr><td style="background:#f5f0e8;padding:36px 48px 28px;text-align:center">
+    <div style="font-size:38px;font-weight:900;letter-spacing:2px;color:#c9a02e;font-family:Georgia,serif">AUDITERA</div>
+    <div style="font-size:12px;color:#a08050;margin-top:6px;letter-spacing:.04em">מערכת ניהול ביקורת חשבונות</div>
   </td></tr>
 
-  <!-- DARK BODY -->
-  <tr><td style="background:#2e2a24;padding:40px 40px 32px">
+  <!-- BODY -->
+  <tr><td style="background:#332e28;padding:44px 48px 40px">
 
     <!-- Greeting -->
-    <h2 style="margin:0 0 10px;font-size:24px;font-weight:800;color:#f5ecd8;text-align:right">!Auditera-ברוך הבא ל</h2>
-    <p style="margin:0 0 6px;font-size:15px;color:#d4c5a0;text-align:right">שלום ${name},</p>
-    <p style="margin:0 0 28px;font-size:14px;color:#b8a880;line-height:1.7;text-align:right">
+    <h2 style="margin:0 0 6px;font-size:26px;font-weight:800;color:#f0e8d8;text-align:right">!ברוך הבא ל-Auditera</h2>
+    <p style="margin:0 0 6px;font-size:15px;color:#d8c8a8;text-align:right">שלום ${name},</p>
+    <p style="margin:0 0 32px;font-size:14px;color:#a8987a;line-height:1.8;text-align:right">
       החשבון שלך נוצר בהצלחה. אנחנו שמחים שהצטרפת אלינו.
     </p>
 
     <!-- Info card -->
-    <table width="100%" cellpadding="0" cellspacing="0"
-      style="background:rgba(255,255,255,.06);border:1px solid rgba(224,184,64,.25);border-radius:12px;padding:20px 24px;margin-bottom:28px">
+    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:32px">
       <tr>
-        <td style="font-size:13px;color:#a08050;text-align:right">
-          <strong style="color:#d4c5a0">מסלול:</strong>&nbsp;${planLabel}</td>
+        <td style="background:#3f3830;border-right:3px solid #c9a02e;border-radius:10px;padding:18px 22px">
+          <div style="font-size:12px;color:#a08050;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">פרטי החשבון</div>
+          <div style="font-size:14px;color:#d8c8a8;margin-bottom:4px">
+            <span style="color:#a08050">האימייל שלך:&nbsp;</span>
+            <span style="color:#c9a02e">${email||''}</span>
+          </div>
+          <div style="font-size:14px;color:#d8c8a8">
+            <span style="color:#a08050">מסלול:&nbsp;</span>${planLabel}
+          </div>
+        </td>
       </tr>
     </table>
 
-    <!-- License key -->
-    <div style="font-size:12px;font-weight:700;color:#c9a02e;margin-bottom:8px;text-align:right">🔑 מפתח הפעלה</div>
-    <div style="background:#1a1410;border:1px solid rgba(224,184,64,.3);border-radius:10px;padding:16px 20px;margin-bottom:28px;text-align:center">
-      <div style="font-family:'Courier New',Courier,monospace;font-size:11px;color:#e0b840;word-break:break-all;letter-spacing:.04em;line-height:1.8">${token}</div>
+    <!-- Key box -->
+    <div style="font-size:11px;font-weight:700;color:#c9a02e;margin-bottom:10px;text-align:right;letter-spacing:.06em;text-transform:uppercase">מפתח הפעלה</div>
+    <div style="background:#221e18;border:1px solid rgba(201,160,46,.35);border-radius:12px;padding:20px 24px;margin-bottom:12px;text-align:center">
+      <div style="font-family:'Courier New',Courier,monospace;font-size:12px;color:#e0b840;word-break:break-all;letter-spacing:.06em;line-height:2">${token}</div>
     </div>
-    <div style="font-size:11px;color:#8a7a58;text-align:center;margin-bottom:32px">
-      הזן את המפתח בתוכנה לאחר ההתחברות כדי להפעיל את המנוי שלך
+    <div style="font-size:11px;color:#7a6a50;text-align:center;margin-bottom:36px;line-height:1.6">
+      הזן את המפתח בהגדרות התוכנה לאחר הכניסה כדי להפעיל את המנוי
     </div>
 
     <!-- CTA -->
     <div style="text-align:center">
-      <a href="${link}"
-        style="display:inline-block;background:#c9a02e;color:#1a1000;font-size:15px;font-weight:800;padding:14px 48px;border-radius:10px;text-decoration:none;letter-spacing:.02em">
+      <a href="${link}" style="display:inline-block;background:#c9a02e;color:#1a1000;font-size:15px;font-weight:800;padding:16px 60px;border-radius:50px;text-decoration:none;letter-spacing:.04em">
         כניסה למערכת
       </a>
     </div>
 
   </td></tr>
 
-  <!-- FOOTER — cream -->
-  <tr><td style="background:#faf6ef;padding:22px 40px;text-align:center;border-top:1px solid #e8dcc8">
-    <div style="font-size:12px;color:#a08050;line-height:1.8">
+  <!-- FOOTER -->
+  <tr><td style="background:#f5f0e8;padding:24px 48px;text-align:center;border-top:1px solid #e8dcc8">
+    <div style="font-size:12px;color:#a08050;line-height:2">
       שאלות? פנה אלינו ב-<a href="mailto:support@auditera.co" style="color:#c9a02e;text-decoration:none">support@auditera.co</a>
     </div>
-    <div style="font-size:11px;color:#c0b090;margin-top:6px">© Auditera ${year}. כל הזכויות שמורות.</div>
+    <div style="font-size:11px;color:#c0b090;margin-top:4px">© Auditera ${year}. כל הזכויות שמורות.</div>
   </td></tr>
 
 </table>
 </td></tr>
 </table>
 </body></html>`;
-
 }
 
 function showEmailPreview(html, toEmail, subject){
@@ -5262,7 +5324,7 @@ async function execSendKey(){
   const link=window.location.origin+'/login.html';
   const subject=document.getElementById('tplSubj_'+tplKey)?.value||t.subject;
   // בנה HTML email ופתח preview
-  const htmlEmail=buildKeyEmailHTML(name,plan,token,link);
+  const htmlEmail=buildKeyEmailHTML(name,plan,token,link,email);
   const cleanSubject=subject.replace(/<[^>]+>/g,'');
   // שמור מפתח ומסלול ב-user record
   const usersNow=getUsers();const uNow=usersNow.find(x=>x.email===email);
@@ -5280,12 +5342,54 @@ async function execSendKey(){
     if(uNow)ss(UK,usersNow);
   }
   adminLog('key_sent',`${email} [${plan}] תוקף:${expiry}`);
-  // סגור modal לפני closeSendKeyModal כדי לא לבטל pending
+  // הפעל מנוי — ודא שלא מושהה וסמן תאריך הפעלה
+  if(uNow){
+    uNow.suspended=false;
+    uNow.subscriptionActivatedAt=new Date().toISOString();
+    if(!uNow.plan||uNow.plan==='trial')uNow.plan=plan;
+    ss(UK,usersNow);
+  }
+  // סגור modal
   window._pendingPlanSave=null;
   closeSendKeyModal();
   renderUsers();renderOverview();
-  showEmailPreview(htmlEmail,email,cleanSubject);
-  toast('✅ מפתח נוצר ונשמר — העתק את ה-HTML ושלח ב-Gmail');
+  // שלח דרך Worker → Make (event: key_sent)
+  try{
+    const notifyResp=await fetch('https://auditera-license.auditera.workers.dev/notify-key',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        email,name,plan,token,expiry,
+        subject:cleanSubject,
+        html_body:htmlEmail,
+        admin_token:sessionStorage.getItem('af_admin_token')||''
+      })
+    });
+    const notifyData=await notifyResp.json();
+    if(notifyData.ok){
+      toast('✅ מפתח נוצר, המנוי הופעל, ואימייל נשלח ללקוח');
+      adminLog('make_email_sent',`${email} [${plan}]`);
+      fireWebhookEvent('key_sent',{email,name,plan,expiry}).catch(()=>{});
+    } else if(notifyData.error==='make_not_configured'){
+      // Make לא מוגדר ב-Worker — נסה ישירות
+      const makeUrl=(ls(K.makeWebhook,'')||'').trim();
+      if(makeUrl){
+        await fetch(makeUrl,{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({event:'key_sent',email,name,plan,token,expiry,subject:cleanSubject,html_body:htmlEmail})});
+        toast('✅ מפתח נוצר ואימייל נשלח');
+        adminLog('make_email_sent',`${email} [${plan}]`);
+      } else {
+        showEmailPreview(htmlEmail,email,cleanSubject);
+        toast('✅ מפתח נוצר — העתק ושלח ב-Gmail');
+      }
+    } else {
+      toast('⚠️ המפתח נוצר אך שגיאה בשליחה — שולח ב-Gmail');
+      showEmailPreview(htmlEmail,email,cleanSubject);
+    }
+  }catch(e){
+    toast('⚠️ שגיאת רשת — פותח תצוגה מקדימה');
+    showEmailPreview(htmlEmail,email,cleanSubject);
+  }
 }
 
 // WAITING LIST
