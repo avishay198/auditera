@@ -210,23 +210,23 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .step p{font-size:13.5px;color:var(--muted);line-height:1.6}
 
 /* PRICING */
-.pricing{background:var(--white);padding:72px 6%}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:840px;margin:44px auto 0}
-.pc{background:#fdf3dc;border:1.5px solid #e0c888;border-radius:18px;padding:28px 24px;transition:box-shadow .2s;position:relative}
-.pc.featured{background:var(--brown);border-color:var(--brown);box-shadow:0 8px 32px rgba(58,32,0,.18)}
-.pc-name{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.pc.featured .pc-name{color:rgba(245,230,192,.5)}
-.pc-badge{display:inline-block;background:var(--gold);color:#000;font-size:9px;font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:6px;letter-spacing:.04em}
-.pc-price{font-size:32px;font-weight:800;color:var(--brown);margin-bottom:4px}
-.pc.featured .pc-price{color:#f5e6c0}
-.pc-price small{font-size:15px;font-weight:400;color:var(--muted)}
-.pc.featured .pc-price small{color:rgba(245,230,192,.5)}
-.pc-items{list-style:none;display:flex;flex-direction:column;gap:8px;margin:16px 0 20px}
-.pc-features li{display:flex;align-items:flex-start;gap:8px;font-size:14.5px;color:var(--brown2)}
-.pc.featured .pc-features li{color:rgba(245,230,192,.82)}
-.fchk{width:16px;height:16px;border-radius:50%;background:var(--gold3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--gold-text);flex-shrink:0;margin-top:2px}
-.pc.featured .fchk{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2)}
-.pc-btn{display:block;width:100%;padding:12px;border-radius:8px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;background:var(--cream);color:var(--brown);border:1.5px solid var(--border);transition:.15s}
+.pricing{background:var(--white);padding:60px 6%}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:32px auto 0}
+.pc{background:#fdf3dc;border:1.5px solid #e0c888;border-radius:16px;padding:22px 20px;transition:box-shadow .2s;position:relative}
+.pc.featured{background:#fdf3dc;border:2px solid var(--gold);box-shadow:0 6px 24px rgba(201,154,46,.22)}
+.pc-name{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.pc-tier{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.pc-badge{position:absolute;top:-11px;right:50%;transform:translateX(50%);background:var(--gold);color:#000;font-size:10px;font-weight:900;padding:2px 12px;border-radius:6px;white-space:nowrap}
+.pc-price{font-size:28px;font-weight:800;color:var(--brown);margin-bottom:4px}
+.pc-price small{font-size:14px;font-weight:400;color:var(--muted)}
+.pc-period{font-size:12px;color:var(--muted);margin-bottom:12px;margin-top:2px}
+.pc-div{height:1px;background:var(--border);margin-bottom:14px}
+.pc-items{list-style:none;display:flex;flex-direction:column;gap:7px;margin:0 0 18px}
+.pc-items li{font-size:13px;color:var(--muted);display:flex;gap:7px;align-items:flex-start;line-height:1.5}
+.pc-items li::before{content:'✓';color:var(--gold-text);font-weight:900;flex-shrink:0;margin-top:1px}
+.fchk{display:none}
+.pc-btn{display:block;width:100%;padding:10px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;background:var(--cream);color:var(--brown);border:1.5px solid var(--border);transition:.15s}
+.pc.featured .pc-btn{background:var(--brown);color:#f5e6c0;border-color:var(--brown)}
 .pc-btn:hover{opacity:.88}
 
 
@@ -530,32 +530,32 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <!-- STARTER -->
     <div class="pc">
       <div class="pc-tier">סטארטר</div>
-      <div class="pc-price">₪590 <small style="font-size:16px;font-weight:500">/ חודש</small></div>
+      <div class="pc-price">₪590 <small>/ חודש</small></div>
       <div class="pc-period">או ₪472 בהתחייבות שנתית</div>
       <div class="pc-div"></div>
       <ul class="pc-items">
-        <li><div class="fchk">✓</div>עד 35 לקוחות</li>
-        <li><div class="fchk">✓</div>ביקורת חודשית ושנתית</li>
-        <li><div class="fchk">✓</div>12 סוגי חריגות</li>
-        <li><div class="fchk">✓</div>מיסוי ישראלי + חשבוניות ישראל</li>
-        <li><div class="fchk">✓</div>ייצוא CSV, פריוריטי, חשבIT</li>
+        <li>עד 35 לקוחות</li>
+        <li>ביקורת חודשית ושנתית</li>
+        <li>12 סוגי חריגות</li>
+        <li>מיסוי ישראלי + חשבוניות ישראל</li>
+        <li>ייצוא CSV, פריוריטי, חשבIT</li>
       </ul>
       <a class="pc-btn" href="checkout.html?plan=starter">רכוש עכשיו ←</a>
     </div>
 
     <!-- PROFESSIONAL -->
     <div class="pc featured">
-      <div class="pc-badge">הכי פופולרי</div>
+      <div class="pc-badge"> הכי פופולרי</div>
       <div class="pc-tier">מקצועי</div>
-      <div class="pc-price">₪990 <small style="font-size:16px;font-weight:500">/ חודש</small></div>
+      <div class="pc-price">₪990 <small>/ חודש</small></div>
       <div class="pc-period">או ₪792 בהתחייבות שנתית</div>
       <div class="pc-div"></div>
       <ul class="pc-items">
-        <li><div class="fchk">✓</div>עד 80 לקוחות</li>
-        <li><div class="fchk">✓</div>אימות מע"מ וניכוי מס במקור</li>
-        <li><div class="fchk">✓</div>חוק בנפורד + השוואה שנה לשנה</li>
-        <li><div class="fchk">✓</div>דפי עבודה ISA מלאים</li>
-        <li><div class="fchk">✓</div>AI עם מפתח אישי</li>
+        <li>עד 80 לקוחות</li>
+        <li>אימות מע"מ וניכוי מס במקור</li>
+        <li>חוק בנפורד + השוואה שנה לשנה</li>
+        <li>דפי עבודה ISA מלאים</li>
+        <li>AI עם מפתח אישי</li>
       </ul>
       <a class="pc-btn" href="checkout.html?plan=professional">רכוש עכשיו ←</a>
     </div>
@@ -563,21 +563,21 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <!-- PREMIUM -->
     <div class="pc">
       <div class="pc-tier">פרמיום</div>
-      <div class="pc-price">₪2,490 <small style="font-size:16px;font-weight:500">/ חודש</small></div>
+      <div class="pc-price">₪2,490 <small>/ חודש</small></div>
       <div class="pc-period">או ₪1,992 בהתחייבות שנתית</div>
       <div class="pc-div"></div>
       <ul class="pc-items">
-        <li><div class="fchk">✓</div>עד 200 לקוחות</li>
-        <li><div class="fchk">✓</div>כל תכונות המקצועי</li>
-        <li><div class="fchk">✓</div>מיתוג מלא — לוגו המשרד</li>
-        <li><div class="fchk">✓</div>מנהל חשבון ייעודי</li>
-        <li><div class="fchk">✓</div>תמיכה 24/7</li>
+        <li>עד 200 לקוחות</li>
+        <li>כל תכונות המקצועי</li>
+        <li>מיתוג מלא — לוגו המשרד</li>
+        <li>מנהל חשבון ייעודי</li>
+        <li>תמיכה 24/7</li>
       </ul>
       <a class="pc-btn" href="checkout.html?plan=premium">רכוש עכשיו ←</a>
     </div>
 
   </div>
-  <div style="text-align:center;margin-top:18px">
+  <div style="text-align:center;margin-top:20px">
     <a href="pricing.html" style="font-size:13px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border)">השוואה מלאה בין המסלולים ←</a>
   </div>
 </section>
