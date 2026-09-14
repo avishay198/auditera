@@ -32,7 +32,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f0e8;color:#3a200
   --cream2:#fff8f0;
   --danger:#dc2626;
   --brown:#3a2000;--brown2:#5a3010;--brown3:#7a5c2e;
-  --gold:#e0b840;--gold2:#e8d4a0;--gold3:#fdf3dc;
+  --gold:#e0b840;--gold-text:#8a6510;--gold2:#e8d4a0;--gold3:#fdf3dc;
   --cream:#fffdf5;--border:#e0c888;--muted:#9a7a4a;
   --red:#dc2626;--green:#16a34a;--blue:#1d4ed8;--orange:#d97706;--purple:#7c3aed;
 }
@@ -5797,7 +5797,7 @@ function renderUsers(){
           <button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px" onclick="editNote(${ri})"><i class="ti ti-edit"></i></button>
           ${payBtn}${setExpiry}
           <button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px" title="איפוס סיסמה" onclick="resetUserPassword('${jsesc(u.email)}','${jsesc(u.name)}')"><i class="ti ti-key"></i></button>
-          ${['starter','professional','premium','enterprise'].includes(p)?`<button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#fffbeb;color:#92400e;border-color:var(--gold2)" title="ייצר ושלח מפתח הפעלה" onclick="openSendKeyModal('key_${p}','${PLAN_NAMES[p]}','${jsesc(u.email)}','${jsesc(u.name||'')}')">✉️ מפתח</button>`:''}
+          ${['starter','professional','premium','enterprise'].includes(p)?`<button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#fffbeb;color:#92400e;border-color:var(--gold2)" title="ייצר ושלח מפתח הפעלה" onclick="openSendKeyModal('key_${p}','${PLAN_NAMES[p]}','${jsesc(u.email)}','${jsesc(u.name||'')}')"><i class="ti ti-send"></i> מפתח</button>`:''}
           ${u.licenseToken?`<button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#fdf3dc;color:#92400e;border-color:#e0b840" title="הצג/העתק מפתח רישיון" onclick="showStoredToken('${jsesc(u.email)}','${jsesc(u.name||u.email)}')"><i class="ti ti-key"></i> הצג</button>`:`<button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#f0fdf4;color:#166534;border-color:#86efac" title="צור מפתח רישיון ושמור" onclick="generateAndStoreToken('${jsesc(u.email)}','${jsesc(u.name||u.email)}')"><i class="ti ti-key"></i> צור</button>`}
           ${resetTrialBtn}
           <button class="nbtn nbtn-outline" style="padding:2px 7px;font-size:10px;background:#f5f0ff;color:#6d28d9;border-color:#c4b5fd" onclick="impersonateUser('${jsesc(u.email)}')"><i class="ti ti-masks-theater"></i></button>
@@ -6027,7 +6027,7 @@ function showNewUserTokenModal(name,email,plan,token,isExisting=false){
       </div>
       <div style="display:flex;gap:8px;justify-content:flex-end">
         ${validPaidPlan?`<button onclick="openSendKeyModal('key_${safePlan}','${safePlanHe}','${safeEmail}','${safeName}');document.getElementById('newUserTokenModal').remove()"
-          style="padding:9px 18px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer">✉️ שלח במייל</button>`:''}
+          style="padding:9px 18px;background:var(--gold);color:#000;border:none;border-radius:8px;font-weight:700;cursor:pointer"><i class="ti ti-send"></i> שלח במייל</button>`:''}
         <button onclick="document.getElementById('newUserTokenModal').remove()"
           style="padding:9px 18px;background:var(--cream);color:var(--brown);border:1px solid var(--border);border-radius:8px;font-weight:600;cursor:pointer">סגור</button>
       </div>
@@ -6916,7 +6916,7 @@ function logIcon(a){
     features:'🚀',tax_cfg:'🧾',publish_ann:'📢',clear_ann:'🔇',create_promo:'🎟',
     delete_promo:'🗑',toggle_promo:'🔀',changelog:'📝',export:'📥',backup:'💾',
     restore:'📤',security:'🔐',sys:'⚙️'};
-  return m[a]||'📌';
+  return m[a]||'·';
 }
 
 function saveSys(){
@@ -7303,7 +7303,7 @@ function renderMktLibrary(){
     return`<div class="mkt-lib-item">
       <div class="mkt-lib-meta">
         <span class="sp">${item.typeIcon||''} ${esc(item.typeName||'')}</span>
-        ${item.topic?`<span style="font-size:10px;color:var(--brown2)">📌 ${esc(item.topic)}</span>`:''}
+        ${item.topic?`<span style="font-size:10px;color:var(--brown2)"><i class="ti ti-tag" style="font-size:10px"></i> ${esc(item.topic)}</span>`:''}
         <span style="font-size:10px;color:var(--muted);margin-right:auto">${relDate(item.created)}</span>
       </div>
       <div class="mkt-lib-preview" dir="rtl">${esc(preview)}</div>
@@ -7588,7 +7588,7 @@ function renderNPS(){
   if(!el) return;
   const entries=ls(NPS_KEY,[]);
   if(!entries.length){
-    el.innerHTML='<div class="empty" style="padding:12px"><div class="empty-icon">⭐</div>אין ציוני NPS עדיין</div>';
+    el.innerHTML='<div class="empty" style="padding:12px"><div class="empty-icon"><i class="ti ti-star"></i></div>אין ציוני NPS עדיין</div>';
     return;
   }
   const promoters=entries.filter(e=>e.score>=9).length;
@@ -7813,9 +7813,9 @@ function renderInquiries(){
       <!-- card top bar -->
       <div style="background:${topBar};padding:10px 18px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;border-bottom:1px solid ${borderColor}">
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <span style="font-size:11px;font-weight:800;background:${isPay?'rgba(201,154,46,.18)':'rgba(58,32,0,.08)'};color:var(--brown);padding:3px 12px;border-radius:20px">${isPay?'💳 בקשת קוד הפעלה':'✉️ צור קשר'}</span>
+          <span style="font-size:11px;font-weight:800;background:${isPay?'rgba(201,154,46,.18)':'rgba(58,32,0,.08)'};color:var(--brown);padding:3px 12px;border-radius:20px">${isPay?'<i class="ti ti-credit-card"></i> בקשת קוד הפעלה':'<i class="ti ti-mail"></i> צור קשר'}</span>
           ${it.plan?`<span style="font-size:10px;font-weight:700;background:${planColor}18;color:${planColor};padding:2px 9px;border-radius:12px;border:1px solid ${planColor}40">${it.plan}${it.method?' · '+methodLabel[it.method]:''}</span>`:''}
-          ${handled?'<span style="font-size:10px;font-weight:700;background:#d1fae5;color:#15803d;padding:2px 9px;border-radius:12px">✅ טופל</span>':'<span style="font-size:10px;font-weight:700;background:#eff6ff;color:#2563eb;padding:2px 9px;border-radius:12px">🔵 חדש</span>'}
+          ${handled?'<span style="font-size:10px;font-weight:700;background:#d1fae5;color:#15803d;padding:2px 9px;border-radius:12px"><i class="ti ti-circle-check"></i> טופל</span>':'<span style="font-size:10px;font-weight:700;background:#eff6ff;color:#2563eb;padding:2px 9px;border-radius:12px">חדש</span>'}
         </div>
         <div style="font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px"><i class="ti ti-clock"></i> ${date}</div>
       </div>
