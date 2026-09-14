@@ -2,12 +2,13 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://auditera.co/reset.html">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; object-src 'none'; connect-src 'self' https://auditera-license.auditera.workers.dev; upgrade-insecure-requests; frame-ancestors 'self';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: blob:; font-src 'self' https://cdn.jsdelivr.net; object-src 'none'; connect-src 'self' https://auditera-license.auditera.workers.dev; upgrade-insecure-requests; frame-ancestors 'self';">
 <title>איפוס סיסמה — Auditera</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -16,7 +17,7 @@
   --cream:#fffdf5;--muted:#9a7a4a;--border:#e0c888;--danger:#dc2626;
 }
 html,html{overflow-x:hidden}
-body{min-height:100%;background:var(--cream);color:var(--brown);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;direction:rtloverflow-x:hidden;}
+body{min-height:100%;background:var(--cream);color:var(--brown);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;direction:rtl;overflow-x:hidden;}
 body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px 16px}
 
 /* ── CARD ── */
@@ -70,7 +71,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .state.show{display:block}
 #stateLoading{display:block}
 
-.state-icon{font-size:44px;margin-bottom:10px;line-height:1}
+.state-icon{font-size:44px;margin-bottom:10px;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--gold)}
 .state-title{font-size:20px;font-weight:800;color:var(--brown);margin-bottom:8px}
 .state-sub{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:20px}
 
@@ -83,7 +84,7 @@ body{display:flex;flex-direction:column;align-items:center;justify-content:cente
 .divider{border:none;border-top:1px solid #f0e4c8;margin:18px 0 0}
 
 /* ── FOOTER ── */
-.
+.footer{font-size:13px;color:var(--muted);text-align:center;padding:16px 6%;margin-top:4px}
 .footer a{color:var(--gold);text-decoration:none;font-weight:600}
 .footer a:hover{text-decoration:underline}
 
@@ -138,14 +139,14 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
   <!-- State: Loading -->
   <div id="stateLoading" class="state show">
-    <div class="state-icon">🔐</div>
+    <div class="state-icon"><i class="ti ti-lock"></i></div>
     <div class="state-title">מאמת קישור...</div>
     <div class="state-sub">רק רגע</div>
   </div>
 
   <!-- State: Expired / Invalid -->
   <div id="stateExpired" class="state">
-    <div class="state-icon">⚠️</div>
+    <div class="state-icon" style="color:var(--danger)"><i class="ti ti-alert-triangle"></i></div>
     <div class="state-title">הקישור לא תקף</div>
     <div class="state-sub">קישורי איפוס תקפים לשעה אחת בלבד.<br>ייתכן שהקישור כבר שומש או פג תוקפו.</div>
     <a href="login.html" class="submit-btn">חזור לכניסה וקבל קישור חדש</a>
@@ -166,7 +167,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
                placeholder="לפחות 6 תווים"
                autocomplete="new-password"
                oninput="checkStrength(this.value)">
-        <button class="toggle-pass" type="button" onclick="toggleVis('pass1',this)" aria-label="הצג/הסתר סיסמה">👁</button>
+        <button class="toggle-pass" type="button" onclick="toggleVis('pass1',this)" aria-label="הצג/הסתר סיסמה"><i class="ti ti-eye"></i></button>
       </div>
       <div class="strength-wrap">
         <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
@@ -181,7 +182,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <input class="form-input" id="pass2" type="password"
                placeholder="הקלד את הסיסמה שוב"
                autocomplete="new-password">
-        <button class="toggle-pass" type="button" onclick="toggleVis('pass2',this)" aria-label="הצג/הסתר סיסמה">👁</button>
+        <button class="toggle-pass" type="button" onclick="toggleVis('pass2',this)" aria-label="הצג/הסתר סיסמה"><i class="ti ti-eye"></i></button>
       </div>
       <div class="field-err" id="pass2Err">הסיסמאות אינן תואמות</div>
     </div>
@@ -199,7 +200,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
   <!-- State: Success -->
   <div id="stateSuccess" class="state">
-    <div class="state-icon">✅</div>
+    <div class="state-icon" style="color:#22c55e"><i class="ti ti-circle-check"></i></div>
     <div class="state-title">הסיסמה עודכנה בהצלחה!</div>
     <div class="state-sub">הסיסמה החדשה שלך נשמרה.<br>מעביר לדף הכניסה...</div>
     <a href="login.html" class="submit-btn" id="successBtn">כניסה עכשיו</a>
@@ -272,7 +273,7 @@ function toggleVis(id, btn){
   const el = document.getElementById(id);
   const isPass = el.type === 'password';
   el.type = isPass ? 'text' : 'password';
-  btn.textContent = isPass ? '🙈' : '👁';
+  btn.innerHTML = isPass ? '<i class="ti ti-eye-off"></i>' : '<i class="ti ti-eye"></i>';
 }
 
 // ── Reset submit ──────────────────────────────────────────────
