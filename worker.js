@@ -433,23 +433,10 @@ async function handleGenerateToken(request, env) {
 // ══════════════════════════════════════════════════════════════
 async function handleNotifyKey(request, env) {
   try {
-    const { email, name, plan, token, expiry, subject, html_body, admin_token } = await request.json();
-    // אמת מנהל
-    if (!admin_token) return json({ ok: false, error: 'unauthorized' }, 401);
-    try {
-      const decoded = atob(admin_token);
-      const lastPipe = decoded.lastIndexOf('|');
-      const payload  = decoded.slice(0, lastPipe);
-      const sig      = decoded.slice(lastPipe + 1);
-      if (!payload.startsWith('admin|')) return json({ ok: false, error: 'unauthorized' }, 401);
-      const expires = parseInt(payload.split('|')[1]);
-      if (Date.now() > expires) return json({ ok: false, error: 'session_expired' }, 401);
-      const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env.LIC_SECRET||''),
-        { name:'HMAC', hash:'SHA-256' }, false, ['sign']);
-      const expected = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(payload));
-      const expHex = Array.from(new Uint8Array(expected)).map(b=>b.toString(16).padStart(2,'0')).join('');
-      if (expHex !== sig) return json({ ok: false, error: 'unauthorized' }, 401);
-    } catch(e) { return json({ ok: false, error: 'unauthorized' }, 401); }
+    const { email, name, plan, token, expiry, subject, html_body, admin_api_key } = await request.json();
+    // אמת מנהל — API key פשוט
+    const expectedKey = env.ADMIN_API_KEY || '';
+    if (!expectedKey || admin_api_key !== expectedKey) return json({ ok: false, error: 'unauthorized' }, 401);
 
     const makeUrl = env.MAKE_WEBHOOK_URL;
     if (!makeUrl) return json({ ok: false, error: 'make_not_configured' });

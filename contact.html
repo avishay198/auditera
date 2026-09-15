@@ -346,15 +346,15 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="fullName">שם מלא<span>*</span></label>
-            <input class="form-input" id="fullName" type="text" placeholder="ישראל ישראלי" required>
+            <input class="form-input" id="fullName" type="text" placeholder="ישראל ישראלי" autocorrect="off" autocapitalize="words" spellcheck="false" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="email">דוא"ל עסקי<span>*</span></label>
-            <input class="form-input" id="email" type="email" placeholder="israel@example.co.il" required>
+            <input class="form-input" id="email" type="email" placeholder="israel@example.co.il" autocorrect="off" autocapitalize="none" spellcheck="false" required style="direction:ltr;text-align:left">
           </div>
           <div class="form-group">
             <label class="form-label" for="firm">שם חברה / משרד<span>*</span></label>
-            <input class="form-input" id="firm" type="text" placeholder="משרד ישראלי ושות'" required>
+            <input class="form-input" id="firm" type="text" placeholder="משרד ישראלי ושות'" autocorrect="off" autocapitalize="words" spellcheck="false" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">טלפון</label>

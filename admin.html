@@ -1857,6 +1857,10 @@ nav {
         <label>Webhook URL (Make.com)</label>
         <input id="makeWebhookUrl" type="url" placeholder="https://hook.eu2.make.com/xxxxxxxxxxxxxxxx" style="direction:ltr;font-size:12px;font-family:monospace" oninput="checkMakeStatus()">
       </div>
+      <div class="fg" style="margin-top:8px;margin-bottom:8px">
+        <label>Admin API Key <span style="font-size:10px;color:var(--muted)">(זהה ל-ADMIN_API_KEY ב-Cloudflare)</span></label>
+        <input id="adminApiKeyInput" type="password" placeholder="auditera-admin-2026" style="direction:ltr;font-size:12px;font-family:monospace;width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:7px;outline:none" oninput="localStorage.setItem('af_admin_api_key',this.value)">
+      </div>
       <div style="display:flex;align-items:center;gap:10px">
         <button class="nbtn nbtn-outline" onclick="testMakeWebhook()"><i class="ti ti-send"></i> בדוק חיבור</button>
         <span id="makeStatusBadge" style="font-size:11px;color:var(--muted)"></span>
@@ -3965,6 +3969,7 @@ function renderIntegrations(){
   // Restore Make webhook URL
   const mwEl=document.getElementById('makeWebhookUrl');
   if(mwEl){mwEl.value=ls(K.makeWebhook,'')||'';checkMakeStatus();}
+  const akEl=document.getElementById('adminApiKeyInput');if(akEl)akEl.value=localStorage.getItem('af_admin_api_key')||'';
 
   // Render webhooks
   renderWebhookList();
@@ -5362,7 +5367,7 @@ async function execSendKey(){
         email,name,plan,token,expiry,
         subject:cleanSubject,
         html_body:htmlEmail,
-        admin_token:sessionStorage.getItem('af_admin_token')||''
+        admin_api_key:localStorage.getItem('af_admin_api_key')||''
       })
     });
     const notifyData=await notifyResp.json();
