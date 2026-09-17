@@ -62,7 +62,7 @@ nav{
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .mobile-menu{display:none;position:fixed;top:64px;right:0;left:0;background:var(--brown);flex-direction:column;padding:8px 6% 18px;gap:2px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.35);border-top:1px solid rgba(201,154,46,.2)}
 .mobile-menu.open{display:flex}
-.mobile-menu a{color:rgba(245,230,192,.8);font-size:15px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
+.mobile-menu a{color:rgba(245,230,192,.8);font-size:16px;padding:11px 4px;border-bottom:1px solid rgba(255,255,255,.07);text-decoration:none;font-weight:500}
 .mobile-menu a:last-child{border-bottom:none}
 @media(max-width:768px){.hamburger{display:flex}.nav-links .nav-link{display:none}nav{padding:0 4%;height:56px}.mobile-menu{top:56px}}
 
@@ -197,11 +197,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .form-panel{padding:24px 16px 36px}
   .card{padding:24px 20px 20px;border-radius:16px}
   .trust-row{gap:8px}
-  .trust-badge{font-size:10.5px;padding:3px 9px}
+  .trust-badge{font-size:11px;padding:4px 10px}
+  .form-input{height:48px;font-size:16px}
+  .submit-btn{height:50px;font-size:16px}
 }
 @media(max-width:400px){
-  .form-input{font-size:16px;padding:10px 12px}
-  .submit-btn{font-size:14px;padding:12px}
+  .form-input{font-size:16px;padding:10px 12px;height:48px}
+  .submit-btn{font-size:15px;padding:13px;height:50px}
   .trust-row{display:none}
 }
 @media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
