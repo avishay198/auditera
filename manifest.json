@@ -2,22 +2,66 @@
   "name": "Auditera — ביקורת פיננסית חכמה",
   "short_name": "Auditera",
   "description": "כלי ביקורת פיננסית חכם לרואי חשבון ישראליים — ניתוח עסקאות, זיהוי חריגות, דוחות מקצועיים.",
-  "start_url": "/",
+  "start_url": "/login.html",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#fffdf5",
   "theme_color": "#3a2000",
   "lang": "he",
   "dir": "rtl",
   "icons": [
-    { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
-    { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
-    { "src": "/icon-192.png",       "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/icon-512.png",       "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ],
-  "screenshots": [
-    { "src": "/og-image.png", "sizes": "1200x630", "type": "image/png", "form_factor": "wide" }
+  "shortcuts": [
+    {
+      "name": "כניסה למערכת",
+      "short_name": "כניסה",
+      "url": "/login.html",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "צור קשר",
+      "short_name": "צור קשר",
+      "url": "/contact.html",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ],
-  "categories": ["finance", "business", "productivity"],
-  "related_applications": [],
+  "categories": [
+    "finance",
+    "business",
+    "productivity"
+  ],
   "prefer_related_applications": false
 }

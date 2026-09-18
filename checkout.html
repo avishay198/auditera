@@ -531,5 +531,38 @@ renderPlan();renderBank();renderBit();renderContact();selectMethod('bank');
   <button onclick="document.getElementById('cookieBanner').style.display='none';localStorage.setItem('cookieOk','1')" style="background:#e0b840;color:#000;border:none;border-radius:6px;padding:8px 22px;font-size:16px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit">הבנתי</button>
 </div>
 <script>if(!localStorage.getItem('cookieOk'))document.getElementById('cookieBanner').style.display='flex';</script>
+
+<script>
+/* PWA — Service Worker + iOS Install Banner */
+(function(){
+  // Register service worker
+  if('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('/sw.js').catch(function(){});
+    });
+  }
+
+  // iOS install banner (Safari only, not already in standalone mode)
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var isStandalone = window.navigator.standalone === true;
+  var dismissed = localStorage.getItem('af_ios_banner_dismissed');
+  if(isIOS && !isStandalone && !dismissed){
+    window.addEventListener('load', function(){
+      setTimeout(function(){
+        var banner = document.createElement('div');
+        banner.id = 'ios-install-banner';
+        banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:99998;background:#2c1a00;color:#fdf3dc;padding:14px 16px 20px;direction:rtl;font-family:inherit;box-shadow:0 -4px 24px rgba(0,0,0,.3);display:flex;align-items:center;gap:12px;';
+        banner.innerHTML = '<img src="/apple-touch-icon.png" style="width:44px;height:44px;border-radius:10px;flex-shrink:0" alt="Auditera">'
+          + '<div style="flex:1;min-width:0">'
+          + '<div style="font-size:14px;font-weight:700;margin-bottom:2px">הוסף את Auditera למסך הבית</div>'
+          + '<div style="font-size:12px;opacity:.7;line-height:1.4">לחץ על <span style="display:inline-block;background:rgba(255,255,255,.15);border-radius:4px;padding:1px 6px">שתף &#x2191;</span> ואז <strong>הוסף למסך הבית</strong></div>'
+          + '</div>'
+          + '<button onclick="document.getElementById('ios-install-banner').remove();localStorage.setItem('af_ios_banner_dismissed','1')" style="background:none;border:none;color:#e0b840;font-size:22px;cursor:pointer;padding:4px;flex-shrink:0;line-height:1">&times;</button>';
+        document.body.appendChild(banner);
+      }, 3000);
+    });
+  }
+})();
+</script>
 </body>
 </html>
