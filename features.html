@@ -120,7 +120,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .feat-card.dark-card .feat-desc{color:rgba(245,230,192,.46)}
 
 /* ANOMALY LIST */
-.anom-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.anom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .anom-item{display:flex;gap:12px;padding:16px;background:var(--white);border:1px solid var(--border);border-radius:12px;align-items:flex-start;transition:border-color .2s}
 .anom-item:hover{border-color:var(--gold-text)}
 .anom-n{width:28px;height:28px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--brown);flex-shrink:0;margin-top:1px}
@@ -303,10 +303,10 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
 /* ANOMALY GRID */
 .anom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
-.anom-card{background:var(--gold3);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
-.anom-name{font-size:13px;font-weight:700;color:var(--brown);margin-bottom:5px;display:flex;align-items:center;gap:6px}
+.anom-card{background:var(--gold3);border:1px solid var(--border);border-radius:12px;padding:14px 16px;transition:border-color .2s}.anom-card:hover{border-color:var(--gold-text)}
+.anom-name{font-size:14px;font-weight:700;color:var(--brown);margin-bottom:6px;display:flex;align-items:center;gap:7px}
 .anom-name .ti{font-size:14px;color:var(--gold-text)}
-.anom-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.anom-desc{font-size:13px;color:var(--muted);line-height:1.6}
 
 /* FCARD ICON */
 .fcard-icon{font-size:22px;color:var(--gold-text);margin-bottom:4px}
@@ -314,6 +314,9 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
 @media(max-width:768px){
   .anom-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .anom-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
   .anom-grid{grid-template-columns:1fr}
@@ -465,18 +468,18 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         </div>
         <div class="cap-row-right">
           <div class="anom-grid">
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-trending-up"></i> סכום חריג</div><div class="anom-desc">עסקה שסכומה חורג באופן משמעותי מממוצע הספק — מצביעה על חיוב שגוי או הונאה.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-copy"></i> כפילות</div><div class="anom-desc">שתי עסקאות או יותר לאותו ספק בסכום זהה בתוך 30 יום — חשד לחיוב כפול.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-cut"></i> פיצול עסקאות</div><div class="anom-desc">מספר עסקאות קטנות לאותו ספק ביום אחד שסכומן המצטבר גדול — עוקף סף אישור.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-user-plus"></i> ספק חדש</div><div class="anom-desc">ספק המופיע לראשונה בנתונים — דורש אימות קיום ורישום תקין.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-player-stop"></i> תשלום חוזר שהופסק</div><div class="anom-desc">תשלום קבוע שנעצר לפתע — ייתכן שהסכם הסתיים ללא הודעה רשמית.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-trending-up"></i> סכום חריג</div><div class="anom-desc">עסקה שסכומה חורג באופן משמעותי מממוצע הספק, מצביעה על חיוב שגוי או הונאה.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-copy"></i> כפילות</div><div class="anom-desc">שתי עסקאות או יותר לאותו ספק בסכום זהה בתוך 30 יום. חשד לחיוב כפול.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-cut"></i> פיצול עסקאות</div><div class="anom-desc">מספר עסקאות קטנות לאותו ספק ביום אחד שסכומן המצטבר גדול, עוקף סף אישור.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-user-plus"></i> ספק חדש</div><div class="anom-desc">ספק המופיע לראשונה בנתונים. דורש אימות קיום ורישום תקין.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-player-stop"></i> תשלום חוזר שהופסק</div><div class="anom-desc">תשלום קבוע שנעצר לפתע. ייתכן שהסכם הסתיים ללא הודעה רשמית.</div></div>
             <div class="anom-card"><div class="anom-name"><i class="ti ti-circle"></i> מספר עגול</div><div class="anom-desc">עסקאות בסכומים עגולים (₪5,000, ₪10,000) — נפוץ בהערכות לא מבוססות.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-calendar-off"></i> עסקה בשישי/שבת</div><div class="anom-desc">חיוב שבוצע בסוף שבוע — יוצא דופן לרוב הספקים העסקיים.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-clock-off"></i> שעות חריגות</div><div class="anom-desc">עסקה שבוצעה בשעות הלילה — מחוץ לשעות הפעילות הרגילות של העסק.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-cash-off"></i> חוק מזומן</div><div class="anom-desc">עסקת מזומן מעל ₪11,000 — חובת דיווח לרשות המסים לפי חוק.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-users"></i> צד קשור</div><div class="anom-desc">עסקה עם גורם קשור לבעל העסק (קרוב משפחה, חברה קשורה) — דורשת גילוי.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-calendar-off"></i> עסקה בשישי/שבת</div><div class="anom-desc">חיוב שבוצע בסוף שבוע — יוצא דופן לרוב הספקים.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-clock-off"></i> שעות חריגות</div><div class="anom-desc">עסקה שבוצעה בשעות הלילה — מחוץ לשעות הפעילות הרגילות.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-cash-off"></i> חוק מזומן</div><div class="anom-desc">עסקת מזומן מעל ₪11,000 — חובת דיווח לרשות המסים.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-users"></i> צד קשור</div><div class="anom-desc">עסקה עם גורם קשור לבעל העסק (קרוב משפחה, חברה קשורה). דורשת גילוי.</div></div>
             <div class="anom-card"><div class="anom-name"><i class="ti ti-file-invoice"></i> חשבוניות ישראל</div><div class="anom-desc">בדיקת תקינות חשבוניות מול מערכת רשות המסים — שדות חובה ותאריכים.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-file-off"></i> אסמכתא חסרה</div><div class="anom-desc">עסקה ללא מספר אסמכתא — לא ניתן לאמת את מקור החיוב.</div></div>
+            <div class="anom-card"><div class="anom-name"><i class="ti ti-file-off"></i> אסמכתא חסרה</div><div class="anom-desc">עסקה ללא מספר אסמכתא . לא ניתן לאמת את מקור החיוב.</div></div>
           </div>
         </div>
       </div>
