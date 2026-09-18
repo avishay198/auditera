@@ -136,8 +136,8 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .cap-row-icon{font-size:26px;margin-bottom:8px}
 .cap-row-name{font-size:15px;font-weight:800;color:#f5e6c0;margin-bottom:4px}
 .cap-row-sub{font-size:11px;color:rgba(245,230,192,.45);line-height:1.5}
-.cap-row-right{background:var(--white);padding:18px 22px;display:flex;flex-wrap:wrap;gap:8px;align-content:center}
-.cap-tag{padding:4px 13px;background:var(--cream);border:1px solid var(--border);border-radius:16px;font-size:12px;color:var(--brown2);font-weight:500;transition:border-color .2s}
+.cap-row-right{background:var(--white);padding:20px 24px;display:flex;flex-wrap:wrap;gap:8px;align-content:center}
+.cap-tag{padding:5px 14px;background:var(--cream);border:1px solid var(--border);border-radius:16px;font-size:13px;color:var(--brown2);font-weight:500;transition:border-color .2s;display:inline-flex;align-items:center;gap:5px}
 .cap-tag:hover{border-color:var(--gold-text)}
 
 /* TWO-COL */
@@ -467,20 +467,18 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
           <div class="cap-row-sub">זיהוי אוטומטי — כל חריגה עם הסבר ורמת סיכון</div>
         </div>
         <div class="cap-row-right">
-          <div class="anom-grid">
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-trending-up"></i> סכום חריג</div><div class="anom-desc">עסקה שסכומה חורג באופן משמעותי מממוצע הספק, מצביעה על חיוב שגוי או הונאה.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-copy"></i> כפילות</div><div class="anom-desc">שתי עסקאות או יותר לאותו ספק בסכום זהה בתוך 30 יום. חשד לחיוב כפול.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-cut"></i> פיצול עסקאות</div><div class="anom-desc">מספר עסקאות קטנות לאותו ספק ביום אחד שסכומן המצטבר גדול, עוקף סף אישור.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-user-plus"></i> ספק חדש</div><div class="anom-desc">ספק המופיע לראשונה בנתונים. דורש אימות קיום ורישום תקין.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-player-stop"></i> תשלום חוזר שהופסק</div><div class="anom-desc">תשלום קבוע שנעצר לפתע. ייתכן שהסכם הסתיים ללא הודעה רשמית.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-circle"></i> מספר עגול</div><div class="anom-desc">עסקאות בסכומים עגולים (₪5,000, ₪10,000) — נפוץ בהערכות לא מבוססות.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-calendar-off"></i> עסקה בשישי/שבת</div><div class="anom-desc">חיוב שבוצע בסוף שבוע — יוצא דופן לרוב הספקים.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-clock-off"></i> שעות חריגות</div><div class="anom-desc">עסקה שבוצעה בשעות הלילה — מחוץ לשעות הפעילות הרגילות.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-cash-off"></i> חוק מזומן</div><div class="anom-desc">עסקת מזומן מעל ₪11,000 — חובת דיווח לרשות המסים.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-users"></i> צד קשור</div><div class="anom-desc">עסקה עם גורם קשור לבעל העסק (קרוב משפחה, חברה קשורה). דורשת גילוי.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-file-invoice"></i> חשבוניות ישראל</div><div class="anom-desc">בדיקת תקינות חשבוניות מול מערכת רשות המסים — שדות חובה ותאריכים.</div></div>
-            <div class="anom-card"><div class="anom-name"><i class="ti ti-file-off"></i> אסמכתא חסרה</div><div class="anom-desc">עסקה ללא מספר אסמכתא . לא ניתן לאמת את מקור החיוב.</div></div>
-          </div>
+          <span class="cap-tag"><i class="ti ti-trending-up" aria-hidden="true"></i> סכום חריג</span>
+          <span class="cap-tag"><i class="ti ti-copy" aria-hidden="true"></i> כפילות</span>
+          <span class="cap-tag"><i class="ti ti-cut" aria-hidden="true"></i> פיצול עסקאות</span>
+          <span class="cap-tag"><i class="ti ti-user-plus" aria-hidden="true"></i> ספק חדש</span>
+          <span class="cap-tag"><i class="ti ti-player-stop" aria-hidden="true"></i> תשלום חוזר שהופסק</span>
+          <span class="cap-tag"><i class="ti ti-circle" aria-hidden="true"></i> מספר עגול</span>
+          <span class="cap-tag"><i class="ti ti-calendar-off" aria-hidden="true"></i> עסקה בשישי/שבת</span>
+          <span class="cap-tag"><i class="ti ti-clock-off" aria-hidden="true"></i> שעות חריגות</span>
+          <span class="cap-tag"><i class="ti ti-cash-off" aria-hidden="true"></i> חוק מזומן</span>
+          <span class="cap-tag"><i class="ti ti-users" aria-hidden="true"></i> צד קשור</span>
+          <span class="cap-tag"><i class="ti ti-file-invoice" aria-hidden="true"></i> חשבוניות ישראל</span>
+          <span class="cap-tag"><i class="ti ti-file-off" aria-hidden="true"></i> אסמכתא חסרה</span>
         </div>
       </div>
 
