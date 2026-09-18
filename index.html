@@ -277,9 +277,11 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
   .modal-footer-text{font-size:13px}
   .modal-cta{width:100%;justify-content:center}
 
-  .stats-bar{flex-wrap:wrap;gap:0;padding:16px 4%}
-  .stat-item{min-width:50%;border-right:none!important;padding:8px 0}
-  .stat-item:nth-child(odd){border-left:1px solid var(--border)}
+  .stats-bar{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:16px 4%;border-radius:12px;margin:0 4% 24px}
+  .stat-item{padding:14px 8px;border-left:none!important;border-right:none!important;border-bottom:1px solid var(--border)}
+  .stat-item:last-child,.stat-item:nth-last-child(2):nth-child(odd){border-bottom:none}
+  .stat-sep{display:none}
+  .stat-label{font-size:12px}
 
   .features{padding:36px 5%}
   .feat-grid{grid-template-columns:1fr}
@@ -305,7 +307,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
   .hero-sub{font-size:13px}
   .btn-main,.btn-outline{font-size:14px;padding:11px 12px}
   .steps{grid-template-columns:1fr}
-  .stat-item{min-width:100%;border-left:none!important}
+  .stat-num{font-size:20px}
     .cta-inner h2{font-size:19px}
 }
 
@@ -349,7 +351,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 .stats-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(255,255,255,.7);border:1px solid var(--border);border-radius:14px;padding:16px 28px;margin:0 auto 40px;max-width:680px;backdrop-filter:blur(4px)}
 .stat-item{display:flex;flex-direction:column;align-items:center;padding:0 24px}
 .stat-num{font-size:24px;font-weight:900;color:var(--gold-text);line-height:1}
-.stat-label{font-size:11px;color:var(--muted);margin-top:3px;white-space:nowrap}
+.stat-label{font-size:11px;color:var(--muted);margin-top:3px}
 .stat-sep{width:1px;height:36px;background:var(--border)}
 
 /* BOTTOM CTA */
@@ -366,9 +368,9 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 .bottom-cta-trust span{font-size:13px;color:rgba(245,230,192,.6);font-weight:600;display:flex;align-items:center;gap:4px}
 
 @media(max-width:600px){
-  .stats-bar{padding:12px 12px;gap:4px}
-  .stat-item{padding:0 12px}
-  .stat-num{font-size:20px}
+  .stats-bar{padding:10px 3%;margin:0 3% 20px}
+  .stat-item{padding:12px 6px}
+  .stat-num{font-size:22px}
   .bottom-cta h2{font-size:22px}
   .bottom-cta{padding:32px 5%}
   .bottom-cta-actions{flex-direction:column;align-items:stretch;gap:10px;max-width:300px;margin:0 auto 24px}
