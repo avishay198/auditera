@@ -372,10 +372,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .bottom-cta-actions{flex-direction:column;align-items:stretch;gap:10px;max-width:300px;margin:0 auto 24px}
 }
 @media(max-width:768px){
-  .stats-bar{display:grid!important;grid-template-columns:1fr 1fr;padding:12px 14px;gap:0;margin-bottom:24px;border-radius:12px;max-width:100%}
+  .stats-bar{display:grid!important;grid-template-columns:1fr 1fr;padding:0;gap:0;margin-bottom:24px;border-radius:12px;max-width:100%;overflow:hidden}
   .stat-sep{display:none!important}
-  .stat-item{padding:12px 6px!important;border-right:none!important;border-left:none!important;border-bottom:1px solid var(--border);max-width:none!important;width:100%;justify-content:center}
-  .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}
+  .stat-item{padding:18px 10px!important;border:none!important;max-width:none!important;width:100%;justify-content:center;box-sizing:border-box}
+  /* פס אופקי בין שורה 1 לשורה 2 */
+  .stat-item:nth-child(1),.stat-item:nth-child(3){border-bottom:1px solid var(--border)!important}
+  /* פס אנכי בין עמודה ימין לשמאל */
+  .stat-item:nth-child(3),.stat-item:nth-child(7){border-left:1px solid var(--border)!important}
 }
 
 </style>
