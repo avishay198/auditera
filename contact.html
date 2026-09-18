@@ -355,8 +355,8 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
             <input class="form-input" id="email" type="email" placeholder="israel@example.co.il" autocorrect="off" autocapitalize="none" spellcheck="false" required style="direction:ltr;text-align:left">
           </div>
           <div class="form-group">
-            <label class="form-label" for="firm">שם חברה / משרד<span>*</span></label>
-            <input class="form-input" id="firm" type="text" placeholder="משרד ישראלי ושות'" autocorrect="off" autocapitalize="words" spellcheck="false" required>
+            <label class="form-label" for="firm">שם חברה / משרד</label>
+            <input class="form-input" id="firm" type="text" placeholder="משרד ישראלי ושות'" autocorrect="off" autocapitalize="words" spellcheck="false">
           </div>
           <div class="form-group">
             <label class="form-label" for="phone">טלפון</label>
@@ -517,8 +517,8 @@ function handleSubmit(){
   const subject=document.getElementById('subject').value;
   const message=document.getElementById('message').value.trim();
 
-  if(!name||!email||!firm||!subject||!message){
-    ['fullName','email','firm','subject','message'].forEach(id=>{
+  if(!name||!email||!subject||!message){
+    ['fullName','email','subject','message'].forEach(id=>{
       const el=document.getElementById(id);
       if(!el.value.trim()){
         el.style.borderColor='#dc2626';
@@ -539,7 +539,7 @@ function handleSubmit(){
   const phone=document.getElementById('phone').value.trim();
 
   const mailSubject=encodeURIComponent(`[Auditera] ${subjectHe} — ${name}`);
-  const body=`שם: ${name}\nדוא"ל: ${email}\nמשרד: ${firm}${phone?'\nטלפון: '+phone:''}\nנושא: ${subjectHe}\n\n${message}`;
+  const body=`שם: ${name}\nדוא"ל: ${email}${firm?'\nמשרד: '+firm:''}${phone?'\nטלפון: '+phone:''}\nנושא: ${subjectHe}\n\n${message}`;
   const mailBody=encodeURIComponent(body);
   const mailLink=`mailto:support@auditera.co?subject=${mailSubject}&body=${mailBody}`;
 
