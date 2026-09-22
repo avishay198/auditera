@@ -207,16 +207,27 @@ footer a{color:var(--muted);text-decoration:underline}
   .plan-header{flex-direction:column;gap:8px}
   .plan-price-wrap{text-align:right}
   .plan-vat{text-align:right}
+  /* Payment tabs */
   .pay-tabs{gap:8px;grid-template-columns:1fr 1fr}
   #btnPb{grid-column:1/-1}
   .pay-tab{padding:16px 8px 12px;gap:7px}
   .pay-tab-icon{width:46px;height:46px;font-size:18px}
-  .pay-tab-name{font-size:12px}
+  .pay-tab-name{font-size:13px}
   .pay-tab-radio{width:15px;height:15px;top:8px;right:8px}
-  .pay-tab-name{font-size:14px}
+  /* Section cards */
   .section-card{padding:16px 14px}
-  .bit-phone{font-size:22px;letter-spacing:2px}
+  /* Bit section */
+  .bit-card{padding:18px 14px;border-radius:14px}
+  .pb-card{padding:18px 14px;border-radius:14px}
+  .bit-phone-hero,.pb-phone-hero{padding:16px 12px 12px;border-radius:12px}
+  .bit-phone{font-size:26px;letter-spacing:2px}
+  .pb-phone{font-size:26px!important;letter-spacing:2px!important}
+  .bit-amount-badge{font-size:14px;padding:10px 14px}
+  .copy-phone-btn{font-size:12px;padding:10px 14px}
+  .bit-steps-list{font-size:13px;padding:12px 14px}
+  .bit-steps-list li::before{min-width:20px;height:20px;font-size:10px}
   #pbPhoneDisplay{font-size:18px!important;letter-spacing:1px!important}
+  /* General */
   .cta-btn{font-size:16px;padding:14px}
   .trust-bar{gap:10px;font-size:12px}
   .trust-item svg{width:15px;height:15px}
@@ -227,8 +238,9 @@ footer a{color:var(--muted);text-decoration:underline}
 @media(max-width:380px){
   .pay-tabs{grid-template-columns:1fr}
   #btnPb{grid-column:auto}
-  .pb-phone{font-size:22px!important;letter-spacing:1px!important}
+  .bit-phone,.pb-phone{font-size:22px!important;letter-spacing:1px!important}
   .plan-price{font-size:28px}
+  .bit-logo-title,.bit-logo-title{font-size:16px}
 }
 
 footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,.07)}
