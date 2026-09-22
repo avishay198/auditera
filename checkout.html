@@ -134,22 +134,25 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .bank-value{font-weight:800;color:var(--brown);font-family:monospace;direction:ltr}
 
 /* ── BIT SECTION ──────────────────────────────────────────────────── */
-.bit-card{background:linear-gradient(135deg,#e8f9fd 0%,#d0f0f8 100%);border:2px solid var(--bit-border);border-radius:14px;padding:20px;text-align:center;margin-bottom:0}
-.bit-logo-area{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px}
-.bit-logo-circle{width:48px;height:48px;background:var(--bit);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;font-family:monospace;letter-spacing:.5px;box-shadow:0 4px 12px rgba(0,174,207,.3)}
-.bit-logo-title{font-size:20px;font-weight:900;color:var(--bit)}
+.bit-card{background:#f0fbff;border:2px solid #b3e8f5;border-radius:18px;padding:24px 20px;text-align:center;margin-bottom:0}
+.bit-logo-area{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px}
+.bit-logo-circle{width:44px;height:44px;background:var(--bit);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;font-family:monospace;letter-spacing:.5px;box-shadow:0 4px 12px rgba(0,174,207,.3)}
+.bit-logo-title{font-size:19px;font-weight:900;color:var(--bit)}
+/* Phone hero */
+.bit-phone-hero{background:#fff;border:2px solid #c5ecf8;border-radius:16px;padding:20px 16px 14px;margin-bottom:12px}
 .bit-phone-display{background:#fff;border:2px solid var(--bit-border);border-radius:12px;padding:14px 20px;display:inline-block;margin-bottom:12px}
-.bit-phone{font-size:30px;font-weight:900;color:var(--brown);letter-spacing:3px;direction:ltr;font-family:monospace;display:block}
-.copy-phone-btn{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:7px 16px;background:#fff;border:1.5px solid #d0e8f0;border-radius:20px;font-size:12px;font-weight:700;color:#007a96;cursor:pointer;transition:all .18s;font-family:inherit}
-.copy-phone-btn:hover{background:#e8f9fd;border-color:#00AECF}
-.copy-phone-btn.copied{background:#e8f9fd;border-color:#00AECF;color:#005f73}
-.copy-phone-btn.pb-copy{color:var(--pb);border-color:#c4b5fd}
-.copy-phone-btn.pb-copy:hover,.copy-phone-btn.pb-copy.copied{background:#f0ecff;border-color:var(--pb)}
+.bit-phone{font-size:34px;font-weight:900;color:#1a3a4a;letter-spacing:4px;direction:ltr;font-family:monospace;display:block;margin-bottom:4px}
+.copy-phone-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:10px;padding:11px 16px;background:#e0f6fd;border:1.5px solid #7dd8f0;border-radius:12px;font-size:13px;font-weight:800;color:#006f8a;cursor:pointer;transition:all .18s;font-family:inherit}
+.copy-phone-btn:hover{background:#c8eef9;border-color:#00AECF;transform:translateY(-1px)}
+.copy-phone-btn.copied{background:#b8f0e0;border-color:#22c55e;color:#15803d}
+.copy-phone-btn.pb-copy{color:var(--pb);border-color:#c4b5fd;background:#f0ecff}
+.copy-phone-btn.pb-copy:hover,.copy-phone-btn.pb-copy.copied{background:#e5deff;border-color:var(--pb)}
 .bit-phone-label{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
-.bit-amount-badge{display:inline-flex;align-items:center;gap:6px;background:var(--bit);color:#fff;border-radius:10px;padding:8px 18px;font-size:15px;font-weight:900;margin-bottom:16px}
-.bit-steps-list{text-align:right;font-size:16px;color:var(--brown2);background:rgba(255,255,255,.7);border-radius:10px;padding:12px 16px;list-style:none}
-.bit-steps-list li{padding:4px 0;display:flex;align-items:flex-start;gap:8px}
-.bit-steps-list li::before{content:'›';color:var(--bit);font-weight:900;font-size:16px;line-height:1.4;flex-shrink:0}
+.bit-amount-badge{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--bit);color:#fff;border-radius:12px;padding:11px 18px;font-size:16px;font-weight:900;margin-bottom:16px;width:100%;box-sizing:border-box;box-shadow:0 4px 14px rgba(0,174,207,.3)}
+.bit-steps-list{text-align:right;font-size:14px;color:var(--brown2);background:rgba(255,255,255,.8);border-radius:12px;padding:14px 16px;list-style:none;border:1px solid rgba(0,174,207,.15)}
+.bit-steps-list li{padding:5px 0;display:flex;align-items:flex-start;gap:10px;counter-increment:bit-step}
+.bit-steps-list li::before{content:counter(bit-step);min-width:22px;height:22px;border-radius:50%;background:var(--bit);color:#fff;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.bit-steps-list{counter-reset:bit-step}
 
 /* ── NOTE / CONTACT BOXES ─────────────────────────────────────────── */
 .note-box{background:#fef9e7;border:1.5px solid #fde68a;border-radius:12px;padding:14px 16px;font-size:16px;color:#78350f;line-height:1.75;margin-bottom:14px}
@@ -604,24 +607,30 @@ function renderBit(){
         <div class="bit-logo-circle">bit</div>
         <div class="bit-logo-title">תשלום ב-Bit</div>
       </div>
-      <div class="bit-phone-display">
-        <span class="bit-phone">${esc(phone)}</span>
-        <span class="bit-phone-label">מספר טלפון לתשלום</span>
+      <div class="bit-phone-hero">
+        <div style="font-size:12px;font-weight:700;color:#7ab8c8;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase">מספר לתשלום</div>
+        <span class="bit-phone" dir="ltr">${esc(phone)}</span>
+        <button id="copyBitBtn" class="copy-phone-btn" onclick="copyPhone('${esc(phone)}','copyBitBtn',false)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          העתק מספר
+        </button>
       </div>
-      <button id="copyBitBtn" class="copy-phone-btn" onclick="copyPhone('${esc(phone)}','copyBitBtn',false)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> העתק מספר</button>
-      ${_planPrice?`<div><span class="bit-amount-badge"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;flex-shrink:0;margin-left:4px"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="3" y="5" width="18" height="14" rx="3"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="7" y1="15" x2="7.01" y2="15"/><line x1="11" y1="15" x2="13" y2="15"/></svg> לתשלום: ${total}</span></div>`:''}
-      <ul class="bit-steps-list" style="margin-top:14px">
-        <li>פתח Bit ← חיפוש ← הכנס מספר זה</li>
+      ${_planPrice?`<span class="bit-amount-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        לתשלום: ${total}
+      </span>`:''}
+      <ul class="bit-steps-list" style="margin-top:${_planPrice?'0':'16px'}">
+        <li>פתח Bit ← חיפוש ← הכנס את המספר למעלה</li>
         <li>הכנס את הסכום המדויק</li>
         <li>בהערה: שם התכנית + האימייל שלך</li>
         <li>צלם אישור ושלח לנו במייל</li>
       </ul>
-      <div id="pbPhoneWrap" style="margin-top:14px;display:none">
-        <div style="border-top:1px solid var(--bit-border);padding-top:14px;text-align:center">
-          <div style="font-size:12px;font-weight:700;color:#6C3FF6;margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em">גם ב-PayBox</div>
-          <div style="background:#fff;border:2px solid #c4b5fd;border-radius:12px;padding:12px 16px;display:block;width:100%;box-sizing:border-box">
-            <span id="pbPhoneDisplay" style="font-size:22px;font-weight:900;color:var(--brown);letter-spacing:2px;direction:ltr;font-family:monospace;display:block;word-break:keep-all"></span>
-            <span style="font-size:11px;color:var(--muted);font-weight:600;margin-top:3px;display:block">מספר PayBox לתשלום</span>
+      <div id="pbPhoneWrap" style="margin-top:16px;display:none">
+        <div style="border-top:1.5px solid #c5ecf8;padding-top:16px;text-align:center">
+          <div style="font-size:11px;font-weight:800;color:var(--pb);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em">גם ב-PayBox</div>
+          <div style="background:#faf7ff;border:2px solid #c4b5fd;border-radius:12px;padding:14px 16px;width:100%;box-sizing:border-box">
+            <span id="pbPhoneDisplay" style="font-size:24px;font-weight:900;color:#3b1fa8;letter-spacing:3px;direction:ltr;font-family:monospace;display:block"></span>
+            <span style="font-size:11px;color:var(--muted);font-weight:600;margin-top:4px;display:block">מספר PayBox לתשלום</span>
           </div>
         </div>
       </div>
