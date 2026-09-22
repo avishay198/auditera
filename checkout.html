@@ -65,23 +65,41 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 
 /* ── PAYMENT METHOD TABS ──────────────────────────────────────────── */
 .pay-tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:0}
-.pay-tab{border:2px solid #eddfc8;background:#fdf8f0;border-radius:14px;padding:16px 14px;text-align:center;cursor:pointer;transition:all .22s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:6px}
-.pay-tab:hover{border-color:var(--gold-text);background:var(--gold3);transform:translateY(-1px)}
-.pay-tab.active-bank{border-color:var(--brown);background:var(--gold3);box-shadow:0 0 0 3px rgba(58,32,0,.06)}
-.pay-tab.active-bit{border-color:var(--bit);background:var(--bit-bg);box-shadow:0 0 0 3px rgba(0,174,207,.08)}
-.pay-tab-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;background:#f0e8d8;transition:background .2s}
-.pay-tab.active-bank .pay-tab-icon{background:var(--brown)}
-.pay-tab.active-bit .pay-tab-icon{background:var(--bit)}
-.pay-tab-name{font-size:16px;font-weight:800;color:var(--brown)}
+.pay-tab{position:relative;border:2px solid #e8d9c2;background:#fdf8f0;border-radius:16px;padding:18px 12px 14px;text-align:center;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:7px;overflow:hidden}
+.pay-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:transparent;border-radius:0 0 14px 14px;transition:background .25s}
+.pay-tab:hover{border-color:var(--gold-text);background:#fef6e6;transform:translateY(-2px);box-shadow:0 6px 18px rgba(58,32,0,.1)}
+/* BANK active */
+.pay-tab.active-bank{border-color:var(--brown);background:linear-gradient(160deg,#fef9ef 0%,#fdf0d5 100%);box-shadow:0 4px 20px rgba(58,32,0,.13);transform:translateY(-2px)}
+.pay-tab.active-bank::after{background:var(--brown)}
+/* BIT active */
+.pay-tab.active-bit{border-color:var(--bit);background:linear-gradient(160deg,#f0fbff 0%,#d8f4fb 100%);box-shadow:0 4px 20px rgba(0,174,207,.16);transform:translateY(-2px)}
+.pay-tab.active-bit::after{background:var(--bit)}
+/* PAYBOX active */
+.pay-tab.active-pb{border-color:var(--pb);background:linear-gradient(160deg,#f5f1ff 0%,#ebe3ff 100%);box-shadow:0 4px 20px rgba(108,63,246,.16);transform:translateY(-2px)}
+.pay-tab.active-pb::after{background:var(--pb)}
+/* Icon container */
+.pay-tab-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;background:#efe5d4;transition:all .25s;box-shadow:0 2px 6px rgba(0,0,0,.08);color:var(--brown)}
+.pay-tab.active-bank .pay-tab-icon{background:var(--brown);box-shadow:0 4px 12px rgba(58,32,0,.3);color:#fff}
+.pay-tab.active-bit .pay-tab-icon{background:var(--bit);box-shadow:0 4px 12px rgba(0,174,207,.3)}
+.pay-tab.active-pb .pay-tab-icon{background:var(--pb);box-shadow:0 4px 12px rgba(108,63,246,.3)}
+/* Text */
+.pay-tab-name{font-size:14px;font-weight:800;color:var(--brown);transition:color .2s;line-height:1.2}
+.pay-tab.active-bank .pay-tab-name{color:var(--brown)}
 .pay-tab.active-bit .pay-tab-name{color:var(--bit)}
-.pay-tab.active-pb{border-color:var(--pb);background:var(--pb-bg);box-shadow:0 0 0 3px rgba(108,63,246,.08)}
-.pay-tab.active-pb .pay-tab-icon{background:var(--pb)}
 .pay-tab.active-pb .pay-tab-name{color:var(--pb)}
+.pay-tab-sub{font-size:10.5px;color:var(--muted);font-weight:500;letter-spacing:.01em}
+/* Check badge for active */
+.pay-tab-check{display:none;position:absolute;top:8px;left:8px;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:900}
+.pay-tab.active-bank .pay-tab-check{display:flex;background:var(--brown)}
+.pay-tab.active-bit .pay-tab-check{display:flex;background:var(--bit)}
+.pay-tab.active-pb .pay-tab-check{display:flex;background:var(--pb)}
+/* Logos */
+.bit-text-logo{font-size:19px;font-weight:900;color:#fff;letter-spacing:.5px;font-family:monospace}
+.pb-logo-text{font-size:11px;font-weight:900;color:#fff;letter-spacing:-.3px;line-height:1;font-family:inherit}
+/* Buttons */
 .step-badge.pb{background:var(--pb);color:#fff}
 .pb-btn{display:block;width:100%;padding:17px 24px;background:var(--pb);color:#fff;border:none;border-radius:14px;font-size:18px;font-weight:800;cursor:pointer;font-family:inherit;text-decoration:none;text-align:center;box-shadow:0 4px 16px rgba(108,63,246,.35);transition:all .2s}
 .pb-btn:hover{background:var(--pb2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(108,63,246,.45)}
-.pay-tab-sub{font-size:11px;color:var(--muted)}
-.bit-text-logo{font-size:18px;font-weight:900;color:#fff;letter-spacing:.5px;font-family:monospace}
 
 /* ── STEPS ────────────────────────────────────────────────────────── */
 .steps{display:flex;flex-direction:column;gap:12px}
@@ -158,8 +176,9 @@ footer a{color:var(--muted);text-decoration:underline}
   .plan-vat{text-align:right}
   .pay-tabs{gap:8px;grid-template-columns:1fr 1fr}
   #btnPb{grid-column:1/-1}
-  .pay-tab{padding:12px 10px}
-  .pay-tab-icon{width:36px;height:36px;font-size:17px}
+  .pay-tab{padding:14px 10px 11px}
+  .pay-tab-icon{width:44px;height:44px;font-size:20px}
+  .pay-tab-check{width:16px;height:16px;font-size:9px}
   .pay-tab-name{font-size:14px}
   .section-card{padding:16px 14px}
   .bit-phone{font-size:22px;letter-spacing:2px}
@@ -243,17 +262,24 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <div class="section-title"><span class="section-title-dot"></span>בחר שיטת תשלום</div>
     <div class="pay-tabs">
       <button class="pay-tab active-bank" id="btnBank" onclick="selectMethod('bank')" aria-pressed="true">
-        <div class="pay-tab-icon">🏦</div>
+        <span class="pay-tab-check">✓</span>
+        <div class="pay-tab-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="11" width="20" height="10" rx="2" fill="currentColor" opacity=".25"/><path d="M2 11l10-8 10 8H2z" fill="currentColor"/><rect x="5" y="14" width="3" height="5" rx=".5" fill="currentColor"/><rect x="10.5" y="14" width="3" height="5" rx=".5" fill="currentColor"/><rect x="16" y="14" width="3" height="5" rx=".5" fill="currentColor"/></svg>
+        </div>
         <span class="pay-tab-name">העברה בנקאית</span>
         <span class="pay-tab-sub">בטוח ומהיר</span>
       </button>
       <button class="pay-tab" id="btnBit" onclick="selectMethod('bit')" aria-pressed="false">
+        <span class="pay-tab-check">✓</span>
         <div class="pay-tab-icon"><span class="bit-text-logo">bit</span></div>
         <span class="pay-tab-name">תשלום ב-Bit</span>
         <span class="pay-tab-sub">מיידי ופשוט</span>
       </button>
       <button class="pay-tab" id="btnPb" onclick="selectMethod('pb')" aria-pressed="false">
-        <div class="pay-tab-icon" style="background:#f0ecff"><span style="font-size:15px;font-weight:900;color:#6C3FF6;letter-spacing:-.5px">PAY</span></div>
+        <span class="pay-tab-check">✓</span>
+        <div class="pay-tab-icon">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="white" fill-opacity="0.2"/><text x="20" y="16" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="900" fill="white" letter-spacing="-0.5">PAY</text><text x="20" y="27" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="900" fill="white" letter-spacing="-0.5">BOX</text></svg>
+        </div>
         <span class="pay-tab-name">PayBox</span>
         <span class="pay-tab-sub">מיידי ופשוט</span>
       </button>
