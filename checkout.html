@@ -245,7 +245,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <button class="pay-tab active-bank" id="btnBank" onclick="selectMethod('bank')" aria-pressed="true">
         <div class="pay-tab-icon">🏦</div>
         <span class="pay-tab-name">העברה בנקאית</span>
-        <span class="pay-tab-sub">ללא עמלה</span>
+        <span class="pay-tab-sub">בטוח ומהיר</span>
       </button>
       <button class="pay-tab" id="btnBit" onclick="selectMethod('bit')" aria-pressed="false">
         <div class="pay-tab-icon"><span class="bit-text-logo">bit</span></div>
@@ -485,7 +485,7 @@ function renderPlan(){
     const displayPrice=(isAnnual && p.annualPrice) ? p.annualPrice : p.price;
     _planPrice=displayPrice;
     document.getElementById('planPrice').innerHTML=displayPrice.toLocaleString('he-IL')+'<small> ₪/חודש</small>';
-    document.getElementById('planVat').textContent=isAnnual ? '• חיוב חודשי בהתחייבות שנתית | + מע"מ 18%' : '+ מע"מ 18% על המחיר המוצג';
+    document.getElementById('planVat').textContent=isAnnual ? '• חיוב חודשי בהתחייבות שנתית' : '';
     document.getElementById('cancelNote').style.display=isAnnual?'block':'none';
   } else {
     document.getElementById('planPrice').innerHTML='<small style="font-size:16px">מחיר בהתאמה אישית</small>';
@@ -521,7 +521,7 @@ function renderBit(){
     el.innerHTML='<div class="no-bit-box">פרטי Bit טרם הוגדרו — שלח מייל ל-<strong>support@auditera.co</strong> לקבלת פרטי תשלום</div>';
     return;
   }
-  const total=_planPrice?(_planPrice+Math.round(_planPrice*0.18)).toLocaleString('he-IL')+' ₪':'—';
+  const total=_planPrice?_planPrice.toLocaleString('he-IL')+' ₪':'—';
   el.innerHTML=`
     <div class="bit-card">
       <div class="bit-logo-area">
@@ -607,7 +607,7 @@ function renderPb(){
     el.innerHTML='<div class="no-bit-box">מספר PayBox טרם הוגדר — שלח מייל ל-<strong>support@auditera.co</strong> לקבלת פרטי תשלום</div>';
     return;
   }
-  const total=_planPrice?(_planPrice+Math.round(_planPrice*0.18)).toLocaleString('he-IL')+' ₪':'—';
+  const total=_planPrice?_planPrice.toLocaleString('he-IL')+' ₪':'—';
   el.innerHTML=`<div class="bit-card" style="background:linear-gradient(135deg,#f3efff 0%,#e9e3ff 100%);border-color:var(--pb-border)">
     <div class="bit-logo-area">
       <div class="bit-logo-circle" style="background:var(--pb);box-shadow:0 4px 12px rgba(108,63,246,.3)"><span style="font-size:14px;font-weight:900;color:#fff;letter-spacing:-.5px">PAY</span></div>
