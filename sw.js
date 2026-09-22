@@ -1,5 +1,5 @@
 /* Auditera Service Worker v1.0 */
-const CACHE = 'auditera-v1';
+const CACHE = 'auditera-v2';
 const STATIC = [
   '/',
   '/index.html',
