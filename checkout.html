@@ -94,15 +94,16 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .pay-tab.active-pb .pay-tab-icon{background:var(--pb)!important;box-shadow:0 4px 14px rgba(108,63,246,.3)}
 .pay-tab.active-bit .pay-tab-icon{background:var(--bit)!important;box-shadow:0 4px 14px rgba(0,174,207,.3)}
 /* Bit icon */
-.tab-icon-bit{background:#e5f7fb}
-.tab-logo-bit{font-size:20px;font-weight:900;color:var(--bit);letter-spacing:1px;font-family:Arial,Helvetica,sans-serif;line-height:1;transition:color .2s}
+.tab-icon-bit{background:#e5f7fb;overflow:hidden}
+.tab-logo-bit{font-size:18px;font-weight:900;color:var(--bit);letter-spacing:1px;font-family:Arial,Helvetica,sans-serif;line-height:1;transition:color .2s;direction:ltr;unicode-bidi:isolate}
 .pay-tab.active-bit .tab-icon-bit{background:var(--bit)!important}
 .pay-tab.active-bit .tab-logo-bit{color:#fff}
 /* PayBox icon */
-.tab-icon-pb{background:#ede8ff}
-.tab-logo-pb{font-size:11px;font-weight:900;color:var(--pb);letter-spacing:.5px;font-family:Arial,Helvetica,sans-serif;line-height:1.3;text-align:center;transition:color .2s;display:block}
+.tab-icon-pb{background:#ede8ff;overflow:hidden;flex-direction:column;gap:0}
+.tab-logo-pb{display:flex;flex-direction:column;align-items:center;gap:0;direction:ltr;unicode-bidi:isolate}
+.tab-logo-pb span{font-size:10px;font-weight:900;color:var(--pb);letter-spacing:.5px;font-family:Arial,Helvetica,sans-serif;line-height:1.2;transition:color .2s;display:block;text-align:center}
 .pay-tab.active-pb .tab-icon-pb{background:var(--pb)!important}
-.pay-tab.active-pb .tab-logo-pb{color:#fff}
+.pay-tab.active-pb .tab-logo-pb span{color:#fff}
 /* Text */
 .pay-tab-name{font-size:13.5px;font-weight:800;color:#4a3520;line-height:1.2;transition:color .2s}
 .pay-tab.active-bank .pay-tab-name{color:var(--brown)}
@@ -295,7 +296,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <button class="pay-tab" id="btnBit" onclick="selectMethod('bit')" aria-pressed="false">
         <span class="pay-tab-radio" aria-hidden="true"></span>
         <div class="pay-tab-icon tab-icon-bit">
-          <span class="tab-logo-bit">bit</span>
+          <span class="tab-logo-bit" dir="ltr">bit</span>
         </div>
         <span class="pay-tab-name">תשלום ב-Bit</span>
         <span class="pay-tab-sub">מיידי ופשוט</span>
@@ -303,7 +304,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <button class="pay-tab" id="btnPb" onclick="selectMethod('pb')" aria-pressed="false">
         <span class="pay-tab-radio" aria-hidden="true"></span>
         <div class="pay-tab-icon tab-icon-pb">
-          <span class="tab-logo-pb">PAY<br>BOX</span>
+          <span class="tab-logo-pb" dir="ltr"><span>PAY</span><span>BOX</span></span>
         </div>
         <span class="pay-tab-name">PayBox</span>
         <span class="pay-tab-sub">מיידי ופשוט</span>
