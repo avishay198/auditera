@@ -128,10 +128,10 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 
 /* ── BANK DETAILS ─────────────────────────────────────────────────── */
 .bank-grid{display:flex;flex-direction:column;gap:0}
-.bank-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f5ead8;font-size:13.5px}
+.bank-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid #f5ead8;font-size:13.5px;gap:8px;flex-wrap:wrap}
 .bank-row:last-child{border-bottom:none}
-.bank-label{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
-.bank-value{font-weight:800;color:var(--brown);font-family:monospace;direction:ltr}
+.bank-label{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.bank-value{font-weight:800;color:var(--brown);font-family:monospace;direction:ltr;word-break:break-all;text-align:left}
 
 /* ── BIT SECTION ──────────────────────────────────────────────────── */
 .bit-card{background:#f0fbff;border:2px solid #b3e8f5;border-radius:18px;padding:24px 20px;text-align:center;margin-bottom:0}
@@ -216,6 +216,10 @@ footer a{color:var(--muted);text-decoration:underline}
   .pay-tab-radio{width:15px;height:15px;top:8px;right:8px}
   /* Section cards */
   .section-card{padding:16px 14px}
+  /* Bank section */
+  .bank-row{flex-direction:column;align-items:flex-start;gap:3px;padding:10px 0}
+  .bank-value{font-size:16px;letter-spacing:.5px}
+  .bank-label{font-size:10px}
   /* Bit section */
   .bit-card{padding:18px 14px;border-radius:14px}
   .pb-card{padding:18px 14px;border-radius:14px}
@@ -578,10 +582,11 @@ function renderBank(){
     return;
   }
   const rows=[
-    bd.name?'<div class="bank-row"><span class="bank-label">בנק</span><span class="bank-value">'+esc(bd.name)+(bd.branch?' · סניף '+esc(bd.branch):'')+'</span></div>':'',
-    bd.account?'<div class="bank-row"><span class="bank-label">מספר חשבון</span><span class="bank-value">'+esc(bd.account)+'</span></div>':'',
-    bd.holder?'<div class="bank-row"><span class="bank-label">שם בעל החשבון</span><span class="bank-value" style="font-family:inherit">'+esc(bd.holder)+'</span></div>':'',
-    bd.iban?'<div class="bank-row"><span class="bank-label">IBAN</span><span class="bank-value" style="font-size:12px">'+esc(bd.iban)+'</span></div>':'',
+    bd.name?'<div class="bank-row"><span class="bank-label">בנק</span><span class="bank-value">'+esc(bd.name)+(bd.branch?' &nbsp;·&nbsp; סניף '+esc(bd.branch):'')+'</span></div>':'',
+    bd.account?'<div class="bank-row"><span class="bank-label">מספר חשבון</span><span class="bank-value" style="font-size:20px;letter-spacing:2px">'+esc(bd.account)+'</span></div>':'',
+    bd.holder?'<div class="bank-row"><span class="bank-label">שם בעל החשבון</span><span class="bank-value" style="font-family:inherit;direction:rtl">'+esc(bd.holder)+'</span></div>':'',
+    bd.iban?'<div class="bank-row"><span class="bank-label">IBAN</span><span class="bank-value" style="font-size:12px;letter-spacing:.5px">'+esc(bd.iban)+'</span></div>':'',
+    bd.note?'<div class="bank-row" style="background:#fffbf0;border-radius:8px;padding:10px 12px;border:1px solid #f5e8c0;border-bottom:1px solid #f5e8c0;margin-top:4px"><span class="bank-label">הערה</span><span class="bank-value" style="font-family:inherit;direction:rtl;color:#7a5010">'+esc(bd.note)+'</span></div>':'',
   ].filter(Boolean).join('');
   el.innerHTML='<div class="bank-grid">'+rows+'</div>';
 }
