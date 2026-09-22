@@ -270,18 +270,18 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <form id="registerForm" style="display:none" onsubmit="doRegister(event)">
         <div class="form-group">
           <label for="regName">שם מלא</label>
-          <input class="form-input" id="regName" type="text" placeholder="ישראל ישראלי" autocomplete="name" autocorrect="off" autocapitalize="words" spellcheck="false">
+          <input class="form-input" id="regName" name="name" type="text" placeholder="ישראל ישראלי" autocomplete="name" autocorrect="off" autocapitalize="words" spellcheck="false">
           <div class="field-err" id="regNameErr">נא הזן שם מלא</div>
         </div>
         <div class="form-group">
           <label for="regEmail">כתובת אימייל</label>
-          <input class="form-input" id="regEmail" type="email" placeholder="name@example.com" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left">
+          <input class="form-input" id="regEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left">
           <div class="field-err" id="regEmailErr">נא הזן כתובת אימייל תקינה</div>
         </div>
         <div class="form-group">
           <label for="regPass">סיסמה</label>
           <div class="input-wrap">
-            <input class="form-input" id="regPass" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password">
+            <input class="form-input" id="regPass" name="new-password" type="password" placeholder="לפחות 6 תווים" autocomplete="new-password">
             <button type="button" class="toggle-pass" onclick="togglePass('regPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
           </div>
           <div class="field-err" id="regPassErr">סיסמה חייבת להכיל לפחות 6 תווים</div>
@@ -304,13 +304,13 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <form id="loginForm" onsubmit="doLogin(event)" novalidate>
         <div class="form-group">
           <label for="loginEmail">כתובת אימייל</label>
-          <input class="form-input" id="loginEmail" type="email" placeholder="name@example.com" autocomplete="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left">
+          <input class="form-input" id="loginEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left">
           <div class="field-err" id="loginEmailErr">נא הזן כתובת אימייל</div>
         </div>
         <div class="form-group">
           <label for="loginPass">סיסמה</label>
           <div class="input-wrap">
-            <input class="form-input" id="loginPass" type="password" placeholder="הסיסמה שלך" autocomplete="current-password">
+            <input class="form-input" id="loginPass" name="password" type="password" placeholder="הסיסמה שלך" autocomplete="current-password">
             <button type="button" class="toggle-pass" onclick="togglePass('loginPass',this)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
           </div>
           <div class="field-err" id="loginPassErr">נא הזן סיסמה</div>
@@ -327,7 +327,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       <div id="forgotPanel" style="display:none;margin-top:16px;padding:16px;background:#fffbeb;border:1px solid #e0c888;border-radius:12px;text-align:right">
         <p style="font-size:13px;font-weight:700;color:#3a2000;margin:0 0 8px">איפוס סיסמה</p>
         <p style="font-size:12px;color:#7a5c2e;margin:0 0 10px">הזן את כתובת האימייל שלך ונשלח לך קישור לאיפוס סיסמה — תקף לשעה אחת.</p>
-        <input id="forgotEmail" type="email" placeholder="האימייל שלך" autocorrect="off" autocapitalize="none" spellcheck="false" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
+        <input id="forgotEmail" name="email" type="email" placeholder="האימייל שלך" autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="width:100%;padding:8px 10px;border:1px solid #e0c888;border-radius:8px;font-size:13px;margin-bottom:8px;direction:ltr;box-sizing:border-box">
         <div style="display:flex;gap:8px">
           <button onclick="sendForgotRequest()" style="flex:1;padding:8px;background:#e0b840;color:#000;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer">שלח בקשה</button>
           <button onclick="document.getElementById('forgotPanel').style.display='none'" style="padding:8px 14px;background:transparent;color:#7a5c2e;border:1px solid #e0c888;border-radius:8px;font-size:13px;cursor:pointer">ביטול</button>
