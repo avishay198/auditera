@@ -381,6 +381,14 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .stat-item:nth-child(3),.stat-item:nth-child(7){border-left:1px solid var(--border)!important}
 }
 
+
+@media(max-width:600px){
+  .feat-grid{grid-template-columns:1fr!important}
+  .steps{grid-template-columns:1fr 1fr!important;gap:12px!important}
+}
+@media(max-width:400px){
+  .steps{grid-template-columns:1fr!important}
+}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Product","name":"Auditera","description":"מערכת ביקורת חשבונאית חכמה לרואי חשבון בישראל","brand":{"@type":"Brand","name":"Auditera"},"url":"https://auditera.co","offers":[{"@type":"Offer","name":"סטארטר","price":"590","priceCurrency":"ILS","priceSpecification":{"@type":"UnitPriceSpecification","price":"590","priceCurrency":"ILS","billingDuration":"P1M"},"availability":"https://schema.org/InStock","url":"https://auditera.co/checkout.html?plan=starter"},{"@type":"Offer","name":"מקצועי","price":"990","priceCurrency":"ILS","priceSpecification":{"@type":"UnitPriceSpecification","price":"990","priceCurrency":"ILS","billingDuration":"P1M"},"availability":"https://schema.org/InStock","url":"https://auditera.co/checkout.html?plan=professional"},{"@type":"Offer","name":"פרמיום","price":"2490","priceCurrency":"ILS","priceSpecification":{"@type":"UnitPriceSpecification","price":"2490","priceCurrency":"ILS","billingDuration":"P1M"},"availability":"https://schema.org/InStock","url":"https://auditera.co/checkout.html?plan=premium"}]}
