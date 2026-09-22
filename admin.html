@@ -1777,12 +1777,13 @@ nav {
   </div>
 
   <!-- ③  פרטי חשבון בנק להעברה -->
+  <!-- ── העברה בנקאית ── -->
   <div class="card int-section">
     <div class="int-header">
       <div class="int-header-icon" style="background:#dcfce7"><i class="ti ti-building-bank"></i></div>
       <div>
-        <div class="int-header-title">פרטי חשבון בנק להעברה</div>
-        <div class="int-header-sub">פרטים אלו יופיעו בחשבוניות ובדרישות תשלום</div>
+        <div class="int-header-title">העברה בנקאית</div>
+        <div class="int-header-sub">פרטי חשבון הבנק שיוצגו ללקוחות בדף התשלום</div>
       </div>
       <div style="margin-right:auto"></div>
       <span id="bankStatus" class="int-status int-off">לא מוגדר</span>
@@ -1794,13 +1795,47 @@ nav {
       <div class="fg"><label>שם בעל החשבון</label><input id="bankHolder" placeholder="Auditera Ltd." oninput="checkBankStatus()"></div>
       <div class="fg"><label>IBAN (אופציונלי)</label><input id="bankIban" placeholder="IL00 0000 0000 0000 0000 000" style="direction:ltr"></div>
       <div class="fg"><label>הוראת הפניה להעברה (אופציונלי)</label><input id="bankNote" placeholder="יש לציין את מספר החשבונית בהעברה"></div>
-      <div class="fg"><label>מספר טלפון לתשלום ב-Bit (אופציונלי)</label><input id="bankBitPhone" placeholder="050-1234567" style="direction:ltr" oninput="checkBankStatus()"></div>
     </div>
     <div style="display:flex;gap:8px;margin-top:10px">
-      <button class="nbtn nbtn-gold" onclick="saveBankDetails()"><i class="ti ti-device-floppy"></i> שמור פרטים</button>
+      <button class="nbtn nbtn-gold" onclick="saveBankOnly()"><i class="ti ti-device-floppy"></i> שמור פרטי בנק</button>
     </div>
-    <div style="margin-top:12px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:11px;color:#15803d">
-      <i class="ti ti-circle-check" style="color:var(--green)"></i> פרטי הבנק יופיעו אוטומטית בכל חשבונית ודרישת תשלום שמודפסת מהמערכת
+  </div>
+
+  <!-- ── Bit ── -->
+  <div class="card int-section">
+    <div class="int-header">
+      <div class="int-header-icon" style="background:#e0f7fa"><i class="ti ti-device-mobile" style="color:#00AECF"></i></div>
+      <div>
+        <div class="int-header-title">Bit</div>
+        <div class="int-header-sub">מספר הטלפון שיוצג ללקוחות לתשלום ב-Bit</div>
+      </div>
+      <div style="margin-right:auto"></div>
+      <span id="bitStatus" class="int-status int-off">לא מוגדר</span>
+    </div>
+    <div class="cardcom-fields">
+      <div class="fg"><label>מספר טלפון Bit</label><input id="bankBitPhone" placeholder="050-1234567" style="direction:ltr" oninput="checkBitStatus()"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="nbtn" style="background:#00AECF;color:#fff" onclick="saveBitOnly()"><i class="ti ti-device-floppy"></i> שמור מספר Bit</button>
+    </div>
+  </div>
+
+  <!-- ── PayBox ── -->
+  <div class="card int-section">
+    <div class="int-header">
+      <div class="int-header-icon" style="background:#f3efff"><span style="font-size:13px;font-weight:900;color:#6C3FF6;letter-spacing:-.5px">PAY</span></div>
+      <div>
+        <div class="int-header-title">PayBox</div>
+        <div class="int-header-sub">מספר הטלפון שיוצג ללקוחות לתשלום ב-PayBox</div>
+      </div>
+      <div style="margin-right:auto"></div>
+      <span id="pbStatus" class="int-status int-off">לא מוגדר</span>
+    </div>
+    <div class="cardcom-fields">
+      <div class="fg"><label>מספר טלפון PayBox</label><input id="bankPayboxPhone" placeholder="050-1234567" style="direction:ltr" oninput="checkPbStatus()"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="nbtn" style="background:#6C3FF6;color:#fff" onclick="savePbOnly()"><i class="ti ti-device-floppy"></i> שמור מספר PayBox</button>
     </div>
   </div>
 
@@ -3949,7 +3984,8 @@ function renderIntegrations(){
   if(bd.iban)document.getElementById('bankIban').value=bd.iban;
   if(bd.note)document.getElementById('bankNote').value=bd.note;
   if(bd.bit_phone)document.getElementById('bankBitPhone').value=bd.bit_phone;
-  checkBankStatus();
+  if(bd.paybox_phone)document.getElementById('bankPayboxPhone').value=bd.paybox_phone;
+  checkBankStatus();checkBitStatus();checkPbStatus();
 
   // Load alerts config
   const al=ls(K.intAlerts,{});
@@ -4230,24 +4266,52 @@ function checkBankStatus(){
   if(name&&account){s.className='int-status int-on';s.textContent='מוגדר';}
   else{s.className='int-status int-off';s.textContent='לא מוגדר';}
 }
-
-function saveBankDetails(){
-  const cfg={
-    name:document.getElementById('bankName').value.trim(),
+function checkBitStatus(){
+  const phone=document.getElementById('bankBitPhone')?.value;
+  const s=document.getElementById('bitStatus');if(!s)return;
+  if(phone){s.className='int-status int-on';s.textContent='מוגדר';}
+  else{s.className='int-status int-off';s.textContent='לא מוגדר';}
+}
+function checkPbStatus(){
+  const phone=document.getElementById('bankPayboxPhone')?.value;
+  const s=document.getElementById('pbStatus');if(!s)return;
+  if(phone){s.className='int-status int-on';s.textContent='מוגדר';}
+  else{s.className='int-status int-off';s.textContent='לא מוגדר';}
+}
+function _getBD(){try{return ls(K.bankDetails,{});}catch(e){return{};}}
+function saveBankOnly(){
+  const bd=_getBD();
+  const name=document.getElementById('bankName').value.trim();
+  const account=document.getElementById('bankAccount').value.trim();
+  if(!name||!account){toast('❌ מלא לפחות שם בנק ומספר חשבון');return;}
+  ss(K.bankDetails,{...bd,name,
     branch:document.getElementById('bankBranch').value.trim(),
-    account:document.getElementById('bankAccount').value.trim(),
+    account,
     holder:document.getElementById('bankHolder').value.trim(),
     iban:document.getElementById('bankIban').value.trim(),
     note:document.getElementById('bankNote').value.trim(),
-    bit_phone:document.getElementById('bankBitPhone').value.trim(),
     savedAt:new Date().toISOString()
-  };
-  if(!cfg.name||!cfg.account){toast('❌ מלא לפחות שם בנק ומספר חשבון');return;}
-  ss(K.bankDetails,cfg);
-  adminLog('bank_details','saved');
-  checkBankStatus();
-  toast('<i class="ti ti-device-floppy"></i> פרטי הבנק נשמרו');
+  });
+  adminLog('bank_details','saved');checkBankStatus();
+  toast('<i class="ti ti-building-bank"></i> פרטי הבנק נשמרו');
 }
+function saveBitOnly(){
+  const bd=_getBD();
+  const phone=document.getElementById('bankBitPhone').value.trim();
+  ss(K.bankDetails,{...bd,bit_phone:phone,savedAt:new Date().toISOString()});
+  adminLog('bit_details','saved');checkBitStatus();
+  toast('<i class="ti ti-device-mobile"></i> מספר Bit נשמר');
+}
+function savePbOnly(){
+  const bd=_getBD();
+  const phone=document.getElementById('bankPayboxPhone').value.trim();
+  ss(K.bankDetails,{...bd,paybox_phone:phone,savedAt:new Date().toISOString()});
+  adminLog('paybox_details','saved');checkPbStatus();
+  toast('<i class="ti ti-device-floppy"></i> מספר PayBox נשמר');
+}
+function saveBankDetails(){saveBankOnly();}
+
+
 
 function getBankDetails(){return ls(K.bankDetails,{});}
 
