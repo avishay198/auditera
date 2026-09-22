@@ -273,6 +273,19 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .cards-section{overflow:visible!important}
   .cards-inner{overflow:visible!important}
 }
+
+@media(max-width:600px){
+  .compare-section table{min-width:0!important;width:100%!important;table-layout:fixed}
+  .compare-section thead th,
+  .compare-section tbody td{padding:7px 5px!important;font-size:10.5px!important;word-break:keep-all}
+  .compare-section thead th:first-child,
+  .compare-section tbody td:first-child{width:38%}
+  .compare-section thead th:not(:first-child),
+  .compare-section tbody td:not(:first-child){width:20.67%}
+  .compare-section [style*="overflow-x:auto"]{overflow-x:visible!important}
+  .ck{font-size:14px}
+  .cx{font-size:12px}
+}
 </style>
 <script type="application/ld+json">
 {
