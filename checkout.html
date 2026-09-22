@@ -148,6 +148,13 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .copy-phone-btn.pb-copy{color:var(--pb);border-color:#c4b5fd;background:#f0ecff}
 .copy-phone-btn.pb-copy:hover,.copy-phone-btn.pb-copy.copied{background:#e5deff;border-color:var(--pb)}
 .bit-phone-label{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
+/* PayBox card */
+.pb-card{background:linear-gradient(160deg,#f5f0ff 0%,#ece3ff 100%);border:2px solid var(--pb-border);border-radius:18px;padding:24px 20px;text-align:center}
+.pb-phone-hero{background:#fff;border:2px solid #c4b5fd;border-radius:16px;padding:20px 16px 14px;margin-bottom:12px}
+.pb-phone{font-size:34px;font-weight:900;color:#3b1fa8;letter-spacing:4px;direction:ltr;font-family:monospace;display:block;margin-bottom:4px}
+.pb-phone-label{font-size:11px;color:#9b7dd4;font-weight:600;margin-top:2px}
+/* Steps: support --step-c custom color per li */
+.bit-steps-list li::before{background:var(--step-c, var(--bit))}
 .bit-amount-badge{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--bit);color:#fff;border-radius:12px;padding:11px 18px;font-size:16px;font-weight:900;margin-bottom:16px;width:100%;box-sizing:border-box;box-shadow:0 4px 14px rgba(0,174,207,.3)}
 .bit-steps-list{text-align:right;font-size:14px;color:var(--brown2);background:rgba(255,255,255,.8);border-radius:12px;padding:14px 16px;list-style:none;border:1px solid rgba(0,174,207,.15)}
 .bit-steps-list li{padding:5px 0;display:flex;align-items:flex-start;gap:10px;counter-increment:bit-step}
@@ -694,22 +701,31 @@ function renderPb(){
     return;
   }
   const total=_planPrice?_planPrice.toLocaleString('he-IL')+' ₪':'—';
-  el.innerHTML=`<div class="bit-card" style="background:linear-gradient(135deg,#f3efff 0%,#e9e3ff 100%);border-color:var(--pb-border)">
-    <div class="bit-logo-area">
-      <div class="bit-logo-circle" style="background:var(--pb);box-shadow:0 4px 12px rgba(108,63,246,.3)"><span style="font-size:14px;font-weight:900;color:#fff;letter-spacing:-.5px">PAY</span></div>
-      <div class="bit-logo-title" style="color:var(--pb)">תשלום ב-PayBox</div>
+  el.innerHTML=`<div class="pb-card">
+    <div class="bit-logo-area" style="margin-bottom:20px">
+      <div style="width:44px;height:44px;background:var(--pb);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(108,63,246,.35);gap:0">
+        <span style="font-size:9px;font-weight:900;color:#fff;letter-spacing:.5px;line-height:1.2;font-family:Arial,sans-serif;direction:ltr">PAY</span>
+        <span style="font-size:9px;font-weight:900;color:#fff;letter-spacing:.5px;line-height:1.2;font-family:Arial,sans-serif;direction:ltr">BOX</span>
+      </div>
+      <div style="font-size:19px;font-weight:900;color:var(--pb)">תשלום ב-PayBox</div>
     </div>
-    <div class="bit-phone-display" style="border-color:var(--pb-border)">
-      <span class="pb-phone">${phone}</span>
-      <span class="pb-phone-label">מספר טלפון לתשלום</span>
+    <div class="pb-phone-hero">
+      <div style="font-size:12px;font-weight:700;color:#9b7dd4;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase">מספר לתשלום</div>
+      <span class="pb-phone" dir="ltr">${phone}</span>
+      <button id="copyPbBtn" class="copy-phone-btn pb-copy" onclick="copyPhone('${phone}','copyPbBtn',true)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        העתק מספר
+      </button>
     </div>
-    <button id="copyPbBtn" class="copy-phone-btn pb-copy" onclick="copyPhone('${phone}','copyPbBtn',true)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> העתק מספר</button>
-    ${_planPrice?`<div><span class="bit-amount-badge" style="background:var(--pb)">💳 לתשלום: ${total}</span></div>`:''}
-    <ul class="bit-steps-list" style="margin-top:14px">
-      <li>פתח PayBox ← חיפוש ← הכנס מספר זה</li>
-      <li>הכנס את הסכום המדויק</li>
-      <li>בהערה: שם התכנית + האימייל שלך</li>
-      <li>צלם אישור ושלח לנו במייל</li>
+    ${_planPrice?`<span class="bit-amount-badge" style="background:linear-gradient(135deg,var(--pb),var(--pb2));box-shadow:0 4px 14px rgba(108,63,246,.35)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      לתשלום: ${total}
+    </span>`:''}
+    <ul class="bit-steps-list" style="margin-top:${_planPrice?'0':'16px'};border-color:rgba(108,63,246,.15)">
+      <li style="--step-c:var(--pb)">פתח PayBox ← חיפוש ← הכנס את המספר למעלה</li>
+      <li style="--step-c:var(--pb)">הכנס את הסכום המדויק</li>
+      <li style="--step-c:var(--pb)">בהערה: שם התכנית + האימייל שלך</li>
+      <li style="--step-c:var(--pb)">צלם אישור ושלח לנו במייל</li>
     </ul>
   </div>`;
 }
