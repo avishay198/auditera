@@ -275,7 +275,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         </div>
         <div class="form-group">
           <label for="regEmail">כתובת אימייל</label>
-          <input class="form-input" id="regEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left">
+          <input class="form-input" id="regEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left" readonly onfocus="this.removeAttribute('readonly')" onclick="this.removeAttribute('readonly')">
           <div class="field-err" id="regEmailErr">נא הזן כתובת אימייל תקינה</div>
         </div>
         <div class="form-group">
@@ -301,10 +301,11 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       </form>
 
       <!-- LOGIN FORM -->
-      <form id="loginForm" onsubmit="doLogin(event)" novalidate>
+      <form id="loginForm" onsubmit="doLogin(event)" novalidate autocomplete="off" data-form-type="other">
         <div class="form-group">
           <label for="loginEmail">כתובת אימייל</label>
-          <input class="form-input" id="loginEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left">
+          <input type="email" style="display:none;position:absolute;left:-9999px" tabindex="-1" aria-hidden="true" autocomplete="email">
+          <input class="form-input" id="loginEmail" name="email" type="email" placeholder="name@example.com" autocomplete="username" inputmode="email" autocorrect="off" autocapitalize="none" spellcheck="false" style="direction:ltr;text-align:left" readonly onfocus="this.removeAttribute('readonly')" onclick="this.removeAttribute('readonly')">
           <div class="field-err" id="loginEmailErr">נא הזן כתובת אימייל</div>
         </div>
         <div class="form-group">
@@ -698,6 +699,33 @@ async function doResetPass(token) {
       }, 3000);
     });
   }
+})();
+
+
+// Email field guard — strip non-email characters (Hebrew autofill / paste protection)
+(function(){
+  function guardEmail(input){
+    if(!input) return;
+    function clean(e){
+      var v = input.value;
+      // Strip any Hebrew or Arabic characters (can't be in email)
+      var cleaned = v.replace(/[\u0590-\u05FF\u0600-\u06FF\u200f\u200e]/g, '');
+      // If more than 40% of chars got stripped, likely a bad autofill — clear entirely
+      if(v.length > 0 && (v.length - cleaned.length) / v.length > 0.3){
+        input.value = '';
+        input.style.borderColor = '#e0b840';
+        setTimeout(function(){ input.style.borderColor = ''; }, 1000);
+      } else if(cleaned !== v){
+        input.value = cleaned;
+      }
+    }
+    input.addEventListener('input', clean);
+    input.addEventListener('paste', function(){ setTimeout(clean, 0); });
+    input.addEventListener('change', clean);
+  }
+  guardEmail(document.getElementById('loginEmail'));
+  guardEmail(document.getElementById('regEmail'));
+  guardEmail(document.getElementById('forgotEmail'));
 })();
 </script>
 </body>
