@@ -43,7 +43,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 .nav-logo-icon{width:26px;height:26px;background:var(--gold);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px}
 .nav-logo-text{font-size:15px;font-weight:800;color:#ffffff}.nav-logo-text span{color:var(--gold)}
 .admin-badge{background:rgba(220,38,38,.3);border:1px solid rgba(220,38,38,.6);color:#fca5a5;font-size:9px;font-weight:800;padding:1px 7px;border-radius:12px;letter-spacing:.06em}
-.nav-right{display:flex;align-items:center;gap:8px}
+.nav-right{display:flex;align-items:center;gap:8px;overflow:hidden;min-width:0;flex-shrink:1}
 .nav-clock{font-size:11px;color:rgba(245,230,192,.4);margin-left:4px}
 .nbtn{padding:5px 11px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:.15s}
 .nbtn-ghost{background:transparent;border:1px solid rgba(245,230,192,.2);color:rgba(245,230,192,.55)}
@@ -290,7 +290,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 
 /* ── COHORT ANALYSIS ── */
 .cohort-wrap{overflow-x:auto}
-.cohort-table{border-collapse:collapse;font-size:11px;min-width:600px}
+.cohort-table{border-collapse:collapse;font-size:11px;min-width:0}
 .cohort-table th{padding:5px 8px;font-size:9px;font-weight:800;color:var(--muted);text-align:center;white-space:nowrap;background:#fdf8f0;border-bottom:2px solid var(--border)}
 .cohort-table th:first-child{text-align:right;min-width:110px}
 .cohort-table td{padding:4px 6px;text-align:center;border:1px solid #f0e8d8;min-width:48px}
@@ -1232,6 +1232,7 @@ input::placeholder, textarea::placeholder { color: #b89a6a; opacity: 1; }
 table {
   border-collapse: collapse;
   width: 100%;
+  min-width: 0;
   font-size: 12.5px;
 }
 table th {
@@ -8781,5 +8782,256 @@ function deleteInquiry(idx){
   <a href="accessibility.html" style="color:#bbb;text-decoration:underline">הצהרת נגישות</a> ·
   <a href="legal.html" style="color:#bbb;text-decoration:underline">תנאי שימוש ופרטיות</a>
 </div>
+
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ADMIN MOBILE — DEFINITIVE FIX (inserted last, wins all)   ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+/* ── Prevent ALL horizontal overflow ──────────────────────── */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+* { min-width: 0; }
+
+/* Tables always inside scroll containers */
+.table-wrap, [id$="Wrap"], .tbl-wrap, .overflow-x {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* ── NAV: clean single row ─────────────────────────────── */
+  nav {
+    height: 54px !important;
+    padding: 0 14px !important;
+  }
+  
+  /* Hide non-essential nav items */
+  .nav-clock { display: none !important; }
+  #navUser   { display: none !important; }
+  
+  /* Shrink nav buttons */
+  .nbtn-ghost {
+    padding: 5px 10px !important;
+    font-size: 11px !important;
+    gap: 3px !important;
+  }
+  
+  /* Logo icon smaller */
+  nav svg { height: 28px !important; width: 28px !important; }
+  .admin-badge { font-size: 8px !important; padding: 2px 6px !important; }
+  
+  /* Tab bar under 54px nav */
+  .tab-bar { top: 54px !important; }
+  
+  /* Tabs: scrollable, compact */
+  .tab {
+    padding: 0 12px !important;
+    height: 46px !important;
+    font-size: 11.5px !important;
+    gap: 4px !important;
+  }
+  .tab i { font-size: 13px !important; }
+}
+
+@media (max-width: 600px) {
+
+  /* ── PAGE LAYOUT ──────────────────────────────────────── */
+  .page {
+    padding: 12px 12px 24px !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ── NAV even more compact ──────────────────────────── */
+  nav { height: 50px !important; padding: 0 12px !important; }
+  .tab-bar { top: 50px !important; padding: 0 4px !important; }
+  .tab { padding: 0 10px !important; height: 44px !important; font-size: 11px !important; }
+  nav svg { height: 26px !important; width: 26px !important; }
+  
+  /* Hide "למערכת" text, keep icon if any / or abbreviate */
+  .nbtn-ghost { padding: 4px 8px !important; font-size: 11px !important; border-radius: 7px !important; }
+
+  /* ── KPI GRID → 2 COLUMNS (absolute override) ────────── */
+  #kpiGrid1,
+  #kpiGrid2,
+  .kpi-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* ── KPI CARD — compact content ──────────────────────── */
+  .kpi {
+    padding: 12px 12px 10px !important;
+    border-radius: 12px !important;
+    min-width: 0 !important;
+  }
+  .kpi-val {
+    font-size: 22px !important;
+    letter-spacing: -.02em !important;
+    word-break: break-all;
+  }
+  .kpi-label {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+  }
+  .kpi-sub { font-size: 9.5px !important; }
+  .kpi-icon { width: 28px !important; height: 28px !important; font-size: 13px !important; }
+  .kpi-trend { font-size: 9px !important; padding: 2px 6px !important; }
+  .kpi-top { margin-bottom: 8px !important; }
+
+  /* ── CARDS ────────────────────────────────────────────── */
+  .card {
+    border-radius: 12px !important;
+    margin-bottom: 10px !important;
+    overflow: hidden !important;
+  }
+  .card > .card-title:first-child,
+  .card-head {
+    padding: 12px 14px !important;
+  }
+  .card-title { font-size: 13px !important; }
+  .card-body,
+  .card > *:not(.card-title):not(.card-head) {
+    padding: 12px 14px !important;
+  }
+
+  /* ── TABLES — scroll horizontally ────────────────────── */
+  table, .tbl {
+    min-width: 0 !important;
+    font-size: 11.5px !important;
+  }
+  table th { padding: 8px 10px !important; font-size: 9.5px !important; }
+  table td { padding: 9px 10px !important; }
+  
+  /* Wrap any table that is a direct child of card */
+  .card table,
+  .card .tbl {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ── GRIDS → 1 COLUMN ─────────────────────────────────── */
+  .grid2, .grid3,
+  .form-row, .form-row3 {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+  
+  /* ── BUTTONS ──────────────────────────────────────────── */
+  .nbtn {
+    height: 34px !important;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+    border-radius: 8px !important;
+  }
+  
+  /* Action button row — wrap */
+  .card-actions, .modal-btns, [class*="btn-row"] {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+  
+  /* ── BULK BAR ──────────────────────────────────────────── */
+  #bulkBar {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    padding: 8px 12px !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+    font-size: 11.5px !important;
+  }
+  #bulkBar .nbtn { height: 30px !important; padding: 0 8px !important; font-size: 11px !important; }
+
+  /* ── MODAL ─────────────────────────────────────────────── */
+  .modal, .modal-content, .modal-box {
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+    width: calc(100vw - 24px) !important;
+    max-width: none !important;
+    margin: 0 12px !important;
+  }
+  .modal-title, .modal h3 { font-size: 15px !important; }
+
+  /* ── SECTION TITLES ──────────────────────────────────── */
+  .section-title { font-size: 10px !important; margin-bottom: 8px !important; }
+
+  /* ── IMPERSONATION / MAINTENANCE BANNERS ─────────────── */
+  #impBanner, #maintBanner {
+    padding: 8px 12px !important;
+    font-size: 11.5px !important;
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+@media (max-width: 380px) {
+
+  /* Very small phones */
+  .kpi-val { font-size: 19px !important; }
+  .kpi-label { font-size: 9.5px !important; }
+  .tab { padding: 0 8px !important; font-size: 10.5px !important; }
+  .tab i { display: none !important; }  /* icon-only hidden on very small — show text only */
+  .card-title { font-size: 12px !important; }
+}
+
+
+@media (max-width: 600px) {
+  /* Shorten nav button texts */
+  a.nbtn-ghost[href*="audit_agent"] { 
+    font-size: 0 !important; /* hide text */ 
+    padding: 0 8px !important;
+  }
+  a.nbtn-ghost[href*="audit_agent"]::before {
+    content: '← מערכת';
+    font-size: 11px !important;
+  }
+  
+  /* Better: just hide nav-right overflow */
+  .nav-right {
+    gap: 6px !important;
+    overflow: hidden !important;
+    max-width: calc(100vw - 120px) !important;
+  }
+}
+
+</style>
+
+<script>
+
+// Auto-wrap all admin tables in scroll containers
+(function(){
+  function wrapTables(){
+    document.querySelectorAll('.card table, .card .tbl').forEach(function(t){
+      if(t.parentElement && !t.parentElement.classList.contains('tbl-scroll')){
+        var wrap = document.createElement('div');
+        wrap.className = 'tbl-scroll';
+        wrap.style.cssText = 'overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%';
+        t.parentNode.insertBefore(wrap, t);
+        wrap.appendChild(t);
+      }
+    });
+  }
+  // Run on page load and after any tab switch
+  document.addEventListener('DOMContentLoaded', function(){
+    wrapTables();
+    // Observe DOM changes (JS-rendered tables)
+    if(window.MutationObserver){
+      new MutationObserver(function(){ wrapTables(); })
+        .observe(document.body, {childList:true, subtree:true});
+    }
+  });
+})();
+
+</script>
 </body>
 </html>
