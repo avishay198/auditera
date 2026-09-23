@@ -1043,11 +1043,10 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
 </script>
 
 <style>
-
-/* ══════════════════════════════════════════════════════════════
-   INDEX HERO — MOBILE REDESIGN (inserted last, wins all)
-   ══════════════════════════════════════════════════════════════ */
-
+/* ═══════════════════════════════════════════════════
+   HERO MOBILE — DEFINITIVE FIX
+   Placed last so it wins the cascade
+   ═══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
 
   /* ── NAV ─────────────────────────────────────────────────── */
@@ -1068,11 +1067,6 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     font-size: 13px !important;
     padding: 6px 16px !important;
     margin-bottom: 22px !important;
-    letter-spacing: .01em;
-    box-shadow: 0 2px 8px rgba(58,32,0,.08);
-  }
-  .hero-badge-dot {
-    width: 7px; height: 7px;
   }
 
   /* H1 */
@@ -1094,16 +1088,18 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     padding: 0 4px !important;
   }
 
-  /* ── CTA BUTTONS: clear hierarchy ─────────────────────── */
+  /* ── CTA BUTTONS ─────────────────────────────────────────── */
+  /* CRITICAL: flex:none stops the flex:1 1 140px from making them huge */
   .hero-actions {
+    display: flex !important;
     flex-direction: column !important;
     gap: 10px !important;
     align-items: stretch !important;
     margin-bottom: 16px !important;
     padding: 0 !important;
   }
-  /* Primary: bold, full-width, gold */
   .btn-main {
+    flex: none !important;          /* STOP growing in column direction */
     order: -1;
     width: 100% !important;
     height: 52px !important;
@@ -1112,11 +1108,13 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     border-radius: 13px !important;
     background: #3a2000 !important;
     color: #f5e6c0 !important;
-    box-shadow: 0 4px 16px rgba(58,32,0,.22), 0 1px 0 rgba(255,255,255,.1) inset !important;
-    letter-spacing: -.01em;
+    box-shadow: 0 4px 16px rgba(58,32,0,.22) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
-  /* Secondary: outline, slightly smaller */
   .btn-outline {
+    flex: none !important;          /* STOP growing in column direction */
     width: 100% !important;
     height: 46px !important;
     font-size: 15px !important;
@@ -1125,6 +1123,9 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     border: 1.5px solid #c09040 !important;
     color: #5a3010 !important;
     background: rgba(255,255,255,.7) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   /* Trust line */
@@ -1133,22 +1134,29 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     font-size: 13px !important;
     color: #9a7a4a !important;
     margin-top: 4px !important;
-    margin-bottom: 28px !important;
+    margin-bottom: 20px !important;
   }
 
-  /* ── STATS BAR — clean 2x2, no spreadsheet look ────────── */
+  /* ── STATS BAR ───────────────────────────────────────────── */
+  /* CRITICAL: reset the full-bleed vw trick → use padding break-out instead */
   .stats-bar {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
     gap: 0 !important;
-    width: 100vw !important;
-    position: relative !important;
-    left: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: 0 !important;
+    /* break out of hero's 20px padding on each side */
+    width: calc(100% + 40px) !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    /* reset base-CSS full-bleed positioning */
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    /* visual */
     border-radius: 0 !important;
     border-top: 1px solid rgba(224,200,136,.5) !important;
     border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
     background: #fff !important;
     padding: 0 !important;
     margin-top: 0 !important;
@@ -1158,18 +1166,20 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
   .stat-item {
     padding: 18px 14px !important;
     border-bottom: 1px solid rgba(224,200,136,.4) !important;
-    border-right: none !important;
     border-left: none !important;
-    position: relative;
+    border-right: none !important;
+    position: relative !important;
     max-width: none !important;
   }
-  /* RTL: right column (odd) gets a left border as column separator */
-  .stats-bar > .stat-item:nth-of-type(odd) {
+  /* Column separator — stat-items are children 1,3,5,7 (stat-seps at 2,4,6) */
+  /* RTL: item at grid col-start:1 (right col) gets left border = column line */
+  .stats-bar > .stat-item:nth-child(1),
+  .stats-bar > .stat-item:nth-child(5) {
     border-left: 1px solid rgba(224,200,136,.4) !important;
   }
   /* Bottom row: no bottom border */
-  .stats-bar > .stat-item:nth-of-type(3),
-  .stats-bar > .stat-item:nth-of-type(4) {
+  .stats-bar > .stat-item:nth-child(5),
+  .stats-bar > .stat-item:nth-child(7) {
     border-bottom: none !important;
   }
 
@@ -1178,7 +1188,7 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     font-weight: 900 !important;
     letter-spacing: -.02em !important;
     line-height: 1 !important;
-    display: block;
+    display: block !important;
     margin-bottom: 4px !important;
   }
   .stat-label {
@@ -1200,7 +1210,6 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
   .stat-num { font-size: 22px !important; }
   .stat-label { font-size: 10.5px !important; }
 }
-
 </style>
 </body>
 </html>
