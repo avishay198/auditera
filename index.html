@@ -171,9 +171,9 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .ai-send{width:22px;height:22px;background:#e0b840;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px}
 
 /* STATS BAR */
-.stats-bar{background:var(--white);border-bottom:1px solid var(--border);padding:22px 6%;display:flex;justify-content:center;gap:0}
-.stat-item{flex:1;max-width:180px;text-align:center}
-.stat-item+.stat-item{border-right:1px solid var(--border)}
+.stats-bar{display:flex;align-items:stretch;justify-content:space-around;gap:0;background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0;padding:22px 6%;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;width:100vw;max-width:100vw;margin-top:32px}
+.stat-item{flex:1;text-align:center;padding:4px 16px}
+.stat-item+.stat-item{border-right:none}
 .stat-num{font-size:28px;font-weight:800;color:var(--brown)}
 .stat-lbl{font-size:14px;color:var(--muted);margin-top:2px}
 
@@ -278,10 +278,10 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
   .modal-footer-text{font-size:13px}
   .modal-cta{width:100%;justify-content:center}
 
-  .stats-bar{display:grid;grid-template-columns:1fr 1fr;padding:12px 14px;gap:0;margin-bottom:24px;border-radius:12px}
+  .stats-bar{display:grid;grid-template-columns:1fr 1fr;padding:14px 5%;gap:0;margin-bottom:0;border-radius:0;margin-left:-50vw;margin-right:-50vw;width:100vw;max-width:100vw}
   .stat-item{padding:12px 6px;border-right:none!important;border-left:none!important;border-bottom:1px solid var(--border);max-width:none}
   .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}
-  .stat-sep{display:none}
+  .stat-sep{width:1px;background:var(--border);align-self:stretch;opacity:.7}
 
   .features{padding:36px 5%}
   .feat-grid{grid-template-columns:1fr}
@@ -348,7 +348,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 @media(max-width:768px){footer{flex-direction:column;align-items:flex-start;gap:14px}.footer-links{gap:14px}}
 
 /* STATS BAR */
-.stats-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(255,255,255,.7);border:1px solid var(--border);border-radius:14px;padding:16px 28px;margin:0 auto 40px;max-width:680px;backdrop-filter:blur(4px)}
+/* stats-bar base: see above */
 .stat-item{display:flex;flex-direction:column;align-items:center;padding:0 24px}
 .stat-num{font-size:24px;font-weight:900;color:var(--gold-text);line-height:1}
 .stat-label{font-size:11px;color:var(--muted);margin-top:3px;white-space:nowrap}
@@ -373,7 +373,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .bottom-cta-actions{flex-direction:column;align-items:stretch;gap:10px;max-width:300px;margin:0 auto 24px}
 }
 @media(max-width:768px){
-  .stats-bar{display:grid!important;grid-template-columns:1fr 1fr;padding:0;gap:0;margin-bottom:24px;border-radius:12px;max-width:100%;overflow:hidden}
+  .stats-bar{display:grid!important;grid-template-columns:1fr 1fr;padding:14px 5%!important;gap:0;border-radius:0!important;margin-left:calc(-50vw + 0px)!important;margin-right:calc(-50vw + 0px)!important;width:100vw!important;max-width:100vw!important;margin-bottom:0!important}
   .stat-sep{display:none!important}
   .stat-item{padding:18px 10px!important;border:none!important;max-width:none!important;width:100%;justify-content:center;box-sizing:border-box}
   /* פס אופקי בין שורה 1 לשורה 2 */
@@ -802,9 +802,11 @@ footer{
   
   /* Stats bar: 2x2 grid */
   .stats-bar,.stat-row{
-    display:grid;
     grid-template-columns:1fr 1fr;
-    gap:1px;
+    gap:0;
+    width:100vw!important;
+    margin-left:-50vw!important;
+    margin-right:-50vw!important;
   }
   .stat-item{padding:18px 10px}
   .stat-num{font-size:22px}
@@ -866,6 +868,71 @@ footer{
   .mobile-menu a:active{
     background:rgba(224,184,64,.08);
   }
+}
+
+
+/* ══ STATS BAR — Edge-to-edge band polish ══════════════════ */
+
+/* Stat numbers: slightly larger for the wider band */
+.stat-num {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--brown);
+  display: block;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+}
+.stat-label {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 4px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* Subtle hover on each stat */
+.stat-item {
+  flex: 1;
+  text-align: center;
+  padding: 6px 20px;
+  transition: background .15s;
+}
+.stat-item:hover { background: rgba(58,32,0,.03); }
+
+/* Vertical divider */
+.stat-sep {
+  width: 1px;
+  background: var(--border);
+  align-self: stretch;
+  opacity: .6;
+  flex-shrink: 0;
+}
+
+/* Mobile: 2-col grid, dividers become horizontal lines */
+@media (max-width: 600px) {
+  .stats-bar {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    position: relative !important;
+    left: 50% !important;
+  }
+  .stat-sep { display: none !important; }
+  .stat-item {
+    padding: 16px 12px !important;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-item:nth-child(odd) { border-left: 1px solid var(--border); }
+  .stat-item:nth-child(5),
+  .stat-item:nth-child(6),
+  .stat-item:nth-child(7) { border-bottom: none; }
+  .stat-num { font-size: 22px !important; }
+  .stat-label { font-size: 11px !important; white-space: normal !important; }
 }
 
 </style>
