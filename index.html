@@ -1096,8 +1096,11 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     gap: 10px !important;
     align-items: stretch !important;
     margin-bottom: 16px !important;
-    padding: 0 4px !important;
-    width: 100% !important;
+    /* break out of hero 20px padding, then add 14px inner padding */
+    width: calc(100% + 40px) !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    padding: 0 14px !important;
     box-sizing: border-box !important;
   }
   .btn-main {
