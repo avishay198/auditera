@@ -1106,8 +1106,9 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     flex: none !important;
     order: -1;
     width: 100% !important;
+    max-width: 100% !important;          /* override earlier max-width:200px */
     height: 52px !important;
-    padding: 0 !important;               /* prevent padding from inflating height */
+    padding: 0 !important;
     box-sizing: border-box !important;
     font-size: 16px !important;
     font-weight: 800 !important;
@@ -1122,8 +1123,9 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
   .btn-outline {
     flex: none !important;
     width: 100% !important;
+    max-width: 100% !important;          /* override earlier max-width:200px */
     height: 46px !important;
-    padding: 0 !important;               /* prevent padding from inflating height */
+    padding: 0 !important;
     box-sizing: border-box !important;
     font-size: 15px !important;
     font-weight: 600 !important;
