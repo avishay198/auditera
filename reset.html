@@ -420,6 +420,23 @@ document.addEventListener('keydown', e => {
     });
   }
 })();
+
+// Cookie banner
+(function(){
+  if(!localStorage.getItem('cookieOk')){
+    var b=document.getElementById('cookieBanner');
+    if(b) b.style.display='flex';
+  }
+  var btn=document.querySelector('#cookieBanner button');
+  if(btn) btn.addEventListener('click',function(){
+    localStorage.setItem('cookieOk','1');
+    var b=document.getElementById('cookieBanner');
+    if(b) b.style.display='none';
+  });
+})();
 </script>
+<div id="cookieBanner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#2c1a00;color:#fdf3dc;padding:14px 20px;direction:rtl;font-family:inherit;box-shadow:0 -4px 24px rgba(0,0,0,.25)">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="flex:1;min-width:220px;font-size:13px;line-height:1.6">אנו משתמשים ב-cookies הכרחיים בלבד לתפעול האתר. אין פרסום, אין מעקב, אין שיתוף נתונים עם צד שלישי. <a href="/legal.html" style="color:#e0b840;text-decoration:underline;margin-right:6px">מדיניות פרטיות</a></div>
 </body>
 </html>

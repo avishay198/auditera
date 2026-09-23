@@ -672,7 +672,7 @@ function renderContact(){
 }
 
 function markSent(method){
-  const agreeId = method==='bank' ? 'termsAgreeBank' : 'termsAgreeBit';
+  const agreeId = method==='bank' ? 'termsAgreeBank' : method==='pb' ? 'termsAgreePb' : 'termsAgreeBit';
   const agreeEl = document.getElementById(agreeId);
   if(agreeEl && !agreeEl.checked){
     agreeEl.closest('label').style.outline='2px solid #e0b840';
