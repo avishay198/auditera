@@ -171,11 +171,11 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .ai-send{width:22px;height:22px;background:#e0b840;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px}
 
 /* STATS BAR */
-.stats-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;background:rgba(255,255,255,.82);border:1px solid var(--border);border-radius:50px;padding:10px 20px;margin:18px auto 0;max-width:460px;backdrop-filter:blur(6px)}
-.stat-item{flex:1;max-width:140px;text-align:center;padding:6px 14px}
+.stats-bar{display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;gap:0;background:rgba(255,255,255,.82);border:1px solid var(--border);border-radius:50px;padding:10px 28px;margin:18px auto 0;max-width:540px;backdrop-filter:blur(6px)}
+.stat-item{flex:0 0 auto;text-align:center;padding:6px 18px}
 .stat-sep{width:1px;background:var(--border);flex-shrink:0;align-self:stretch;margin:6px 0}
-.stat-num{font-size:22px;font-weight:800;color:var(--brown)}
-.stat-lbl{font-size:14px;color:var(--muted);margin-top:2px}
+.stat-num{font-size:20px;font-weight:800;color:var(--brown);display:block;line-height:1.1}
+.stat-label,.stat-lbl{font-size:12px;color:var(--muted);margin-top:2px;display:block;white-space:nowrap}
 
 /* LOGOS STRIP */
 .logos-strip{background:var(--cream);border-bottom:1px solid var(--border);padding:16px 6%;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
