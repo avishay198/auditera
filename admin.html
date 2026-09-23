@@ -3855,6 +3855,78 @@ function printReceipt(i){
     }
   
 @media(max-width:768px){input,select,textarea{font-size:16px!important}}
+
+/* ══════════════════════════════════════════
+   ADMIN MOBILE — comprehensive (@media ≤600px)
+══════════════════════════════════════════ */
+@media(max-width:600px){
+
+  /* ── Layout ── */
+  .page{padding:10px 12px}
+  nav{padding:0 12px;height:52px}
+  .tab-bar{padding:0 6px;gap:0;top:52px}
+  .tab{padding:10px 10px;font-size:11px;gap:3px}
+  .tab i{font-size:13px}
+
+  /* ── Cards ── */
+  .card{padding:14px 13px;border-radius:10px;margin-bottom:12px}
+  .card-title,.section-title{font-size:14px}
+
+  /* ── KPI grid → 2 col ── */
+  .kpi-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px;margin-bottom:12px}
+  .kpi{padding:11px 12px}
+  .kpi-val{font-size:18px}
+  .kpi-label{font-size:10px}
+
+  /* ── All grids → 1 col ── */
+  .grid2,.grid3,[class*="grid"]{grid-template-columns:1fr!important;gap:10px}
+
+  /* ── Tables: horizontal scroll ── */
+  .table-wrap,[id$="TableWrap"]{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{min-width:480px}
+  th,td{padding:7px 9px;font-size:11.5px}
+
+  /* ── Nav ── */
+  .nav-clock{display:none}
+  #navUser{font-size:10px;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nav-logo span.admin-badge{font-size:9px;padding:2px 5px}
+
+  /* ── Inputs & buttons ── */
+  input,select,textarea{font-size:16px!important;padding:9px 11px}
+  .btn,.btn-primary,.btn-outline,.btn-danger{padding:9px 14px;font-size:13px;width:100%;justify-content:center}
+  .btn-row,.action-row{flex-direction:column;gap:8px}
+
+  /* ── User table rows ── */
+  .user-row,.order-row{font-size:12px}
+  .user-actions{flex-wrap:wrap;gap:4px}
+
+  /* ── Form rows ── */
+  .form-row,.field-row{flex-direction:column;gap:8px}
+  label{font-size:12px}
+
+  /* ── Summary boxes ── */
+  .stat-box,.summary-box{padding:12px;font-size:12px}
+
+  /* ── Impersonation banner ── */
+  #impersonationBanner{font-size:12px;padding:8px 12px;flex-wrap:wrap;gap:4px}
+  #impersonationBanner button{padding:5px 10px;font-size:11px}
+
+  /* ── Bulk action bar ── */
+  #bulkBar{flex-wrap:wrap;gap:6px;padding:8px 12px}
+
+  /* ── Modal ── */
+  .modal-content,.modal-box{padding:16px 14px;margin:10px;width:calc(100% - 20px);max-width:none;border-radius:12px}
+  .modal-title{font-size:15px}
+}
+
+/* ── Very small screens ── */
+@media(max-width:380px){
+  .tab{padding:8px 7px;font-size:10px}
+  .kpi-grid{gap:6px}
+  .kpi-val{font-size:16px}
+  .page{padding:8px 10px}
+}
+
 </style></head><body>
   <div class="page">
     <div class="rec-header">
