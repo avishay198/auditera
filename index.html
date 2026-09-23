@@ -1104,10 +1104,12 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     box-sizing: border-box !important;
   }
   .btn-main {
-    flex: none !important;          /* STOP growing in column direction */
+    flex: none !important;
     order: -1;
     width: 100% !important;
     height: 52px !important;
+    padding: 0 !important;               /* prevent padding from inflating height */
+    box-sizing: border-box !important;
     font-size: 16px !important;
     font-weight: 800 !important;
     border-radius: 13px !important;
@@ -1119,9 +1121,11 @@ document.addEventListener('click',function(e){var w=document.getElementById('flo
     justify-content: center !important;
   }
   .btn-outline {
-    flex: none !important;          /* STOP growing in column direction */
+    flex: none !important;
     width: 100% !important;
     height: 46px !important;
+    padding: 0 !important;               /* prevent padding from inflating height */
+    box-sizing: border-box !important;
     font-size: 15px !important;
     font-weight: 600 !important;
     border-radius: 13px !important;
