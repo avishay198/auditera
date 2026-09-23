@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex,nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self';
   script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
@@ -76,7 +76,7 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 @media(max-width:1000px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
 .kpi{background:#fff;border:1px solid var(--border);border-radius:11px;padding:15px 16px;position:relative;overflow:hidden}
-.kpi-bar{position:absolute;top:0;right:0;width:3px;height:100%}
+.kpi-bar{position:absolute;top:0;left:0;right:0;width:100%!important;height:3px}
 .kpi-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
 .kpi-icon{font-size:18px}
 .kpi-trend{font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
@@ -500,6 +500,15 @@ nav{background:var(--brown);padding:0 20px;height:56px;display:flex;align-items:
 .mkt-api-banner{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .mkt-char-count{font-size:10px;color:var(--muted);text-align:left;margin-top:4px}
 :focus-visible{outline:2px solid var(--gold,#e0b840);outline-offset:2px;border-radius:3px}
+
+/* ── Admin global mobile polish ── */
+*{-webkit-tap-highlight-color:transparent}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+nav{
+  padding-left:max(28px,env(safe-area-inset-left));
+  padding-right:max(28px,env(safe-area-inset-right));
+}
+
 </style>
 
 <!-- ═══════════════════════════════════════════════
@@ -834,6 +843,601 @@ nav {
   .tab-bar { padding: 0 12px; }
 }
 </style>
+<style>
+
+/* ╔══════════════════════════════════════════════════════════════╗
+   ║  ADMIN — PROFESSIONAL VISUAL UPGRADE                        ║
+   ║  KPI cards, inputs, tables, tabs, modals, animations        ║
+   ╚══════════════════════════════════════════════════════════════╝ */
+
+/* ── 1. DESIGN TOKENS ─────────────────────────────────────── */
+:root {
+  /* KPI accent gradients */
+  --kpi-green:  linear-gradient(135deg, #16a34a, #22c55e);
+  --kpi-gold:   linear-gradient(135deg, #c99a2e, #e0b840);
+  --kpi-brown:  linear-gradient(135deg, #3a2000, #7a5c2e);
+  --kpi-blue:   linear-gradient(135deg, #1d4ed8, #3b82f6);
+  --kpi-purple: linear-gradient(135deg, #7c3aed, #a855f7);
+  --kpi-orange: linear-gradient(135deg, #d97706, #f59e0b);
+  --kpi-red:    linear-gradient(135deg, #dc2626, #ef4444);
+  --kpi-teal:   linear-gradient(135deg, #0891b2, #22d3ee);
+  
+  /* Surface */
+  --surface:        #ffffff;
+  --surface-subtle: #fdf8f0;
+  --surface-hover:  #faf4e8;
+  --border-subtle:  rgba(224,200,136,.45);
+  --border-strong:  rgba(224,200,136,.75);
+  
+  /* Text */
+  --text-primary:   #2d1800;
+  --text-secondary: #7a5c2e;
+  --text-muted:     #9a7a4a;
+  --text-light:     #b89a6a;
+  
+  /* Transitions */
+  --ease-out: cubic-bezier(.22,.68,0,1.2);
+  --ease-std: cubic-bezier(.4,0,.2,1);
+}
+
+/* ── 2. BACKGROUND — subtle grid pattern ───────────────────── */
+body {
+  background-color: #ede8dc;
+  background-image:
+    linear-gradient(rgba(58,32,0,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58,32,0,.025) 1px, transparent 1px),
+    radial-gradient(ellipse at 15% 5%, rgba(201,154,46,.07) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 95%, rgba(58,32,0,.05) 0%, transparent 45%);
+  background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+}
+
+/* ── 3. NAVIGATION — premium elevated bar ─────────────────── */
+nav {
+  height: 62px;
+  padding: 0 28px;
+  background: linear-gradient(135deg, #2d1600 0%, #3a2000 40%, #4a2c08 100%);
+  border-bottom: 1px solid rgba(224,184,64,.25);
+  box-shadow:
+    0 1px 0 rgba(224,184,64,.12),
+    0 4px 20px rgba(0,0,0,.35),
+    0 8px 40px rgba(0,0,0,.12);
+}
+.tab-bar { top: 62px !important; }
+
+/* Nav logo — show Auditera text */
+.nav-logo { gap: 10px; }
+.nav-logo-text::after {
+  content: 'ditera';
+  color: rgba(245,230,192,.65);
+  font-weight: 400;
+  font-size: 15px;
+}
+.admin-badge {
+  font-size: 8.5px;
+  padding: 3px 10px;
+  letter-spacing: .12em;
+  box-shadow: 0 0 12px rgba(220,38,38,.3);
+}
+
+/* Nav right — cleaner spacing */
+.nav-clock {
+  font-size: 11.5px;
+  color: rgba(245,230,192,.35);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+}
+#navUser {
+  font-size: 11px;
+  color: rgba(245,230,192,.5);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nbtn-ghost {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(245,230,192,.18);
+  color: rgba(245,230,192,.7);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  transition: all .15s var(--ease-std);
+}
+.nbtn-ghost:hover {
+  background: rgba(255,255,255,.12);
+  border-color: rgba(245,230,192,.35);
+  color: #f5e6c0;
+}
+
+/* ── 4. TAB BAR — floating pill active state ──────────────── */
+.tab-bar {
+  background: #fff;
+  border-bottom: 1.5px solid var(--border-subtle);
+  padding: 0 20px;
+  gap: 0;
+  box-shadow: 0 2px 16px rgba(58,32,0,.07);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab {
+  padding: 0 16px;
+  height: 52px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  gap: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition: color .15s, background .15s, border-color .15s;
+  position: relative;
+}
+.tab i {
+  font-size: 14px;
+  opacity: .75;
+  transition: opacity .15s;
+}
+.tab:hover {
+  color: var(--text-primary);
+  background: rgba(224,184,64,.06);
+}
+.tab:hover i { opacity: 1; }
+.tab.active {
+  color: var(--text-primary);
+  font-weight: 800;
+  border-bottom-color: #e0b840;
+  background: rgba(224,184,64,.07);
+}
+.tab.active i { opacity: 1; }
+
+/* ── 5. KPI CARDS — premium tiles with gradient tops ─────── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 18px 20px 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(58,32,0,.05), 0 4px 16px rgba(58,32,0,.05);
+  transition: transform .2s var(--ease-std), box-shadow .2s var(--ease-std);
+}
+.kpi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(58,32,0,.08), 0 12px 32px rgba(58,32,0,.08);
+}
+
+/* Top accent gradient bar (full width) */
+.kpi-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  width: 100% !important;
+  border-radius: 16px 16px 0 0;
+}
+
+/* Icon circle */
+.kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--surface-subtle);
+  font-size: 16px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.kpi-val {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -.03em;
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  line-height: 1.3;
+}
+
+.kpi-sub {
+  font-size: 10.5px;
+  color: var(--text-light);
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+.kpi-trend {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: .02em;
+}
+.trend-up  { background: #dcfce7; color: #15803d; }
+.trend-dn  { background: #fee2e2; color: #b91c1c; }
+.trend-neu { background: #f1f5f9; color: #64748b; }
+
+/* ── 6. CARDS — clean elevated panels ────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 4px rgba(58,32,0,.05), 0 4px 16px rgba(58,32,0,.04);
+  overflow: hidden;
+  transition: box-shadow .2s var(--ease-std);
+}
+.card:hover {
+  box-shadow: 0 2px 8px rgba(58,32,0,.07), 0 8px 24px rgba(58,32,0,.07);
+}
+/* Card header strip */
+.card > .card-title:first-child,
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1.5px solid var(--border-subtle);
+  background: linear-gradient(180deg, #fdfaf5 0%, #faf5ec 100%);
+  gap: 10px;
+}
+.card-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -.01em;
+  gap: 8px;
+}
+.card-title i {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+/* Card body padding */
+.card-body,
+.card > *:not(.card-title):not(.card-head) {
+  padding: 18px 20px;
+}
+
+/* ── 7. INPUTS & SELECTS — consistent 40px height ─────────── */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="search"],
+select,
+textarea:not([style*="opacity:0"]) {
+  height: 38px;
+  padding: 0 13px;
+  border: 1.5px solid rgba(224,200,136,.7);
+  border-radius: 9px;
+  background: #fdfaf4;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+}
+textarea:not([style*="opacity:0"]) {
+  height: auto;
+  padding: 10px 13px;
+  resize: vertical;
+  min-height: 80px;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #e0b840;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(224,184,64,.15);
+}
+input::placeholder, textarea::placeholder { color: #b89a6a; opacity: 1; }
+
+/* Form row labels */
+.form-row label, label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 5px;
+  letter-spacing: .01em;
+}
+.form-row, .form-row3 {
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+/* ── 8. BUTTONS — polished touch targets ──────────────────── */
+.nbtn {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all .18s var(--ease-std);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nbtn-gold {
+  background: linear-gradient(135deg, #d4a82e 0%, #e0b840 50%, #d4a82e 100%);
+  color: #2d1600;
+  border: 1px solid rgba(201,154,46,.5);
+  box-shadow: 0 2px 8px rgba(201,154,46,.3), inset 0 1px 0 rgba(255,255,255,.25);
+}
+.nbtn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(201,154,46,.4), inset 0 1px 0 rgba(255,255,255,.3);
+}
+.nbtn-outline {
+  background: var(--surface);
+  border: 1.5px solid var(--border-strong);
+  color: var(--text-secondary);
+}
+.nbtn-outline:hover {
+  background: var(--surface-hover);
+  border-color: #c09a30;
+  color: var(--text-primary);
+}
+.nbtn-red {
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #fff;
+  border: 1px solid rgba(220,38,38,.5);
+  box-shadow: 0 2px 8px rgba(220,38,38,.25);
+}
+.nbtn-red:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(220,38,38,.35); }
+.nbtn-green {
+  background: linear-gradient(135deg, #15803d, #16a34a);
+  color: #fff;
+  border: 1px solid rgba(22,163,74,.5);
+  box-shadow: 0 2px 8px rgba(22,163,74,.25);
+}
+.nbtn-green:hover { transform: translateY(-1px); }
+
+/* ── 9. DATA TABLES — premium rows ───────────────────────── */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12.5px;
+}
+table th {
+  padding: 10px 14px;
+  text-align: right;
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  background: linear-gradient(180deg, #fdf8f0 0%, #f8f2e4 100%);
+  border-bottom: 2px solid rgba(224,200,136,.5);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(240,232,216,.6);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+table tbody tr:last-child td { border-bottom: none; }
+table tbody tr:nth-child(even) td { background: rgba(253,248,240,.5); }
+table tbody tr:hover td {
+  background: #fdf5e0;
+  transition: background .12s;
+}
+
+/* ── 10. BADGES — polished pills ─────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+/* Plan badges */
+.pb-trial   { background: #fef9c3; color: #854d0e; border: 1px solid #fde68a; }
+.pb-basic   { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.pb-pro     { background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
+.pb-agency  { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+.pb-expired { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+.pb-susp    { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+
+/* Status badges */
+.st-active  { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.st-trial   { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+.st-expired { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+.st-susp    { background: #f0f9ff; color: #0369a1; border: 1px solid #bae6fd; }
+
+/* ── 11. MODALS — cinematic backdrop ─────────────────────── */
+#confirmOverlay,
+.modal-overlay,
+[id$="Overlay"] {
+  backdrop-filter: blur(6px) saturate(1.2);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  background: rgba(20,10,0,.55) !important;
+  transition: opacity .2s var(--ease-std);
+}
+.modal,
+.modal-content,
+.modal-box {
+  border-radius: 18px !important;
+  padding: 28px 26px !important;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.18),
+    0 32px 80px rgba(0,0,0,.14),
+    0 0 0 1px rgba(224,200,136,.2) !important;
+  animation: modal-pop .22s var(--ease-out) both;
+}
+@keyframes modal-pop {
+  from { opacity: 0; transform: translateY(12px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-title, .modal h3 {
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  color: var(--text-primary);
+  letter-spacing: -.02em;
+  margin-bottom: 12px;
+}
+
+/* ── 12. IMPERSONATION BANNER ─────────────────────────────── */
+#impBanner {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  border-bottom: 1px solid rgba(167,139,250,.3);
+  box-shadow: 0 2px 12px rgba(124,58,237,.3);
+  font-size: 12.5px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f3e8ff;
+}
+.imp-badge {
+  background: rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.3);
+  color: #fff;
+  font-weight: 800;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11.5px;
+}
+
+/* ── 13. MAINTENANCE BANNER ───────────────────────────────── */
+#maintBanner {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  border-bottom: 1px solid rgba(245,158,11,.4);
+  box-shadow: 0 2px 12px rgba(217,119,6,.3);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 24px;
+  text-align: center;
+  letter-spacing: .01em;
+}
+
+/* ── 14. BULK ACTION BAR ──────────────────────────────────── */
+#bulkBar {
+  background: linear-gradient(135deg, #1e3a5f, #1d4ed8);
+  border-bottom: 1px solid rgba(59,130,246,.3);
+  box-shadow: 0 2px 16px rgba(29,78,216,.25);
+  color: #fff;
+  padding: 8px 24px;
+  font-size: 12.5px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+.bulk-count {
+  background: #fff;
+  color: #1d4ed8;
+  font-weight: 900;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+/* ── 15. EMPTY STATE ──────────────────────────────────────── */
+.empty, [class*="empty"] {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+}
+.empty i, [class*="empty"] i {
+  font-size: 36px;
+  opacity: .35;
+  display: block;
+  margin-bottom: 10px;
+}
+.empty-title { font-size: 14px; font-weight: 700; color: var(--text-secondary); margin-bottom: 4px; }
+.empty-sub   { font-size: 12px; color: var(--text-light); }
+
+/* ── 16. PAGE LAYOUT ──────────────────────────────────────── */
+.page {
+  padding: 20px 24px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* Grid spacing */
+.grid2 { gap: 18px; margin-bottom: 18px; }
+.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-bottom: 18px; }
+
+/* Section title above cards */
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  margin-bottom: 12px;
+  margin-top: 4px;
+  padding-right: 4px;
+}
+
+/* ── 17. SCROLLBAR (webkit) ───────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(58,32,0,.2); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(58,32,0,.35); }
+
+/* ── 18. PAGE LOAD ANIMATION ──────────────────────────────── */
+.kpi-grid { animation: fade-up .35s var(--ease-out) both; }
+.kpi-grid:nth-child(2) { animation-delay: .05s; }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 19. PRINT RESET for admin UI ────────────────────────── */
+@media print {
+  nav, .tab-bar, #bulkBar, #impBanner, #maintBanner { display: none !important; }
+  .page { padding: 0; max-width: 100%; }
+}
+
+</style>
+
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
 </head>
@@ -903,38 +1507,38 @@ nav {
 <div class="pane active" id="pane-overview">
   <!-- KPI ROW 1 -->
   <div class="kpi-grid" style="margin-top:8px" id="kpiGrid1">
-    <div class="kpi"><div class="kpi-bar" style="background:var(--green)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-green)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-users"></i></span><span class="kpi-trend" id="kpiTrendUsers"></span></div>
       <div class="kpi-val" id="kpiTotalUsers">0</div><div class="kpi-label">סה"כ משתמשים</div>
     </div>
-    <div class="kpi"><div class="kpi-bar" style="background:var(--gold)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-gold)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-credit-card"></i></span><span class="kpi-trend trend-neu" id="kpiPayingPct">0%</span></div>
       <div class="kpi-val" id="kpiPaying">0</div><div class="kpi-label">מנויים פעילים</div><div class="kpi-sub">שיעור המרה מניסיון</div>
     </div>
-    <div class="kpi"><div class="kpi-bar" style="background:var(--brown)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-brown)"></div>
       <div class="kpi-top"><span class="kpi-icon">₪</span><span class="kpi-trend" id="kpiMRRTrend"></span></div>
       <div class="kpi-val" id="kpiMRR">₪0</div><div class="kpi-label">MRR (הכנסה חודשית)</div>
     </div>
-    <div class="kpi"><div class="kpi-bar" style="background:var(--blue)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-blue)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-trending-up"></i></span></div>
       <div class="kpi-val" id="kpiARR">₪0</div><div class="kpi-label">ARR (תחזית שנתית)</div>
     </div>
   </div>
   <!-- KPI ROW 2 -->
   <div class="kpi-grid" id="kpiGrid2">
-    <div class="kpi"><div class="kpi-bar" style="background:var(--purple)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-purple)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-chart-bar"></i></span></div>
       <div class="kpi-val" id="kpiARPU">₪0</div><div class="kpi-label">ARPU (ממוצע למשתמש)</div>
     </div>
-    <div class="kpi"><div class="kpi-bar" style="background:var(--orange)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-orange)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-user-plus"></i></span><span class="kpi-trend" id="kpiNewTrend"></span></div>
       <div class="kpi-val" id="kpiNewMonth">0</div><div class="kpi-label">הצטרפו החודש</div>
     </div>
-    <div class="kpi"><div class="kpi-bar" style="background:var(--red)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-red)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-player-pause-filled"></i></span></div>
       <div class="kpi-val" id="kpiSuspended">0</div><div class="kpi-label">חשבונות מושהים</div>
     </div>
-    <div class="kpi"><div class="kpi-bar" style="background:var(--green)"></div>
+    <div class="kpi"><div class="kpi-bar" style="background:var(--kpi-green)"></div>
       <div class="kpi-top"><span class="kpi-icon"><i class="ti ti-ticket"></i></span></div>
       <div class="kpi-val" id="kpiPromos">0</div><div class="kpi-label">קופונים פעילים</div>
     </div>
@@ -3926,6 +4530,11 @@ function printReceipt(i){
   .kpi-val{font-size:16px}
   .page{padding:8px 10px}
 }
+
+
+/* Pane transitions */
+.pane { transition: opacity .2s ease, transform .2s ease; }
+.pane:not(.active) { display: none; }
 
 </style></head><body>
   <div class="page">
@@ -8106,6 +8715,66 @@ function deleteInquiry(idx){
   }catch(e){}
   renderInquiries();
 }
+
+/* ── KPI Counter Animation ──────────────────────────────────── */
+(function(){
+  function animateNumber(el, from, to, duration, prefix, suffix){
+    if(!el) return;
+    var start = null;
+    var isFloat = String(to).includes('.');
+    function step(ts){
+      if(!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      // ease-out cubic
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var current = from + (to - from) * ease;
+      var display = isFloat ? current.toFixed(1) : Math.round(current).toLocaleString('he-IL');
+      el.textContent = (prefix||'') + display + (suffix||'');
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  
+  // Run after renderOverview sets the values
+  var _origRenderOverview = window.renderOverview;
+  if(typeof _origRenderOverview === 'function'){
+    window.renderOverview = function(){
+      _origRenderOverview.apply(this, arguments);
+      setTimeout(function(){
+        var kpis = document.querySelectorAll('.kpi-val');
+        kpis.forEach(function(el){
+          var text = el.textContent.trim();
+          var prefix = '';
+          if(text.startsWith('₪')) prefix = '₪';
+          var num = parseFloat(text.replace(/[^0-9.]/g,''));
+          if(!isNaN(num) && num > 0){
+            el.textContent = prefix + '0';
+            animateNumber(el, 0, num, 800, prefix, text.endsWith('%') ? '%' : '');
+          }
+        });
+      }, 50);
+    };
+  }
+  
+  // Smooth tab transitions
+  var _origShowTab = window.showTab;
+  if(typeof _origShowTab === 'function'){
+    window.showTab = function(name, el){
+      var panes = document.querySelectorAll('.pane');
+      panes.forEach(function(p){ p.style.opacity = '0'; p.style.transform = 'translateY(6px)'; });
+      _origShowTab.apply(this, arguments);
+      setTimeout(function(){
+        var active = document.querySelector('.pane.active');
+        if(active){
+          active.style.transition = 'opacity .2s ease, transform .2s ease';
+          active.style.opacity = '1';
+          active.style.transform = 'translateY(0)';
+        }
+      }, 10);
+    };
+  }
+})();
+
 </script>
 
 <div style="text-align:center;padding:12px;font-size:11px;color:#bbb;border-top:1px solid #f0f0f0">
