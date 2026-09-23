@@ -230,6 +230,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .pt-card.featured .pt-btn:hover{background:#5a3010}
 .pt-cta{display:inline-flex;align-items:center;gap:8px;color:var(--brown2);font-size:14px;font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--border);padding-bottom:2px;transition:border-color .2s}
 .pt-cta:hover{border-color:var(--gold-text);color:var(--brown)}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
 @media(max-width:720px){
   .pt-grid{grid-template-columns:1fr;gap:14px}
   .pricing-teaser h2{font-size:20px}
@@ -258,7 +259,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 /* ── MOBILE ── */
 @media(max-width:768px){
   .nav-links .nav-link,.nav-links .nav-cta{display:none}
-  .hamburger{display:flex}
+  .hamburger{display:flex!important}
   nav{padding:0 4%;height:56px}
   .mobile-menu{top:56px}
 
@@ -325,7 +326,7 @@ nav{background:#fff;padding:0 6%;height:64px;display:flex;align-items:center;jus
 .skip-link{position:absolute;top:-100px;right:0;background:#3a2000;color:#f5e6c0;padding:10px 18px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:9999;transition:top .2s}
 .skip-link:focus-visible{top:0}
 /* HAMBURGER MENU */
-.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:8px;margin-right:-6px;margin-left:6px}
+
 .hamburger span{display:block;width:22px;height:2px;background:var(--brown);border-radius:2px;transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
