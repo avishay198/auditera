@@ -9004,6 +9004,43 @@ html, body {
   }
 }
 
+
+/* ── FIELDS & INPUTS — no overflow globally ─────────────────── */
+.fg input, .fg select, .fg textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+}
+
+/* Search/filter inputs with inline min-width — override on mobile */
+@media (max-width: 768px) {
+  input[style*="min-width"],
+  select[style*="min-width"] {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Filter rows — wrap instead of overflow */
+  .card-head, .card > div:has(input), .card > div:has(select) {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Monospace / URL / token fields */
+  input[style*="monospace"], input[style*="direction:ltr"],
+  input[type="url"], input[readonly] {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-width: 0 !important;
+  }
+}
+
 </style>
 
 <script>
