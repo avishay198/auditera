@@ -1917,9 +1917,9 @@ table tbody tr:hover td {
       </div>
     </div>
     <!-- Filters -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-      <input id="userSearch" placeholder="חיפוש שם / אימייל..." oninput="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 11px;font-size:12px;font-family:inherit;min-width:200px">
-      <select id="userPlanF" onchange="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:12px;font-family:inherit">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;overflow-x:auto">
+      <input id="userSearch" placeholder="חיפוש שם / אימייל..." oninput="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 11px;font-size:12px;font-family:inherit;flex:1 1 160px;min-width:0">
+      <select id="userPlanF" onchange="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:12px;font-family:inherit;flex:1 1 120px;min-width:0">
         <option value="">כל המסלולים</option>
         <option value="trial">ניסיון</option>
         <option value="starter">סטארטר</option>
@@ -1927,12 +1927,12 @@ table tbody tr:hover td {
         <option value="premium">פרמיום</option>
         <option value="enterprise">ארגוני</option>
       </select>
-      <select id="userStatusF" onchange="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:12px;font-family:inherit">
+      <select id="userStatusF" onchange="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:12px;font-family:inherit;flex:1 1 110px;min-width:0">
         <option value="">כל הסטטוסים</option>
         <option value="active">פעיל</option>
         <option value="suspended">מושהה</option>
       </select>
-      <select id="userSort" onchange="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:12px;font-family:inherit">
+      <select id="userSort" onchange="renderUsers()" style="border:1px solid var(--border);border-radius:7px;padding:6px 10px;font-size:12px;font-family:inherit;flex:1 1 140px;min-width:0">
         <option value="created_desc">חדש → ישן</option>
         <option value="created_asc">ישן → חדש</option>
         <option value="name">שם א-ת</option>
