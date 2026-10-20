@@ -391,30 +391,33 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   .steps{grid-template-columns:1fr!important}
 }
 
-/* === Hero dark background (match contact page) === */
-.hero{
-  background:linear-gradient(135deg,#2c1600 0%,#3a2000 55%,#4a2c08 100%)!important;
-  border-bottom:none!important;
+/* === Hero heading dark block (contact-page style) === */
+.hero-heading{
+  background:linear-gradient(135deg,#2c1600 0%,#3a2000 55%,#4a2c08 100%);
+  margin:-60px -6% 40px;
+  padding:60px 6% 52px;
   position:relative;overflow:hidden;
+  text-align:right;
 }
-.hero::before{
+.hero-heading::before{
   content:'';position:absolute;top:-80px;left:-80px;
   width:340px;height:340px;border-radius:50%;
   background:radial-gradient(circle,rgba(224,184,64,.13) 0%,transparent 70%);
   pointer-events:none;
 }
-.hero::after{
-  content:'';position:absolute;bottom:-120px;right:5%;
-  width:420px;height:420px;border-radius:50%;
+.hero-heading::after{
+  content:'';position:absolute;bottom:-80px;right:5%;
+  width:380px;height:380px;border-radius:50%;
   background:radial-gradient(circle,rgba(224,184,64,.09) 0%,transparent 65%);
   pointer-events:none;
 }
-.hero h1{color:#f5e6c0!important;margin-inline:0;text-align:right}
-.hero h1 em{color:var(--gold)!important;border-bottom:none!important;font-style:normal}
-.hero-sub{color:rgba(245,230,192,.65)!important;margin-inline:0;text-align:right;display:block}
-.hero-badge{background:rgba(255,255,255,.08)!important;border:1px solid rgba(224,184,64,.3)!important;color:rgba(245,230,192,.75)!important;box-shadow:none!important}
-.hero-badge-dot{background:var(--gold)!important}
-.hero-tag{background:rgba(255,255,255,.08);border:1px solid rgba(224,184,64,.3);color:rgba(245,230,192,.75)}
+.hero-heading h1{color:#f5e6c0;margin-inline:0;text-align:right;position:relative;z-index:1}
+.hero-heading h1 em{color:var(--gold);border-bottom:none!important;font-style:normal}
+.hero-heading .hero-sub{color:rgba(245,230,192,.65);margin-inline:0;text-align:right;display:block;position:relative;z-index:1}
+.hero-heading .hero-badge{background:rgba(255,255,255,.08);border:1px solid rgba(224,184,64,.3);color:rgba(245,230,192,.75);box-shadow:none;position:relative;z-index:1}
+.hero-heading .hero-badge-dot{background:var(--gold)}
+.hero-heading .hero-tag{background:rgba(255,255,255,.08);border:1px solid rgba(224,184,64,.3);color:rgba(245,230,192,.75);position:relative;z-index:1}
+.hero-heading .fdot{background:var(--gold)}
 /* === Right-align headings === */
 h1,h2,h3{text-align:right}
 .hero{text-align:right}
@@ -455,9 +458,11 @@ h1,h2,h3{text-align:right}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge"><div class="hero-badge-dot"></div>בדיקת כספים חכמה לעסקים</div>
-  <h1>בדוק את כספי העסק שלך.<br>תוצאות <em>בשניות.</em></h1>
-  <p class="hero-sub">העלה קובץ Excel מתוכנת הניהול שלך, גלה חריגות ובדוק מע"מ — הכל בדפדפן, ללא התקנה, ללא ידע קודם.</p>
+  <div class="hero-heading">
+    <div class="hero-badge"><div class="hero-badge-dot"></div>בדיקת כספים חכמה לעסקים</div>
+    <h1>בדוק את כספי העסק שלך.<br>תוצאות <em>בשניות.</em></h1>
+    <p class="hero-sub">העלה קובץ Excel מתוכנת הניהול שלך, גלה חריגות ובדוק מע"מ — הכל בדפדפן, ללא התקנה, ללא ידע קודם.</p>
+  </div>
   <div class="hero-actions">
     <a href="login.html?tab=register" class="btn-main">התחל חינם ←</a>
     <button class="btn-outline" onclick="openModal()">▶ צפה בהדגמה</button>
