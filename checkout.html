@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-  <meta name="description" content="רכישת מנוי ל-Auditera — פלטפורמת ביקורת חשבונאית חכמה לרואי חשבון">
+  <meta name="description" content="רכישת מנוי ל-Auditera — כלי בדיקת כספים חכם לבעלי עסקים">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
 <meta name="robots" content="noindex,nofollow">
@@ -365,7 +365,7 @@ footer{
   <script defer data-domain="auditera.co" src="https://plausible.io/js/script.js"></script>
   <meta property="og:type" content="website">
   <meta property="og:title" content="רכישה - Auditera">
-  <meta property="og:description" content="הצטרפו ל-Auditera — פלטפורמת ביקורת חשבונאית חכמה לרואי חשבון.">
+  <meta property="og:description" content="הצטרפו ל-Auditera — כלי בדיקת כספים חכם לבעלי עסקים.">
   <meta property="og:url" content="https://auditera.co/checkout.html">
   <meta property="og:image" content="https://auditera.co/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -634,10 +634,10 @@ footer{
 
 <script>
 const PLANS = {
-  starter:      { name:'סטארטר',  price:590,  annualPrice:472,  features:['35 תיקים בחודש','כלי סקירה חודשית','ייצוא CSV ו-Excel','תמיכה במייל'] },
-  professional: { name:'מקצועי',  price:990,  annualPrice:792,  features:['80 תיקים בחודש','כל הכלים + ביקורת שנתית','בנפורד, יחסים, MUS','AI BYOK + תמיכה מורחבת'] },
-  premium:      { name:'פרמיום',  price:2490, annualPrice:1992, features:['200 תיקים בחודש','כל הפיצ\'רים ללא הגבלה','מותג מותאם אישית','תמיכה ייעודית 24/7'] },
-  enterprise:   { name:'ארגוני',  price:0,    features:['ללא הגבלת תיקים','SLA מותאם','הדרכה ואינטגרציות','מחיר בהתאמה אישית'] }
+  starter:      { name:'עסק 1',        price:590,  annualPrice:472,  features:['עסק אחד','כל כלי הבדיקה','ייצוא CSV ו-Excel','תמיכה במייל'] },
+  professional: { name:'2 עסקים',      price:990,  annualPrice:792,  features:['2 עסקים','כל כלי הבדיקה','בנפורד, יחסים, AI','תמיכה מורחבת'] },
+  premium:      { name:'4 עסקים',      price:1690, annualPrice:1352, features:['4 עסקים','כל כלי הבדיקה','מותג מותאם אישית','תמיכה ייעודית 24/7'] },
+  enterprise:   { name:'מסלול מותאם', price:0,    features:['עסקים ללא הגבלה','SLA מותאם','הדרכה ואינטגרציות','מחיר בהתאמה אישית'] }
 };
 let _currentMethod='bank', _planPrice=0;
 
@@ -660,9 +660,9 @@ function selectMethod(method){
 
 function renderPlan(){
   const params=new URLSearchParams(location.search);
-  const key=(params.get('plan')||'professional').toLowerCase();
+  const key=(params.get('plan')||'starter').toLowerCase();
   const isAnnual=params.get('billing')==='annual';
-  const p=PLANS[key]||PLANS.professional;
+  const p=PLANS[key]||PLANS.starter;
   document.getElementById('planBadge').textContent='תכנית '+p.name;
   document.getElementById('planName').textContent=p.name;
   if(p.price){
@@ -787,7 +787,7 @@ function markSent(method){
     return;
   }
   const params=new URLSearchParams(location.search);
-  const plan=params.get('plan')||'professional';
+  const plan=params.get('plan')||'starter';
   const nameVal=document.getElementById('fullName')?document.getElementById('fullName').value.trim():'';
   const emailVal=document.getElementById('emailField')?document.getElementById('emailField').value.trim():'';
   const at=new Date().toISOString();
