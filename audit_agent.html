@@ -610,16 +610,16 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('upload',this)"><i class="ti ti-folder-open"></i> קבצים</button>
-    <button class="tab" onclick="switchTab('dashboard',this)"><i class="ti ti-layout-dashboard"></i> דשבורד</button>
+    <button class="tab active" onclick="switchTab('upload',this)"><i class="ti ti-folder-open"></i> העלאה</button>
+    <button class="tab" onclick="switchTab('dashboard',this)"><i class="ti ti-layout-dashboard"></i> סיכום</button>
     <button class="tab" onclick="switchTab('transactions',this)"><i class="ti ti-list-details"></i> עסקאות</button>
-    <button class="tab" onclick="switchTab('anomalies',this)"><i class="ti ti-alert-triangle"></i> חריגות</button>
+    <button class="tab" onclick="switchTab('anomalies',this)"><i class="ti ti-alert-triangle"></i> בדיקות</button>
     <button class="tab" onclick="switchTab('analysis',this)"><i class="ti ti-chart-bar"></i> ניתוח</button>
-    <button class="tab" onclick="switchTab('trialbalance',this)"><i class="ti ti-scale"></i> מאזן</button>
-    <button class="tab" onclick="switchTab('tax',this)"><i class="ti ti-receipt-tax"></i> מיסוי</button>
+    
+    <button class="tab" onclick="switchTab('tax',this)"><i class="ti ti-receipt-tax"></i> מס ומע"מ</button>
     <button class="tab tab-ai" onclick="_featureAllowed('ai')?switchTab('ai',this):_showUpgradePlan('דוח AI מקצועי')"><i class="ti ti-robot"></i> AI</button>
-    <button class="tab" onclick="switchTab('bank',this)"><i class="ti ti-building-bank"></i> בנק</button>
-    <button class="tab" onclick="switchTab('report',this)"><i class="ti ti-file-report"></i> דוח</button>
+    <button class="tab" onclick="switchTab('bank',this)"><i class="ti ti-building-bank"></i> התאמת בנק</button>
+    <button class="tab" onclick="switchTab('report',this)"><i class="ti ti-file-report"></i> הפקת דוח</button>
   </div>
 
   <!-- ── PERIOD FILTER BAR ─────────────────────────────── -->
@@ -635,11 +635,17 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 
   <!-- UPLOAD -->
   <div id="tab-upload" class="tab-panel active">
+    <div style="background:#f5faf0;border:1px solid #b8dca0;border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;line-height:1.8;color:#2a4a1a;direction:rtl">
+      <strong>📋 איך מתחילים — 3 שלבים פשוטים:</strong><br>
+      <strong>שלב 1:</strong> יצא קובץ Excel או CSV מתוכנת הנהלת החשבונות שלך (Priority, Rivchit, חשבשבת וכו׳)<br>
+      <strong>שלב 2:</strong> גרור את הקובץ לאזור למטה — המערכת מזהה את העמודות אוטומטית<br>
+      <strong>שלב 3:</strong> לחץ על "הפעל בדיקה" וקבל דוח מלא תוך שניות
+    </div>
     <div class="upload-zone" id="uploadZone">
       <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" onchange="handleFiles(this.files)">
       <div class="upload-icon"><i class="ti ti-cloud-upload" style="font-size:2.5rem"></i></div>
       <h2>גרור קובץ לכאן או לחץ לבחירה</h2>
-      <p id="uploadZoneHint">CSV או Excel — הסוכן מזהה עמודות אוטומטית בעברית ואנגלית</p>
+      <p id="uploadZoneHint">קובץ Excel או CSV מייצוא הנהלת החשבונות שלך</p>
       <div class="formats">
         <span class="fbadge">CSV</span><span class="fbadge">Excel (.xlsx)</span>
       </div>
@@ -708,7 +714,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         </div>
       </div>
     </div>
-    <button class="analyze-btn" id="analyzeBtn" onclick="analyzeData()" disabled><i class="ti ti-search"></i> הפעל ניתוח ביקורת מלא</button>
+    <button class="analyze-btn" id="analyzeBtn" onclick="analyzeData()" disabled><i class="ti ti-search"></i> הפעל בדיקה</button>
     <div style="text-align:center;margin-top:6px;font-size:11px;color:#9a7a4a;opacity:.75;letter-spacing:.2px">⌨&nbsp; <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">Ctrl</kbd> + <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">Enter</kbd>&nbsp; להפעלה מהירה &nbsp;·&nbsp; <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">Ctrl</kbd> + <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">P</kbd>&nbsp; להדפסה</div>
 
     <!-- מאזן בוחן — annual audit only -->
@@ -774,25 +780,34 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 
   <!-- ANOMALIES -->
   <div id="tab-anomalies" class="tab-panel">
-    <div id="anomaliesContent"><div class="empty"><div class="ei"><i class="ti ti-alert-triangle"></i></div><h3>הפעל ניתוח כדי לזהות חריגות</h3></div></div>
+    <div style="background:#fffbf0;border:1px solid #e8d5a0;border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;line-height:1.7;color:#5a3e00;direction:rtl">
+      <strong>🔍 מה הבדיקות מחפשות?</strong><br>
+      המערכת בודקת אוטומטית 12 סוגי חריגות — כפילויות, עסקאות עגולות חשודות, תשלומים גבוהים מהרגיל, תבניות מספרים לא תקינות ועוד.<br>
+      <strong>מה לעשות אם מוצאים?</strong> בדוק כל חריגה מול המסמכים המקוריים. אם אין הסבר — פנה לרואה החשבון שלך.
+    </div>
+    <div id="anomaliesContent"><div class="empty"><div class="ei"><i class="ti ti-alert-triangle"></i></div><h3>הפעל בדיקה כדי לראות עסקאות חשודות</h3></div></div>
   </div>
 
   <!-- ANALYSIS: Benford + Ratios + Compare + Vendors -->
   <div id="tab-analysis" class="tab-panel">
     <div class="sub-tabs">
       <!-- ביקורת שנתית (נסתרים במצב חודשי) -->
-      <button class="tab active" id="stab-benford" onclick="_planGateSubTab('analysis','benford',this,'חוק בנפורד')"><i class="ti ti-123"></i> בנפורד</button>
-      <button class="tab" id="stab-vendors" onclick="_planGateSubTab('analysis','vendors',this,'רשת ספקים')"><i class="ti ti-users"></i> ספקים</button>
-      <button class="tab" id="stab-mus" onclick="_planGateSubTab('analysis','mus',this,'מדגם MUS')"><i class="ti ti-chart-dots-3"></i> מדגם MUS</button>
+      <button class="tab active" id="stab-benford" onclick="_planGateSubTab('analysis','benford',this,'זיהוי תבניות')"><i class="ti ti-123"></i> זיהוי תבניות</button>
+      <button class="tab" id="stab-vendors" onclick="_planGateSubTab('analysis','vendors',this,'ניתוח ספקים')"><i class="ti ti-users"></i> ניתוח ספקים</button>
+      <button class="tab" id="stab-mus" onclick="_planGateSubTab('analysis','mus',this,'מדגם MUS')" style="display:none"><i class="ti ti-chart-dots-3"></i> מדגם MUS</button>
       <!-- ביקורת חודשית: תקציב (ימין) → תזרים (אמצע) → השוואה (שמאל) -->
       <button class="tab" id="stab-budget" onclick="_planGateSubTab('analysis','budget',this,'השוואה לתקציב')"><i class="ti ti-calculator"></i> תקציב</button>
       <button class="tab" id="stab-cashflow" onclick="switchSubTab('analysis','cashflow',this)"><i class="ti ti-cash"></i> תזרים</button>
-      <button class="tab" id="stab-compare" onclick="_planGateSubTab('analysis','compare',this,'השוואת תקופות')"><i class="ti ti-arrows-exchange"></i> השוואה</button>
+      <button class="tab" id="stab-compare" onclick="_planGateSubTab('analysis','compare',this,'השוואה לתקופה קודמת')"><i class="ti ti-arrows-exchange"></i> השוואה לתקופה קודמת</button>
       <!-- שנתי בלבד -->
-      <button class="tab" id="stab-materiality" onclick="_planGateSubTab('analysis','materiality',this,'מהותיות')"><i class="ti ti-scale-outline"></i> מהותיות</button>
+      <button class="tab" id="stab-materiality" onclick="_planGateSubTab('analysis','materiality',this,'מהותיות')" style="display:none"><i class="ti ti-scale-outline"></i> מהותיות</button>
     </div>
     <div id="subpanel-analysis-benford" data-subpanel>
-      <div id="benfordContent"><div class="empty"><div class="ei"><i class="ti ti-wave-sine"></i></div><h3>חוק בנפורד</h3><p>הפעל ניתוח כדי לבחון התפלגות ספרות ראשונות</p></div></div>
+      <div style="background:#f0f7ff;border:1px solid #b8d4f0;border-radius:10px;padding:12px 16px;margin-bottom:12px;font-size:12.5px;line-height:1.7;color:#1a3a5c;direction:rtl">
+  <strong>💡 מה זה בדיקת תבניות מספרים?</strong><br>
+  בדיקה זו מזהה מספרים שנראים "מעוגלים מדי" או חוזרים בתדירות חשודה — סימן אפשרי לטעות או ערך שהוזן ידנית. לא כל חריגה בעייתית, אבל שווה לבדוק.
+</div>
+<div id="benfordContent"><div class="empty"><div class="ei"><i class="ti ti-wave-sine"></i></div><h3>זיהוי תבניות חשודות</h3><p>הפעל בדיקה כדי לנתח</p></div></div>
     </div>
     <div id="subpanel-analysis-compare" data-subpanel style="display:none">
       <div class="card" style="margin-bottom:12px" id="compareUploadCard">
@@ -817,10 +832,10 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         </div>
       </div>
     </div>
-    <div id="compareContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-arrows-shuffle"></i></div><h3>השוואת תקופות</h3><p>הפעל ניתוח כדי לראות השוואה</p></div></div>
+    <div id="compareContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-arrows-shuffle"></i></div><h3>השוואה לתקופה קודמת</h3><p>הפעל בדיקה כדי לראות השוואה</p></div></div>
     </div><!-- /subpanel-analysis-compare -->
     <div id="subpanel-analysis-vendors" data-subpanel style="display:none">
-      <div id="vendorsContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-affiliate"></i></div><h3>רשת ספקים</h3><p>הפעל ניתוח כדי לטעון</p></div></div>
+      <div id="vendorsContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-affiliate"></i></div><h3>ניתוח ספקים</h3><p>הפעל בדיקה כדי לטעון</p></div></div>
     </div><!-- /subpanel-analysis-vendors -->
 
     <!-- MUS Sampling -->
@@ -866,7 +881,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         </div>
         <div class="cb" style="padding:12px 16px">
           <p style="font-size:12px;color:var(--muted);margin-bottom:14px">הזן תקציב חודשי מתוכנן לכל קטגוריה — המערכת תציג פערים מול הנתונים בפועל.</p>
-          <div id="budgetTableWrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div class="empty"><div class="ei"><i class="ti ti-calculator"></i></div><h3>תקציב</h3><p>הפעל ניתוח כדי לטעון קטגוריות</p></div></div>
+          <div id="budgetTableWrap" style="overflow-x:auto;-webkit-overflow-scrolling:touch"><div class="empty"><div class="ei"><i class="ti ti-calculator"></i></div><h3>תקציב</h3><p>הפעל בדיקה כדי לטעון קטגוריות</p></div></div>
         </div>
       </div>
     </div><!-- /subpanel-analysis-budget -->
@@ -883,12 +898,12 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         </div>
         <div class="cb">
           <p style="font-size:12px;color:var(--muted);margin:0 0 14px">סווג כל קטגוריה לאחד משלושת סוגי התזרים. הסיווג האוטומטי מבוסס על שם הקטגוריה — ניתן לעקוף ידנית.</p>
-          <div id="cashFlowContent"><div class="empty"><div class="ei"><i class="ti ti-cash"></i></div><h3>תזרים מזומנים</h3><p>הפעל ניתוח כדי לחשב</p></div></div>
+          <div id="cashFlowContent"><div class="empty"><div class="ei"><i class="ti ti-cash"></i></div><h3>תזרים מזומנים</h3><p>הפעל בדיקה כדי לחשב</p></div></div>
         </div>
       </div>
     </div><!-- /subpanel-analysis-cashflow -->
     <div id="subpanel-analysis-materiality" data-subpanel style="display:none">
-      <div id="materialityContent"><div class="empty"><div class="ei"><i class="ti ti-scale"></i></div><h3>חישוב מהותיות</h3><p>הפעל ניתוח כדי לחשב</p></div></div>
+      <div id="materialityContent"><div class="empty"><div class="ei"><i class="ti ti-scale"></i></div><h3>סף בדיקה</h3><p>הפעל בדיקה כדי לחשב</p></div></div>
     </div><!-- /subpanel-analysis-materiality -->
 
   </div><!-- /tab-analysis -->
@@ -930,10 +945,10 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
         <div id="vatModeDesc" style="margin-top:10px;font-size:11px;color:var(--muted)">החישוב יתעדכן אוטומטית בהתאם לבחירה.</div>
       </div>
     </div>
-    <div id="vatContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-receipt"></i></div><h3>ניתוח מע"מ</h3><p>הפעל ניתוח כדי לחשב</p></div></div>
+    <div id="vatContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-receipt"></i></div><h3>בדיקת מע"מ</h3><p>הפעל בדיקה כדי לחשב</p></div></div>
     </div><!-- /subpanel-tax-vat -->
     <div id="subpanel-tax-wht" data-subpanel style="display:none">
-      <div id="whtContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-building-bank"></i></div><h3>ניכוי מס במקור</h3><p>הפעל ניתוח כדי לחשב</p></div></div>
+      <div id="whtContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-building-bank"></i></div><h3>ניכוי מס</h3><p>הפעל בדיקה כדי לחשב</p></div></div>
     </div><!-- /subpanel-tax-wht -->
     <div id="subpanel-tax-il" data-subpanel style="display:none">
       <div id="israeliInvoiceContent"><div class="empty"><div class="ei"><i class="ti ti-tag"></i></div><h3>חשבוניות ישראל</h3><p>הפעל ניתוח כדי לבדוק מספרי הקצאה בחשבוניות הקנייה של הלקוח</p><p style="font-size:11px;color:#9a7a4a;margin-top:8px;max-width:320px">מומלץ לייצא מהנה"ח את עמודת מספר ההקצאה — ללא עמודה זו כל חשבונית מעל הסף תסומן כחסרה</p></div></div>
@@ -1053,7 +1068,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
           <button onclick="printWorkingPapers()" id="wpPrintBtn" class="cl-btn" style="font-size:11px" disabled><i class="ti ti-printer"></i> הדפס דפי עבודה</button>
         </div>
       </div>
-      <div id="workingPapersContent"><div class="empty" style="padding:16px"><p>הפעל ניתוח כדי לפתוח דפי עבודה</p></div></div>
+      <div id="workingPapersContent"><div class="empty" style="padding:16px"><p>הפעל בדיקה כדי לפתוח דפי עבודה</p></div></div>
     </div>
 
     <!-- דוח רווח והפסד מהיר -->
@@ -1065,7 +1080,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
           <button onclick="printPL()" id="plPrintBtn" class="cl-btn" style="font-size:11px" disabled><i class="ti ti-printer"></i> הדפס</button>
         </div>
       </div>
-      <div id="plContent"><div class="empty"><div class="ei"><i class="ti ti-report-analytics"></i></div><h3>דוח רווח והפסד</h3><p>הפעל ניתוח כדי לחשב</p></div></div>
+      <div id="plContent"><div class="empty"><div class="ei"><i class="ti ti-report-analytics"></i></div><h3>דוח רווח והפסד</h3><p>הפעל בדיקה כדי לחשב</p></div></div>
     </div>
 
     <!-- יצירת דוח -->
@@ -1198,6 +1213,10 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   </div><!-- /tab-ai -->
   <!-- ── BANK RECONCILIATION TAB ──────────────────────── -->
   <div id="tab-bank" class="tab-panel">
+    <div style="background:#f0f5ff;border:1px solid #b0c8f0;border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;line-height:1.7;color:#1a2e5c;direction:rtl">
+      <strong>🏦 מה זה התאמת בנק?</strong><br>
+      בדיקה שמוודאת שכל עסקה שמופיעה בספרים שלך מופיעה גם בדף הבנק — ולהפך. פערים בין הספרים לבנק יכולים להעיד על טעות או עסקה שנשכחה.
+    </div>
     <div class="card" style="margin-bottom:14px">
       <div class="ch"><span class="ct">&#x1F4B3; התאמת דף בנק</span></div>
       <div class="cb" style="padding:14px 16px">
@@ -1791,7 +1810,7 @@ function calcAutoMateriality(pct){
 function renderMUS(){
   const el=document.getElementById('musResults');if(!el)return;
   if(!analyzedData){
-    el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-dice"></i></div><h3>אין נתונים</h3><p>הפעל ניתוח ביקורת תחילה</p></div>';return;
+    el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-dice"></i></div><h3>אין נתונים</h3><p>הפעל בדיקה תחילה</p></div>';return;
   }
   // MUS דוגם את כל העסקאות (הכנסות + הוצאות) לפי ערך מוחלט
   const rows=analyzedData.rows.filter(r=>r.amount!==0);
@@ -4694,7 +4713,7 @@ function drawBenfordChart(canvasId,digitCounts,total){
 
 function renderBenford(){
   const el=document.getElementById('benfordContent');if(!el)return;
-  if(!analyzedData){el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-wave-sine"></i></div><h3>חוק בנפורד</h3><p>הפעל ניתוח כדי לבחון</p></div>';return;}
+  if(!analyzedData){el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-wave-sine"></i></div><h3>חוק בנפורד</h3><p>הפעל בדיקה כדי לבחון</p></div>';return;}
   const rows=analyzedData.rows;
   const digitCounts={1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};
   const digitRows={1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]};
@@ -6722,7 +6741,7 @@ function renderMateriality(){
   const el=document.getElementById('materialityContent');
   if(!el) return;
   if(!analyzedData){
-    el.innerHTML=`<div class="empty"><div class="ei"><i class="ti ti-scale"></i></div><h3>חישוב מהותיות</h3><p>הפעל ניתוח כדי לחשב</p></div>`;
+    el.innerHTML=`<div class="empty"><div class="ei"><i class="ti ti-scale"></i></div><h3>סף בדיקה</h3><p>הפעל בדיקה כדי לחשב</p></div>`;
     return;
   }
   const{stats,rows}=analyzedData;
@@ -6909,7 +6928,7 @@ function renderRiskScore(){
   if(!el) return;
   const d=computeRiskScore();
   if(!d){
-    el.innerHTML=`<div class="empty" style="padding:20px"><p>הפעל ניתוח כדי לחשב</p></div>`;
+    el.innerHTML=`<div class="empty" style="padding:20px"><p>הפעל בדיקה כדי לחשב</p></div>`;
     if(badge) badge.textContent='—';
     return;
   }
@@ -6990,7 +7009,7 @@ function renderWorkingPapers(){
   const btnML=document.getElementById('mgmtLetterBtn');
   if(!el) return;
   if(!analyzedData){
-    el.innerHTML=`<div class="empty" style="padding:16px"><p>הפעל ניתוח כדי לפתוח דפי עבודה</p></div>`;
+    el.innerHTML=`<div class="empty" style="padding:16px"><p>הפעל בדיקה כדי לפתוח דפי עבודה</p></div>`;
     [btnWP,btnML].forEach(b=>{if(b)b.disabled=true;});
     return;
   }
@@ -7337,7 +7356,7 @@ function renderPL(){
   }
   const d=_buildPLData();
   if(!d){
-    el.innerHTML=`<div class="empty"><div class="ei"><i class="ti ti-report-analytics"></i></div><h3>דוח רווח והפסד</h3><p>הפעל ניתוח כדי לחשב</p></div>`;
+    el.innerHTML=`<div class="empty"><div class="ei"><i class="ti ti-report-analytics"></i></div><h3>דוח רווח והפסד</h3><p>הפעל בדיקה כדי לחשב</p></div>`;
     if(btnExp) btnExp.disabled=true;
     if(btnPrt) btnPrt.disabled=true;
     return;
@@ -9463,7 +9482,7 @@ function renderCashFlow(){
   const el=document.getElementById('cashFlowContent');
   if(!el)return;
   if(!analyzedData||!analyzedData.byCategory){
-    el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-cash"></i></div><h3>תזרים מזומנים</h3><p>הפעל ניתוח כדי לחשב</p></div>';
+    el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-cash"></i></div><h3>תזרים מזומנים</h3><p>הפעל בדיקה כדי לחשב</p></div>';
     return;
   }
   const _cfCache=_cfLoadClass();
