@@ -444,11 +444,35 @@ footer{
 }
 
 
-/* === Right-align headings & subheadings === */
+/* === Hero dark background (match contact page) === */
+.hero{
+  background:linear-gradient(135deg,#2c1600 0%,#3a2000 55%,#4a2c08 100%)!important;
+  border-bottom:none!important;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-80px;left:-80px;
+  width:340px;height:340px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,184,64,.13) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-120px;right:5%;
+  width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(224,184,64,.09) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero h1{color:#f5e6c0!important;margin-inline:0;text-align:right}
+.hero h1 em{color:var(--gold)!important;border-bottom:none!important;font-style:normal}
+.hero-sub{color:rgba(245,230,192,.65)!important;margin-inline:0;text-align:right;display:block}
+.hero-badge{background:rgba(255,255,255,.08)!important;border:1px solid rgba(224,184,64,.3)!important;color:rgba(245,230,192,.75)!important;box-shadow:none!important}
+.hero-badge-dot{background:var(--gold)!important}
+.hero-tag{background:rgba(255,255,255,.08);border:1px solid rgba(224,184,64,.3);color:rgba(245,230,192,.75)}
+/* === Right-align headings === */
 h1,h2,h3{text-align:right}
-.hero h1{text-align:right;margin-right:0;margin-left:auto}
-.hero-sub,.hero-tag,.hero-badge{text-align:right;margin-right:0;margin-left:auto;display:block}
-.section-title,.section-sub,.section-tag{text-align:right}
+.hero{text-align:right}
+.hero-actions{justify-content:flex-end}
+.section-title,.section-sub,.section-tag{text-align:right;margin-inline:0}
 .s-title,.s-sub{text-align:right}
 </style>
 <script type="application/ld+json">
