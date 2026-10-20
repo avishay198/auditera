@@ -604,8 +604,8 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   <div class="mode-toggle-bar" id="modeToggleBar">
     <span style="font-size:12px;color:var(--muted);font-weight:600">מצב:</span>
     <div class="mode-toggle">
-      <button class="mode-btn active" id="modeMonthly" onclick="setAuditMode('monthly')"><i class="ti ti-calendar-month"></i> ביקורת חודשית</button>
-      <button class="mode-btn" id="modeAnnual" onclick="setAuditMode('annual')"><i class="ti ti-calendar-stats"></i> ביקורת שנתית</button>
+      <button class="mode-btn active" id="modeMonthly" onclick="setAuditMode('monthly')"><i class="ti ti-calendar-month"></i> בדיקה חודשית</button>
+      <button class="mode-btn" id="modeAnnual" onclick="setAuditMode('annual')"><i class="ti ti-calendar-stats"></i> בדיקה שנתית</button>
     </div>
   </div>
 
@@ -1062,7 +1062,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <!-- דפי עבודה ומכתב להנהלה -->
     <div class="card" id="workingPapersCard" style="margin-bottom:12px">
       <div class="ch" style="justify-content:space-between;align-items:center">
-        <span class="ct"><i class="ti ti-folder-open"></i> דפי עבודה ותיעוד ביקורת</span>
+        <span class="ct"><i class="ti ti-folder-open"></i> סיכומים ותיעוד בדיקה</span>
         <div style="display:flex;gap:6px">
           <button onclick="generateManagementLetter()" id="mgmtLetterBtn" class="cl-btn" style="font-size:11px;background:#1a2b0f;color:#fff;border-color:#1a2b0f" disabled><i class="ti ti-mail"></i> מכתב להנהלה</button>
           <button onclick="printWorkingPapers()" id="wpPrintBtn" class="cl-btn" style="font-size:11px" disabled><i class="ti ti-printer"></i> הדפס דפי עבודה</button>
@@ -1085,7 +1085,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 
     <!-- יצירת דוח -->
     <div class="card">
-      <div class="ch"><span class="ct"><i class="ti ti-file-report"></i> יצירת דוח ביקורת</span></div>
+      <div class="ch"><span class="ct"><i class="ti ti-file-report"></i> יצירת דוח בדיקה</span></div>
       <div class="cb">
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
           <div class="report-opt sel" onclick="selReport(this,'full')"><div class="oi"><i class="ti ti-file-analytics"></i></div><div class="ot">דוח מלא</div><div class="od">כל הסעיפים</div></div>
@@ -1104,16 +1104,16 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
           </div>
         </div>
         <div style="margin-bottom:12px">
-          <label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px">הערות ביקורת</label>
+          <label style="font-size:12px;font-weight:600;display:block;margin-bottom:4px">הערות</label>
           <textarea id="reportNotes" rows="3" placeholder="ממצאים מיוחדים, המלצות..." class="si" style="width:100%;resize:vertical"></textarea>
         </div>
-        <button class="gen-btn" id="generateBtn" onclick="generateReport()" disabled><i class="ti ti-file-report"></i> צור דוח ביקורת</button>
+        <button class="gen-btn" id="generateBtn" onclick="generateReport()" disabled><i class="ti ti-file-report"></i> צור דוח בדיקה</button>
         <div id="reportExportRow" style="display:none;margin-top:10px">
           <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:600">ייצוא:</div>
           <div style="display:flex;gap:8px">
             <button onclick="_featureAllowed('export_csv')?exportReportXLSX():_showUpgradePlan('ייצוא Excel')" style="flex:1;padding:9px;background:#0a3622;border:1.5px solid #1d7a3a;border-radius:9px;color:#fff;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='#1d7a3a'" onmouseout="this.style.background='#0a3622'"><i class="ti ti-table-export"></i> הורד Excel</button>
           </div>
-          <button onclick="generateAIReport()" id="aiReportBtn" style="width:100%;margin-top:7px;padding:9px;background:#1e1b4b;border:1.5px solid #4338ca;border-radius:9px;color:#ede9fe;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='#312e81'" onmouseout="this.style.background='#1e1b4b'" title="יוצר דוח ביקורת מפורט בעזרת AI — דורש חיבור ל-AI בלשונית AI"><i class="ti ti-sparkles"></i> דוח AI מקצועי <span style="font-size:10px;opacity:.7">(דורש AI)</span></button>
+          <button onclick="generateAIReport()" id="aiReportBtn" style="width:100%;margin-top:7px;padding:9px;background:#1e1b4b;border:1.5px solid #4338ca;border-radius:9px;color:#ede9fe;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='#312e81'" onmouseout="this.style.background='#1e1b4b'" title="יוצר דוח בדיקה מפורט בעזרת AI — דורש חיבור ל-AI בלשונית AI"><i class="ti ti-sparkles"></i> דוח AI מפורט <span style="font-size:10px;opacity:.7">(דורש AI)</span></button>
         </div>
       </div>
     </div>
@@ -1126,7 +1126,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       <!-- Header -->
       <div class="ch" style="flex-shrink:0">
         <div style="display:flex;align-items:center;gap:10px">
-          <span class="ct"><i class="ti ti-robot"></i> סוכן ביקורת AI</span>
+          <span class="ct"><i class="ti ti-robot"></i> עוזר AI לבדיקת כספים</span>
           <span id="aiStatus" class="badge" style="font-size:10px;padding:2px 8px;background:#fee2e2;color:#dc2626;border-radius:20px">⬤ לא מחובר</span>
         </div>
         <div style="display:flex;gap:7px;align-items:center">
@@ -1169,9 +1169,9 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       <div style="padding:8px 12px 4px;flex-shrink:0;display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid #f0f4f8">
         <span style="font-size:11px;color:var(--muted);align-self:center;margin-left:4px">שאלות מהירות:</span>
         <button class="qq-chip" onclick="askQuick('מה הממצאים החשובים ביותר שמצאת בנתונים?')">ממצאים עיקריים</button>
-        <button class="qq-chip" onclick="askQuick('אילו עסקאות הן הסיכון הגבוה ביותר לביקורת ולמה?')">סיכונים גבוהים</button>
+        <button class="qq-chip" onclick="askQuick('אילו עסקאות הן הסיכון הגבוה ביותר ולמה?')">סיכונים גבוהים</button>
         <button class="qq-chip" onclick="askQuick('האם יש חריגות בתשלומי המע&quot;מ?')">בדיקת מע"מ</button>
-        <button class="qq-chip" onclick="askQuick('תן לי המלצות לדוח הביקורת הסופי')">המלצות לדוח</button>
+        <button class="qq-chip" onclick="askQuick('תן לי המלצות לדוח הבדיקה הסופי')">המלצות לדוח</button>
         <button class="qq-chip" onclick="askQuick('מהן 5 העסקאות החשודות ביותר?')">עסקאות חשודות</button>
         <button class="qq-chip" onclick="askQuick('האם יש חשד להונאה או עסקאות לא רגילות?')">חשד להונאה</button>
       </div>
@@ -1180,7 +1180,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       <div id="chatMessages" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px">
         <div id="chatWelcome" style="text-align:center;padding:24px 16px;color:var(--muted)">
           <div style="font-size:48px;margin-bottom:10px;color:var(--primary)"><i class="ti ti-robot"></i></div>
-          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px">סוכן ביקורת AI</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px">עוזר AI</div>
           <div style="font-size:12px;line-height:1.7;margin-bottom:14px">לחץ <strong><i class="ti ti-settings"></i></strong> לבחירת ספק AI, הזן מפתח API — ושאל שאלות על הנתונים.</div>
           <div style="display:inline-flex;flex-direction:column;gap:7px;text-align:right;font-size:11px;background:#f8fafc;padding:10px 16px;border-radius:10px;border:1px solid #e2e8f0">
             <span><i class="ti ti-world"></i> <strong>OpenAI</strong> — GPT-4o / GPT-4o-mini, מפתח מחשבון OpenAI שלך</span>
@@ -1329,7 +1329,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <h2 style="font-size:18px;font-weight:800;color:#3a2000;text-align:center;margin-bottom:8px">קובץ עם מספר חודשים</h2>
     <p style="font-size:13px;color:#7a5c2e;text-align:center;margin-bottom:20px;line-height:1.6">
       הקובץ שהעלית מכיל נתונים ממספר חודשים.<br>
-      בביקורת חודשית מומלץ לנתח חודש אחד בלבד — איזה חודש תרצה/י?
+      בבדיקה חודשית מומלץ לנתח חודש אחד בלבד — איזה חודש תרצה/י?
     </p>
     <select id="monthFilterSel" style="width:100%;padding:10px 14px;border:1.5px solid #d4b896;border-radius:10px;font-size:14px;font-family:inherit;color:#3a2000;background:#fff;margin-bottom:18px;direction:rtl">
     </select>
@@ -1362,8 +1362,8 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 <div id="replaceFileModal" style="display:none;position:fixed;inset:0;background:rgba(26,14,0,.72);z-index:3200;align-items:center;justify-content:center;backdrop-filter:blur(6px)">
   <div style="background:#fffdf5;border-radius:18px;padding:32px 28px;max-width:420px;width:92%;text-align:center;box-shadow:0 20px 60px rgba(58,32,0,.25)">
     <div style="font-size:48px;margin-bottom:12px;color:var(--primary)"><i class="ti ti-folder-open"></i></div>
-    <h2 style="font-size:18px;font-weight:800;color:#3a2000;margin-bottom:10px">החלפת קובץ — ביקורת חודשית</h2>
-    <p style="font-size:13px;color:#7a5c2e;line-height:1.8;margin-bottom:6px">בביקורת חודשית ניתן לנתח <strong>קובץ אחד בלבד</strong>.</p>
+    <h2 style="font-size:18px;font-weight:800;color:#3a2000;margin-bottom:10px">החלפת קובץ — בדיקה חודשית</h2>
+    <p style="font-size:13px;color:#7a5c2e;line-height:1.8;margin-bottom:6px">בבדיקה חודשית ניתן לנתח <strong>קובץ אחד בלבד</strong>.</p>
     <div style="background:#fef3c7;border:1.5px solid #fcd34d;border-radius:10px;padding:12px 14px;margin:14px 0;font-size:12.5px;color:#78350f;text-align:right;line-height:1.8">
       <div>קובץ נוכחי: <strong id="replaceOldName" style="direction:ltr;display:inline-block"></strong></div>
       <div>קובץ חדש: <strong id="replaceNewName" style="direction:ltr;display:inline-block"></strong></div>
@@ -1507,7 +1507,7 @@ async function doActivateLicense(){
     }
     // רענן מצב UI לפי המסלול החדש
     setAuditMode(localStorage.getItem(_modeKey())||'monthly');
-    showToast(`✓ רישיון ${planNames[result.plan]||result.plan} הופעל — ביקורת שנתית פתוחה!`, 'success');
+    showToast(`✓ רישיון ${planNames[result.plan]||result.plan} הופעל — בדיקה שנתית פתוחה!`, 'success');
   }, 1800);
 }
 
@@ -2479,7 +2479,7 @@ function runDemo(){
       document.getElementById('bankUploadZone').style.display='none';
       // קובץ
       const fl=document.getElementById('fileList');
-      fl.innerHTML=`<div class="fi"><span class="fi-icon">📅</span><div class="fi-info"><div class="fi-name">demo_monthly.csv</div><div class="fi-meta">${demoRows.length} עסקאות — ביקורת חודשית</div></div><span class="fi-status sl-ok">✓ נטען</span></div>`;
+      fl.innerHTML=`<div class="fi"><span class="fi-icon">📅</span><div class="fi-info"><div class="fi-name">demo_monthly.csv</div><div class="fi-meta">${demoRows.length} עסקאות — בדיקה חודשית</div></div><span class="fi-status sl-ok">✓ נטען</span></div>`;
     } else {
       // ── ביקורת שנתית ──
       const clientName='חברת דוגמה בע"מ';
@@ -2494,7 +2494,7 @@ function runDemo(){
         'נסיעות והוצאות':3500,'שירותים מקצועיים':8000,'אחר':2500
       }));
       const fl=document.getElementById('fileList');
-      fl.innerHTML=`<div class="fi"><span class="fi-icon"><i class="ti ti-file-spreadsheet" style="font-size:18px;color:#16a34a"></i></span><div class="fi-info"><div class="fi-name">demo_annual.csv</div><div class="fi-meta">${demoRows.length} עסקאות — ביקורת שנתית</div></div><span class="fi-status sl-ok">✓ נטען</span></div>`;
+      fl.innerHTML=`<div class="fi"><span class="fi-icon"><i class="ti ti-file-spreadsheet" style="font-size:18px;color:#16a34a"></i></span><div class="fi-info"><div class="fi-name">demo_annual.csv</div><div class="fi-meta">${demoRows.length} עסקאות — בדיקה שנתית</div></div><span class="fi-status sl-ok">✓ נטען</span></div>`;
     }
 
     document.getElementById('analyzeBtn').disabled=false;
@@ -3273,7 +3273,7 @@ function _setAnalyzeBtnLoading(on){
     btn.innerHTML='<span class="btn-spinner"></span> מנתח נתונים...';
   } else {
     btn.classList.remove('loading');
-    btn.innerHTML='<i class="ti ti-search"></i> הפעל ניתוח ביקורת מלא';
+    btn.innerHTML='<i class="ti ti-search"></i> הפעל בדיקה';
     // re-enable only if data is loaded
     if(allRows.length) btn.disabled=false;
   }
@@ -3288,7 +3288,7 @@ function analyzeData(){
   if(_isTrial && _isMonthlyMode && _getAnalysisCount() >= TRIAL_ANALYSIS_LIMIT){
     document.getElementById('quotaModalTitle').textContent='הגעת למכסת הסקירות החודשיות';
     document.getElementById('quotaModalBody').innerHTML=
-      'חשבון הניסיון מאפשר <strong>ביקורת חודשית אחת בלבד</strong>.<br>'+
+      'חשבון הניסיון מאפשר <strong>בדיקה חודשית אחת בלבד</strong>.<br>'+
       'לסקירות נוספות ללא הגבלה, שדרג לתוכנית <strong>Starter</strong> ומעלה.';
     document.getElementById('quotaModal').style.display='flex';
     _isAnalyzing=false; // שחרר guard — יציאה מוקדמת לפני setTimeout
@@ -5275,7 +5275,7 @@ function renderRatios(){
   const _ratiosEl=document.getElementById('ratiosContent');
   if(_ratiosEl)_ratiosEl.innerHTML=`
     <div class="card" style="margin-bottom:14px">
-      <div class="ch"><span class="ct"><i class="ti ti-award"></i> ציון ביקורת כולל</span></div>
+      <div class="ch"><span class="ct"><i class="ti ti-award"></i> ציון בדיקה כולל</span></div>
       ${_scoreGaugeCB}
     </div>
     <div class="grid3">
@@ -5555,7 +5555,7 @@ function renderVAT(){
             <div class="stat b"><div class="sl">מע"מ תשומות לניכוי</div><div class="sv" style="color:#dc2626">לא זכאי</div><div class="ss">פטור</div></div>
           </div>
           <div style="margin-top:14px;padding:12px;background:#fef9c3;border-radius:8px;border-right:3px solid #ca8a04">
-            <div style="font-size:12px;font-weight:700;color:#92400e;margin-bottom:4px"><i class="ti ti-alert-triangle"></i> הערת ביקורת</div>
+            <div style="font-size:12px;font-weight:700;color:#92400e;margin-bottom:4px"><i class="ti ti-alert-triangle"></i> הערת בדיקה</div>
             <div style="font-size:12px;color:var(--text)">יש לוודא שמסמכי הפטור תקפים ומעודכנים. פטור ממע"מ מחייב אישור מרשות המסים ותחול החוק הרלוונטי (עמותה, שירות רפואי, ייצוא וכו').</div>
           </div>
         </div>
@@ -5590,7 +5590,7 @@ function renderVAT(){
         </div>
         ${splitNote}
         <div style="margin-top:${vatData.splitYear?'10':'14'}px;padding:12px;background:#ede9fe;border-radius:8px;border-right:3px solid var(--purple)">
-          <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:4px"><i class="ti ti-alert-triangle"></i> הערת ביקורת</div>
+          <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:4px"><i class="ti ti-alert-triangle"></i> הערת בדיקה</div>
           <div style="font-size:12px;color:var(--text)">חישוב המע"מ מבוסס על שיעורים לפי תאריך עסקה. יש לאמת מול חשבוניות מקוריות ולבדוק עסקאות פטורות ממע"מ.</div>
         </div>
       </div>
@@ -6341,7 +6341,7 @@ function renderWHT(){
       </td>
       <td style="font-size:11px;padding:6px 8px;text-align:center;border-bottom:1px solid #e8e0d0">
         <div style="display:inline-flex;align-items:center;gap:3px;background:#f5f0e8;border-radius:6px;padding:3px 7px">
-          <input type="number" aria-label="ציון ביקורת 0–100" min="0" max="100" step="0.5" aria-label="ציון ביקורת 0–100"
+          <input type="number" aria-label="ציון בדיקה 0–100" min="0" max="100" step="0.5" aria-label="ציון בדיקה 0–100"
             value="${ovr?.customRate!=null?ovr.customRate:(v.rate*100).toFixed(0)}"
             onchange="setWHTOverride(this.closest('tr').dataset.vname,'customRate',this.value)"
             style="width:38px;padding:2px 4px;border:1px solid var(--border);border-radius:4px;font-size:11px;text-align:center;background:#fff;color:var(--text)">
@@ -6399,7 +6399,7 @@ function renderWHT(){
       </div>
     </div>
     ${_isMonthlyWHT?`<div style="margin:0 14px 10px;padding:8px 12px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;font-size:11px;color:#1e40af;line-height:1.6">
-      ℹ️ <strong>ביקורת חודשית:</strong> הניתוח מבוסס על נתוני החודש שנטען. ניכוי מס במקור מחושב על בסיס שנתי — השתמש בנתונים אלה לאמידה חודשית ולבדיקה שוטפת. טופס 856 מופק בביקורת שנתית בלבד.
+      ℹ️ <strong>בדיקה חודשית:</strong> הניתוח מבוסס על נתוני החודש שנטען. ניכוי מס במקור מחושב על בסיס שנתי — השתמש בנתונים אלה לאמידה חודשית ולבדיקה שוטפת. טופס 856 מופק בבדיקה שנתית בלבד.
     </div>`:''}
   </div>
 
@@ -6458,7 +6458,7 @@ function renderWHT(){
         </div>
       </div>
       <div class="card" style="background:#fffbeb;border-color:#e8d08a">
-        <div class="ch" style="background:#fef3c7"><span class="ct" style="color:#92400e">⚠️ הערות ביקורת</span></div>
+        <div class="ch" style="background:#fef3c7"><span class="ct" style="color:#92400e">⚠️ הערות בדיקה</span></div>
         <div class="cb" style="padding:12px 14px;font-size:11px;color:#78350f;line-height:1.8">
           <div>• ניכוי מס במקור חובה לפי סעיפים 164–170 לפקודת מס הכנסה</div>
           <div>• ספק עם תעודת פטור — שיעור מופחת/0% לפי האישור</div>
@@ -6911,7 +6911,7 @@ function computeRiskScore(){
   let level,color,opinion;
   if(total<=25){level='נמוך';color='#15803d';opinion='ציון גבוה — לא זוהו חריגות';}
   else if(total<=55){level='בינוני';color='#d97706';opinion='נדרשת תשומת לב — בדוק ממצאים ספציפיים לפני חיווי';}
-  else{level='גבוה';color='#dc2626';opinion='סיכון גבוה — שקול הסתייגות או הדגשת עניין בדוח הביקורת';}
+  else{level='גבוה';color='#dc2626';opinion='סיכון גבוה — בחן את החריגות וטפל בממצאים הקריטיים';}
   return{total,maxTotal,level,color,opinion,factors};
 }
 
@@ -6986,9 +6986,9 @@ function renderRiskScore(){
 // 📁 דפי עבודה (Working Papers)
 // ══════════════════════════════════════════════════════════════
 const WP_SECTIONS=[
-  {id:'W100',title:'מידע כללי על הלקוח',icon:'<i class="ti ti-building"></i>',desc:'נתוני לקוח, תקופת ביקורת, פרטי רו"ח'},
+  {id:'W100',title:'מידע כללי על העסק',icon:'<i class="ti ti-building"></i>',desc:'נתוני העסק, תקופת הבדיקה'},
   {id:'W200',title:'סיכום נתונים פיננסיים',icon:'<i class="ti ti-chart-bar"></i>',desc:'הכנסות, הוצאות, מאזן נטו, מספר עסקאות'},
-  {id:'W300',title:'ביקורת אנליטית',icon:'<i class="ti ti-trending-up"></i>',desc:'השוואת תקופות, ניתוח מגמות, יחסים פיננסיים'},
+  {id:'W300',title:'בדיקה אנליטית',icon:'<i class="ti ti-trending-up"></i>',desc:'השוואת תקופות, ניתוח מגמות, יחסים פיננסיים'},
   {id:'W400',title:'עמידה בדרישות מס',icon:'<i class="ti ti-receipt"></i>',desc:'מע"מ, ניכוי מס במקור, חשבוניות ישראל'},
   {id:'W500',title:'ממצאים וחריגות',icon:'<i class="ti ti-alert-triangle"></i>',desc:'פירוט ממצאים, חומרה, המלצות לטיפול'},
   {id:'W600',title:'ציון סיכון וסיכום',icon:'<i class="ti ti-target"></i>',desc:'ציון סיכון, חוות דעת ראשונית, פריטים פתוחים'},
@@ -7149,7 +7149,7 @@ function printWorkingPapers(){
   const w=window.open('','_blank','width=960,height=750,scrollbars=yes');
   if(!w){showToast('אפשר חלונות קופצים בדפדפן כדי לפתוח את הטופס','warning');return;}
   w.document.write(`<!DOCTYPE html><html lang="he" dir="rtl"><head><meta charset="UTF-8">
-<title>דפי עבודה — ${clientName||'ביקורת'}</title>
+<title>סיכום בדיקה — ${clientName||'בדיקה'}</title>
 <style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:11px;color:#111;background:#fff;padding:20px;direction:rtl}
 .page{max-width:940px;margin:0 auto}.hdr{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #1a2b0f;padding-bottom:10px;margin-bottom:14px}
 .title{font-size:17px;font-weight:bold}.sub{font-size:10px;color:#555;margin-top:3px}
@@ -7179,12 +7179,12 @@ tr:nth-child(even){background:#fafaf8}
   <div class="mc"><div class="ml">לקוח / חברה</div><strong>${escHtml(clientName)||'—'}</strong></div>
   <div class="mc"><div class="ml">מספר תיק / ח.פ.</div><strong>${escHtml(clientId)||'—'}</strong></div>
   <div class="mc"><div class="ml">רואה חשבון</div><strong>${escHtml(cpaName)||'—'}</strong></div>
-  <div class="mc"><div class="ml">תאריך ביקורת</div><strong>${todayStr}</strong></div>
+  <div class="mc"><div class="ml">תאריך בדיקה</div><strong>${todayStr}</strong></div>
   <div class="mc"><div class="ml">עסקאות שנותחו</div><strong>${analyzedData.rows.length.toLocaleString('he-IL')}</strong></div>
   <div class="mc"><div class="ml">תקופת ניתוח</div><strong>${d?.periodLabel||'—'}</strong></div>
 </div>
 ${risk?`<div class="risk-box" style="border-color:${risk.color};background:${risk.total<=25?'#f0fdf4':risk.total<=55?'#fffbeb':'#fff5f5'}">
-  <div style="font-size:13px;font-weight:700;color:${risk.color}"><i class="ti ti-target"></i> ציון סיכון ביקורת: ${risk.level} (${risk.total}/100)</div>
+  <div style="font-size:13px;font-weight:700;color:${risk.color}"><i class="ti ti-target"></i> ציון סיכון: ${risk.level} (${risk.total}/100)</div>
   <div style="font-size:11px;color:#555;max-width:400px;text-align:left">${risk.opinion}</div>
 </div>`:''}
 <table>
@@ -7193,9 +7193,9 @@ ${risk?`<div class="risk-box" style="border-color:${risk.color};background:${ris
 </table>
 <div class="sig-row">
   <div><div style="font-size:10px;font-weight:700;margin-bottom:4px">חתימת רואה החשבון</div><div class="sig-box"></div></div>
-  <div><div style="font-size:10px;font-weight:700;margin-bottom:4px">חתימת שותף/מנהל ביקורת</div><div class="sig-box"></div></div>
+  <div><div style="font-size:10px;font-weight:700;margin-bottom:4px">אישור בעל העסק</div><div class="sig-box"></div></div>
 </div>
-<div class="footer">הופק על-ידי Auditera — לצרכי תיעוד ביקורת פנימי. יש לשמור במסגרת תיק הביקורת לפי הוראות תקינה מקצועית.</div>
+<div class="footer">הופק על-ידי Auditera — לצרכי תיעוד ובקרה פנימית. מומלץ לשמור לתיוק.</div>
 </div>`);
   w.document.close();
 }
@@ -7273,9 +7273,9 @@ body{font-family:Arial,sans-serif;font-size:12px;color:#111;background:#fff;padd
   <strong>לכבוד הנהלת:</strong> ${escHtml(clientName)}<br>
   <strong>הנדון:</strong> סיכום לבעל העסק — ממצאי בדיקת כספים
 </div>
-<div class="subject">מכתב להנהלה — ממצאי ביקורת ומלצות</div>
+<div class="subject">סיכום לבעל העסק — ממצאים והמלצות</div>
 <div class="body-text">
-  בהתאם לביקורת הפיננסית שביצענו על הנתונים שהוצגו בפנינו לתקופה <strong>${d?.periodLabel||'הנבדקת'}</strong>, להלן ממצאינו, הערות מקצועיות והמלצות לטיפול.
+  בהתאם לבדיקת הכספים שביצענו על הנתונים שהוצגו לנו לתקופה <strong>${d?.periodLabel||'הנבדקת'}</strong>, להלן ממצאינו, הערות מקצועיות והמלצות לטיפול.
   הבדיקה בוצעה על בסיס הנתונים שהוצגו, בהתאם להוראות מס ומע"מ הנהוגות בישראל.
 </div>
 ${d?`<div class="summary-box">
@@ -7565,7 +7565,7 @@ function addLog(action,detail=''){
 }
 
 function addManualLog(){
-  const text=prompt('הזן רשומה לדיווח ביקורת:');
+  const text=prompt('הזן רשומה לתיוק:');
   if(text)addLog('רשומה ידנית',text);
 }
 
@@ -7600,8 +7600,8 @@ function _buildProfessionalNarrative(anomalies,stats,ratios){
   if(sc>=85&&highC===0) conclusion='בסיכום, הנתונים הפיננסיים שנבדקו מצביעים על מצב תקין ועל יישום הולם של נוהלי הנהלת חשבונות. לא זוהו חריגות.';
   else if(sc>=70&&highC===0) conclusion=`בסיכום, הנתונים הפיננסיים שנבדקו מצביעים על תמונה סבירה עם ${medC} ממצאים בדרגת חומרה בינונית הדורשים טיפול. לא זוהו ממצאים מהותיים.`;
   else if(highC===1) conclusion=`בסיכום, זוהה ממצא אחד בדרגת חומרה מהותית הדורש טיפול מיידי. בנוסף, ${medC>0?medC+' ממצאים בינוניים':'לא זוהו ממצאים בינוניים נוספים'}. מומלץ לפעול בהקדם.`;
-  else if(highC>1) conclusion=`בסיכום, זוהו ${highC} ממצאים בדרגת חומרה מהותית הדורשים טיפול מיידי ואסרטיבי. ציון הביקורת (${sc}/100) מצביע על סיכון מוגבר. מומלץ להסדיר את הממצאים לפני הגשת דוחות כספיים.`;
-  else conclusion=`הביקורת בוצעה על ${stats.txCount||0} עסקאות. ציון הביקורת הכולל הוא ${sc}/100.`;
+  else if(highC>1) conclusion=`בסיכום, זוהו ${highC} ממצאים בדרגת חומרה מהותית הדורשים טיפול מיידי ואסרטיבי. ציון הבדיקה (${sc}/100) מצביע על סיכון מוגבר. מומלץ לטפל בממצאים לפני הגשת דוחות כספיים.`;
+  else conclusion=`הבדיקה בוצעה על ${stats.txCount||0} עסקאות. ציון הבדיקה הכולל הוא ${sc}/100.`;
 
   const highTypes=[...new Set(anomalies.filter(a=>a.sev==='high').map(a=>a.type))];
   const narrativeItems=highTypes.slice(0,3).map(t=>`<div style="margin-bottom:10px"><strong style="color:#3a2000">${t}:</strong> ${_anomNarrative(t)}</div>`).join('');
@@ -7668,7 +7668,7 @@ function _generateReportInner(){
     generateExecReport(client,clientId,stats,ratios,anomalies,sc,scColor,scText,notes,now,cpa);return;
   }
   if(_reportType==='anomaly'){
-    const html=`<!DOCTYPE html><html dir="rtl" lang="he"><head><meta charset="UTF-8"><title>ממצאי ביקורת — ${_ec}</title>
+    const html=`<!DOCTYPE html><html dir="rtl" lang="he"><head><meta charset="UTF-8"><title>ממצאי בדיקה — ${_ec}</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 *{box-sizing:border-box}
@@ -7722,7 +7722,7 @@ tr:nth-child(even) td{background:#fefaf3}
 </style></head><body>
 <div class="cover">
   <div class="cover-brand">Auditera · Audit Findings Report</div>
-  <div class="cover-badge">דוח ממצאי ביקורת</div>
+  <div class="cover-badge">דוח ממצאי בדיקה</div>
   <div class="cover-title">ממצאי בדיקת כספים</div>
   <div class="cover-client">${_ec}${_eid?' · מספר תיק: '+_eid:''} · ${fmtDate(now)}</div>
   <div class="cover-ref">AUD-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}</div>
@@ -7774,10 +7774,10 @@ ${anomalies.length?`<div class="sec">
 <div class="sec">
   <div class="sec-hdr"><div class="sec-title">פעולות נדרשות</div><div class="sec-tag">REQUIRED ACTIONS</div></div>
   <div class="rec-box"><ul>
-    ${anomalies.filter(a=>a.sev==='high').length>0?`<li><strong>ממצאים מהותיים — טיפול מיידי :</strong> ${anomalies.filter(a=>a.sev==='high').map(a=>escHtml(a.type)).join(', ')} — יש לבחון השפעתם על חוות הדעת הביקורתית</li>`:''}
+    ${anomalies.filter(a=>a.sev==='high').length>0?`<li><strong>ממצאים מהותיים — טיפול מיידי :</strong> ${anomalies.filter(a=>a.sev==='high').map(a=>escHtml(a.type)).join(', ')} — יש לטפל בהם בהקדם</li>`:''}
     ${anomalies.find(a=>a.type==='חוק מזומן')?'<li><strong style="color:#dc2626">חוק מזומן (סעיף 9ב, תיקון 15):</strong> חובה לדווח לרשות המסים תוך 30 יום. אי-דיווח — קנס פלילי ועד 3 שנות מאסר</li>':''}
     ${anomalies.find(a=>a.type==='כפילות')?'<li><strong>כפילויות :</strong> הצלב מול ספרי הספק — דרוש Vendor Confirmation וחשבון זיכוי לכל חיוב כפול שאומת</li>':''}
-    ${anomalies.find(a=>a.type==='פיצול עסקאות')?'<li><strong>חשד לפיצול :</strong> תעד בתיק הביקורת ושקול דיווח לפי חוק הלבנת הון</li>':''}
+    ${anomalies.find(a=>a.type==='פיצול עסקאות')?'<li><strong>חשד לפיצול :</strong> תעד את הממצא ושקול דיווח לפי חוק הלבנת הון</li>':''}
     ${anomalies.find(a=>a.type==='צד קשור')?'<li><strong>צדדים קשורים :</strong> ודא הסכמים בכתב, אישור דירקטוריון, תנאי Arm\'s Length וגילוי מלא</li>':''}
     ${anomalies.filter(a=>a.type==='חשבוניות ישראל').length>0?`<li><strong>חשבוניות ישראל (חוזר מע"מ 1/2023):</strong> בקש מספרי הקצאה עבור ${anomalies.filter(a=>a.type==='חשבוניות ישראל').length} עסקאות — ניכוי מע"מ ייפסל ללא מספר</li>`:''}
     ${anomalies.filter(a=>a.type==='אסמכתא חסרה').length>0?`<li><strong>אסמכתאות חסרות (סעיף 17 לפקודה):</strong> השג תיעוד ל-${anomalies.filter(a=>a.type==='אסמכתא חסרה').length} עסקאות — ללא אסמכתא ההוצאה תיפסל בשומה</li>`:''}
@@ -7802,7 +7802,7 @@ ${anomalies.length?`<div class="sec">
   </div>
 </div>
 <div class="footer">
-  <span>Auditera · דוח ממצאי ביקורת · ${fmtDate(now)}</span>
+  <span>Auditera · דוח ממצאי בדיקה · ${fmtDate(now)}</span>
   <span style="font-weight:700;color:#7a5020;letter-spacing:1.5px;font-size:9px">סודי — CONFIDENTIAL</span>
   <span>${anomalies.length} ממצאים${_cpaN?' · נערך ע"י: '+_cpaN:''}</span>
 </div>
@@ -7810,12 +7810,12 @@ ${anomalies.length?`<div class="sec">
 `;
     _saveReportHTML(html);
     const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-    dlBlob(blob,`ממצאי_ביקורת_${client}_${now.toISOString().slice(0,10)}.html`);
+    dlBlob(blob,`ממצאי_בדיקה_${client}_${now.toISOString().slice(0,10)}.html`);
     showToast('✓ דוח ממצאים הורד','success');return;
   }
 
   const html=`<!DOCTYPE html><html dir="rtl" lang="he"><head><meta charset="UTF-8">
-<title>דוח ביקורת — ${_ec}</title>
+<title>דוח בדיקה — ${_ec}</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 *{box-sizing:border-box}
@@ -7888,7 +7888,7 @@ tr:nth-child(even) td{background:#fefaf3}
   <div class="cover-meta">
     <div class="cmi"><div class="cmi-lbl">תאריך הפקה</div><div class="cmi-val">${fmtDate(now)}</div></div>
     <div class="cmi"><div class="cmi-lbl">עסקאות שנבדקו</div><div class="cmi-val">${rows.length.toLocaleString()}</div></div>
-    <div class="cmi"><div class="cmi-lbl">ממצאי ביקורת</div><div class="cmi-val">${anomalies.filter(a=>a.sev==='high').length} מהותיים · ${anomalies.filter(a=>a.sev==='medium').length} בינוניים</div></div>
+    <div class="cmi"><div class="cmi-lbl">ממצאי בדיקה</div><div class="cmi-val">${anomalies.filter(a=>a.sev==='high').length} מהותיים · ${anomalies.filter(a=>a.sev==='medium').length} בינוניים</div></div>
   </div>
 </div>
 
@@ -7920,7 +7920,7 @@ ${(_cpaF||_cpaN||_cpaLogoHtml)?`<div class="cpa-bar">
 ${(()=>{
   const {conclusion,narrativeItems}=_buildProfessionalNarrative(anomalies,{...stats,txCount:rows.length},ratios);
   return `<div class="sec">
-  <div class="sec-hdr"><div class="sec-title">מסקנת הביקורת</div><div class="sec-tag">AUDIT CONCLUSION</div></div>
+  <div class="sec-hdr"><div class="sec-title">מסקנת הבדיקה</div><div class="sec-tag">CHECK CONCLUSION</div></div>
   <div class="statement">${conclusion}</div>
   ${narrativeItems?`<div style="background:#fefaf3;border:1px solid #e0c888;border-radius:6px;padding:14px 18px;font-size:12.5px;line-height:1.9;color:#3a2000">${narrativeItems}</div>`:''}
 </div>`;
@@ -7945,7 +7945,7 @@ ${(()=>{
 </div>
 
 <div class="sec">
-  <div class="sec-hdr"><div class="sec-title">סעיף ב׳ — ממצאי ביקורת (${anomalies.length})</div><div class="sec-tag">AUDIT FINDINGS</div></div>
+  <div class="sec-hdr"><div class="sec-title">סעיף ב׳ — ממצאי בדיקה (${anomalies.length})</div><div class="sec-tag">CHECK FINDINGS</div></div>
   ${anomalies.length?`<table>
     <thead><tr><th>סוג ממצא</th><th>תיאור</th><th>פירוט</th><th>דרגת חומרה</th><th>סקירת רו"ח</th><th>הערה</th></tr></thead>
     <tbody>${anomRows}</tbody>
@@ -7968,14 +7968,14 @@ ${notes?`<div class="sec">
 <div class="sec">
   <div class="sec-hdr"><div class="sec-title">סעיף ד׳ — פעולות נדרשות</div><div class="sec-tag">REQUIRED ACTIONS</div></div>
   <div class="action-box"><ul>
-    ${anomalies.filter(a=>a.sev==='high').length>0?`<li><strong>ממצאים מהותיים — טיפול מיידי :</strong> ${anomalies.filter(a=>a.sev==='high').map(a=>escHtml(a.type)).join(', ')} (${anomalies.filter(a=>a.sev==='high').length} ממצאים) — על המבקר לבחון השפעתם על חוות הדעת הביקורתית</li>`:''}
+    ${anomalies.filter(a=>a.sev==='high').length>0?`<li><strong>ממצאים מהותיים — טיפול מיידי :</strong> ${anomalies.filter(a=>a.sev==='high').map(a=>escHtml(a.type)).join(', ')} (${anomalies.filter(a=>a.sev==='high').length} ממצאים) — יש לבחון ולטפל בהם בהקדם</li>`:''}
     ${anomalies.find(a=>a.type==='כפילות')?'<li><strong>כפילויות :</strong> בצע הצלבה מול ספרי הספק — השג אישור יתרה (Vendor Confirmation) ודרוש חשבון זיכוי בגין כל חיוב כפול שאומת</li>':''}
     ${anomalies.find(a=>a.type==='חוק מזומן')?'<li><strong style="color:#dc2626">חוק מזומן (תיקון 15, סעיף 9ב):</strong> חובה לדווח לרשות המסים בתוך 30 יום ממועד העסקה. עמוד הדיווח: מע"מ אינטרנט → דיווח עסקת מזומן. אי-דיווח — קנס פלילי ועד 3 שנות מאסר</li>':''}
-    ${anomalies.find(a=>a.type==='פיצול עסקאות')?'<li><strong>חשד לפיצול עסקאות :</strong> תעד את הממצא בתיק הביקורת ושקול דיווח לפי חוק הלבנת הון. הפרה — סנקציות פליליות וסיכון רגולטורי מיידי לעסק</li>':''}
+    ${anomalies.find(a=>a.type==='פיצול עסקאות')?'<li><strong>חשד לפיצול עסקאות :</strong> תעד את הממצא ושקול דיווח לפי חוק הלבנת הון. הפרה — סנקציות פליליות וסיכון רגולטורי מיידי לעסק</li>':''}
     ${anomalies.find(a=>a.type==='צד קשור')?'<li><strong>צדדים קשורים :</strong> ודא קיום הסכמים בכתב, אישור דירקטוריון, ותנאי Arm\'s Length. חובת גילוי מלאה בדוחות הכספיים. בחן פוטנציאל לאחריות אישית של נושאי משרה</li>':''}
     ${anomalies.filter(a=>a.type==='אסמכתא חסרה').length>0?`<li><strong>אסמכתאות חסרות (סעיף 17 לפקודת מס הכנסה):</strong> השג תיעוד ל-${anomalies.filter(a=>a.type==='אסמכתא חסרה').length} עסקאות. ללא אסמכתא — ההוצאה תיפסל בשומה ומע"מ התשומות לא יוכר לניכוי</li>`:''}
     ${anomalies.filter(a=>a.type==='חשבוניות ישראל').length>0?`<li><strong>חשבוניות ישראל (חוזר מע"מ 1/2023, סעיף 38 לחוק מע"מ):</strong> בקש מספרי הקצאה עבור ${anomalies.filter(a=>a.type==='חשבוניות ישראל').length} עסקאות. ללא מספר הקצאה — ניכוי מע"מ התשומות ייפסל, חשיפה לקנסות מנהליים</li>`:''}
-    ${anomalies.find(a=>a.type==='חוק בנפורד')?`<li><strong>חריגת בנפורד :</strong> הרחב את היקף הבדיקה המדגמית (Sampling Rate) לעסקאות בסכומים חשודים. שקול תשאול הנהלה וביקורת תיעוד מורחבת</li>`:''}
+    ${anomalies.find(a=>a.type==='חוק בנפורד')?`<li><strong>חריגת בנפורד :</strong> הרחב את היקף הבדיקה המדגמית (Sampling Rate) לעסקאות בסכומים חשודים. שקול לבחון את התיעוד לעומק</li>`:''}
     ${anomalies.find(a=>a.type==='ריכוזיות ספקים')?'<li><strong>ריכוזיות ספקים :</strong> ודא קיום חוזה בכתב, בחן תנאי תשלום, וקבע האם מדובר בצד קשור. שקול גיוון ספקים להפחתת סיכון תפעולי</li>':''}
     ${vatData&&!vatData.exempt&&(vatData.vatIn-vatData.vatOut)>0?`<li><strong>מע"מ לתשלום:</strong> ${fmtCur(vatData.vatIn-vatData.vatOut)} — ודא העברה במועד לרשות המסים. איחור מעל 30 יום מחייב תוספת הפרשי הצמדה וריבית לפי סעיף 97 לחוק מע"מ</li>`:''}
     ${Math.abs(ratios.expRatio)>0.85?'<li><strong>שיעור הוצאות חריג :</strong> שיעור הוצאות מעל 85% מהמחזור דורש הסבר ניהולי. בחן אפשרויות לייעול עלויות וודא כי לא מדובר בהוצאות שאינן עסקיות</li>':''}
@@ -8012,7 +8012,7 @@ ${notes?`<div class="sec">
 
   _saveReportHTML(html);
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  dlBlob(blob,`דוח_ביקורת_${client}_${now.toISOString().slice(0,10)}.html`);
+  dlBlob(blob,`דוח_בדיקה_${client}_${now.toISOString().slice(0,10)}.html`);
   addLog('דוח הופק',`${client} — ${_reportType}`);
   showToast('✓ דוח הורד','success');
 }
@@ -8039,32 +8039,32 @@ async function generateAIReport(){
 
 הנך מתבקש להכין דוח בדיקת כספים מפורט עבור בעל העסק:
 שם לקוח: ${client}${clientId?' | מספר תיק: '+clientId:''}
-תאריך ביקורת: ${now.toLocaleDateString('he-IL')}
-${cpa.cpaName?'מבצע הביקורת: רו"ח '+cpa.cpaName+(cpa.cpaFirm?' — '+cpa.cpaFirm:'')+(cpa.cpaLicense?' | רישיון '+cpa.cpaLicense:''):''}
+תאריך בדיקה: ${now.toLocaleDateString('he-IL')}
+${cpa.cpaName?'מבצע הבדיקה: '+cpa.cpaName+(cpa.cpaFirm?' — '+cpa.cpaFirm:'')+(cpa.cpaLicense?' | רישיון '+cpa.cpaLicense:''):''}
 
-נתוני הביקורת:
+נתוני הבדיקה:
 ${ctx}
 ${notes?'הערות רו"ח: '+notes:''}
 
 ---
-הנח דוח ביקורת מקצועי הכולל את הסעיפים הבאים:
+הנח דוח בדיקת כספים הכולל את הסעיפים הבאים:
 
-**1. מסקנת ביקורת כוללת**
-2-3 משפטים מנוסחים בשפה מקצועית ופורמלית, המסכמים את ממצאי הביקורת ורמת הסיכון הכוללת.
+**1. מסקנת בדיקה כוללת**
+2-3 משפטים בשפה ברורה, המסכמים את ממצאי הבדיקה ורמת הסיכון הכוללת.
 
 **2. ממצאים מהותיים — פירוט ועומק**
 לכל ממצא מהותי (high severity): שם הממצא, תיאור הממצא, ההשלכה הפוטנציאלית לעסק, והמלצה מפורטת לטיפול.
 
 **3. הערכת סיכונים**
-טבלה/רשימה של סיכוני הביקורת המרכזיים שזוהו, כולל חשיפה כמותית היכן שניתן ורמת דחיפות.
+טבלה/רשימה של הממצאים המרכזיים שזוהו, כולל חשיפה כמותית היכן שניתן ורמת דחיפות.
 
 **4. המלצות פעולה — מיידיות ולטווח ארוך**
 פעולות מיידיות (עד 30 יום), פעולות לטווח בינוני (עד 3 חודשים), ושיפורים שיטתיים לטווח ארוך.
 
-**5. הצהרת ביקורת**
+**5. הצהרת בדיקה**
 טקסט הצהרה הכולל את היקף הבדיקה, מגבלות, ואחריות המנתח.
 
-כתוב בעברית תקינה וברורה. התייחס לחוקי המס הישראלים (פקודת מס הכנסה, חוק מע"מ, חוק הלבנת הון), ולדיני החברות כאשר רלוונטי. הדוח מיועד לתיק ביקורת רשמי ולעיון המקצועי של רואה החשבון.`;
+כתוב בעברית תקינה וברורה. התייחס לחוקי המס הישראלים (פקודת מס הכנסה, חוק מע"מ, חוק הלבנת הון), ולדיני החברות כאשר רלוונטי. הדוח מיועד לבעל העסק לצורכי ניהול ובקרה.`;
 
   try{
     const url=`${AI_PROVIDERS[aiProvider].baseUrl}/v1/chat/completions`;
@@ -8083,7 +8083,7 @@ ${notes?'הערות רו"ח: '+notes:''}
       if(resp.status===401)errMsg='מפתח API שגוי — עדכן בהגדרות';
       if(resp.status===429)errMsg='חרגת ממגבלת הקצב — המתן ונסה שוב';
       showToast('שגיאה: '+errMsg,'error');
-      if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-sparkles"></i> דוח AI מקצועי <span style="font-size:10px;opacity:.7">(דורש AI)</span>';}
+      if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-sparkles"></i> דוח AI מפורט <span style="font-size:10px;opacity:.7">(דורש AI)</span>';}
       return;
     }
     const data=await resp.json();
@@ -8105,7 +8105,7 @@ ${notes?'הערות רו"ח: '+notes:''}
     const _ec=escHtml(client);
     const _eid=escHtml(clientId);
     const html=`<!DOCTYPE html><html dir="rtl" lang="he"><head><meta charset="UTF-8">
-<title>דוח ביקורת AI — ${_ec}</title>
+<title>דוח בדיקה AI — ${_ec}</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap');
 *{box-sizing:border-box}
@@ -8129,7 +8129,7 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 </style></head><body>
 <div class="cover">
   <div class="cover-brand">Auditera · AI Professional Audit Report · ${AI_PROVIDERS[aiProvider]?.label||aiProvider}</div>
-  <div class="cover-badge">✨ דוח ביקורת AI מקצועי</div>
+  <div class="cover-badge">✨ דוח בדיקה AI</div>
   <div class="cover-title">דוח בדיקת כספים</div>
   <div class="cover-client">${_ec}${_eid?' · תיק: '+_eid:''}</div>
   <div class="cover-meta">
@@ -8161,7 +8161,7 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
     if(e.name==='TimeoutError')showToast('פסק זמן (90s) — נסה מודל קטן יותר','error');
     else showToast('שגיאת חיבור: '+e.message,'error');
   }
-  if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-sparkles"></i> דוח AI מקצועי <span style="font-size:10px;opacity:.7">(דורש AI)</span>';}
+  if(btn){btn.disabled=false;btn.innerHTML='<i class="ti ti-sparkles"></i> דוח AI מפורט <span style="font-size:10px;opacity:.7">(דורש AI)</span>';}
 }
 
 function generateExecReport(client,clientId,stats,ratios,anomalies,sc,scColor,scText,notes,now,cpa={}){
@@ -8227,13 +8227,13 @@ body{font-family:'Heebo','Segoe UI',system-ui,sans-serif;direction:rtl;color:#1e
 
 <div class="cover">
   <div class="cover-brand">Auditera · Executive Summary</div>
-  <div class="cover-badge">סיכום מנהלים — דוח ביקורת</div>
+  <div class="cover-badge">סיכום מנהלים — דוח בדיקה</div>
   <div class="cover-title">סיכום מנהלים</div>
   <div class="cover-client">${_ec}${_eid?' · מספר תיק: '+_eid:''}</div>
   <div class="cover-ref">AUD-${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}</div>
   <div class="cover-meta">
     <div class="cmi"><div class="cmi-lbl">תאריך הפקה</div><div class="cmi-val">${fmtDate(now)}</div></div>
-    <div class="cmi"><div class="cmi-lbl">ציון ביקורת</div><div class="cmi-val">${sc}/100</div></div>
+    <div class="cmi"><div class="cmi-lbl">ציון בדיקה</div><div class="cmi-val">${sc}/100</div></div>
     <div class="cmi"><div class="cmi-lbl">ממצאים מהותיים</div><div class="cmi-val" style="color:${high.length>0?'#fca5a5':'#86efac'}">${high.length}</div></div>
   </div>
 </div>
@@ -8289,7 +8289,7 @@ ${notes?`<div class="sec">
 <div class="sec">
   <div class="sec-hdr"><div class="sec-title">פעולות נדרשות</div><div class="sec-tag">REQUIRED ACTIONS</div></div>
   <div class="action-box"><ul>
-    ${high.length>0?`<li><strong>ממצאים מהותיים — טיפול מיידי :</strong> ${high.map(a=>escHtml(a.type)).join(', ')} — בחן השפעה על חוות הדעת הביקורתית</li>`:'<li><span style="color:#16a34a">✅ לא זוהו ממצאים מהותיים — ציון סיכון: תקין</span></li>'}
+    ${high.length>0?`<li><strong>ממצאים מהותיים — טיפול מיידי :</strong> ${high.map(a=>escHtml(a.type)).join(', ')} — יש לבחון ולטפל בהקדם</li>`:'<li><span style="color:#16a34a">✅ לא זוהו ממצאים מהותיים — ציון סיכון: תקין</span></li>'}
     ${anomalies.find(a=>a.type==='חוק מזומן')?'<li><strong style="color:#dc2626">חוק מזומן (סעיף 9ב, תיקון 15):</strong> חובת דיווח לרשות המסים תוך 30 יום — אי-עמידה מהווה עבירה פלילית</li>':''}
     ${anomalies.find(a=>a.type==='פיצול עסקאות')?'<li><strong>פיצול עסקאות :</strong> Red Flag לתרמית — הרחב בדיקה וצור פרוטוקול תשאול הנהלה</li>':''}
     ${anomalies.find(a=>a.type==='כפילות')?'<li><strong>כפילויות :</strong> בצע Vendor Confirmation לכל ספק מעורב — דרוש חשבון זיכוי לכל חיוב כפול שאומת</li>':''}
@@ -8404,7 +8404,7 @@ function exportReportXLSX(){
       ['פרטי לקוח',''],
       ['לקוח / חברה',client],
       ['מספר תיק / ח.פ.',clientId||'—'],
-      ['תאריך ביקורת',dateStr],
+      ['תאריך בדיקה',dateStr],
       ['תקופת נתונים',rows.length+' עסקאות'],
       ['',''],
       ['פרטי רואה חשבון מוסמך',''],
@@ -8423,7 +8423,7 @@ function exportReportXLSX(){
       ['הוצאה ממוצעת לעסקה',N(ratios.avgExpense)],
       ...(_materiality>0?[['סף בדיקה',N(_materiality)]]:[] ),
       ['',''],
-      ['ציון ביקורת',''],
+      ['ציון בדיקה',''],
       ['ציון כולל (0–100)',ratios.score],
       ['הערכה',scText],
       ['ממצאים מהותיים',anomalies.filter(a=>a.sev==='high').length],
@@ -8437,7 +8437,7 @@ function exportReportXLSX(){
       ['מע"מ תשומות (זכות)',N(vatData.vatOut||0)],
       [vatData.vatIn>vatData.vatOut?'מע"מ לתשלום':'זכות ממע"מ',N(Math.abs((vatData.vatIn||0)-(vatData.vatOut||0)))],
       ['',''],
-      ['הערות ביקורת',''],
+      ['הערות',''],
       [notes||'—',''],
       ['',''],
       ['הצהרה',''],
@@ -8599,7 +8599,7 @@ function exportReportXLSX(){
     // ══════════════════════════════════════
     const ratioRows=[
       ['מדד פיננסי','ערך','הערכה','תקן / הפניה'],
-      ['ציון ביקורת (0–100)',ratios.score,scText,'Auditera Audit Score'],
+      ['ציון בדיקה (0–100)',ratios.score,scText,'Auditera Score'],
       ['שיעור הוצאות מהמחזור',pct(ratios.expRatio),ratios.expRatio>0.85?'גבוה — דורש בחינה':ratios.expRatio>0.6?'בינוני':'תקין',''],
       ['שיעור רווח',pct(ratios.profitMargin),ratios.profitMargin>0.2?'טוב':ratios.profitMargin>0?'בינוני':'הפסד',''],
       ['הכנסה ממוצעת לעסקה',N(ratios.avgIncome),'',''],
@@ -8661,12 +8661,12 @@ function exportReportXLSX(){
     ws10['!cols']=[{wch:22},{wch:24},{wch:50}];
     freeze(ws10,1);
     setRTL(ws10);
-    XLSX.utils.book_append_sheet(wb,ws10,'יומן ביקורת');
+    XLSX.utils.book_append_sheet(wb,ws10,'יומן בדיקה');
 
     // ── כתיבה ──
-    const safeName=(client||'ביקורת').replace(/[<>:"\/\\|?*\x00-\x1f]/g,'_');
+    const safeName=(client||'בדיקה').replace(/[<>:"\/\\|?*\x00-\x1f]/g,'_');
     const ts=now.toISOString().slice(0,10);
-    XLSX.writeFile(wb,`דוח_ביקורת_${safeName}_${ts}.xlsx`);
+    XLSX.writeFile(wb,`דוח_בדיקה_${safeName}_${ts}.xlsx`);
     addLog('ייצוא',`Excel — ${client} (${rows.length} עסקאות, ${anomalies.length} ממצאים, 10 גיליונות)`);
     showToast('קובץ Excel הורד — 10 גיליונות','success');
   }catch(e){
@@ -8721,7 +8721,7 @@ function exportCSV(){
   ];
   const allRows=[...meta,[h.join(',')],...body,...footer.map(r=>r.join(','))];
   const csv=allRows.map(r=>Array.isArray(r)?r.join(','):r).join('\n');
-  dlBlob(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),`עסקאות_ביקורת_${new Date().toISOString().slice(0,10)}.csv`);
+  dlBlob(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),`עסקאות_בדיקה_${new Date().toISOString().slice(0,10)}.csv`);
   showToast('✓ CSV הורד','success');
 }
 function toggleExportMenu(){
@@ -9341,7 +9341,7 @@ function buildAuditContext(){
     .map(r=>`- ${r.date?fmtDate(r.date):'?'} | ${r.desc} | ${fmtCur(r.amount)} | דגל: ${txFlags[r.idx]}`).join('\n');
   return`## נתוני בדיקת כספים
 סה"כ עסקאות: ${rows.length} | הכנסות: ${fmtCur(stats.income)} | הוצאות: ${fmtCur(Math.abs(stats.expense))} | מאזן: ${fmtCur(stats.net)}
-ציון ביקורת: ${ratios.score}/100 | שיעור הוצאות: ${(ratios.expRatio*100).toFixed(1)}% | רווח: ${(ratios.profitMargin*100).toFixed(1)}%
+ציון בדיקה: ${ratios.score}/100 | שיעור הוצאות: ${(ratios.expRatio*100).toFixed(1)}% | רווח: ${(ratios.profitMargin*100).toFixed(1)}%
 מע"מ לתשלום/זכות: ${fmtCur(vatData.vatIn-vatData.vatOut)}
 
 חריגות (${anomalies.length} סה"כ, ${anomalies.filter(a=>a.sev==='high').length} דחופות):
@@ -9402,7 +9402,7 @@ async function sendChat(){
   appendMsg('user',q);
   chatHistory.push({role:'user',content:q});
   appendTyping();
-  const sysPrompt=`אתה סוכן ביקורת פיננסי מקצועי. עוזר לרואה חשבון לנתח נתונים פיננסיים.
+  const sysPrompt=`אתה עוזר פיננסי חכם. עוזר לבעל העסק לנתח נתונים כספיים.
 ענה בעברית. היה תמציתי, מקצועי ומעשי. השתמש בנתונים שסופקו בלבד.
 ${buildAuditContext()}`;
   try{
@@ -9810,7 +9810,7 @@ window.addEventListener('DOMContentLoaded',()=>{
       lk.style.cssText = 'font-size:12px;opacity:0.8';
       btnAnnual.appendChild(lk);
     }
-    btnAnnual.title = 'ביקורת שנתית זמינה בתוכניות בתשלום';
+    btnAnnual.title = 'בדיקה שנתית זמינה בתוכניות בתשלום';
   }
 
   // Show logged-in user name in header
@@ -9839,7 +9839,7 @@ window.addEventListener('pageshow', function(e){
 function setAuditMode(mode){
   // ביקורת שנתית זמינה רק בתוכנית בתשלום
   if(mode === 'annual' && getUserPlan() === 'trial') {
-    showToast('⭐ ביקורת שנתית זמינה בתוכניות בתשלום בלבד — שדרג כדי להשתמש', 'error');
+    showToast('⭐ בדיקה שנתית זמינה בתוכניות בתשלום בלבד — שדרג כדי להשתמש', 'error');
     // אתחל את ה-UI במצב חודשי במקום לחזור מוקדם (return מוקדם משאיר UI שבור)
     mode = 'monthly';
   }
@@ -9929,7 +9929,7 @@ function setAuditMode(mode){
   const hint = document.getElementById('uploadZoneHint');
   if(hint){
     hint.textContent = mode==='monthly'
-      ? '⚠️ ביקורת חודשית — קובץ אחד בלבד | CSV או Excel'
+      ? '⚠️ בדיקה חודשית — קובץ אחד בלבד | CSV או Excel'
       : 'CSV או Excel — ניתן לגרור מספר קבצים לניתוח שנתי';
   }
 }

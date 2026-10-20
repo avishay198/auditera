@@ -306,7 +306,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     },
     {
       "@type": "Offer",
-      "name": "מקצועי",
+      "name": "2 עסקים",
       "priceCurrency": "ILS",
       "price": "890",
       "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" },
@@ -334,7 +334,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       "name": "כמה עולה Auditera?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Auditera מציעה 3 מסלולים: סטארטר ₪299/חודש (עד 35 תיקי לקוחות), מקצועי ₪890/חודש (עד 80 תיקי לקוחות), פרמיום ₪2,490/חודש (עד 200 תיקי לקוחות). קיים ניסיון חינמי ללא כרטיס אשראי."
+        "text": "Auditera מציעה 3 מסלולים: עסק 1 — ₪590/חודש, 2 עסקים — ₪990/חודש, 4 עסקים — ₪1,690/חודש. קיים ניסיון חינמי ללא כרטיס אשראי."
       }
     },
     {
@@ -342,7 +342,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
       "name": "האם יש ניסיון חינמי?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "כן — ניסיון חינמי מלא: ביקורת חודשית אחת ללא כרטיס אשראי, ללא חתימה, וללא חיוב אוטומטי. גישה לכל תכונות הניתוח."
+        "text": "כן — ניסיון חינמי מלא: בדיקה חודשית אחת ללא כרטיס אשראי, ללא חתימה, וללא חיוב אוטומטי. גישה לכל תכונות הניתוח."
       }
     },
     {
@@ -402,7 +402,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 <!-- HERO -->
 <div class="hero" id="main-content">
   <div class="hero-tag"><span class="fdot"></span>תמחור</div>
-  <h1>חסוך שעות ביקורת.<br>גלה חריגות <em>תוך שניות.</em></h1>
+  <h1>חסוך שעות בדיקה.<br>גלה חריגות <em>תוך שניות.</em></h1>
   <p class="hero-sub">כלי חכם לבדיקת כספי העסק שמזהה אוטומטית חריגות, בודק מע"מ וניכוי מס — ומייצר דוחות ברורים ומוכנים.</p>
   <div class="toggle-wrap">
     <div class="toggle">
@@ -435,7 +435,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <div class="why-grid">
       <div class="why-card">
         <div class="why-icon"><i class="ti ti-clock-hour-4" style="font-size:28px;color:var(--gold)"></i></div>
-        <div class="why-title">חוסך 80% מזמן הביקורת</div>
+        <div class="why-title">חוסך 80% מזמן הבדיקה</div>
         <div class="why-text">ניתוח חריגות שלוקח ידנית שעות — Auditera מבצעת תוך שניות, עם דוח מוכן לייצוא.</div>
       </div>
       <div class="why-card">
@@ -572,7 +572,7 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <tr>
           <th>תכונה</th>
           <th>סטארטר</th>
-          <th class="hl">מקצועי</th>
+          <th class="hl">2 עסקים</th>
           <th>פרמיום</th>
         </tr>
       </thead>
@@ -614,9 +614,9 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
   {key:'ai',           s:false,p:false,pr:true},
 ];
   var ROWS=[
-    {label:'מספר לקוחות', static:['35','80','עד 200']},
-    {label:'ביקורת חודשית',                       key:null, s:true, p:true, pr:true},
-    {label:'ביקורת שנתית',                          key:null, s:true, p:true, pr:true},
+    {label:'מספר עסקים', static:['1','2','4']},
+    {label:'בדיקה חודשית',                        key:null, s:true, p:true, pr:true},
+    {label:'בדיקה שנתית',                           key:null, s:true, p:true, pr:true},
     {label:'12 סוגי חריגות',                       key:'anomalies'},
     {label:'מאזן בוחן',                            key:'trial_balance'},
     {label:'חוק בנפורד (MAD + χ²)',               key:'benford'},
@@ -632,8 +632,8 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     {label:'השוואה לתקציב',                        key:'budget'},
     {label:'רשת ספקים + לורנץ',                   key:'vendors'},
     {label:'טופס 856',                             key:'form856'},
-    {label:'AI מקצועי (OpenAI / Groq)',          key:'ai'},
-    {label:'מיתוג המשרד (לוגו בדוחות)',           key:null, s:false, p:false, pr:true},
+    {label:'AI חכם (OpenAI / Groq)',            key:'ai'},
+    {label:'לוגו העסק בדוחות',                    key:null, s:false, p:false, pr:true},
     {label:'דשבורד ניהולי',                        key:null, s:false, p:false, pr:true},
     {label:'תמיכה', static:['אימייל עד 48 שעות','עדיפות','24/7 + מנהל חשבון'], text:true},
   ];
@@ -707,11 +707,11 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
     <div class="faq-grid">
       <div class="faq-item">
         <div class="faq-q">מה כולל הניסיון החינמי?</div>
-        <div class="faq-a">הניסיון כולל ביקורת חודשית אחת ללא תשלום - לקוח אחד, כל תכונות הניתוח. לאחר הניסיון נדרש מנוי להמשיך. אין חיוב אוטומטי.</div>
+        <div class="faq-a">הניסיון כולל בדיקה חודשית אחת ללא תשלום — עסק אחד, כל תכונות הניתוח. לאחר הניסיון נדרש מנוי להמשיך. אין חיוב אוטומטי.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">האם הנתונים שלי נשמרים בשרת?</div>
-        <div class="faq-a">לא. כל הניתוח מתבצע בדפדפן שלך בלבד. הנתונים הפיננסיים של הלקוחות לא עוברים לשרתי Auditera בשום שלב.</div>
+        <div class="faq-a">לא. כל הניתוח מתבצע בדפדפן שלך בלבד. הנתונים הפיננסיים שלך לא עוברים לשרתי Auditera בשום שלב.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">האם אפשר לשנות מסלול?</div>
@@ -726,8 +726,8 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
         <div class="faq-a">כן - כל הממשק, הדוחות, דפי העבודה והתמיכה הם בעברית מלאה RTL. המערכת בנויה מהיסוד לשוק הישראלי.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">מה ההבדל בין ביקורת חודשית לשנתית?</div>
-        <div class="faq-a">ביקורת חודשית - קובץ אחד, לתקופה בודדת. ביקורת שנתית - מאחדת מספר קבצים חודשיים לניתוח שנתי מקיף עם השוואת YoY.</div>
+        <div class="faq-q">מה ההבדל בין בדיקה חודשית לשנתית?</div>
+        <div class="faq-a">בדיקה חודשית — קובץ אחד, לתקופה בודדת. בדיקה שנתית — מאחדת מספר קבצים חודשיים לניתוח שנתי מקיף עם השוואת YoY.</div>
       </div>
     </div>
   </div>
@@ -735,8 +735,8 @@ footer{background:var(--brown);padding:24px 6%;display:flex;align-items:center;j
 
 <!-- CTA -->
 <div class="cta-section">
-  <h2>מסלול לכל משרד רו"ח</h2>
-  <p>ביקורת חודשית אחת בחינם - ללא כרטיס אשראי, ללא התחייבות.</p>
+  <h2>מסלול לכל עסק</h2>
+  <p>בדיקה חודשית אחת בחינם — ללא כרטיס אשראי, ללא התחייבות.</p>
   <div class="cta-btns">
     <a href="login.html?tab=register" class="btn-dark">התחל ניסיון חינם ←</a>
   </div>
