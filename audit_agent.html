@@ -618,7 +618,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     
     <button class="tab" onclick="switchTab('tax',this)"><i class="ti ti-receipt-tax"></i> מס ומע"מ</button>
     <button class="tab tab-ai" onclick="_featureAllowed('ai')?switchTab('ai',this):_showUpgradePlan('דוח AI מקצועי')"><i class="ti ti-robot"></i> AI</button>
-    <button class="tab" onclick="switchTab('bank',this)"><i class="ti ti-building-bank"></i> התאמת בנק</button>
+    <button class="tab" onclick="switchTab('bank',this)"><i class="ti ti-building-bank"></i> בדיקת בנק</button>
     <button class="tab" onclick="switchTab('report',this)"><i class="ti ti-file-report"></i> הפקת דוח</button>
   </div>
 
@@ -717,14 +717,14 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <button class="analyze-btn" id="analyzeBtn" onclick="analyzeData()" disabled><i class="ti ti-search"></i> הפעל בדיקה</button>
     <div style="text-align:center;margin-top:6px;font-size:11px;color:#9a7a4a;opacity:.75;letter-spacing:.2px">⌨&nbsp; <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">Ctrl</kbd> + <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">Enter</kbd>&nbsp; להפעלה מהירה &nbsp;·&nbsp; <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">Ctrl</kbd> + <kbd style="background:#f0e8d8;border:1px solid #c8a96e;border-radius:3px;padding:1px 5px;font-size:10px;font-family:inherit">P</kbd>&nbsp; להדפסה</div>
 
-    <!-- מאזן בוחן — annual audit only -->
+    <!-- מאזן חשבונות — annual audit only -->
     <div class="card annual-only" style="margin-top:14px">
       <div class="ch">
         <span class="ct"><i class="ti ti-scale"></i> מאזן בוחן (Trial Balance) — ייבוא אופציונלי</span>
       </div>
       <div id="tbCardBody" style="display:block">
         <div class="cb">
-          <p style="font-size:12px;color:var(--muted);margin-bottom:10px">העלה קובץ מאזן בוחן (CSV/XLSX) עם עמודות: מספר חשבון, שם חשבון, חובה, זכות, יתרה. הנתונים יוצגו בטאב <strong><i class="ti ti-scale"></i> מאזן</strong>.</p>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:10px">העלה קובץ מאזן חשבונות (CSV/XLSX) עם עמודות: מספר חשבון, שם חשבון, חובה, זכות, יתרה. הנתונים יוצגו בטאב <strong><i class="ti ti-scale"></i> מאזן חשבונות</strong>.</p>
           <div id="tbDropZone" style="border:2px dashed var(--border);border-radius:10px;padding:16px;text-align:center;cursor:pointer;position:relative"
             ondragover="event.preventDefault();this.style.borderColor='var(--primary)'"
             ondragleave="this.style.borderColor='var(--border)'"
@@ -769,7 +769,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
       </div>
       <div style="font-size:11px;opacity:.5;line-height:1.6;margin-right:auto">נשמר אוטומטית לפי שם לקוח</div>
     </div>
-    <div id="dashboardContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-chart-bar"></i></div><h3>אין נתונים</h3><p>העלה קבצים והפעל ניתוח</p></div></div>
+    <div id="dashboardContent" style="overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0"><div class="empty"><div class="ei"><i class="ti ti-chart-bar"></i></div><h3>מוכן לבדיקה</h3><p>העלה קובץ Excel ולחץ "הפעל בדיקה"</p></div></div>
 
   </div>
 
@@ -841,7 +841,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
     <!-- MUS Sampling -->
     <div id="subpanel-analysis-mus" data-subpanel style="display:none">
       <div class="card" style="margin-bottom:12px">
-        <div class="ch"><span class="ct"><i class="ti ti-dice-3"></i> מדגם סטטיסטי</span></div>
+        <div class="ch"><span class="ct"><i class="ti ti-dice-3"></i> דגימת עסקאות</span></div>
         <div class="cb">
           <p style="font-size:12px;color:var(--muted);margin-bottom:14px">שיטת הדגימה בוחרת עסקאות מדגם באופן יחסי לגודלן הכספי. עסקאות גדולות יותר — סיכוי גבוה יותר להיבחר.</p>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px">
@@ -910,7 +910,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
 
   <!-- TRIAL BALANCE TAB -->
   <div id="tab-trialbalance" class="tab-panel">
-    <div id="tbContent"><div class="empty"><div class="ei"><i class="ti ti-clipboard-list"></i></div><h3>מאזן בוחן</h3><p>העלה קובץ מאזן בוחן בכרטיסיית ״קבצים״</p></div></div>
+    <div id="tbContent"><div class="empty"><div class="ei"><i class="ti ti-clipboard-list"></i></div><h3>מאזן חשבונות</h3><p>העלה קובץ מאזן חשבונות בכרטיסיית ״קבצים״</p></div></div>
   </div>
 
   <div id="tab-tax" class="tab-panel">
@@ -1214,7 +1214,7 @@ table.dt{width:100%;border-collapse:collapse;font-size:12px}
   <!-- ── BANK RECONCILIATION TAB ──────────────────────── -->
   <div id="tab-bank" class="tab-panel">
     <div style="background:#f0f5ff;border:1px solid #b0c8f0;border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;line-height:1.7;color:#1a2e5c;direction:rtl">
-      <strong>🏦 מה זה התאמת בנק?</strong><br>
+      <strong>🏦 מה זה בדיקת בנק?</strong><br>
       בדיקה שמוודאת שכל עסקה שמופיעה בספרים שלך מופיעה גם בדף הבנק — ולהפך. פערים בין הספרים לבנק יכולים להעיד על טעות או עסקה שנשכחה.
     </div>
     <div class="card" style="margin-bottom:14px">
@@ -1794,7 +1794,7 @@ function updateMaterialityDisplay(){
   el.style.color='var(--primary)';el.style.fontWeight='700';
 }
 function calcAutoMateriality(pct){
-  if(!analyzedData){showToast('יש להפעיל ניתוח תחילה — העלה קובץ ולחץ על כפתור הניתוח','error');return;}
+  if(!analyzedData){showToast('העלה קובץ Excel ולחץ על הפעל בדיקה תחילה','error');return;}
   const income=analyzedData.stats.income||0;
   const mat=Math.round(income*(pct/100)/100)*100; // round to nearest 100
   _materiality=mat;
@@ -1888,7 +1888,7 @@ function renderMUS(){
   window._musSample=sample;
   musCurrentPage=1;
   renderMUSPage();
-  addLog('מדגם סטטיסטי','גודל מדגם: '+sample.length+' עסקאות מתוך '+rows.length);
+  addLog('דגימת עסקאות','גודל מדגם: '+sample.length+' עסקאות מתוך '+rows.length);
 }
 
 function renderMUSPage(){
@@ -1932,7 +1932,7 @@ function renderMUSPage(){
 function musGoPage(p){musCurrentPage=p;renderMUSPage();}
 
 function exportMUSSample(){
-  if(!window._musSample||!window._musSample.length){showToast('אין עסקאות במדגם — הפעל ניתוח ובחר חודש תחילה','error');return;}
+  if(!window._musSample||!window._musSample.length){showToast('הפעל בדיקה ובחר חודש כדי לדגום עסקאות','error');return;}
   const rows=[['#','תאריך','תיאור','ספק','קטגוריה','סכום','סמן'],...window._musSample.map((r,i)=>[
     i+1, r.date?fmtDate(r.date):'', r.desc||'', r.vendor||'', r.cat||'',
     r.amount, {r:'חריגה',y:'לבדיקה',g:'אומת'}[txFlags[r.idx]]||''
@@ -2021,7 +2021,7 @@ function clearTB(){
   const s=document.getElementById('tbStatus');if(s)s.style.display='none';
   const m=document.getElementById('tbMapper');if(m)m.style.display='none';
   const c=document.getElementById('tbContent');
-  if(c)c.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-clipboard-list"></i></div><h3>מאזן בוחן</h3><p>העלה קובץ מאזן בוחן בכרטיסיית ״קבצים״</p></div>';
+  if(c)c.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-clipboard-list"></i></div><h3>מאזן חשבונות</h3><p>העלה קובץ מאזן חשבונות בכרטיסיית ״קבצים״</p></div>';
   if(hadData)showToast('מאזן בוחן נוקה','');
 }
 
@@ -2050,7 +2050,7 @@ const TB_CLASS_COLOR={
 
 function renderTB(){
   const el=document.getElementById('tbContent');if(!el)return;
-  if(!tbRows.length){el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-clipboard-list"></i></div><h3>מאזן בוחן</h3><p>העלה קובץ מאזן בוחן בכרטיסיית ״קבצים״</p></div>';return;}
+  if(!tbRows.length){el.innerHTML='<div class="empty"><div class="ei"><i class="ti ti-clipboard-list"></i></div><h3>מאזן חשבונות</h3><p>העלה קובץ מאזן חשבונות בכרטיסיית ״קבצים״</p></div>';return;}
   const g=f=>{const c=_tbColMap[f];return c?r=>r[c]:()=>'';};
   const pn=v=>{if(v===undefined||v===null||v==='')return 0;return parseFloat((v+'').replace(/[,\s]/g,'').replace('−','-'))||0;};
   const rows=tbRows.map(r=>({
@@ -2073,7 +2073,7 @@ function renderTB(){
 
   el.innerHTML=`
   <div class="card" style="margin-bottom:12px">
-    <div class="ch"><span class="ct"><i class="ti ti-scale"></i> מאזן בוחן — ${rows.length} חשבונות</span>
+    <div class="ch"><span class="ct"><i class="ti ti-scale"></i> מאזן חשבונות — ${rows.length} חשבונות</span>
       <span style="font-size:12px;padding:3px 10px;border-radius:20px;font-weight:700;${balanced?'background:#dcfce7;color:#166534':'background:#fee2e2;color:#dc2626'}">${balanced?'<i class="ti ti-circle-check"></i> מאוזן':'<i class="ti ti-circle-x"></i> לא מאוזן'}</span>
     </div>
     <div class="cb">
@@ -6550,7 +6550,7 @@ function _buildWHTVendors(){
 }
 
 function exportForm856(){
-  if(!analyzedData){showToast('טרם הועלה קובץ נתונים — העלה CSV/Excel והפעל ניתוח','error');return;}
+  if(!analyzedData){showToast('העלה קובץ Excel ולחץ על הפעל בדיקה','error');return;}
   const vendors=_buildWHTVendors();
   if(!vendors||!vendors.length){showToast('לא נמצאו ספקים — ייתכן שנדרש ניתוח מחדש או שאין נתוני ספקים בקובץ','warning');return;}
 
@@ -7123,7 +7123,7 @@ function renderWorkingPapers(){
 }
 
 function printWorkingPapers(){
-  if(!analyzedData){showToast('יש להפעיל ניתוח תחילה — העלה קובץ ולחץ על כפתור הניתוח','error');return;}
+  if(!analyzedData){showToast('העלה קובץ Excel ולחץ על הפעל בדיקה תחילה','error');return;}
   const risk=computeRiskScore();
   const d=_buildPLData();
   const clientName=document.getElementById('clientName')?.value||'';
@@ -7204,7 +7204,7 @@ ${risk?`<div class="risk-box" style="border-color:${risk.color};background:${ris
 // ✉️ מכתב להנהלה
 // ══════════════════════════════════════════════════════════════
 function generateManagementLetter(){
-  if(!analyzedData){showToast('יש להפעיל ניתוח תחילה — העלה קובץ ולחץ על כפתור הניתוח','error');return;}
+  if(!analyzedData){showToast('העלה קובץ Excel ולחץ על הפעל בדיקה תחילה','error');return;}
   const risk=computeRiskScore();
   const d=_buildPLData();
   const clientName=document.getElementById('clientName')?.value||'הנהלת החברה';
@@ -7440,7 +7440,7 @@ function renderPL(){
 function exportPLCSV(){
   // Export as professional XLSX instead of raw CSV
   const d=_buildPLData();
-  if(!d){showToast('אין נתונים לייצוא — הפעל ניתוח ולאחר מכן נסה שוב','error');return;}
+  if(!d){showToast('הפעל בדיקה תחילה ואז ייצא','error');return;}
   const{incRows,expRows,totalInc,totalExp,net,margin,periodLabel}=d;
   const N=v=>Math.round(v);
   const pct=(v,tot)=>tot>0?+(v/tot*100).toFixed(1):0;
